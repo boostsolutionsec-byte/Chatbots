@@ -245,12 +245,25 @@ export class Engine {
     const forced = this.keywordRule(rt, userText);
     let finalText = '';
     let model = '';
+    const shortcut = !forced && this.opts.shortcuts ? this.shortcutIntent(rt, msg, conv) : undefined;
 
     if (forced) {
       const input = { destino: forced.ir_a, motivo: forced.si, prioridad: forced.prioridad };
       const result = await executeTool('derivar', input, ctx);
       executed.push({ id: 'regla', name: 'derivar', input, result });
       finalText = result.sugerencia ?? '';
+    } else if (shortcut === 'saludo') {
+      // Atajo sin IA: saludo solo.
+      const pending = missingFields(bot, conv, conv.activeFlow ?? defaultFlow(bot))[0];
+      finalText = `¡Hola! 👋 Soy ${bot.config.persona.nombre}${bot.config.marca ? ` de ${bot.config.marca}` : ''}. ${pending?.pregunta ?? '¿En qué te puedo ayudar?'}`;
+      ctx.actions.push('atajo:saludo');
+    } else if (shortcut === 'donde_compro') {
+      // Atajo sin IA: "¿dónde compro?" con una ubicación clara → respuesta armada por el localizador.
+      const input = msg.location ? { lat: msg.location.lat, lng: msg.location.lng } : { ubicacion: msg.text ?? '' };
+      const result = await executeTool('buscar_tienda', input, ctx);
+      executed.push({ id: 'atajo', name: 'buscar_tienda', input, result });
+      finalText = result.sugerencia ?? '';
+      ctx.actions.push('atajo:donde_compro');
     } else {
       const llmMessages: LLMMessage[] = this.history(conv);
       const tooSlow = conv.turnsWithoutProgress >= Math.ceil(bot.config.limites.max_mensajes_sin_avance / 2);
@@ -376,6 +389,31 @@ export class Engine {
       pendingField: pending?.campo,
       turnsWithoutProgress: conv.turnsWithoutProgress,
     };
+  }
+
+  /**
+   * Casos claros que no necesitan IA (ahorro de costo): un saludo solo, o "¿dónde compro?" con una ubicación
+   * clara (GPS o lugar reconocido sin ambigüedad) y sin otra intención (precio, reclamo, consejo de producto…).
+   */
+  private shortcutIntent(rt: BotRuntime, msg: IncomingMessage, conv: Conversation): 'saludo' | 'donde_compro' | undefined {
+    const raw = msg.text ?? '';
+    const t = normalizeLoose(raw);
+    if (msg.location && !t) return 'donde_compro';
+    if (!t || detectLanguage(raw) !== 'es') return undefined;
+    const words = t.split(' ');
+    if (words.length <= 4 && /^(hola+|holi|ola|buenas?|buenos dias|buenas tardes|buenas noches|hey|saludos|que tal)( (hola|buenas|que tal|como estas|buenos dias|buenas tardes|buenas noches))*$/.test(t) && conv.messages.filter((m) => m.role === 'user').length <= 1) {
+      return 'saludo';
+    }
+    const otherIntent =
+      /\b(precio|precios|cuesta|cuestan|vale|valen|costo|dolares|reclamo|queja|danad|defect|garantia|devolucion|distribu|mayor|colegio|empresa|persona|asesor|humano|horario|hora|abren|envio|envios|enviar|domicilio|online|para (pintar|dibujar|tela|zapat|taza|madera|vidrio)|que (punta|modelo|color|posca|marcador) |cual|como|sirve|diferencia|recomienda|stock|hay en|tienen el|bot|instrucciones|prompt|mokalu)\b/.test(t) || raw.includes('?') && words.length > 8;
+    if (otherIntent) return undefined;
+    const m = rt.locator.gazetteer.resolve(raw);
+    if (!m || m.alternatives.length || m.place.kind === 'provincia') return undefined;
+    // El lugar debe ser casi todo el mensaje o venir con una frase típica de "dónde compro".
+    const intent = /\b(donde|dnd|compro|comprar|consigo|conseguir|venden|encuentro|tienda|tiendas|local|punto|soy de|vivo en|estoy en|desde)\b/.test(t);
+    const rest = words.length - m.place.matched.split(' ').length;
+    if (!intent && rest > 2) return undefined;
+    return 'donde_compro';
   }
 
   private keywordRule(rt: BotRuntime, text: string) {

@@ -101,7 +101,7 @@ describe('Engine con MockProvider y bots/_plantilla', () => {
   it('anti-alucinación: borra teléfonos y links inventados por el LLM', async () => {
     const provider = new MockProvider([{ text: 'Llama al 0991234567 o entra a https://inventado.com/x' }]);
     const e = new Engine({ provider, env });
-    const r = await e.handle('_plantilla', msg('hola'));
+    const r = await e.handle('_plantilla', msg('me ayudas con algo?'));
     expect(r.replies[0].text).not.toContain('0991234567');
     expect(r.replies[0].text).not.toContain('inventado.com');
     expect(r.replies[0].text).toContain('[número no verificado]');
@@ -203,7 +203,7 @@ describe('pausa con vencimiento y agrupación de ráfagas', () => {
 describe('H-13: ubicación detectada', () => {
   it('si el modelo vuelve a preguntar la ciudad, el motor busca la tienda', async () => {
     const provider = new MockProvider([{ text: '¿En qué ciudad estás?' }, { text: 'En Santo Domingo... ' }]);
-    const e = new Engine({ provider, env });
+    const e = new Engine({ provider, env, shortcuts: false });
     const r = await e.handle('_plantilla', msg('buenas en sto domingo donde hay marcadores'));
     expect(r.toolCalls[0].name).toBe('buscar_tienda');
     expect(provider.calls[0].system).toContain('ubicacion_detectada_en_mensaje: Santo Domingo');
@@ -294,9 +294,30 @@ describe('respaldo si la IA falla', () => {
   it('usa reglas deterministas y no deja al cliente sin respuesta', async () => {
     const broken = { name: 'anthropic', complete: async () => { throw new Error('529 overloaded'); } };
     const logs: string[] = [];
-    const e = new Engine({ provider: broken, env, log: (s) => logs.push(s) });
+    const e = new Engine({ provider: broken, env, log: (s) => logs.push(s), shortcuts: false });
     const r = await e.handle('_plantilla', msg('soy de cuenca'));
     expect(r.tiendas[0].id).toBe('ej-cue-1');
     expect(logs.join(' ')).toMatch(/respuesta de respaldo/);
+  });
+});
+
+describe('atajos sin IA', () => {
+  it('saludo y dónde compro no llaman al LLM; lo demás sí', async () => {
+    const provider = new MockProvider([{ text: 'Para tela te sirve el EJEMPLO Marcador de pintura fino' }]);
+    const e = new Engine({ provider, env });
+    const r1 = await e.handle('_plantilla', msg('hola'));
+    expect(r1.actions).toContain('atajo:saludo');
+    expect(r1.replies[0].text).toMatch(/Ana/);
+    const r2 = await e.handle('_plantilla', msg('donde compro en riobamba'));
+    expect(r2.actions).toContain('atajo:donde_compro');
+    expect(r2.tiendas[0].id).toBe('ej-rio-1');
+    const r3 = await e.handle('_plantilla', msg('y que marcador para tela?'));
+    expect(provider.calls).toHaveLength(1);
+    expect(r3.replies[0].text).toContain('tela');
+  });
+  it('no usa atajo con precio, inglés o ambigüedad', async () => {
+    const e = new Engine({ provider: new MockProvider(), env });
+    expect((await e.handle('_plantilla', msg('cuanto cuesta en quito'))).actions).not.toContain('atajo:donde_compro');
+    expect((await e.handle('_plantilla', msg("hi, where can I buy in Quito?", { userId: 'en' }))).actions).not.toContain('atajo:donde_compro');
   });
 });
