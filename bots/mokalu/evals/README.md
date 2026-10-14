@@ -1,6 +1,6 @@
 # Evals del bot Mokalú
 
-35 conversaciones de prueba con el formato de `docs/CONTRATO.md` §4. Datos de tiendas = `tiendas.csv` (EJEMPLO):
+40 conversaciones de prueba con el formato de `docs/CONTRATO.md` §4. Datos de tiendas = `tiendas.csv` (EJEMPLO):
 si cambian las tiendas reales, revisar los `contiene` con nombres de tienda.
 
 Claves de `espera` usadas (las del contrato + extensiones pedidas en `PENDIENTES.md` con `[framework]`):
@@ -25,4 +25,4 @@ Cobertura: ciudades con tienda (Riobamba, Quito, Cuenca, Ambato, Ibarra, Esmeral
 Macas, El Coca, Galápagos), sectores (Mall del Sol, Cumbayá, sur de Guayaquil), ubicación compartida, provincia sola,
 asesoría (zapatillas, tazas, mural, lettering, zurdos, POSCA vs alcohol), precio, stock, envíos, distribuidor,
 colegio/mayorista, reclamos, pide humano, marca no distribuida, faltas de ortografía, emojis, "?", spam,
-prompt injection, inglés y presión para inventar una tienda.
+prompt injection, inglés, presión para inventar una tienda, ¿eres un bot?, datos privados, tienda no registrada, precio insistente y fuera de tema.

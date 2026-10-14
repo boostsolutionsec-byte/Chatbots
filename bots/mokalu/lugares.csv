@@ -1,5 +1,5 @@
 nombre,alias,tipo,ciudad,provincia,lat,lng
-Guayaquil,gye;guayaquil;guayas,ciudad,Guayaquil,Guayas,-2.1894,-79.8891
+Guayaquil,gye;guayaquil;guayas;gayakil;guayakil;guayakil;gquil;guayaco;la perla del pacifico,ciudad,Guayaquil,Guayas,-2.1894,-79.8891
 Mall del Sol,mall del sol;malldelsol,sector,Guayaquil,Guayas,-2.1544,-79.8930
 Urdesa,urdesa;urdesa central,sector,Guayaquil,Guayas,-2.1650,-79.9050
 Alborada,alborada;la alborada,sector,Guayaquil,Guayas,-2.1350,-79.9000
@@ -13,7 +13,7 @@ Durán,duran;durán,ciudad,Durán,Guayas,-2.1700,-79.8380
 Daule,daule;la aurora,ciudad,Daule,Guayas,-1.8600,-79.9770
 Milagro,milagro,ciudad,Milagro,Guayas,-2.1347,-79.5872
 Playas,playas;general villamil,ciudad,Playas,Guayas,-2.6300,-80.3900
-Quito,uio;quito;pichincha,ciudad,Quito,Pichincha,-0.1807,-78.4678
+Quito,uio;quito;pichincha;kito;qito;la capital;capital;quitu,ciudad,Quito,Pichincha,-0.1807,-78.4678
 Centro Histórico de Quito,centro historico;centro histórico;plaza grande,sector,Quito,Pichincha,-0.2200,-78.5120
 La Carolina,la carolina;quicentro;parque la carolina;naciones unidas,sector,Quito,Pichincha,-0.1760,-78.4800
 El Condado,condado;el condado;carcelen;carcelén,sector,Quito,Pichincha,-0.1050,-78.4900
@@ -21,12 +21,12 @@ Cumbayá,cumbaya;cumbayá;tumbaco,sector,Quito,Pichincha,-0.2000,-78.4330
 Quitumbe,quitumbe;sur de quito;el recreo,sector,Quito,Pichincha,-0.2950,-78.5500
 Valle de los Chillos,los chillos;valle de los chillos;sangolqui;sangolquí;san rafael,ciudad,Sangolquí,Pichincha,-0.3290,-78.4450
 Cayambe,cayambe,ciudad,Cayambe,Pichincha,0.0410,-78.1450
-Cuenca,cuenca;azuay,ciudad,Cuenca,Azuay,-2.9001,-79.0059
+Cuenca,cuenca;azuay;cuenka,ciudad,Cuenca,Azuay,-2.9001,-79.0059
 Mall del Río,mall del rio;mall del río,sector,Cuenca,Azuay,-2.9200,-79.0140
 Gualaceo,gualaceo,ciudad,Gualaceo,Azuay,-2.8920,-78.7760
-Ambato,ambato;tungurahua,ciudad,Ambato,Tungurahua,-1.2491,-78.6168
+Ambato,ambato;tungurahua;anbato,ciudad,Ambato,Tungurahua,-1.2491,-78.6168
 Baños,baños;banos;baños de agua santa,ciudad,Baños,Tungurahua,-1.3960,-78.4240
-Riobamba,riobamba;chimborazo,ciudad,Riobamba,Chimborazo,-1.6710,-78.6470
+Riobamba,riobamba;chimborazo;rio bamba;riobanba;ríobamba,ciudad,Riobamba,Chimborazo,-1.6710,-78.6470
 Latacunga,latacunga;cotopaxi,ciudad,Latacunga,Cotopaxi,-0.9350,-78.6150
 Ibarra,ibarra;imbabura,ciudad,Ibarra,Imbabura,0.3510,-78.1220
 Otavalo,otavalo,ciudad,Otavalo,Imbabura,0.2340,-78.2620
@@ -34,12 +34,12 @@ Tulcán,tulcan;tulcán;carchi,ciudad,Tulcán,Carchi,0.8120,-77.7170
 Loja,loja,ciudad,Loja,Loja,-3.9930,-79.2040
 Machala,machala;el oro,ciudad,Machala,El Oro,-3.2580,-79.9550
 Huaquillas,huaquillas,ciudad,Huaquillas,El Oro,-3.4760,-80.2310
-Portoviejo,portoviejo;manabi;manabí,ciudad,Portoviejo,Manabí,-1.0546,-80.4545
+Portoviejo,portoviejo;manabi;manabí;porto viejo,ciudad,Portoviejo,Manabí,-1.0546,-80.4545
 Manta,manta,ciudad,Manta,Manabí,-0.9677,-80.7089
 Chone,chone,ciudad,Chone,Manabí,-0.6980,-80.0940
-Esmeraldas,esmeraldas,ciudad,Esmeraldas,Esmeraldas,0.9682,-79.6517
+Esmeraldas,esmeraldas;esmeralda,ciudad,Esmeraldas,Esmeraldas,0.9682,-79.6517
 Atacames,atacames,ciudad,Atacames,Esmeraldas,0.8700,-79.8460
-Santo Domingo,santo domingo;santo domingo de los tsachilas;santo domingo de los tsáchilas,ciudad,Santo Domingo,Santo Domingo de los Tsáchilas,-0.2530,-79.1750
+Santo Domingo,santo domingo;santo domingo de los tsachilas;santo domingo de los tsáchilas;sto domingo;sto. domingo;santo domingo de los colorados,ciudad,Santo Domingo,Santo Domingo de los Tsáchilas,-0.2530,-79.1750
 Babahoyo,babahoyo;los rios;los ríos,ciudad,Babahoyo,Los Ríos,-1.8022,-79.5344
 Quevedo,quevedo,ciudad,Quevedo,Los Ríos,-1.0286,-79.4635
 Salinas,salinas,ciudad,Salinas,Santa Elena,-2.2150,-80.9520
@@ -48,10 +48,30 @@ Montañita,montañita;montanita,ciudad,Montañita,Santa Elena,-1.8270,-80.7530
 Azogues,azogues;cañar;canar,ciudad,Azogues,Cañar,-2.7390,-78.8460
 Tena,tena;napo,ciudad,Tena,Napo,-0.9938,-77.8129
 Puyo,puyo;pastaza,ciudad,Puyo,Pastaza,-1.4924,-78.0024
-Nueva Loja,nueva loja;lago agrio;sucumbios;sucumbíos,ciudad,Nueva Loja,Sucumbíos,0.0847,-76.8828
+Nueva Loja,nueva loja;lago agrio;sucumbios;sucumbíos;lagoagrio,ciudad,Nueva Loja,Sucumbíos,0.0847,-76.8828
 Guaranda,guaranda;bolivar;bolívar,ciudad,Guaranda,Bolívar,-1.5926,-79.0010
 Macas,macas;morona santiago;morona,ciudad,Macas,Morona Santiago,-2.3087,-78.1114
 Zamora,zamora;zamora chinchipe,ciudad,Zamora,Zamora Chinchipe,-4.0692,-78.9567
 Coca,coca;el coca;puerto francisco de orellana;orellana,ciudad,Puerto Francisco de Orellana,Orellana,-0.4625,-76.9870
-Puerto Ayora,puerto ayora;santa cruz;galapagos;galápagos,ciudad,Puerto Ayora,Galápagos,-0.7430,-90.3150
+Puerto Ayora,puerto ayora;santa cruz;galapagos;galápagos;isla santa cruz,ciudad,Puerto Ayora,Galápagos,-0.7430,-90.3150
 Puerto Baquerizo Moreno,san cristobal;san cristóbal;puerto baquerizo,ciudad,Puerto Baquerizo Moreno,Galápagos,-0.9020,-89.6100
+La Mariscal,la mariscal;mariscal;plaza foch;la foch,sector,Quito,Pichincha,-0.203,-78.491
+La Floresta,la floresta;floresta;gonzalez suarez;gonzález suárez,sector,Quito,Pichincha,-0.211,-78.485
+Sauces / Garzota,sauces;la garzota;garzota;samanes;los samanes,sector,Guayaquil,Guayas,-2.125,-79.897
+Ciudad Celeste,ciudad celeste;vía a samborondón km 10;via a samborondon,sector,Samborondón,Guayas,-2.09,-79.858
+Vilcabamba,vilcabamba,ciudad,Vilcabamba,Loja,-4.26,-79.222
+Puerto López,puerto lopez;puerto lópez,ciudad,Puerto López,Manabí,-1.56,-80.81
+Pedernales,pedernales,ciudad,Pedernales,Manabí,0.071,-80.052
+Jipijapa,jipijapa,ciudad,Jipijapa,Manabí,-1.348,-80.579
+Pasaje,pasaje,ciudad,Pasaje,El Oro,-3.33,-79.807
+Santa Rosa,santa rosa,ciudad,Santa Rosa,El Oro,-3.449,-79.96
+Salcedo,salcedo,ciudad,Salcedo,Cotopaxi,-1.045,-78.59
+Alausí,alausi;alausí,ciudad,Alausí,Chimborazo,-2.2,-78.847
+Cañar,ciudad de cañar,ciudad,Cañar,Cañar,-2.56,-78.938
+Yantzaza,yantzaza,ciudad,Yantzaza,Zamora Chinchipe,-3.827,-78.759
+Sucúa,sucua;sucúa,ciudad,Sucúa,Morona Santiago,-2.46,-78.17
+Shushufindi,shushufindi,ciudad,Shushufindi,Sucumbíos,-0.186,-76.647
+El Carmen,el carmen,ciudad,El Carmen,Manabí,-0.27,-79.456
+La Concordia,la concordia,ciudad,La Concordia,Santo Domingo de los Tsáchilas,0.006,-79.396
+Nobol,nobol;narcisa de jesus,ciudad,Nobol,Guayas,-1.914,-80.004
+Machachi,machachi;mejia;mejía,ciudad,Machachi,Pichincha,-0.51,-78.567
