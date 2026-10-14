@@ -1,0 +1,57 @@
+nombre,alias,tipo,ciudad,provincia,lat,lng
+Guayaquil,gye;guayaquil;guayas,ciudad,Guayaquil,Guayas,-2.1894,-79.8891
+Mall del Sol,mall del sol;malldelsol,sector,Guayaquil,Guayas,-2.1544,-79.8930
+Urdesa,urdesa;urdesa central,sector,Guayaquil,Guayas,-2.1650,-79.9050
+Alborada,alborada;la alborada,sector,Guayaquil,Guayas,-2.1350,-79.9000
+Kennedy,kennedy;policentro;san marino,sector,Guayaquil,Guayas,-2.1700,-79.8990
+Los Ceibos,ceibos;los ceibos;riocentro ceibos,sector,Guayaquil,Guayas,-2.1720,-79.9450
+Vía a la Costa,via a la costa;vía a la costa;puerto azul;laguna plaza;chongon,sector,Guayaquil,Guayas,-2.1870,-80.0060
+Sur de Guayaquil,sur de guayaquil;mall del sur;guasmo;25 de julio,sector,Guayaquil,Guayas,-2.2290,-79.8960
+Centro de Guayaquil,centro de guayaquil;malecon;malecón 2000;9 de octubre,sector,Guayaquil,Guayas,-2.1894,-79.8850
+Samborondón,samborondon;samborondón;la puntilla;entreplaza,ciudad,Samborondón,Guayas,-2.1400,-79.8650
+Durán,duran;durán,ciudad,Durán,Guayas,-2.1700,-79.8380
+Daule,daule;la aurora,ciudad,Daule,Guayas,-1.8600,-79.9770
+Milagro,milagro,ciudad,Milagro,Guayas,-2.1347,-79.5872
+Playas,playas;general villamil,ciudad,Playas,Guayas,-2.6300,-80.3900
+Quito,uio;quito;pichincha,ciudad,Quito,Pichincha,-0.1807,-78.4678
+Centro Histórico de Quito,centro historico;centro histórico;plaza grande,sector,Quito,Pichincha,-0.2200,-78.5120
+La Carolina,la carolina;quicentro;parque la carolina;naciones unidas,sector,Quito,Pichincha,-0.1760,-78.4800
+El Condado,condado;el condado;carcelen;carcelén,sector,Quito,Pichincha,-0.1050,-78.4900
+Cumbayá,cumbaya;cumbayá;tumbaco,sector,Quito,Pichincha,-0.2000,-78.4330
+Quitumbe,quitumbe;sur de quito;el recreo,sector,Quito,Pichincha,-0.2950,-78.5500
+Valle de los Chillos,los chillos;valle de los chillos;sangolqui;sangolquí;san rafael,ciudad,Sangolquí,Pichincha,-0.3290,-78.4450
+Cayambe,cayambe,ciudad,Cayambe,Pichincha,0.0410,-78.1450
+Cuenca,cuenca;azuay,ciudad,Cuenca,Azuay,-2.9001,-79.0059
+Mall del Río,mall del rio;mall del río,sector,Cuenca,Azuay,-2.9200,-79.0140
+Gualaceo,gualaceo,ciudad,Gualaceo,Azuay,-2.8920,-78.7760
+Ambato,ambato;tungurahua,ciudad,Ambato,Tungurahua,-1.2491,-78.6168
+Baños,baños;banos;baños de agua santa,ciudad,Baños,Tungurahua,-1.3960,-78.4240
+Riobamba,riobamba;chimborazo,ciudad,Riobamba,Chimborazo,-1.6710,-78.6470
+Latacunga,latacunga;cotopaxi,ciudad,Latacunga,Cotopaxi,-0.9350,-78.6150
+Ibarra,ibarra;imbabura,ciudad,Ibarra,Imbabura,0.3510,-78.1220
+Otavalo,otavalo,ciudad,Otavalo,Imbabura,0.2340,-78.2620
+Tulcán,tulcan;tulcán;carchi,ciudad,Tulcán,Carchi,0.8120,-77.7170
+Loja,loja,ciudad,Loja,Loja,-3.9930,-79.2040
+Machala,machala;el oro,ciudad,Machala,El Oro,-3.2580,-79.9550
+Huaquillas,huaquillas,ciudad,Huaquillas,El Oro,-3.4760,-80.2310
+Portoviejo,portoviejo;manabi;manabí,ciudad,Portoviejo,Manabí,-1.0546,-80.4545
+Manta,manta,ciudad,Manta,Manabí,-0.9677,-80.7089
+Chone,chone,ciudad,Chone,Manabí,-0.6980,-80.0940
+Esmeraldas,esmeraldas,ciudad,Esmeraldas,Esmeraldas,0.9682,-79.6517
+Atacames,atacames,ciudad,Atacames,Esmeraldas,0.8700,-79.8460
+Santo Domingo,santo domingo;santo domingo de los tsachilas;santo domingo de los tsáchilas,ciudad,Santo Domingo,Santo Domingo de los Tsáchilas,-0.2530,-79.1750
+Babahoyo,babahoyo;los rios;los ríos,ciudad,Babahoyo,Los Ríos,-1.8022,-79.5344
+Quevedo,quevedo,ciudad,Quevedo,Los Ríos,-1.0286,-79.4635
+Salinas,salinas,ciudad,Salinas,Santa Elena,-2.2150,-80.9520
+Santa Elena,santa elena;la libertad,ciudad,Santa Elena,Santa Elena,-2.2260,-80.8580
+Montañita,montañita;montanita,ciudad,Montañita,Santa Elena,-1.8270,-80.7530
+Azogues,azogues;cañar;canar,ciudad,Azogues,Cañar,-2.7390,-78.8460
+Tena,tena;napo,ciudad,Tena,Napo,-0.9938,-77.8129
+Puyo,puyo;pastaza,ciudad,Puyo,Pastaza,-1.4924,-78.0024
+Nueva Loja,nueva loja;lago agrio;sucumbios;sucumbíos,ciudad,Nueva Loja,Sucumbíos,0.0847,-76.8828
+Guaranda,guaranda;bolivar;bolívar,ciudad,Guaranda,Bolívar,-1.5926,-79.0010
+Macas,macas;morona santiago;morona,ciudad,Macas,Morona Santiago,-2.3087,-78.1114
+Zamora,zamora;zamora chinchipe,ciudad,Zamora,Zamora Chinchipe,-4.0692,-78.9567
+Coca,coca;el coca;puerto francisco de orellana;orellana,ciudad,Puerto Francisco de Orellana,Orellana,-0.4625,-76.9870
+Puerto Ayora,puerto ayora;santa cruz;galapagos;galápagos,ciudad,Puerto Ayora,Galápagos,-0.7430,-90.3150
+Puerto Baquerizo Moreno,san cristobal;san cristóbal;puerto baquerizo,ciudad,Puerto Baquerizo Moreno,Galápagos,-0.9020,-89.6100
