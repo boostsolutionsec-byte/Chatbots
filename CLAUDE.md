@@ -1,20 +1,22 @@
 # Chatbots — reglas para todos los agentes
 
 Este repo contiene un **framework para crear chatbots de venta y atención** (WhatsApp + Instagram)
-y los dos primeros bots construidos con él: **Mocalu** (redireccionamiento) y **Uniwell** (compras).
-Lo trabajan 3 agentes en sesiones de Claude Code en la nube, en paralelo, durante la noche.
+y el primer bot construido con él: **Mokalú** (`bots/mokalu/`). Mokalú es el **distribuidor** en Ecuador de uni-ball/POSCA
+(y otras marcas); el bot **redirige a cada cliente a la tienda/punto de venta más cercano** y le ayuda a elegir producto.
+Ver `docs/marcas.md` y `docs/repos-base.md` (repos de GitHub sobre los que construimos).
+Lo trabajan 4 agentes en sesiones de Claude Code en la nube, en paralelo, durante la noche.
 
 ## Antes de empezar (todos los agentes)
 
-1. Lee `FORMULARIO.md` (respuestas del dueño). Lo que esté vacío → usa el valor por defecto que ahí se indica.
+1. Lee `FORMULARIO.md` (respuestas del dueño) y `docs/marcas.md`. Lo que esté vacío → usa el valor por defecto que ahí se indica.
 2. Lee tu brief en `agentes/` y **solo** trabaja en las carpetas que tu brief te asigna.
-3. Lee `PENDIENTES.md` y `docs/CONTRATO.md` (la interfaz común entre agentes).
+3. Lee `PENDIENTES.md` (incluye hallazgos `[validador→agente N]` que debes atender primero) y `docs/CONTRATO.md`.
 
 ## Reglas duras
 
 - Idioma: código y nombres técnicos en inglés; documentación, prompts del bot y commits en **español**.
 - **Nunca** escribas secretos (tokens, claves, números privados) en el repo. Usa variables de entorno y documenta su nombre en `.env.example`.
-- **Nunca** envíes mensajes reales a clientes, ni llames APIs de Meta/WhatsApp/Instagram en producción. Todo se prueba con el simulador y mocks.
+- **Nunca** envíes mensajes reales a clientes, ni llames APIs de Meta/WhatsApp/Instagram. Por ahora **no se conecta Meta**: se prueba con el simulador, el chat web local y Telegram (solo cuando el dueño ponga el token).
 - No copies código del repositorio de referencia literalmente si su licencia no lo permite: documenta el comportamiento y **reimplementa**.
 - Todo lo que requiera una persona (crear cuentas, aprobar plantillas, verificar número, pegar tokens) se anota en `PASOS-HUMANOS.md` con el formato de ese archivo. No lo intentes resolver tú.
 - Toda duda que el formulario no responda → decide con el valor más prudente, sigue, y anótala en `PENDIENTES.md`.
@@ -28,18 +30,21 @@ Lo trabajan 3 agentes en sesiones de Claude Code en la nube, en paralelo, durant
 |---|---|---|
 | 1 · Investigador (ingeniería inversa) | `agente/1-ingenieria-inversa` | `docs/ingenieria-inversa/` |
 | 2 · Arquitecto (framework) | `agente/2-framework` | `framework/`, `.env.example` |
-| 3 · Diseñador de bots | `agente/3-bots` | `bots/`, `datos/` |
+| 3 · Diseñador del bot | `agente/3-bots` | `bots/`, `datos/`, `docs/marcas.md` |
+| 4 · Validador | `agente/4-validador` | `validacion/` |
 
 Si la sesión en la nube te asigna otra rama (ej. `claude/...`) y rechaza el push a la de la tabla, usa la asignada
 y escribe su nombre en `PENDIENTES.md` con la etiqueta `[decisión]` para que los demás la encuentren.
 
 Archivos compartidos (`PENDIENTES.md`, `PASOS-HUMANOS.md`, `docs/CONTRATO.md`): solo **añadir** líneas, nunca borrar las de otro agente.
-Al final de la noche el dueño (o un agente integrador) une las tres ramas en `claude/mocalu-uniwell-chatbot-agents-lp0vn0`.
+Al final de la noche el dueño (o un agente integrador) une las cuatro ramas en `claude/mocalu-uniwell-chatbot-agents-lp0vn0`.
 
 ## Stack por defecto (si el formulario no dice otra cosa)
 
-- Node.js 20 + TypeScript, pruebas con Vitest.
+- Node.js 20 + TypeScript, pruebas con Vitest. Base candidata: **BuilderBot** (ver `docs/repos-base.md`).
 - LLM: API de Anthropic (Claude Haiku para conversación, Sonnet para escalar casos difíciles), detrás de una interfaz `LLMProvider` para poder cambiar a DeepSeek u otro.
-- Canales: WhatsApp Cloud API de Meta e Instagram Messaging API (Graph API), detrás de una interfaz `ChannelAdapter`. Periskope como adaptador alternativo de WhatsApp.
+- Canales, detrás de una interfaz `ChannelAdapter`:
+  - **Ahora (prioridad):** chat web local + **Telegram** (Bot API, token de @BotFather).
+  - **Después (solo esqueleto + pruebas con mocks):** WhatsApp Cloud API, Instagram Messaging API, Periskope.
 - Persistencia: Supabase (Postgres) detrás de una interfaz `Store`; en pruebas, memoria.
 - Orquestación externa opcional: n8n (el dueño ya lo usa) llamando al servicio por webhook.
