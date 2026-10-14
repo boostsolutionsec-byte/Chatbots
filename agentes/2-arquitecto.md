@@ -26,7 +26,10 @@ Debe quedar listo para que mañana solo falte pegar el token de Telegram y la cl
      (Telegram/WhatsApp) y elige por distancia (haversine). Si la ciudad no tiene tienda → la más cercana + aviso.
      Pruebas exhaustivas (las 24 provincias, faltas de ortografía, ciudades ambiguas).
    - `llm/` — `AnthropicProvider` (SDK oficial `@anthropic-ai/sdk`, prompt caching del sistema+conocimiento),
-     `DeepSeekProvider` (compatible OpenAI) y `MockProvider` determinista para pruebas.
+     `DeepSeekProvider` (compatible OpenAI), `MockProvider` determinista para pruebas unitarias y **`ClaudeCliProvider`**
+     (solo desarrollo: llama a `claude -p` con el prompt armado y devuelve la respuesta; herramientas vía JSON en el texto).
+     Selección automática: `ANTHROPIC_API_KEY` → Anthropic; si no, `claude` disponible → ClaudeCli; si no → Mock.
+     **Hazlo en las primeras 2 horas**: los Agentes 3 y 4 lo necesitan para probar con IA real.
    - `channels/` — **prioridad:** `WebChatAdapter` (página HTML simple servida en `/chat/:botId`, para probar en el navegador),
      `TelegramAdapter` (Bot API: modo *long polling* para correr sin dominio público + modo webhook; texto, botones inline,
      fotos de producto), `SimulatorAdapter`.

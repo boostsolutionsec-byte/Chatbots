@@ -61,5 +61,8 @@ Al final de la noche el dueño (o un agente integrador) une las cuatro ramas en 
 - Canales, detrás de una interfaz `ChannelAdapter`:
   - **Ahora (prioridad):** chat web local + **Telegram** (Bot API, token de @BotFather).
   - **Después (solo esqueleto + pruebas con mocks):** WhatsApp Cloud API, Instagram Messaging API, Periskope.
+- **IA para pruebas esta noche (sin clave de API):** en la sesión en la nube funciona `claude -p "..."` (CLI de Claude Code,
+  usa los créditos del dueño). El framework incluye `ClaudeCliProvider` (solo desarrollo) para que el bot, los clientes simulados
+  y el juez usen IA real. Úsalo con moderación: respuestas cortas, sin bucles infinitos, `--model` barato cuando se pueda.
 - Persistencia: Supabase (Postgres) detrás de una interfaz `Store`; en pruebas, memoria.
 - Orquestación externa opcional: n8n (el dueño ya lo usa) llamando al servicio por webhook.
