@@ -54,16 +54,22 @@ export function tiendasEsperadas(p: Persona, tiendas: Tienda[]): Esperado | null
   };
 }
 
-/** ¿El texto menciona esta tienda? (por nombre sin el prefijo EJEMPLO, por WhatsApp/teléfono o por link de Maps) */
-export function mencionaTienda(texto: string, t: Tienda): boolean {
+/**
+ * ¿El texto menciona esta tienda? Por nombre (sin el prefijo EJEMPLO ni paréntesis), por link de Maps
+ * o por WhatsApp/teléfono — esto último solo si el número es único entre `todas` (con datos de ejemplo
+ * varias tiendas comparten el mismo número y no sirve para saber cuál recomendó el bot).
+ */
+export function mencionaTienda(texto: string, t: Tienda, todas?: Tienda[]): boolean {
   const n = norm(texto);
-  const nombre = norm(t.nombre.replace(/^EJEMPLO\s*/i, ''));
+  const nombre = norm(t.nombre.replace(/^EJEMPLO\s*/i, '').replace(/\(.*?\)/g, ''));
   if (nombre.length >= 4 && n.includes(nombre)) return true;
+  if (t.maps_url && texto.includes(t.maps_url)) return true;
   const digits = texto.replace(/\D/g, '');
   for (const tel of [t.whatsapp, t.telefono]) {
-    const d = (tel ?? '').replace(/\D/g, '');
-    if (d.length >= 7 && digits.includes(d.slice(-9))) return true;
+    const d = (tel ?? '').replace(/\D/g, '').slice(-9);
+    if (d.length < 7) continue;
+    const compartido = todas?.some((o) => o !== t && [o.whatsapp, o.telefono].some((x) => (x ?? '').replace(/\D/g, '').slice(-9) === d));
+    if (!compartido && digits.includes(d)) return true;
   }
-  if (t.maps_url && texto.includes(t.maps_url)) return true;
   return false;
 }

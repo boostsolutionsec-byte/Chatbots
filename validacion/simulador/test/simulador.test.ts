@@ -148,3 +148,16 @@ describe('natural', () => {
     expect(r.notas.natural).toBe(1);
   });
 });
+
+describe('teléfonos compartidos (datos de ejemplo)', () => {
+  it('no cuenta un número repetido en varias tiendas como mención de una tienda concreta', () => {
+    const a = { ...tiendas[0], whatsapp: '+593 99 000 0000' };
+    const b = { ...tiendas[1], whatsapp: '+593 99 000 0000' };
+    expect(mencionaTienda('escribe al +593 99 000 0000', a, [a, b])).toBe(false);
+    expect(mencionaTienda('escribe al +593 99 000 0000', a)).toBe(true);
+  });
+  it('ignora paréntesis y POR CONFIRMAR en el nombre', () => {
+    const t = { ...tiendas[0], nombre: 'Mokalú — tienda propia (POR CONFIRMAR)' };
+    expect(mencionaTienda('puedes ir a Mokalú — tienda propia en Laguna Plaza', t)).toBe(true);
+  });
+});

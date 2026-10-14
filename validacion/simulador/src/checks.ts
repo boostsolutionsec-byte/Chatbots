@@ -48,9 +48,9 @@ export function deterministicChecks(p: Persona, transcript: Turno[], tiendas: Ti
   // --- 1. Tienda correcta
   const destino = p.espera.destino;
   const esperado = tiendasEsperadas(p, tiendas);
-  const mencionadas = tiendas.filter((t) => mencionaTienda(botText, t));
+  const mencionadas = tiendas.filter((t) => mencionaTienda(botText, t, tiendas));
   if (destino === 'tienda_mas_cercana' && esperado) {
-    const ok = esperado.correctas.some((t) => mencionaTienda(botText, t));
+    const ok = esperado.correctas.some((t) => mencionaTienda(botText, t, tiendas));
     const online = p.espera.acepta_online && RE_ONLINE.test(botText);
     const mismaProv = mencionadas.some((t) => norm(t.provincia) === norm(p.ubicacion.provincia));
     if (ok) notas.tienda_correcta = 2;
@@ -68,7 +68,7 @@ export function deterministicChecks(p: Persona, transcript: Turno[], tiendas: Ti
       obs.push('La tienda más cercana está en otra ciudad y el bot no lo avisó.');
     }
     // --- 2. Pocos mensajes: índice del primer mensaje del bot que menciona una tienda correcta
-    const idx = bot.findIndex((t) => esperado.correctas.some((x) => mencionaTienda(t.texto, x)));
+    const idx = bot.findIndex((t) => esperado.correctas.some((x) => mencionaTienda(t.texto, x, tiendas)));
     const max = p.espera.max_mensajes_bot;
     notas.pocos_mensajes = idx < 0 ? 0 : idx + 1 <= max ? 2 : idx + 1 <= max + 2 ? 1 : 0;
     if (idx >= 0 && idx + 1 > max) obs.push(`Llegó a la tienda en el mensaje ${idx + 1} del bot (máx. esperado ${max}).`);
