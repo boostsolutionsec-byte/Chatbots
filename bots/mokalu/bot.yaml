@@ -83,7 +83,8 @@ localizador:
   ofrecer_ademas: tienda_online   # si la más cercana está lejos (> 60 km) ofrecer envío nacional (POR CONFIRMAR)
   distancia_lejana_km: 60        # 60–300 km: tienda + opción online en una línea
   distancia_muy_lejana_km: 300   # > 300 km (ej. Galápagos): primero la tienda online
-  filtro_producto: marcas         # si pide POSCA, preferir tiendas cuya columna marcas incluya POSCA
+  # filtro_producto: marcas       # Desactivado por H-12; además todas las tiendas EJEMPLO tienen "uni-ball;POSCA"
+                                  # hasta tener la lista real de marcas por tienda.
 
 flujos:
   donde_comprar:
