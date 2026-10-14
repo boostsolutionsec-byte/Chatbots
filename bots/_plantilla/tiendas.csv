@@ -1,0 +1,11 @@
+id,nombre,ciudad,provincia,direccion,lat,lng,maps_url,whatsapp,telefono,horario,marcas,vende_online,web
+ej-gye-1,EJEMPLO Papelería Centro Guayaquil,Guayaquil,Guayas,EJEMPLO Av. 9 de Octubre 100,-2.1925,-79.8840,https://ejemplo.invalid/maps/ej-gye-1,+593 99 000 0000,,Lun-Sáb 09:00-19:00,MarcaA;MarcaB,no,
+ej-gye-2,EJEMPLO Arte Norte Guayaquil,Guayaquil,Guayas,EJEMPLO C.C. Norte local 5,-2.1400,-79.9060,https://ejemplo.invalid/maps/ej-gye-2,+593 99 000 0000,,Lun-Dom 10:00-20:00,MarcaA,sí,https://ejemplo.invalid/tienda-norte
+ej-uio-1,EJEMPLO Librería La Carolina,Quito,Pichincha,EJEMPLO Av. Amazonas y Naciones Unidas,-0.1790,-78.4840,https://ejemplo.invalid/maps/ej-uio-1,+593 99 000 0000,,Lun-Sáb 09:00-18:00,MarcaA;MarcaB,no,
+ej-uio-2,EJEMPLO Papelería Sur Quito,Quito,Pichincha,EJEMPLO Av. Maldonado y Morán Valverde,-0.2850,-78.5450,https://ejemplo.invalid/maps/ej-uio-2,+593 99 000 0000,,Lun-Sáb 09:00-18:00,MarcaB,no,
+ej-cue-1,EJEMPLO Arte Cuenca,Cuenca,Azuay,EJEMPLO Calle Larga 200,-2.8990,-79.0050,https://ejemplo.invalid/maps/ej-cue-1,+593 99 000 0000,,Lun-Vie 09:00-18:00,MarcaA;MarcaB,no,
+ej-rio-1,EJEMPLO Papelería Riobamba,Riobamba,Chimborazo,EJEMPLO Av. Daniel León Borja 300,-1.6720,-78.6480,https://ejemplo.invalid/maps/ej-rio-1,+593 99 000 0000,,Lun-Sáb 09:00-18:00,MarcaA,no,
+ej-amb-1,EJEMPLO Útiles Ambato,Ambato,Tungurahua,EJEMPLO Av. Cevallos 400,-1.2490,-78.6170,https://ejemplo.invalid/maps/ej-amb-1,+593 99 000 0000,,Lun-Sáb 09:00-18:00,MarcaA;MarcaB,no,
+ej-mta-1,EJEMPLO Papelería Manta,Manta,Manabí,EJEMPLO Av. Flavio Reyes 500,-0.9560,-80.7200,https://ejemplo.invalid/maps/ej-mta-1,+593 99 000 0000,,Lun-Sáb 09:00-18:00,MarcaA,no,
+ej-loj-1,EJEMPLO Arte Loja,Loja,Loja,EJEMPLO Calle Bolívar 600,-3.9960,-79.2010,https://ejemplo.invalid/maps/ej-loj-1,+593 99 000 0000,,Lun-Sáb 09:00-18:00,MarcaB,no,
+ej-onl-1,EJEMPLO Tienda Online Nacional,Guayaquil,Guayas,EJEMPLO solo envíos,,,,+593 99 000 0000,,Lun-Vie 09:00-17:00,MarcaA;MarcaB,sí,https://ejemplo.invalid/tienda

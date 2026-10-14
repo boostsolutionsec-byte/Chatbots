@@ -1,0 +1,10 @@
+nombre: ciudad sin tienda → la más cercana
+canal: web
+turnos:
+  - usuario: "vivo en guano, donde compro?"
+    espera:
+      tienda_en: [riobamba]
+      contiene: ["cercan"]
+resultado_final:
+  accion: buscar_tienda
+juez: "Explicó que en Guano no hay tienda y ofreció la más cercana (Riobamba) sin inventar datos."

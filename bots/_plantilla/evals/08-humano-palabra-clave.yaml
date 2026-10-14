@@ -1,0 +1,8 @@
+nombre: pide hablar con una persona
+canal: telegram
+turnos:
+  - usuario: "quiero hablar con una persona"
+    espera:
+      deriva_a: asesor_ventas
+resultado_final:
+  accion: derivar

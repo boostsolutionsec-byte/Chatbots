@@ -1,0 +1,9 @@
+nombre: reclamo va a servicio al cliente
+canal: web
+turnos:
+  - usuario: "compré un marcador y vino dañado, quiero hacer un reclamo"
+    espera:
+      deriva_a: servicio_cliente
+resultado_final:
+  accion: derivar
+juez: "Mostró empatía, no discutió y derivó a servicio al cliente."
