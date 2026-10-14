@@ -161,3 +161,24 @@ describe('teléfonos compartidos (datos de ejemplo)', () => {
     expect(mencionaTienda('puedes ir a Mokalú — tienda propia en Laguna Plaza', t)).toBe(true);
   });
 });
+
+describe('filtro de marca y falsedad "no hay tienda"', () => {
+  const base = tiendas.find((t) => t.ciudad === 'Ambato')!;
+  const solo = { ...base, id: 'x', nombre: 'EJEMPLO Solo Uni Durán', ciudad: 'Durán', provincia: 'Guayas', lat: -2.17, lng: -79.838, marcas: 'uni-ball', whatsapp: '+593 99 000 0099' };
+  const ts = [...tiendas, solo];
+  const p = byId('p14'); // pide posca pc-8k en Durán
+  it('acepta la tienda local o la más cercana con POSCA', () => {
+    const e = tiendasEsperadas(p, ts)!;
+    expect(e.correctas.map((t) => t.ciudad)).toContain('Durán');
+    expect(e.correctas.some((t) => t.ciudad === 'Guayaquil')).toBe(true);
+  });
+  it('penaliza decir que no hay tienda en su ciudad', () => {
+    const r = deterministicChecks(p, [{ rol: 'bot', texto: 'Por ahora no tenemos punto de venta en Durán. La más cercana es EJEMPLO Papelería Mall del Sol' }], ts);
+    expect(r.notas.tienda_correcta).toBe(1);
+    expect(r.obs.join(' ')).toMatch(/Dijo que no hay tienda en Durán/);
+  });
+  it('detecta derivación en usted', () => {
+    const r = deterministicChecks(byId('p37'), [{ rol: 'bot', texto: 'Un comercial de Mokalú le escribirá para la cotización.' }], tiendas);
+    expect(r.notas.escala_bien).toBe(2);
+  });
+});

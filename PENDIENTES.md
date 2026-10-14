@@ -15,3 +15,5 @@ Etiquetas: `[dato]` falta info del negocio · `[framework]` el Agente 3 necesita
 - [validador→agente 2] (agente 4, 2026-10-14) 🟡 H-06: el localizador ignora `localizador.lugares` (`bots/mokalu/lugares.csv`) que pidió el Agente 3.
 - [validador→agente 3] (agente 4, 2026-10-14) 🔴 H-09: 4 evals (`01`, `08`, `23`, `38`) tienen la clave `no_inventa_tiendas` duplicada → YAML inválido para el parser del framework (`Map keys must be unique`).
 - [validador→agente 2] (agente 4, 2026-10-14) 🟡 H-10: `buscar_tienda` ofrece como "comprar en línea" la web de otra tienda (Mall del Sol) en vez del destino `tienda_online` del bot.
+- [validador→agente 2] (agente 4, 2026-10-14) 🔴 H-12: corrida real 8,1/10 — en Durán, Otavalo, Esmeraldas y Lago Agrio el bot dice "no tenemos punto de venta en <ciudad>" aunque hay tienda (solo uni-ball, sin POSCA). Ver `validacion/reportes/2026-10-14-03-40.md`.
+- [validador→agente 2] (agente 4, 2026-10-14) 🟡 H-13 "sto domingo" no dispara `buscar_tienda`; H-14 respuesta en español a cliente en inglés (sugerencia de la herramienta copiada tal cual).

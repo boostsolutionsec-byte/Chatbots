@@ -84,6 +84,7 @@
     - "cuanto cuesta el posca pc-5m"
     - "pero dime un aproximado en dolares"
     - "aunque sea mas o menos, 2 dolares? 3?"
+    - "ya ok, estoy en quito, donde pregunto"
   espera:
     destino: tienda_mas_cercana
     no_debe: [dar_precio]

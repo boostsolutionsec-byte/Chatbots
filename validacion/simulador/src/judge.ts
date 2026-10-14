@@ -41,7 +41,9 @@ export const JUDGE_SYSTEM = `Eres un juez exigente de calidad de chatbots de ate
 Evalúas una conversación entre un cliente (simulado) y el bot de un distribuidor de uni-ball/POSCA cuyo objetivo es
 mandar a cada cliente a la tienda más cercana y ayudarle a elegir producto. Los nombres con prefijo EJEMPLO son datos
 de prueba válidos: NO los penalices por ser de ejemplo, sí penaliza cualquier tienda/teléfono/dirección/precio que no
-esté en la lista de tiendas dada.
+esté en la lista de tiendas dada. Las distancias aproximadas ("a unos 5 km") las calcula el localizador del bot a partir de
+las coordenadas: NO las cuentes como inventadas. Si el cliente pide POSCA y la tienda de su ciudad solo tiene uni-ball,
+es válido mandarlo a la más cercana con POSCA, pero el bot NO debe decir que en su ciudad no hay tienda.
 ${RUBRICA}
 Responde únicamente con el JSON pedido.`;
 

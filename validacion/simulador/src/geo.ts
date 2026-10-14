@@ -39,10 +39,32 @@ export function tiendasEsperadas(p: Persona, tiendas: Tienda[]): Esperado | null
   if (valid.length === 0) return null;
   const nombres = [p.ubicacion.ciudad, p.ubicacion.alias].filter(Boolean).map((s) => norm(s!));
   const misma = valid.filter((t) => nombres.includes(norm(t.ciudad)));
+  const marca = marcaPedida(p);
+  const conMarca = (t: Tienda) => !marca || !t.marcas || norm(t.marcas).includes(marca);
   if (misma.length > 0) {
     const d = Math.min(...misma.map((t) => haversineKm(p.ubicacion, t)));
-    return { correctas: misma, otraCiudad: false, distanciaKm: d, motivo: 'misma_ciudad' };
+    // Si pide una marca (POSCA) y ninguna tienda de su ciudad la tiene, también vale la más cercana que sí la tenga.
+    const extra = misma.some(conMarca) ? [] : masCercanas(p, valid.filter((t) => conMarca(t) && !misma.includes(t)));
+    return { correctas: [...misma, ...extra], otraCiudad: false, distanciaKm: d, motivo: 'misma_ciudad' };
   }
+  const base = masCercanasEsperado(p, valid);
+  base.correctas = [...new Set([...base.correctas, ...masCercanas(p, valid.filter(conMarca))])];
+  return base;
+}
+
+/** Marca que pide la persona en su guion (solo POSCA importa para el filtro de marcas de tiendas.csv). */
+export function marcaPedida(p: Persona): string | undefined {
+  return /pos?[ck]a|pozca/i.test(p.guion.join(' ')) ? 'posca' : undefined;
+}
+
+function masCercanas(p: Persona, ts: Tienda[]): Tienda[] {
+  if (!ts.length) return [];
+  const conDist = ts.map((t) => ({ t, d: haversineKm(p.ubicacion, t) })).sort((a, b) => a.d - b.d);
+  const umbral = Math.max(conDist[0].d * 1.25, conDist[0].d + 20);
+  return conDist.filter((x) => x.d <= umbral).map((x) => x.t);
+}
+
+function masCercanasEsperado(p: Persona, valid: Tienda[]): Esperado {
   const conDist = valid.map((t) => ({ t, d: haversineKm(p.ubicacion, t) })).sort((a, b) => a.d - b.d);
   const min = conDist[0].d;
   const umbral = Math.max(min * 1.25, min + 20);

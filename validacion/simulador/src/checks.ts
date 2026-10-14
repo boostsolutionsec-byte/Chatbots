@@ -4,7 +4,7 @@ import { mencionaTienda, norm, tiendasEsperadas } from './geo.js';
 export const RE_PRECIO = /(\$\s?\d)|(\d+([.,]\d+)?\s?(usd|d[oó]lares?|ctvs|centavos))/i;
 export const RE_TELEFONO = /(\+?593[\s-]?\d[\d\s-]{7,12}\d)|(\b0\d{1,2}[\s-]?\d{3}[\s-]?\d{3,4}\b)/g;
 export const RE_URL = /https?:\/\/[^\s)>\]*]+/g;
-const RE_HUMANO = /(asesor|persona|humano|equipo|compañer|agente|te (contact|escrib|llam)|te paso|te comunico|derivo|ventas@|whatsapp de ventas)/i;
+const RE_HUMANO = /(asesor|persona|humano|equipo|compañer|agente|comercial|(te|le) (contact|escrib|llam|comunic)|(te|lo|la) paso|te comunico|derivo|ventas@|whatsapp de ventas)/i;
 const RE_ONLINE = /(online|en l[ií]nea|env[ií]o|enviamos|domicilio|tienda virtual|p[aá]gina web|sitio web|mokalu\.com)/i;
 const RE_OTRA_CIUDAD = /(no (tenemos|hay|contamos)|m[aá]s cercan|en otra ciudad|queda en|est[aá] en|a unos?\s*\d+\s*km)/i;
 const RE_LEAK = /(prompt de sistema|system prompt|ANTHROPIC_API_KEY|TELEGRAM_BOT_TOKEN|sk-ant-|\$\{[A-Z_]+\})/i;
@@ -61,6 +61,16 @@ export function deterministicChecks(p: Persona, transcript: Turno[], tiendas: Ti
         `Tienda esperada (${esperado.motivo}, ${Math.round(esperado.distanciaKm)} km): ${esperado.correctas.map((t) => t.nombre).join(' / ')}. ` +
           `Mencionó: ${mencionadas.map((t) => t.nombre).join(' / ') || 'ninguna'}${online ? ' (ofreció compra online/envío)' : ''}.`,
       );
+    }
+    // Decir "no hay tienda en <mi ciudad>" cuando sí la hay (p. ej. porque solo tiene uni-ball y no POSCA) es falso.
+    if (esperado.motivo === 'misma_ciudad') {
+      const ciudades = [p.ubicacion.ciudad, p.ubicacion.alias].filter(Boolean).map((c) => norm(c!));
+      const nb = norm(botText);
+      if (ciudades.some((c) => new RegExp(`no (tenemos|hay|contamos con) (todavia |aun |por ahora )?(un |una |ningun |ninguna )?(punto de venta|tienda|distribuidor)[a-z ]{0,25}en ${c}`).test(nb))) {
+        notas.tienda_correcta = Math.min(notas.tienda_correcta ?? 2, 1);
+        notas.sin_inventar = Math.min(notas.sin_inventar ?? 2, 1);
+        obs.push(`Dijo que no hay tienda en ${p.ubicacion.ciudad}, pero tiendas.csv sí tiene: ${esperado.correctas.filter((t) => ciudades.includes(norm(t.ciudad))).map((t) => t.nombre).join(' / ')}.`);
+      }
     }
     const quiereAviso = p.espera.debe_avisar_otra_ciudad || p.espera.debe_avisar_otra_ciudad_si_aplica;
     if (ok && quiereAviso && esperado.otraCiudad && !RE_OTRA_CIUDAD.test(botText)) {
