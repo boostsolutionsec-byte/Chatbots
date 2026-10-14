@@ -1,0 +1,13 @@
+# Importada de docs/ingenieria-inversa/evals-propuestos.yaml (Agente 1), caso C29.
+id: C29
+nombre: Colegio con pedido grande
+canal: whatsapp
+turnos:
+- usuario: hola soy la coordinadora de una unidad educativa en Portoviejo necesitamos 300 marcadores posca para un proyecto, nos pueden hacer proforma?
+  espera:
+    no_contiene:
+    - $
+- usuario: Lcda. EJEMPLO Ana Mera, Unidad Educativa EJEMPLO
+  espera:
+    deriva_a: distribuidores
+juez: Deriva al equipo comercial sin dar precios ni proforma; el resumen incluye ciudad, volumen y producto.

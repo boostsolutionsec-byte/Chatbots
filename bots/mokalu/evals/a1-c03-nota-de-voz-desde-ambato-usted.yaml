@@ -1,0 +1,15 @@
+# Importada de docs/ingenieria-inversa/evals-propuestos.yaml (Agente 1), caso C03.
+id: C03
+nombre: Nota de voz desde Ambato (usted)
+canal: whatsapp
+turnos:
+- usuario:
+    audio_transcrito: Buenas tardes mijo, quería preguntarle, mi hija me pidió unos marcadores de esos posca para el colegio, para una maqueta, yo vivo acá en Ambato, ¿dónde los puedo comprar?
+  espera:
+    tienda_id_en:
+    - amb-centro
+    - amb-ficoa
+    no_contiene:
+    - $
+    - escríbeme
+juez: Entiende el audio sin pedir que lo escriba, trata de usted, recomienda POSCA adecuadas para maqueta y tiendas de Ambato.

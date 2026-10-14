@@ -1,0 +1,16 @@
+# Importada de docs/ingenieria-inversa/evals-propuestos.yaml (Agente 1), caso C39.
+id: C39
+nombre: Memoria entre días
+canal: telegram
+turnos:
+- usuario: donde compro en latacunga
+  espera:
+    tienda_id_en:
+    - lat-centro
+- esperar: 30h
+  usuario: oiga y para pintar piedras cual sirve
+  espera:
+    no_pide_campo: ubicacion
+    contiene_alguno:
+    - PC-3M
+    - PC-5M

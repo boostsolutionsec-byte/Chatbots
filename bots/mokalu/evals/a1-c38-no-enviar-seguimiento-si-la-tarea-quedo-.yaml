@@ -1,0 +1,15 @@
+# Importada de docs/ingenieria-inversa/evals-propuestos.yaml (Agente 1), caso C38.
+id: C38
+nombre: No enviar seguimiento si la tarea quedó completa
+canal: whatsapp
+turnos:
+- usuario: hola donde compro posca en santo domingo
+  espera:
+    tienda_id_en:
+    - sdo-centro
+- usuario: gracias 👍
+  espera:
+    max_burbujas: 1
+- esperar: 23h
+  espera:
+    seguimientos_enviados: 0

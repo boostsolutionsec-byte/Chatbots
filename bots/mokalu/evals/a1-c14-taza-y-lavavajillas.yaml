@@ -1,0 +1,14 @@
+# Importada de docs/ingenieria-inversa/evals-propuestos.yaml (Agente 1), caso C14.
+id: C14
+nombre: Taza y lavavajillas
+canal: whatsapp
+turnos:
+- usuario: se puede pintar una taza con posca y despues meterla al lavavajilla?
+  espera:
+    contiene_alguno:
+    - decorativa
+    - a mano
+    no_contiene:
+    - apta para lavavajillas
+    - sí puedes meterla
+juez: Aclara que la taza queda decorativa, lavar a mano y no pintar la zona de la boca.

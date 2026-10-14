@@ -1,0 +1,11 @@
+# Importada de docs/ingenieria-inversa/evals-propuestos.yaml (Agente 1), caso C23.
+id: C23
+nombre: Comparación con Molotow
+canal: whatsapp
+turnos:
+- usuario: es mejor posca o molotow? cual me recomiendas pa graffiti
+  espera:
+    no_contiene:
+    - Molotow es peor
+    - Molotow es mala
+    - mala calidad

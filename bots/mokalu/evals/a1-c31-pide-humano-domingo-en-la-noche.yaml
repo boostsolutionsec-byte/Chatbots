@@ -1,0 +1,12 @@
+# Importada de docs/ingenieria-inversa/evals-propuestos.yaml (Agente 1), caso C31.
+id: C31
+nombre: Pide humano domingo en la noche
+canal: whatsapp
+hora_simulada: domingo 21:30 America/Guayaquil
+turnos:
+- usuario: quiero hablar con una persona no con un robot
+  espera:
+    deriva_a: asesor_ventas
+    contiene_alguno:
+    - 10h00
+    - lunes

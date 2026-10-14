@@ -1,0 +1,19 @@
+# Importada de docs/ingenieria-inversa/evals-propuestos.yaml (Agente 1), caso C13.
+id: C13
+nombre: Zapatillas custom en Samborondón
+canal: instagram
+turnos:
+- usuario: holi quiero pintar unas vans blancas q posca me recomiendas??
+  espera:
+    contiene_alguno:
+    - PC-1M
+    - PC-5M
+    - PC-3M
+    pide_campo: ubicacion
+    no_contiene:
+    - $
+- usuario: samborondon
+  espera:
+    tienda_id_en:
+    - sam-entreplaza
+juez: Recomienda 2-3 POSCA adecuadas para lona con un tip de fijado y luego la tienda de Samborondón.

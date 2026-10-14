@@ -1,0 +1,20 @@
+# Importada de docs/ingenieria-inversa/evals-propuestos.yaml (Agente 1), caso C02.
+id: C02
+nombre: Ráfaga cortada en Quito, sector La Carolina
+canal: whatsapp
+turnos:
+- usuario:
+  - holaa
+  - una consulta
+  - los marcadores q pintan todo
+  - esos posca
+  - en quito donde hay
+  espera:
+    pide_campo: ubicacion
+    max_burbujas: 2
+    respuestas_totales: 1
+- usuario: x la carolina
+  espera:
+    tienda_id_en:
+    - uio-carolina
+juez: Responde una sola vez a la ráfaga, no saluda varias veces y recomienda la tienda del sector La Carolina.

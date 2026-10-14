@@ -1,0 +1,11 @@
+# Importada de docs/ingenieria-inversa/evals-propuestos.yaml (Agente 1), caso C19.
+id: C19
+nombre: Portaminas en Cumbayá
+canal: instagram
+turnos:
+- usuario: un portaminas bueno para arquitectura? estoy en cumbaya
+  espera:
+    contiene_alguno:
+    - Kuru Toga
+    tienda_id_en:
+    - uio-cumbaya

@@ -1,0 +1,12 @@
+# Importada de docs/ingenieria-inversa/evals-propuestos.yaml (Agente 1), caso C25.
+id: C25
+nombre: Stock de color en Ibarra
+canal: whatsapp
+turnos:
+- usuario: en la papeleria de ibarra tienen el posca dorado pc-5m??
+  espera:
+    tienda_id_en:
+    - iba-centro
+    no_contiene:
+    - sí tienen
+    - hay stock

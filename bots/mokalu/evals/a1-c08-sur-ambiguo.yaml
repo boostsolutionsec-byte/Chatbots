@@ -1,0 +1,13 @@
+# Importada de docs/ingenieria-inversa/evals-propuestos.yaml (Agente 1), caso C08.
+id: C08
+nombre: Sur ambiguo
+canal: instagram
+turnos:
+- usuario: donde venden por el sur
+  espera:
+    pide_campo: ubicacion
+- usuario: gye
+  espera:
+    tienda_id_en:
+    - gye-sur
+juez: Pide aclarar la ciudad una sola vez y luego recomienda la tienda del sur de Guayaquil.

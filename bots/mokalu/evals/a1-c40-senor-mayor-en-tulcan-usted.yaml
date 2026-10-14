@@ -1,0 +1,16 @@
+# Importada de docs/ingenieria-inversa/evals-propuestos.yaml (Agente 1), caso C40.
+id: C40
+nombre: Señor mayor en Tulcán (usted)
+canal: whatsapp
+turnos:
+- usuario: Buenas tardes señorita. Le escribe un servidor desde Tulcán. Quisiera consultarle si esos marcadores sirven para dar retoques sobre un cuadro al óleo ya seco, pues me lo recomendó mi nieto. Le
+    agradezco de antemano.
+  espera:
+    no_contiene:
+    - 'tú '
+    - te recomiendo
+- usuario: Si por favor
+  espera:
+    tienda_id_en:
+    - tul-centro
+juez: Trata de usted, no promete compatibilidad con óleo (sugiere probar) y recomienda la tienda de Tulcán.

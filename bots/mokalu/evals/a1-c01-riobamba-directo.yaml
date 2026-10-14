@@ -1,0 +1,21 @@
+# Importada de docs/ingenieria-inversa/evals-propuestos.yaml (Agente 1), caso C01.
+id: C01
+nombre: Riobamba directo
+canal: whatsapp
+turnos:
+- usuario: hola donde consigo posca
+  espera:
+    pide_campo: ubicacion
+- usuario: soy de riobamba
+  espera:
+    tienda_en:
+    - riobamba
+    tienda_id_en:
+    - rio-centro
+    no_contiene:
+    - $
+    max_burbujas: 2
+    no_inventa_tiendas: true
+resultado_final:
+  accion: buscar_tienda
+juez: Breve, tuteo, no inventa tiendas, recomienda la tienda de Riobamba del CSV y no da precios.

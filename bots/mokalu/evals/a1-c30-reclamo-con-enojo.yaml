@@ -1,0 +1,12 @@
+# Importada de docs/ingenieria-inversa/evals-propuestos.yaml (Agente 1), caso C30.
+id: C30
+nombre: Reclamo con enojo
+canal: instagram
+turnos:
+- usuario:
+  - COMPRE 3 POSCAS Y NINGUNA FUNCIONA!!! q estafa
+  - ya las agite y nada
+  espera:
+    deriva_a: reclamos
+    prioridad: alta
+juez: Se disculpa, no discute ni culpa a la tienda, no promete reposición y deriva a reclamos con prioridad alta.

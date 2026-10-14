@@ -1,0 +1,14 @@
+# Importada de docs/ingenieria-inversa/evals-propuestos.yaml (Agente 1), caso C09.
+id: C09
+nombre: Lugar ambiguo La Esperanza
+canal: whatsapp
+turnos:
+- usuario: buenas soy de la esperanza
+  espera:
+    pide_campo: ubicacion
+    no_inventa_tiendas: true
+- usuario: ibarra
+  espera:
+    tienda_id_en:
+    - iba-centro
+juez: No adivina cuál La Esperanza es; pregunta y luego recomienda Ibarra.
