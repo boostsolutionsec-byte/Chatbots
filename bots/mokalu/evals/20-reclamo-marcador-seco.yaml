@@ -7,5 +7,5 @@ turnos:
       no_contiene: ["te devolvemos", "reembolso garantizado"]
 resultado_final:
   accion: derivar
-  destino: reclamos
+  deriva_a: reclamos
 juez: "Se disculpó con empatía en una frase, no discutió ni culpó a la tienda, no prometió devolución y derivó al equipo de reclamos."

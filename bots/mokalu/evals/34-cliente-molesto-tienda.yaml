@@ -7,5 +7,5 @@ turnos:
       no_contiene: ["mala tienda", "son malos"]
 resultado_final:
   accion: derivar
-  destino: reclamos
+  deriva_a: reclamos
 juez: "Mostró empatía, no habló mal de la tienda y derivó al equipo de reclamos; opcionalmente ofreció otra tienda cercana."

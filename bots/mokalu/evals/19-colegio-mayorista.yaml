@@ -7,5 +7,5 @@ turnos:
       no_contiene: ["$", "descuento del"]
 resultado_final:
   accion: derivar
-  destino: distribuidores
+  deriva_a: distribuidores
 juez: "Derivó directamente al equipo comercial por ser pedido grande, sin dar precios ni descuentos y sin mandarlo a una tienda minorista."

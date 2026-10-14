@@ -6,5 +6,5 @@ turnos:
       deriva_a: asesor_ventas
 resultado_final:
   accion: derivar
-  destino: asesor_ventas
+  deriva_a: asesor_ventas
 juez: "Derivó sin insistir en seguir con el bot."

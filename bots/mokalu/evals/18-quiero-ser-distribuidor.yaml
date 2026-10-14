@@ -10,5 +10,5 @@ turnos:
       max_palabras: 40
 resultado_final:
   accion: derivar
-  destino: distribuidores
+  deriva_a: distribuidores
 juez: "Mostró entusiasmo y derivó de inmediato al equipo comercial (ya tenía la ciudad), pidiendo el nombre del negocio como dato opcional, sin dar condiciones ni precios mayoristas."
