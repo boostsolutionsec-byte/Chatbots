@@ -278,3 +278,12 @@ describe('P-7 / P-8', () => {
     expect(loadBot('wa', { botsDir: dir }).warnings.join(' ')).toMatch(/ventana de 24 h/);
   });
 });
+
+describe('formatDias', () => {
+  it('rangos y sueltos', async () => {
+    const { formatDias } = await import('../src/engine/time.js');
+    expect(formatDias(['lun', 'mar', 'mie', 'jue', 'vie'])).toBe('lunes a viernes');
+    expect(formatDias(['lun', 'mie', 'vie'])).toBe('lunes, miércoles y viernes');
+    expect(formatDias(['sab'])).toBe('sábado');
+  });
+});

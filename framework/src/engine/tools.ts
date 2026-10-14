@@ -5,7 +5,7 @@ import { transcriptOf } from '../handoff/index.js';
 import type { Locator, LocateResult } from '../locator/locator.js';
 import { STOPWORDS, normalize, tokens } from '../locator/normalize.js';
 import type { Conversation, OutgoingMessage, Producto, Store, Tienda, ToolDefinition } from '../types.js';
-import { isOpen, localTime } from './time.js';
+import { formatDias, isOpen, localTime } from './time.js';
 
 export const TOOL_DEFINITIONS: ToolDefinition[] = [
   {
@@ -417,7 +417,7 @@ async function derivar(input: Record<string, unknown>, ctx: ToolContext): Promis
 
   const abierto = isOpen(ctx.bot.config.horario_humano, ctx.now());
   const h = ctx.bot.config.horario_humano;
-  const horarioTxt = h ? `${h.dias.join(', ')} de ${h.desde} a ${h.hasta}` : undefined;
+  const horarioTxt = h ? `de ${formatDias(h.dias)}, de ${h.desde} a ${h.hasta}` : undefined;
 
   if (destino.tipo === 'sucursal') {
     // Tienda propia: se muestra como una tienda más (id en tiendas.csv), sin pausar el bot ni avisar a nadie.
@@ -441,9 +441,9 @@ async function derivar(input: Record<string, unknown>, ctx: ToolContext): Promis
       c.pausedReason = `derivado a ${destino.id}: ${motivo}`;
     }
   }
-  const quien = destino.descripcion?.split(':')[0] ?? 'un asesor';
+  const quien = destino.descripcion?.split(':')[0]?.trim();
   const fuera = abierto === false ? (h?.fuera_de_horario ?? (horarioTxt ? `Nuestro equipo atiende ${horarioTxt}; te escribirán apenas estén disponibles.` : undefined)) : undefined;
-  const base = regla?.mensaje ?? `Te comunico con ${quien.charAt(0).toLowerCase()}${quien.slice(1)} 🙌`;
+  const base = regla?.mensaje ?? (quien ? `Te comunico con nuestro equipo (${quien}) 🙌` : 'Te comunico con una persona de nuestro equipo 🙌');
   const cuando = fuera ? ` ${fuera}` : regla?.mensaje ? '' : ' En breve te escriben por aquí.';
   return {
     ok: true,
@@ -479,6 +479,6 @@ function consultarHorario(ctx: ToolContext): ToolResult {
     hasta: h.hasta,
     abierto,
     nota: 'Este es el horario del equipo humano del bot; el de cada tienda viene en buscar_tienda.',
-    sugerencia: `Nuestro equipo atiende ${h.dias.join(', ')} de ${h.desde} a ${h.hasta}. ${abierto ? 'Ahora mismo estamos atendiendo 🙂' : 'Ahora estamos fuera de horario, pero te respondemos apenas abramos.'}`,
+    sugerencia: `Nuestro equipo atiende de ${formatDias(h.dias)}, de ${h.desde} a ${h.hasta}. ${abierto ? 'Ahora mismo estamos atendiendo 🙂' : 'Ahora estamos fuera de horario, pero te respondemos apenas abramos.'}`,
   };
 }

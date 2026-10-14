@@ -30,21 +30,23 @@ console.log('Comandos: /ubicacion -1.67,-78.65 · /reiniciar · /estado · /sali
 
 const rl = createInterface({ input: stdin, output: stdout, terminal: stdin.isTTY });
 const userId = 'terminal';
-const ask = async (): Promise<string | null> => {
-  try {
-    return await rl.question('\x1b[36mtú>\x1b[0m ');
-  } catch {
-    return null;
-  }
+const prompt = () => {
+  rl.setPrompt('\x1b[36mtú>\x1b[0m ');
+  rl.prompt();
 };
+prompt();
 
-for (;;) {
-  const line = await ask();
-  if (line === null || /^\/(salir|exit|quit)$/.test(line.trim())) break;
+for await (const line of rl) {
+  if (/^\/(salir|exit|quit)$/.test(line.trim())) break;
   const text = line.trim();
-  if (!text) continue;
+  if (!stdin.isTTY && text) console.log(text); // eco cuando la entrada viene de un archivo/tubería
+  if (!text) {
+    prompt();
+    continue;
+  }
   if (text === '/estado') {
     console.log(JSON.stringify(await engine.store.getConversation(botId, userId), null, 2));
+    prompt();
     continue;
   }
   const loc = text.match(/^\/ubicacion\s+(-?\d+(?:\.\d+)?)\s*,\s*(-?\d+(?:\.\d+)?)/);
@@ -66,5 +68,6 @@ for (;;) {
   } catch (e) {
     console.error(`\x1b[31merror:\x1b[0m ${(e as Error).message}`);
   }
+  prompt();
 }
 rl.close();
