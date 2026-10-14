@@ -26,5 +26,5 @@ resueltos sin IA: **menos de 0,10 USD/mes** en IA. Las ejecuciones cuentan en el
 
 ## Archivos
 - `nodo.plantilla.js` — fuente del nodo Code (con `__LUGARES__`/`__FRAG__`); `nodo.js` — versión armada que está en n8n.
-- `probar.js` — `node framework/n8n/workflow/probar.js` prueba el nodo con 15 mensajes sin n8n.
+- `probar.cjs` — `node framework/n8n/workflow/probar.js` prueba el nodo con 15 mensajes sin n8n.
 - `workflow.sdk.js` — definición completa del workflow (n8n Workflow SDK).
