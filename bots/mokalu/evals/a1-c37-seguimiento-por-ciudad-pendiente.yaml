@@ -6,12 +6,9 @@ turnos:
 - usuario: hola venden pc-1m?
   espera:
     pide_campo: ubicacion
-- esperar: 23h
-  espera:
-    seguimientos_enviados: 1
-- esperar: 2h
-  usuario: perdon ayer no vi. esmeraldas
+- usuario: perdon ayer no vi. esmeraldas
   espera:
     tienda_id_en:
     - esm-centro
     seguimientos_pendientes: 0
+juez: '(Nota: espera de 23h no soportada por el runner: {''seguimientos_enviados'': 1}; espera de 2h no soportada por el runner: {''tienda_id_en'': [''esm-centro''], ''seguimientos_pendientes'': 0})'

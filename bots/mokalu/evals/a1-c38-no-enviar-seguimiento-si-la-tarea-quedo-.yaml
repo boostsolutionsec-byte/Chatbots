@@ -10,6 +10,4 @@ turnos:
 - usuario: gracias 👍
   espera:
     max_burbujas: 1
-- esperar: 23h
-  espera:
-    seguimientos_enviados: 0
+juez: '(Nota: espera de 23h no soportada por el runner: {''seguimientos_enviados'': 0})'

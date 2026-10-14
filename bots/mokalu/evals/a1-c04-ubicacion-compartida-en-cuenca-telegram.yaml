@@ -6,11 +6,10 @@ turnos:
 - usuario: /start
   espera:
     pide_campo: ubicacion
-- usuario:
-    ubicacion:
-      lat: -2.918
-      lng: -79.011
-  espera:
+- espera:
     tienda_id_en:
     - cue-mall-rio
+  ubicacion:
+    lat: -2.918
+    lng: -79.011
 juez: Usa la ubicación compartida sin pedir la ciudad y recomienda la tienda más cercana.

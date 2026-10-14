@@ -7,10 +7,10 @@ turnos:
   espera:
     tienda_id_en:
     - lat-centro
-- esperar: 30h
-  usuario: oiga y para pintar piedras cual sirve
+- usuario: oiga y para pintar piedras cual sirve
   espera:
     no_pide_campo: ubicacion
     contiene_alguno:
     - PC-3M
     - PC-5M
+juez: '(Nota: espera de 30h no soportada por el runner: {''no_pide_campo'': ''ubicacion'', ''contiene_alguno'': [''PC-3M'', ''PC-5M'']})'

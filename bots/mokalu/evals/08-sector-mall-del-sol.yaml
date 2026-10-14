@@ -6,7 +6,6 @@ turnos:
       tienda_id_en: [gye-mall-sol]
       no_inventa_tiendas: true
       tienda_en: [guayaquil]
-      no_inventa_tiendas: true
 resultado_final:
   accion: buscar_tienda
 juez: "Usó el sector para dar la tienda más cercana al Mall del Sol, no una cualquiera de Guayaquil."

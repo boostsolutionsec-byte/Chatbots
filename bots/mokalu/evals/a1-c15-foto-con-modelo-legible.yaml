@@ -3,9 +3,9 @@ id: C15
 nombre: Foto con modelo legible
 canal: whatsapp
 turnos:
-- usuario:
-  - imagen_descrita: marcador blanco con tapa roja, se lee POSCA y PC-5M
-  - tienen de este en otros colores?
+- usuario: '[imagen] marcador blanco con tapa roja, se lee POSCA y PC-5M
+
+    tienen de este en otros colores?'
   espera:
     contiene_alguno:
     - PC-5M

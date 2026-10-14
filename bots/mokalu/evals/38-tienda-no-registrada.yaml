@@ -6,7 +6,6 @@ turnos:
       tienda_en: [salinas]
       no_inventa_tiendas: true
       tienda_id_en: [sal-centro]
-      no_inventa_tiendas: true
       no_contiene: ["El Faro vende", "sí, el faro"]
 resultado_final:
   accion: buscar_tienda

@@ -6,7 +6,6 @@ turnos:
       tienda_en: [guayaquil]
       no_inventa_tiendas: true
       tienda_id_en: [gye-sur]
-      no_inventa_tiendas: true
 resultado_final:
   accion: buscar_tienda
 juez: "Entendió 'gayakil x el sur' como el sur de Guayaquil y dio la tienda del sur, sin corregir al cliente."

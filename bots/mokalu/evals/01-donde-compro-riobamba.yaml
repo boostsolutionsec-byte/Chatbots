@@ -10,7 +10,6 @@ turnos:
       tienda_en: [riobamba]
       no_inventa_tiendas: true
       tienda_id_en: [rio-centro]
-      no_inventa_tiendas: true
       no_contiene: ["$", "precio"]
 resultado_final:
   accion: buscar_tienda
