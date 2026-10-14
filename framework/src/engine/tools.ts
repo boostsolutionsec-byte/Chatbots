@@ -394,6 +394,10 @@ async function derivar(input: Record<string, unknown>, ctx: ToolContext): Promis
   const motivo = String(input.motivo ?? 'sin motivo');
   const { destino, prioridad: p0, regla } = pickDestino(ctx.bot, typeof input.destino === 'string' ? input.destino : undefined, motivo);
   const prioridad = input.prioridad === 'alta' ? 'alta' : p0;
+  // Una sola derivación al mismo destino por turno (el modelo a veces la repite).
+  if (destino && destino.tipo !== 'sucursal' && ctx.actions.includes(`derivar:${destino.id}`)) {
+    return { ok: true, destino: destino.id, ya_derivado: true, bot_pausado: !!ctx.conversation.paused };
+  }
   if (!destino) return { error: 'No hay destinos configurados en bot.yaml; no prometas que alguien escribirá. Pide disculpas y da la información que tengas.' };
   const c = ctx.conversation;
   const handoff = {

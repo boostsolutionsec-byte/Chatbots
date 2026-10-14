@@ -384,6 +384,14 @@ export class Engine {
           `\nDestinos: ${c.destinos.map((d) => `${d.id} (${d.tipo}${d.descripcion ? `: ${d.descripcion}` : ''})`).join('; ')}`,
       );
     }
+    const sucursales = c.destinos.filter((d) => d.tipo === 'sucursal');
+    if (sucursales.length) {
+      parts.push(
+        `## Tienda propia\nSi preguntan dónde queda la tienda de ${c.marca || 'la marca'} o quieren ir a la tienda propia, usa derivar con destino ` +
+          sucursales.map((d) => `"${d.id}"${d.descripcion ? ` (${d.descripcion})` : ''}`).join(' o ') +
+          ' (muestra la dirección real; no uses buscar_tienda para esto).',
+      );
+    }
     const flowLines = Object.entries(c.flujos).map(
       ([id, f]) => `- ${id}: campos ${f.campos.map((x) => `${x.id}${x.requerido ? '*' : ''}`).join(', ')}${f.al_completar.length ? ` → al completar: ${f.al_completar.join(', ')}` : ''}`,
     );
