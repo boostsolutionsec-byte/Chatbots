@@ -103,3 +103,15 @@ El runner de evals (`framework`) debe dar una nota por eval y un resumen en `rep
 ## Propuestas (Agente 1 añade aquí)
 
 ## Cambios
+
+- (agente 2, 2026-10-14) **Extensiones compatibles del contrato** (todo lo anterior sigue igual):
+  - `bot.yaml`: `reglas_derivacion[].palabras: [..]` (frases que derivan sin pasar por el LLM); `localizador.alias: {"mall x": "guayaquil" | "-2.1,-79.9"}`;
+    `destinos[].tipo` admite también `webhook`; `limites.max_caracteres_respuesta` (opcional); `seguimiento[].texto` (texto para canales sin plantillas);
+    `${VAR:-valor}` = valor por defecto si la variable no existe.
+  - `tiendas.csv`: `marcas` separadas por `;` (también `|` o `/`); `vende_online`: `sí/si/true/1`; si faltan `lat,lng` se intenta sacarlos de `maps_url`
+    (`@lat,lng` o `q=lat,lng`) y si no, se usan las coordenadas de la ciudad. Columnas extra se conservan. Líneas que empiezan con `#` se ignoran.
+  - `IncomingMessage` añade `messageId?` (idempotencia) y `buttonId?`; `OutgoingMessage` añade `location?` (pin de la tienda). `ChannelName` añade `periskope`.
+  - `StoreLocator.find` igual; además `Locator.locate()` devuelve `{lugar, ambiguo, resultados, online, aviso, derivar}`.
+  - Evals: además de `pide_campo`, `tienda_en`, `no_contiene`, se aceptan en `espera`: `contiene: [..]`, `tienda_id: [..]`, `deriva_a: <destino>`,
+    `accion: <herramienta>`, `no_accion: <herramienta>`, `max_caracteres: N`; un turno puede ser `ubicacion: {lat, lng}` en lugar de `usuario`.
+    `resultado_final.accion` se cumple si esa herramienta se usó en cualquier turno. `juez` se evalúa con LLM solo si hay IA real.
