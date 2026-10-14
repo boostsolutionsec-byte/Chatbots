@@ -251,3 +251,9 @@ describe('Locator', () => {
     expect(r.aviso).toMatch(/No inventes/);
   });
 });
+
+describe('Gazetteer: no sobrecorrige', () => {
+  it.each(['Papeleria y Bazar EJEMPLO Mi Cuaderno', 'Lcda. EJEMPLO Ana Mera, Unidad Educativa EJEMPLO', 'ese q brilla pues el d tiktok', 'hacen envios? cuanto se demora'])('"%s" no es un lugar', (text) => {
+    expect(g.resolve(text)).toBeUndefined();
+  });
+});

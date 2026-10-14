@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { Engine } from '../src/engine/engine.js';
 import { MockProvider } from '../src/llm/mock.js';
-import { loadEvals, runAll, renderReport, LLMJudge, checkTurn } from '../src/evals/runner.js';
+import { loadEvals, runAll, renderReport, LLMJudge, checkTurn, parseJudge, userInput } from '../src/evals/runner.js';
 import { loadBot, parseTiendas, renderTemplate, resolveEnvVars, coordsFromMapsUrl, BotConfigError } from '../src/config/loader.js';
 import { parseCsv } from '../src/config/csv.js';
 import { parseTextProtocol, extractJson, renderTranscript, toolInstructions } from '../src/llm/text-protocol.js';
@@ -127,6 +127,28 @@ describe('evals', () => {
     expect(failed.map((f) => f.nombre)).toEqual([]);
     expect(renderReport('_plantilla', 'mock', results)).toContain(`${cases.length}/${cases.length}`);
   });
+  it('variantes de usuario: ráfaga, audio, imagen, ubicación', () => {
+    expect(userInput({ usuario: ['hola', 'soy de quito'] }).text).toBe('hola\nsoy de quito');
+    expect(userInput({ usuario: { audio_transcrito: 'hola' } }).text).toContain('nota de voz');
+    expect(userInput({ usuario: { imagen_descrita: 'un posca' } }).text).toContain('imagen');
+    expect(userInput({ usuario: { ubicacion: { lat: 1, lng: 2 } } }).location).toEqual({ lat: 1, lng: 2 });
+    expect(userInput({ usuario: 123 }).text).toBe('123');
+  });
+  it('reloj simulado y seguimientos (esperar)', async () => {
+    const engine = new Engine({ provider: new MockProvider(), env, pauseOnHandoff: false });
+    const [r] = await runAll(engine, '_plantilla', [
+      { nombre: 'seg', archivo: 's.yaml', canal: 'telegram', hora_simulada: '2026-10-12T15:00:00Z', turnos: [{ usuario: 'hola' }, { esperar: '23h', espera: { seguimientos_enviados: 1 } }, { esperar: '23h', espera: { seguimientos_enviados: 0 } }] },
+    ]);
+    expect(r.turnos[1].respuesta).toContain('¿Pudiste encontrar la tienda?');
+    expect(r.paso).toBe(true);
+  });
+  it('YAML con claves duplicadas se acepta', () => {
+    const dir = mkdtempSync(join(tmpdir(), 'ev-'));
+    writeFileSync(join(dir, 'a.yaml'), 'nombre: x\nturnos:\n  - usuario: hola\n    espera:\n      contiene: [a]\n      contiene: [b]\n');
+    const { cases, errors } = loadEvals(dir);
+    expect(errors).toEqual([]);
+    expect(cases[0].turnos[0].espera).toEqual({ contiene: ['b'] });
+  });
   it('un eval que falla se reporta con detalle', async () => {
     const engine = new Engine({ provider: new MockProvider(), env, pauseOnHandoff: false });
     const results = await runAll(engine, '_plantilla', [{ nombre: 'falla', archivo: 'x.yaml', canal: 'web', turnos: [{ usuario: 'soy de quito', espera: { tienda_en: ['cuenca'] } }] }]);
@@ -138,13 +160,15 @@ describe('evals', () => {
     expect(await j.grade('c', 't')).toEqual({ nota: 8, razon: 'bien' });
     const j2 = new LLMJudge(new MockProvider([{ text: '{"respuesta":"{\\"nota\\":7,\\"razon\\":\\"ok\\"}"}' }]), 'm');
     expect((await j2.grade('c', 't')).nota).toBe(7);
+    expect(parseJudge('Le doy 9/10 porque sí').nota).toBe(9);
   });
   it('checkTurn: no_contiene y max_caracteres', () => {
     const engine = new Engine({ provider: new MockProvider(), env });
     const gz = engine.runtime('_plantilla').locator.gazetteer;
-    const r = { replies: [{ text: 'Cuesta $5' }], toolCalls: [], actions: [], tiendas: [], state: { fields: {}, paused: false, turnsWithoutProgress: 0 } };
-    const c = checkTurn({ no_contiene: ['$'], max_caracteres: 3 }, r, gz);
-    expect(c.every((x) => !x.ok)).toBe(true);
+    const r = { replies: [{ text: 'Cuesta $5? y 0991234567?' }], toolCalls: [], actions: [], tiendas: [], motivos: [], state: { fields: {}, paused: false, turnsWithoutProgress: 0 } };
+    const { checks, paraJuez } = checkTurn({ no_contiene: ['$'], max_caracteres: 3, pregunta_unica: true, contiene_alguno: ['hola', 'chao'], max_palabras: 2, no_inventa_tiendas: true, rara: 1 }, r, gz);
+    expect(checks.map((x) => x.ok)).toEqual([false, false, false, false, false, false]);
+    expect(paraJuez).toEqual(['rara: 1']);
   });
 });
 

@@ -58,7 +58,10 @@ export const STOPWORDS = new Set(
   plumas color colores pintura pinturas precio precios cuanto vale valen ciudad sector provincia zona barrio casa trabajo
   ayuda ayudame necesito busco buscando queria quieria saber info informacion mira mire oye disculpa perdon tal vez talvez
   hijo hija mama papa amigo amiga estudiante colegio escuela universidad clase clases regalo regalar arte artista dibujo
-  dibujar pintar papel tela vidrio madera zapatos zapatillas taza tazas piedra piedras lienzo pared`.split(/\s+/).filter(Boolean),
+  dibujar pintar papel tela vidrio madera zapatos zapatillas taza tazas piedra piedras lienzo pared
+  bazar papeleria papelerias libreria librerias negocio empresa unidad educativa escuela senor senora senorita lcda lic
+  ingeniero doctor nombre llamo llama mio mia aqui alla sale salen brilla brillan tiktok instagram whatsapp facebook
+  envio envios enviar demora cuesta cuestan valor gracias muchas buenos buenas tardes noches dias porfa plis please`.split(/\s+/).filter(Boolean),
 );
 
 /** Nombres de lugar que también son palabras comunes: solo cuentan con una pista de ubicación delante. */

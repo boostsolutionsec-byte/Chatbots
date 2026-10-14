@@ -45,6 +45,10 @@ export interface EngineReply {
   /** Acciones del turno: buscar_tienda, derivar:<destino>, registrar_campo:<id>, guardar_lead… */
   actions: string[];
   tiendas: Tienda[];
+  /** Motivo del localizador para cada tienda de `tiendas` (misma_ciudad | misma_provincia | mas_cercana). */
+  motivos: string[];
+  /** Prioridad de la derivación del turno, si hubo. */
+  prioridad?: 'normal' | 'alta';
   state: {
     fields: Record<string, string>;
     activeFlow?: string;
@@ -129,8 +133,9 @@ export class Engine {
     await this.store.saveConversation({ ...c, messages: [], fields: {}, activeFlow: undefined, paused: false, turnsWithoutProgress: 0, lead: undefined, followupsSent: [] });
   }
 
-  async handle(botId: string, msg: IncomingMessage): Promise<EngineReply> {
+  async handle(botId: string, msg: IncomingMessage, turnOpts: { now?: Date } = {}): Promise<EngineReply> {
     const rt = this.runtime(botId);
+    const nowFn = turnOpts.now ? () => turnOpts.now! : this.opts.now;
     const { bot } = rt;
     const conv = await this.store.getConversation(botId, msg.userId);
     conv.channel = msg.channel;
@@ -139,6 +144,7 @@ export class Engine {
       toolCalls: [],
       actions: [],
       tiendas: [],
+      motivos: [],
       state: this.state(rt, conv),
       ...extra,
     });
@@ -161,8 +167,8 @@ export class Engine {
       return { ...base(), replies: [{ text: 'Conversación reiniciada.' }], state: this.state(rt, fresh) };
     }
 
-    conv.messages.push({ role: 'user', text: userText, at: msg.timestamp || Date.now(), channel: msg.channel });
-    conv.lastUserAt = msg.timestamp || Date.now();
+    conv.messages.push({ role: 'user', text: userText, at: msg.timestamp || nowFn().getTime(), channel: msg.channel });
+    conv.lastUserAt = msg.timestamp || nowFn().getTime();
 
     if (conv.paused) {
       await this.store.saveConversation(conv);
@@ -178,8 +184,9 @@ export class Engine {
       extras: [],
       actions: [],
       tiendasMostradas: [],
+      motivos: [],
       pauseOnHandoff: this.opts.pauseOnHandoff,
-      now: this.opts.now,
+      now: nowFn,
     };
     const fieldsBefore = Object.keys(conv.fields).length;
     const executed: ExecutedToolCall[] = [];
@@ -200,7 +207,7 @@ export class Engine {
       const alias = tooSlow ? bot.config.modelo.experto : bot.config.modelo.rapido;
       const override = tooSlow ? this.opts.env.LLM_MODEL_EXPERTO : this.opts.env.LLM_MODEL_RAPIDO;
       model = override || resolveModel(this.provider.name, alias);
-      const { cacheable, dynamic } = this.systemPrompt(rt, conv, userText);
+      const { cacheable, dynamic } = this.systemPrompt(rt, conv, userText, nowFn());
 
       for (let round = 0; round <= this.opts.maxToolRounds; round++) {
         const lastRound = round === this.opts.maxToolRounds;
@@ -237,7 +244,7 @@ export class Engine {
       const problems = outputProblems(finalText, rt.bot, ctx.actions.includes('buscar_tienda'));
       if (problems.length) {
         this.opts.log(`[${botId}] guarda de salida: ${problems.join('; ')} → reintento`);
-        const { cacheable, dynamic } = this.systemPrompt(rt, conv, userText);
+        const { cacheable, dynamic } = this.systemPrompt(rt, conv, userText, nowFn());
         const retry = await this.provider.complete({
           system: `${dynamic}\n\n## Corrección obligatoria\nTu borrador tenía problemas: ${problems.join('; ')}. Reescríbelo corrigiéndolo, sin mencionar la corrección.`,
           cacheableSystemPrefix: cacheable,
@@ -267,8 +274,8 @@ export class Engine {
     }
 
     const replies: OutgoingMessage[] = [{ text: finalText.trim() }, ...ctx.extras];
-    conv.messages.push({ role: 'assistant', text: finalText.trim(), at: Date.now(), toolCalls: executed.map(({ result: _r, ...c }) => c) });
-    conv.lastBotAt = Date.now();
+    conv.messages.push({ role: 'assistant', text: finalText.trim(), at: nowFn().getTime(), toolCalls: executed.map(({ result: _r, ...c }) => c) });
+    conv.lastBotAt = nowFn().getTime();
     await this.store.saveConversation(conv);
 
     return {
@@ -276,6 +283,8 @@ export class Engine {
       toolCalls: executed,
       actions: ctx.actions,
       tiendas: ctx.tiendasMostradas,
+      motivos: ctx.motivos,
+      prioridad: executed.map((e) => (e.name === 'derivar' ? (e.result as { prioridad?: 'normal' | 'alta' })?.prioridad : undefined)).find(Boolean),
       state: this.state(rt, conv),
       model: model || undefined,
     };
@@ -310,7 +319,7 @@ export class Engine {
     return out;
   }
 
-  private systemPrompt(rt: BotRuntime, conv: Conversation, userText: string): { cacheable: string; dynamic: string } {
+  private systemPrompt(rt: BotRuntime, conv: Conversation, userText: string, now: Date = this.opts.now()): { cacheable: string; dynamic: string } {
     const { bot } = rt;
     const c = bot.config;
     const full = rt.knowledgeChars <= this.opts.fullKnowledgeChars;
@@ -342,8 +351,8 @@ export class Engine {
     const pending = missingFields(bot, conv, conv.activeFlow ?? defaultFlow(bot))[0];
     const estado = [
       `canal: ${conv.channel ?? 'desconocido'}`,
-      h ? `hora_local: ${localTime(h.zona, this.opts.now()).label} (${h.zona})` : undefined,
-      h ? `equipo_humano_disponible: ${isOpen(h, this.opts.now()) ? 'sí' : 'no'} (${h.dias.join(',')} ${h.desde}-${h.hasta})` : undefined,
+      h ? `hora_local: ${localTime(h.zona, now).label} (${h.zona})` : undefined,
+      h ? `equipo_humano_disponible: ${isOpen(h, now) ? 'sí' : 'no'} (${h.dias.join(',')} ${h.desde}-${h.hasta})` : undefined,
       `campos_recolectados: ${JSON.stringify(conv.fields)}`,
       pending ? `campo_pendiente: ${pending.campo}` : undefined,
       pending?.pregunta ? `pregunta_pendiente: ${pending.pregunta}` : undefined,

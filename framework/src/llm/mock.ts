@@ -59,7 +59,12 @@ export class MockProvider implements LLMProvider {
     if (/\b(reclamo|queja|danad|defectuos|garantia|estafa|molest|pesimo|devolucion|no sirve|no funciona)/.test(t)) {
       return call('derivar', { motivo: 'reclamo o cliente molesto', prioridad: 'alta' }) ?? { text: 'Lamento lo ocurrido.' };
     }
-    if (/\b(distribuidor|distribuir|punto de venta|al por mayor|mayorista|mayoreo|revender|colegio|empresa|cotizacion)\b/.test(t)) {
+    if (
+      /\b(distribuidor|distribuir|punto de venta|al por mayor|mayorista|mayoreo|revender|colegio|empresa|cotizacion|proforma|unidad educativa|institucion)\b/.test(t) ||
+      /\b(tengo|tenemos) (una|un) (papeleria|libreria|bazar|tienda|negocio)\b/.test(t) ||
+      /\b(quiero|quisiera|queremos) (vender|revender|distribuir)\b/.test(t) ||
+      /\b\d{2,}\s*(marcadores|unidades|cajas|docenas)\b/.test(t)
+    ) {
       return call('derivar', { motivo: 'quiere ser punto de venta, mayorista o compra institucional' }) ?? { text: 'Te paso con ventas.' };
     }
     if (/\b(horario|a que hora|abren|atienden|cierran)\b/.test(t)) {

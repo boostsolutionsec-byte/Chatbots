@@ -84,6 +84,8 @@ export interface ToolContext {
   actions: string[];
   /** Tiendas mostradas en este turno (para evals: tienda_en). */
   tiendasMostradas: Tienda[];
+  /** Motivo del localizador para cada tienda mostrada. */
+  motivos: string[];
   pauseOnHandoff: boolean;
   now: () => Date;
 }
@@ -157,6 +159,7 @@ async function buscarTienda(input: Record<string, unknown>, ctx: ToolContext): P
   if (r.resultados.length && !repeated) {
     ctx.actions.push('buscar_tienda');
     ctx.tiendasMostradas.push(...r.resultados.map((x) => x.tienda));
+    ctx.motivos.push(...r.resultados.map((x) => x.motivo));
     const first = r.resultados[0].tienda;
     if (first.lat !== undefined && first.lng !== undefined) {
       ctx.extras.push({ location: { lat: first.lat, lng: first.lng, name: first.nombre, address: first.direccion } });
