@@ -24,4 +24,6 @@
 1. Llenar `FORMULARIO-FINAL.md` (sobre todo la lista real de tiendas).
 2. Seguir `PASOS-HUMANOS.md`: crear un bot **nuevo** en @BotFather para Mokalú y poner `DEEPSEEK_API_KEY`.
 3. Probar: `cd framework && npm install && npm run dev` → abrir `/chat/mokalu`, o `npm run sim -- mokalu`.
-4. **Pendiente:** armar el workflow en n8n con el paquete `framework/n8n/` (no se hizo por el tope de presupuesto).
+4. **Workflow de n8n creado (apagado):** [BORRADOR - Bot Mokalú tiendas cercanas (DeepSeek)](https://henrydelgado.app.n8n.cloud/workflow/3PxOLqw5gERwNqut).
+   Tiendas en la Data Table "Mokalú tiendas". Antes de encenderlo, ver `framework/n8n/workflow/README.md`
+   (cambiar la credencial de Telegram por la del bot nuevo).

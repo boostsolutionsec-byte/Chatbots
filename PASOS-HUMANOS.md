@@ -15,6 +15,14 @@ Formato: `- [ ] [quién] Qué hacer — por qué / dónde — (agente que lo pid
 - [ ] [dueño] (Opcional) Crear/elegir el proyecto de **Supabase** para guardar conversaciones y aplicar la migración de `framework/supabase/migrations/`.
 - [ ] [dueño] (Opcional) Desplegar el servicio (Railway/Render/VPS) para que el bot de Telegram quede encendido 24/7.
 
+## Workflow de n8n (bot en producción)
+
+- [ ] [dueño] Crear el bot nuevo de Mokalú en @BotFather y su credencial de Telegram en n8n.
+- [ ] [dueño] En el workflow "BORRADOR - Bot Mokalú tiendas cercanas (DeepSeek)" cambiar la credencial de los 4 nodos de Telegram (hoy tienen la "Telegram account" existente; encenderlo así le quitaría el webhook al bot actual).
+- [ ] [dueño] Poner el ID del chat del equipo en el nodo "Avisar al equipo".
+- [ ] [dueño] Reemplazar las tiendas EJEMPLO en la Data Table "Mokalú tiendas" de n8n.
+- [ ] [dueño] Probar con mensajes reales y luego encender el workflow.
+
 ## Fase 2 — más adelante: WhatsApp e Instagram (Meta)
 
 - [ ] [dueño] Cuenta de **Meta Business** verificada de la marca que tendrá el bot.
