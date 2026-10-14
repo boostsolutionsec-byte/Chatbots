@@ -1,0 +1,25 @@
+{
+  "name": "mokalu-validador-simulador",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Clientes simulados + juez LLM para validar bots del framework (Agente 4)",
+  "scripts": {
+    "test": "vitest run",
+    "sim": "tsx src/run.ts",
+    "mock-server": "tsx src/mock-server.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "yaml": "^2.9.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.43",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.3",
+    "vitest": "^3.2.7"
+  }
+}

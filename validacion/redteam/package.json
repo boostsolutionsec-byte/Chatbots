@@ -1,0 +1,13 @@
+{
+  "name": "mokalu-redteam",
+  "private": true,
+  "type": "module",
+  "description": "Red teaming del bot con promptfoo (Agente 4)",
+  "scripts": {
+    "redteam": "promptfoo eval -c promptfooconfig.yaml --no-cache -j 2",
+    "redteam:view": "promptfoo view"
+  },
+  "devDependencies": {
+    "promptfoo": "^0.124.1"
+  }
+}

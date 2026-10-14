@@ -1,0 +1,173 @@
+# Personas — pueblos pequeños, Amazonía, Galápagos y ciudades que probablemente NO tienen tienda.
+# El bot debe dar la más cercana por distancia (y avisar que está en otra ciudad) u ofrecer compra online/envío.
+
+- id: p19-lago-agrio
+  nombre: "Carlos, Lago Agrio"
+  tipo: profesional
+  ubicacion: {ciudad: Nueva Loja, provincia: Sucumbíos, alias: "Lago Agrio", lat: 0.0847, lng: -76.8828}
+  estilo: "dice 'lago agrio' (nombre popular), no 'Nueva Loja'"
+  intencion: donde_comprar
+  contexto: "Sabe que en su ciudad casi no hay papelerías de arte."
+  guion:
+    - "buenas, estoy en lago agrio, hay donde comprar posca por aca?"
+  espera:
+    destino: tienda_mas_cercana
+    acepta_online: true
+    debe_avisar_otra_ciudad: true
+    max_mensajes_bot: 3
+
+- id: p20-galapagos
+  nombre: "Ana, Puerto Ayora (Galápagos)"
+  tipo: artista
+  ubicacion: {ciudad: Puerto Ayora, provincia: Galápagos, lat: -0.7432, lng: -90.3134}
+  estilo: "relajada, cuenta que vive en Santa Cruz"
+  intencion: donde_comprar
+  contexto: "Vive en la isla Santa Cruz. Quiere saber si le envían."
+  guion:
+    - "hola! vivo en santa cruz galapagos 🐢 hay forma de conseguir posca aca o me envian?"
+  espera:
+    destino: tienda_mas_cercana
+    acepta_online: true
+    debe_avisar_otra_ciudad: true
+    max_mensajes_bot: 3
+
+- id: p21-otavalo
+  nombre: "Inti, artesano de Otavalo"
+  tipo: artista
+  ubicacion: {ciudad: Otavalo, provincia: Imbabura, lat: 0.2341, lng: -78.2611}
+  estilo: "respetuoso, 'mashi', 'por favorcito'"
+  intencion: donde_comprar
+  contexto: "Pinta artesanías de madera."
+  guion:
+    - "alli puncha mashi, en otavalo donde venden marcadores posca por favorcito"
+  espera:
+    destino: tienda_mas_cercana
+    debe_avisar_otra_ciudad_si_aplica: true
+    max_mensajes_bot: 3
+
+- id: p22-tena
+  nombre: "Jessica, Tena"
+  tipo: mama
+  ubicacion: {ciudad: Tena, provincia: Napo, lat: -0.9938, lng: -77.8129}
+  estilo: "minúsculas, sin tildes"
+  intencion: donde_comprar
+  contexto: "Útiles escolares para su hijo."
+  guion:
+    - "hola en el tena venden esferos uni ball?"
+  espera:
+    destino: tienda_mas_cercana
+    acepta_online: true
+    max_mensajes_bot: 3
+
+- id: p23-macas
+  nombre: "Pedro, Macas"
+  tipo: profesor
+  ubicacion: {ciudad: Macas, provincia: Morona Santiago, lat: -2.3087, lng: -78.1114}
+  estilo: "formal"
+  intencion: donde_comprar
+  contexto: "Profesor de arte."
+  guion:
+    - "Buenas tardes, ¿tienen distribuidor en Macas?"
+  espera:
+    destino: tienda_mas_cercana
+    acepta_online: true
+    max_mensajes_bot: 3
+
+- id: p24-zamora
+  nombre: "Lucía, Zamora"
+  tipo: estudiante
+  ubicacion: {ciudad: Zamora, provincia: Zamora Chinchipe, lat: -4.0692, lng: -78.9567}
+  estilo: "corto, sin saludo"
+  intencion: donde_comprar
+  contexto: "Universitaria."
+  guion:
+    - "posca en zamora?"
+  espera:
+    destino: tienda_mas_cercana
+    acepta_online: true
+    max_mensajes_bot: 3
+
+- id: p25-vilcabamba
+  nombre: "Turista viviendo en Vilcabamba"
+  tipo: artista
+  ubicacion: {ciudad: Vilcabamba, provincia: Loja, lat: -4.2600, lng: -79.2220}
+  estilo: "español sencillo con algún error de extranjero"
+  intencion: donde_comprar
+  contexto: "Es un pueblo pequeño cerca de Loja."
+  guion:
+    - "Hola, yo vivo en Vilcabamba. Donde es la tienda mas cerca para comprar POSCA?"
+  espera:
+    destino: tienda_mas_cercana
+    debe_avisar_otra_ciudad: true
+    max_mensajes_bot: 3
+
+- id: p26-montanita
+  nombre: "Surfista de Montañita"
+  tipo: artista
+  ubicacion: {ciudad: Montañita, provincia: Santa Elena, lat: -1.8270, lng: -80.7530}
+  estilo: "relajado, 'bro', 'brother', escribe 'montanita' sin ñ"
+  intencion: donde_comprar
+  contexto: "Quiere pintar tablas de surf."
+  guion:
+    - "q tal bro, estoy en montanita, quiero pintar tablas de surf, donde compro posca?"
+  espera:
+    destino: tienda_mas_cercana
+    producto_esperado: [PC-5M, PC-8K, PC-17K, PC-3M]
+    debe_avisar_otra_ciudad_si_aplica: true
+    max_mensajes_bot: 4
+
+- id: p27-banos
+  nombre: "Dueña de hostal en Baños"
+  tipo: profesional
+  ubicacion: {ciudad: Baños de Agua Santa, provincia: Tungurahua, lat: -1.3964, lng: -78.4247}
+  estilo: "dice solo 'baños'"
+  intencion: donde_comprar
+  contexto: "Ambigüedad: 'baños' puede confundirse; está en Tungurahua."
+  guion:
+    - "buenas, estoy en baños, donde hay posca cerca"
+  espera:
+    destino: tienda_mas_cercana
+    debe_avisar_otra_ciudad_si_aplica: true
+    max_mensajes_bot: 4
+
+- id: p28-gualaceo
+  nombre: "Rosita, Gualaceo"
+  tipo: mama
+  ubicacion: {ciudad: Gualaceo, provincia: Azuay, lat: -2.8920, lng: -78.7770}
+  estilo: "cuencana, 'ayayay', 'pes'"
+  intencion: donde_comprar
+  contexto: "Cantón cercano a Cuenca."
+  guion:
+    - "buenas, de gualaceo le escribo, donde pes venden los posca"
+  espera:
+    destino: tienda_mas_cercana
+    debe_avisar_otra_ciudad_si_aplica: true
+    max_mensajes_bot: 3
+
+- id: p29-huaquillas
+  nombre: "Comerciante de Huaquillas"
+  tipo: profesional
+  ubicacion: {ciudad: Huaquillas, provincia: El Oro, lat: -3.4762, lng: -80.2308}
+  estilo: "corto y directo"
+  intencion: donde_comprar
+  contexto: "Frontera con Perú."
+  guion:
+    - "en huaquillas hay tienda de uni-ball?"
+  espera:
+    destino: tienda_mas_cercana
+    debe_avisar_otra_ciudad_si_aplica: true
+    max_mensajes_bot: 3
+
+- id: p30-guaranda-envio
+  nombre: "Estudiante de Guaranda que pide envío"
+  tipo: estudiante
+  ubicacion: {ciudad: Guaranda, provincia: Bolívar, lat: -1.5926, lng: -79.0010}
+  estilo: "educado, minúsculas"
+  intencion: donde_comprar
+  contexto: "Pregunta si se lo pueden mandar a domicilio."
+  guion:
+    - "hola, soy de guaranda, me pueden enviar unos posca a mi casa?"
+  espera:
+    destino: tienda_mas_cercana
+    acepta_online: true
+    max_mensajes_bot: 3

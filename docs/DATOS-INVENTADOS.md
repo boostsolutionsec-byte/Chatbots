@@ -27,3 +27,4 @@ Cada agente añade aquí una fila por cada dato de ejemplo que use. El Agente 4 
 | bots/mokalu/plantillas-whatsapp.md | 5 plantillas | textos propuestos por el agente | Textos aprobados por el dueño | ¿Apruebas estos textos de seguimiento o quieres otros? ¿Quieres seguimiento automático a las 23 h? |
 | bots/mokalu/prompts/sistema.md | ejemplos de respuestas | ejemplos con tiendas EJEMPLO | — (se actualizan solos al cambiar tiendas.csv; revisar tono) | ¿Te gusta este tono? ¿tuteo o "usted"? |
 | bots/mokalu/tiendas.csv | columna `marcas` de todas las filas | `uni-ball;POSCA` (todas iguales, por H-12) | Qué marcas/líneas tiene cada punto de venta | ¿Todas las tiendas tienen POSCA o algunas solo bolígrafos uni-ball? |
+| validacion/simulador/fixtures/tiendas-mock.csv | 12 filas `EJEMPLO …` | tiendas de prueba del validador (solo se usan si no existe `bots/mokalu/tiendas.csv`) | ninguno: es un fixture de pruebas, no va al bot | — |

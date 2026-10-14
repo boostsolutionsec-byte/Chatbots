@@ -1,0 +1,249 @@
+# Personas — "¿dónde compro?" desde ciudades grandes y medianas.
+# Formato: ver validacion/personas/README.md
+# Las coordenadas son el centro aproximado de la ciudad/sector (para calcular la tienda más cercana
+# de forma independiente al bot, a partir de bots/mokalu/tiendas.csv).
+
+- id: p01-riobamba-mama
+  nombre: "Rosa, mamá de Riobamba"
+  tipo: mama
+  ubicacion: {ciudad: Riobamba, provincia: Chimborazo, lat: -1.6636, lng: -78.6546}
+  estilo: "todo en minúsculas, sin tildes, sin signos de apertura, mensajes muy cortos"
+  intencion: donde_comprar
+  contexto: "Su hija de 12 años pinta piedras y le pidió marcadores POSCA. No sabe cuál comprar."
+  guion:
+    - "hola buenas tardes"
+    - "donde consigo los marcadores posca"
+    - "soy de riobamba"
+  espera:
+    destino: tienda_mas_cercana
+    max_mensajes_bot: 4
+
+- id: p02-guayaquil-mall-del-sol
+  nombre: "Kevin, estudiante de diseño"
+  tipo: estudiante
+  ubicacion: {ciudad: Guayaquil, provincia: Guayas, sector: "Mall del Sol", lat: -2.1548, lng: -79.8927}
+  estilo: "muchos emojis, abrevia (q, xq, tmb), escribe rápido"
+  intencion: donde_comprar
+  contexto: "Vive cerca del Mall del Sol y quiere ir hoy mismo a comprar un POSCA PC-1M."
+  guion:
+    - "holaa 👋👋"
+    - "vivo cerca del mall del sol, donde puedo comprar posca pc-1m?? 🙏"
+  espera:
+    destino: tienda_mas_cercana
+    max_mensajes_bot: 3
+
+- id: p03-quito-capital
+  nombre: "Daniela, ilustradora en Quito"
+  tipo: artista
+  ubicacion: {ciudad: Quito, provincia: Pichincha, lat: -0.1807, lng: -78.4678}
+  estilo: "correcta, frases completas, sin emojis"
+  intencion: donde_comprar
+  contexto: "Dice 'en la capital' en vez de Quito. Busca uni-ball PIN para entintar."
+  guion:
+    - "Buenas, ¿dónde venden los uni PIN en la capital?"
+  espera:
+    destino: tienda_mas_cercana
+    max_mensajes_bot: 3
+
+- id: p04-cuenca-profesor-usted
+  nombre: "Lic. Hernán, profesor de dibujo técnico"
+  tipo: profesor
+  ubicacion: {ciudad: Cuenca, provincia: Azuay, lat: -2.9001, lng: -79.0059}
+  estilo: "muy formal, trata de usted, saluda 'Buenos días estimados'"
+  intencion: donde_comprar
+  contexto: "Quiere recomendar a sus alumnos un lugar en Cuenca donde comprar portaminas Kuru Toga."
+  guion:
+    - "Buenos días estimados."
+    - "Quisiera saber en qué establecimiento de la ciudad de Cuenca puedo adquirir portaminas Kuru Toga."
+  espera:
+    destino: tienda_mas_cercana
+    max_mensajes_bot: 3
+
+- id: p05-ambato-partido
+  nombre: "Mateo, colegial de Ambato"
+  tipo: estudiante
+  ubicacion: {ciudad: Ambato, provincia: Tungurahua, lat: -1.2491, lng: -78.6168}
+  estilo: "parte cada idea en 3 mensajes seguidos, sin puntuación"
+  intencion: donde_comprar
+  contexto: "Necesita esferos uni-ball Signo para el colegio."
+  guion:
+    - "hola"
+    - "una pregunta"
+    - "en ambato donde venden los signo"
+  espera:
+    destino: tienda_mas_cercana
+    max_mensajes_bot: 4
+
+- id: p06-loja-audio
+  nombre: "Doña Carmen, Loja (audio transcrito)"
+  tipo: mama
+  ubicacion: {ciudad: Loja, provincia: Loja, lat: -3.9931, lng: -79.2042}
+  estilo: "mensajes como audio transcrito: largos, sin puntuación, muletillas ('este', 'o sea', 've'), algún error de transcripción"
+  intencion: donde_comprar
+  contexto: "Su nieto le pidió 'los marcadores de pintura para los zapatos'."
+  guion:
+    - "aló buenas este mi nieto me dice que quiere unos marcadores de esos de pintura para pintar los zapatos o sea los posca dice ve y yo estoy aquí en loja dónde los puedo comprar"
+  espera:
+    destino: tienda_mas_cercana
+    max_mensajes_bot: 3
+
+- id: p07-manta-muralista
+  nombre: "Andrés, muralista de Manta"
+  tipo: artista
+  ubicacion: {ciudad: Manta, provincia: Manabí, lat: -0.9677, lng: -80.7089}
+  estilo: "manaba, cercano ('mi pana', 'ñaño'), pocas tildes"
+  intencion: donde_comprar
+  contexto: "Quiere POSCA PC-17K (punta gruesa) para un mural."
+  guion:
+    - "q mas ñaño, en manta donde hay posca de los gruesos pc17k?"
+  espera:
+    destino: tienda_mas_cercana
+    max_mensajes_bot: 3
+
+- id: p08-machala-signo
+  nombre: "Usuario de Machala que solo manda '?'"
+  tipo: estudiante
+  ubicacion: {ciudad: Machala, provincia: El Oro, lat: -3.2581, lng: -79.9554}
+  estilo: "primero manda solo '?', luego responde con una o dos palabras"
+  intencion: donde_comprar
+  contexto: "Vio una publicación de POSCA y escribió '?' sin contexto."
+  guion:
+    - "?"
+    - "donde venden"
+    - "machala"
+  espera:
+    destino: tienda_mas_cercana
+    max_mensajes_bot: 4
+
+- id: p09-esmeraldas
+  nombre: "Yuli, emprendedora de Esmeraldas"
+  tipo: artista
+  ubicacion: {ciudad: Esmeraldas, provincia: Esmeraldas, lat: 0.9682, lng: -79.6517}
+  estilo: "cálida, usa 'mi amor', emojis de corazón"
+  intencion: donde_comprar
+  contexto: "Decora tazas para vender y quiere POSCA."
+  guion:
+    - "hola mi amor 💕 en esmeraldas venden posca? decoro tazas"
+  espera:
+    destino: tienda_mas_cercana
+    producto_esperado: [PC-3M, PC-5M, PC-1M]
+    max_mensajes_bot: 4
+
+- id: p10-santo-domingo
+  nombre: "Luis, Santo Domingo de los Tsáchilas"
+  tipo: estudiante
+  ubicacion: {ciudad: Santo Domingo, provincia: Santo Domingo de los Tsáchilas, lat: -0.2530, lng: -79.1754}
+  estilo: "escribe 'sto domingo', sin tildes"
+  intencion: donde_comprar
+  contexto: "Busca esferos Jetstream."
+  guion:
+    - "buenas en sto domingo donde hay jetstream"
+  espera:
+    destino: tienda_mas_cercana
+    max_mensajes_bot: 3
+
+- id: p11-ibarra
+  nombre: "Gaby, arquitecta en Ibarra"
+  tipo: profesional
+  ubicacion: {ciudad: Ibarra, provincia: Imbabura, lat: 0.3517, lng: -78.1223}
+  estilo: "directa, un solo mensaje claro"
+  intencion: donde_comprar
+  contexto: "Necesita portaminas y minas 0.5."
+  guion:
+    - "Hola, estoy en Ibarra. ¿Dónde puedo comprar portaminas Kuru Toga?"
+  espera:
+    destino: tienda_mas_cercana
+    max_mensajes_bot: 2
+
+- id: p12-cumbaya-sector
+  nombre: "Sofía, vive en Cumbayá"
+  tipo: mama
+  ubicacion: {ciudad: Quito, provincia: Pichincha, sector: Cumbayá, lat: -0.2025, lng: -78.4300}
+  estilo: "quiteña, 've', 'full', 'chévere'"
+  intencion: donde_comprar
+  contexto: "Solo dice el sector ('cumbaya'), no la ciudad."
+  guion:
+    - "holi, vivo en cumbaya, hay algun lugar cerca donde vendan posca?"
+  espera:
+    destino: tienda_mas_cercana
+    max_mensajes_bot: 3
+
+- id: p13-samborondon
+  nombre: "Valentina, Samborondón"
+  tipo: estudiante
+  ubicacion: {ciudad: Samborondón, provincia: Guayas, lat: -2.1333, lng: -79.8833}
+  estilo: "mezcla inglés ('ok', 'cute', 'please'), emojis"
+  intencion: donde_comprar
+  contexto: "Quiere los POSCA pastel para decorar su laptop."
+  guion:
+    - "hii 💖 vivo en samborondon, donde compro posca pastel please"
+  espera:
+    destino: tienda_mas_cercana
+    max_mensajes_bot: 3
+
+- id: p14-duran
+  nombre: "Don Jorge, Durán"
+  tipo: profesional
+  ubicacion: {ciudad: Durán, provincia: Guayas, lat: -2.1700, lng: -79.8380}
+  estilo: "escribe 'duran' sin tilde, frases cortas"
+  intencion: donde_comprar
+  contexto: "Rotula letreros, quiere POSCA PC-8K."
+  guion:
+    - "buenas tardes, soy de duran. donde consigo posca pc-8k"
+  espera:
+    destino: tienda_mas_cercana
+    max_mensajes_bot: 3
+
+- id: p15-guayaco-jerga
+  nombre: "Bryan, 'guayaco de cepa'"
+  tipo: estudiante
+  ubicacion: {ciudad: Guayaquil, provincia: Guayas, sector: Urdesa, lat: -2.1700, lng: -79.9100}
+  estilo: "jerga guayaca ('mijo', 'de ley', 'chuta', 'qué fue'), sin tildes"
+  intencion: donde_comprar
+  contexto: "Dice 'soy guayaco, por urdesa' en vez de Guayaquil."
+  guion:
+    - "que fue loco, soy guayaco, por urdesa. donde venden posca de ley?"
+  espera:
+    destino: tienda_mas_cercana
+    max_mensajes_bot: 3
+
+- id: p16-riobamba-typo
+  nombre: "Usuario con faltas de ortografía (Riobamba)"
+  tipo: estudiante
+  ubicacion: {ciudad: Riobamba, provincia: Chimborazo, lat: -1.6636, lng: -78.6546}
+  estilo: "faltas fuertes: 'kiero', 'rio bamba', 'aser', 'pozca'"
+  intencion: donde_comprar
+  contexto: "Escribe la ciudad separada: 'rio bamba'."
+  guion:
+    - "kiero conprar pozca en rio bamba"
+  espera:
+    destino: tienda_mas_cercana
+    max_mensajes_bot: 2
+
+- id: p17-portoviejo
+  nombre: "Mariela, Portoviejo"
+  tipo: profesor
+  ubicacion: {ciudad: Portoviejo, provincia: Manabí, lat: -1.0546, lng: -80.4545}
+  estilo: "amable, frases completas"
+  intencion: donde_comprar
+  contexto: "Profesora de primaria, quiere marcadores para su aula."
+  guion:
+    - "Hola, buenas. Soy profesora en Portoviejo, ¿dónde puedo comprar marcadores POSCA?"
+  espera:
+    destino: tienda_mas_cercana
+    max_mensajes_bot: 3
+
+- id: p18-ubicacion-compartida
+  nombre: "Cliente que comparte su ubicación (Quito norte)"
+  tipo: estudiante
+  ubicacion: {ciudad: Quito, provincia: Pichincha, sector: "La Carolina", lat: -0.1830, lng: -78.4840}
+  comparte_ubicacion: true    # el arnés envía {location: {lat,lng}} en lugar de texto en ese turno
+  estilo: "no quiere escribir mucho; cuando le piden la ciudad, manda la ubicación"
+  intencion: donde_comprar
+  contexto: "Prefiere mandar la ubicación del celular."
+  guion:
+    - "donde venden posca"
+    - "[UBICACION]"
+  espera:
+    destino: tienda_mas_cercana
+    max_mensajes_bot: 3
