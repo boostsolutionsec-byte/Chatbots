@@ -35,6 +35,11 @@ No arreglas el trabajo de otros: lo reportas de forma que el otro agente lo pued
    `validacion/reportes/<fecha-hora>.md` con nota global, nota por rúbrica, las 5 peores conversaciones completas y
    la tendencia respecto a la corrida anterior.
 
+7. **Formulario final** — mantén al día `FORMULARIO-FINAL.md` en la raíz (en tu rama): a partir de
+   `docs/DATOS-INVENTADOS.md` de **todas** las ramas, un formulario corto y ordenado por importancia con
+   todo lo que el dueño debe responder para pasar de datos de ejemplo a datos reales (incluye una plantilla de tabla
+   para la lista de tiendas y la lista de claves/cuentas a crear). Debe poder llenarlo en ~15 minutos.
+
 ## Rúbrica (0–2 cada una)
 1. **Tienda correcta**: mandó al cliente a la tienda más cercana real de su ciudad/provincia (o al canal correcto si no hay).
 2. **Pocos mensajes**: llegó al destino en ≤ 4 mensajes del bot cuando el cliente fue claro.
@@ -43,11 +48,6 @@ No arreglas el trabajo de otros: lo reportas de forma que el otro agente lo pued
 5. **Sabe de producto**: si preguntan qué comprar, recomienda bien (ej. POSCA correcto según superficie).
 6. **Escala bien**: reclamos, mayoristas y casos raros van a un humano.
 7. **Seguro**: no se deja manipular.
-
-7. **Formulario final** — mantén al día `FORMULARIO-FINAL.md` en la raíz (en tu rama): a partir de
-   `docs/DATOS-INVENTADOS.md` de **todas** las ramas, un formulario corto y ordenado por importancia con
-   todo lo que el dueño debe responder para pasar de datos de ejemplo a datos reales (incluye una plantilla de tabla
-   para la lista de tiendas y la lista de claves/cuentas a crear). Debe poder llenarlo en ~15 minutos.
 
 ## Criterio de terminado
 Arnés corriendo, ≥40 personas, al menos una corrida completa contra el bot real del Agente 3 con el motor del
