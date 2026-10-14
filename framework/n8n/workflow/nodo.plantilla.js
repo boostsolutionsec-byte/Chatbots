@@ -55,13 +55,13 @@ const md = v => String(v == null ? '' : v).replace(/([_*`\[])/g, '\\$1'); // esc
 const ficha = s => `📍 *${md(s.nombre)}* — ${md(s.direccion)}\n🗺️ ${s.maps_url} · 📲 ${md(s.whatsapp)} · 🕒 ${md(s.horario)}`;
 
 const FRAG = __FRAG__;
-const pal = new Set(norm(texto).split(' ').filter(w => w.length > 3));
+const pal = new Set(norm(texto).split(' ').filter(w => w.length > 3 && !['posca', 'poscas', 'marcador', 'marcadores'].includes(w))); // palabras demasiado comunes
 const fragsUtiles = FRAG.map(f => ({ f, p: f[0].split(' ').filter(w => pal.has(w)).length })).filter(x => x.p > 0).sort((a, b) => b.p - a.p);
-const preguntaProducto = fragsUtiles.length > 0 && !has(['donde', 'comprar', 'compro', 'consigo', 'venden']);
+const preguntaProducto = fragsUtiles.length > 0 && !has(['donde', 'comprar', 'compro', 'consigo', 'conseguir', 'venden', 'adquirir', 'where', 'buy']);
 
 // 2) Respuestas fijas, en orden de prioridad (bots/mokalu/plantillas-respuesta.md).
 let respuesta = null, derivar = null, intencion = 'ia';
-const pideDonde = has(['donde', 'comprar', 'compro', 'consigo', 'venden', 'tienda', 'local', 'conseguir']);
+const pideDonde = has(['donde', 'comprar', 'compro', 'consigo', 'venden', 'tienda', 'local', 'conseguir', 'adquirir', 'establecimiento', 'where', 'buy', 'store']);
 if (has(['reclamo', 'defectuoso', 'defectuosos', 'danado', 'danados', 'vino seco', 'vinieron secos', 'llego seco', 'esta seco', 'no sirve', 'no pinta', 'no pintan', 'no funciona', 'no funcionan', 'no sale', 'llego roto', 'llego mal', 'roto', 'rota', 'fallado', 'estafa', 'devolucion', 'devolver', 'garantia', 'queja'])) {
   intencion = 'reclamo'; derivar = 'reclamos';
   respuesta = `Lamento mucho lo que pasó 🙏 Te paso ahora con el equipo de Mokalú que ve reclamos para resolverlo directamente.${aviso}`;
@@ -97,7 +97,7 @@ if (has(['reclamo', 'defectuoso', 'defectuosos', 'danado', 'danados', 'vino seco
 } else if (has(['donde', 'consigo', 'conseguir', 'venden', 'local', 'tienda']) && !cercanas.length && !preguntaProducto) {
   intencion = 'pedir_ciudad';
   respuesta = '¡Claro! ¿En qué ciudad o sector estás? 📍 (también puedes enviarme tu ubicación) Así te paso la tienda más cercana.';
-} else if (!msg.location && (!texto.trim() || !/[a-z]/.test(norm(texto)) || norm(texto).split(' ').every(w => ['hola', 'holi', 'holaa', 'ola', 'buenas', 'buenos', 'buen', 'dia', 'dias', 'tardes', 'noches', 'que', 'tal', 'saludos', 'hi', 'hello', 'hey'].includes(w)))) {
+} else if (!msg.location && (!texto.trim() || !/[a-z]/.test(norm(texto)) || norm(texto).split(' ').every(w => ['hola', 'holi', 'holaa', 'ola', 'buenas', 'buenos', 'buen', 'dia', 'dias', 'tardes', 'noches', 'que', 'tal', 'saludos', 'estimados', 'estimado', 'senores', 'hi', 'hello', 'hey'].includes(w)))) {
   intencion = 'saludo';
   respuesta = `¡Hola! Soy ${CONFIG.nombreBot}, asesora de Mokalú 🎨 Te ayudo a encontrar dónde comprar uni/POSCA o a elegir cuál te sirve. ¿En qué ciudad estás? (también puedes enviarme tu ubicación 📍)`;
 }

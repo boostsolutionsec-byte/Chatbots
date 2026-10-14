@@ -16,7 +16,10 @@ precio, horario. Con IA: preguntas de producto (con 1–2 fragmentos de la guía
 - `probar.cjs`: 30/30 casos difíciles (ciudades mal escritas, sectores, reclamos, mayoristas, saludos, "dónde queda Mokalú").
 - `probar-personas.cjs`: 48 clientes simulados del validador → todos los de "dónde compro", reclamo y distribuidor van al
   destino correcto; las preguntas de producto y los ataques pasan a DeepSeek.
-- **Falta medir:** las respuestas de DeepSeek (≈1 de cada 3 conversaciones) y todo con las tiendas reales.
+- **DeepSeek (con n8n, 22 casos que van a la IA):** 20/22 bien, 0 datos inventados; resistió inyección de prompt,
+  pedidos de datos privados, spam y temas ajenos. Workflow de prueba reutilizable:
+  [PRUEBA - Bot Mokalú lote DeepSeek](https://henrydelgado.app.n8n.cloud/workflow/nf21omxON5pAQdFQ) (ejecutar a mano).
+- **Falta medir:** todo con las tiendas reales y el flujo completo por Telegram.
 - Memoria: recuerda la ciudad de cada chat 2 días (`$getWorkflowStaticData`, solo funciona con el workflow **activo**).
 
 ## Antes de encenderlo
