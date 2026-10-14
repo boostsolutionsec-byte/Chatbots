@@ -3,6 +3,8 @@
 // Requiere TELEGRAM_BOT_TOKEN (de @BotFather). Opcional: TELEGRAM_ADMIN_CHAT_ID para avisos de derivación.
 import { loadDotEnv, createEngine } from '../runtime.js';
 import { TelegramAdapter } from '../channels/telegram.js';
+import { Debouncer } from '../channels/debounce.js';
+import type { IncomingMessage } from '../types.js';
 import { startFollowups } from '../followups/index.js';
 
 loadDotEnv();
@@ -28,6 +30,19 @@ console.log(`Telegram listo: @${me.username} → bot "${botId}" · IA: ${engine.
 if (process.env.FOLLOWUPS_ENABLED === 'true') startFollowups(engine, (ch) => (ch === 'telegram' ? tg : undefined), [botId]);
 
 const queues = new Map<string, Promise<void>>();
+const debouncer = new Debouncer(Number(process.env.DEBOUNCE_SECONDS ?? 3) * 1000, (m) => reply(m));
+function reply(m: IncomingMessage) {
+  const prev = queues.get(m.userId) ?? Promise.resolve();
+  const job = prev
+    .then(async () => {
+      await tg.typing(m.userId);
+      const r = await engine.handle(botId!, m);
+      for (const out of r.replies) await tg.send(m.userId, out);
+    })
+    .catch((e) => console.error(`[telegram] ${m.userId}:`, (e as Error).message));
+  queues.set(m.userId, job);
+  return job;
+}
 await tg.startPolling(async (m) => {
   // Comandos del chat de asesores: /reactivar <bot> <usuario>
   if (adminChat && m.userId === adminChat && m.text?.startsWith('/reactivar')) {
@@ -39,11 +54,5 @@ await tg.startPolling(async (m) => {
     return;
   }
   if (m.text === '/start') m.text = 'hola';
-  const prev = queues.get(m.userId) ?? Promise.resolve();
-  const job = prev.then(async () => {
-    await tg.typing(m.userId);
-    const r = await engine.handle(botId, m);
-    for (const out of r.replies) await tg.send(m.userId, out);
-  }).catch((e) => console.error(`[telegram] ${m.userId}:`, (e as Error).message));
-  queues.set(m.userId, job);
+  debouncer.push(m.userId, m);
 });

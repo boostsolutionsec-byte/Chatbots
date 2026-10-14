@@ -6,6 +6,7 @@ import { SimulatorAdapter } from './channels/simulator.js';
 import { WebChatAdapter, chatPage } from './channels/web.js';
 import { metaVerificationChallenge } from './channels/meta.js';
 import type { ChannelAdapter, IncomingMessage, WebhookRequest } from './types.js';
+import { Debouncer } from './channels/debounce.js';
 
 export interface AppDeps {
   engine: Engine;
@@ -129,10 +130,22 @@ export function createApp(deps: AppDeps) {
     const req = toWebhookRequest(c, raw);
     if (adapter.verifyWebhook && !adapter.verifyWebhook(req)) return c.json({ error: 'firma inválida' }, 401);
     const msgs = adapter.parseWebhook(req);
-    // Responder 200 rápido y procesar en segundo plano (Meta reintenta si tardamos).
-    for (const m of msgs) void processInBackground(botId, adapter, m);
+    // Responder 200 rápido y procesar en segundo plano (Meta reintenta si tardamos); ráfagas agrupadas (P-4).
+    for (const m of msgs) debouncerFor(botId, adapter).push(m.userId, m);
     return c.json({ ok: true, recibidos: msgs.length });
   });
+
+  const debouncers = new Map<string, Debouncer>();
+  const debounceMs = Number(env.DEBOUNCE_SECONDS ?? 3) * 1000;
+  function debouncerFor(botId: string, adapter: ChannelAdapter): Debouncer {
+    const key = `${adapter.name}:${botId}`;
+    let d = debouncers.get(key);
+    if (!d) {
+      d = new Debouncer(Number.isFinite(debounceMs) ? debounceMs : 3000, (m) => processInBackground(botId, adapter, m));
+      debouncers.set(key, d);
+    }
+    return d;
+  }
 
   async function processInBackground(botId: string, adapter: ChannelAdapter, m: IncomingMessage) {
     try {

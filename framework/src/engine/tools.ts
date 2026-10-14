@@ -376,6 +376,7 @@ async function derivar(input: Record<string, unknown>, ctx: ToolContext): Promis
     await ctx.notifier.notify({ handoff: { ...handoff }, destino, conversation: c, transcript: transcriptOf(c) });
     if (ctx.pauseOnHandoff) {
       c.paused = true;
+      c.pausedAt = ctx.now().getTime();
       c.pausedReason = `derivado a ${destino.id}: ${motivo}`;
     }
   }

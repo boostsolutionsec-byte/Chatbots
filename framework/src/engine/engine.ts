@@ -25,6 +25,8 @@ export interface EngineOptions {
   botsDir?: string;
   /** Pausar el bot cuando deriva a un humano (defecto: true). */
   pauseOnHandoff?: boolean;
+  /** Horas tras las cuales una pausa por derivación vence sola (defecto 12; 0 = nunca). */
+  pauseHours?: number;
   /** Mensajes de historial que ve el LLM (defecto 20). */
   historyLimit?: number;
   /** Máximo de rondas de herramientas por turno (defecto 4). */
@@ -93,6 +95,7 @@ export class Engine {
       env: opts.env ?? process.env,
       botsDir: opts.botsDir,
       pauseOnHandoff: opts.pauseOnHandoff ?? true,
+      pauseHours: opts.pauseHours ?? 12,
       historyLimit: opts.historyLimit ?? 20,
       maxToolRounds: opts.maxToolRounds ?? 4,
       fullKnowledgeChars: opts.fullKnowledgeChars ?? 40000,
@@ -123,6 +126,7 @@ export class Engine {
     const c = await this.store.getConversation(botId, userId);
     c.paused = false;
     c.pausedReason = undefined;
+    c.pausedAt = undefined;
     c.turnsWithoutProgress = 0;
     c.messages.push({ role: 'system', text: 'Bot reactivado por un humano', at: Date.now() });
     await this.store.saveConversation(c);
@@ -170,6 +174,11 @@ export class Engine {
     conv.messages.push({ role: 'user', text: userText, at: msg.timestamp || nowFn().getTime(), channel: msg.channel });
     conv.lastUserAt = msg.timestamp || nowFn().getTime();
 
+    if (conv.paused && this.opts.pauseHours > 0 && conv.pausedAt && nowFn().getTime() - conv.pausedAt > this.opts.pauseHours * 3_600_000) {
+      conv.paused = false;
+      conv.pausedReason = undefined;
+      conv.messages.push({ role: 'system', text: `Pausa vencida (${this.opts.pauseHours} h): el bot vuelve a responder`, at: nowFn().getTime() });
+    }
     if (conv.paused) {
       await this.store.saveConversation(conv);
       return base({ skipped: 'paused', state: this.state(rt, conv) });

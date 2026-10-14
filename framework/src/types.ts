@@ -154,6 +154,8 @@ export interface Conversation {
   /** Bot en pausa porque un humano tomó la conversación. */
   paused?: boolean;
   pausedReason?: string;
+  /** Cuándo se pausó (para reactivar solo tras HANDOFF_PAUSE_HOURS). */
+  pausedAt?: number;
   /** Turnos del bot seguidos sin avance (sin campo nuevo ni acción). */
   turnsWithoutProgress: number;
   lead?: Record<string, unknown>;

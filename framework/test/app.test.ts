@@ -5,7 +5,7 @@ import { MockProvider } from '../src/llm/mock.js';
 import { RecordingTransport } from '../src/channels/meta.js';
 import { SimulatorAdapter } from '../src/channels/simulator.js';
 
-const env = { BOTS_DIR: new URL('../../bots', import.meta.url).pathname, ADMIN_TOKEN: 'adm', WHATSAPP_VERIFY_TOKEN: 'vt' } as NodeJS.ProcessEnv;
+const env = { BOTS_DIR: new URL('../../bots', import.meta.url).pathname, ADMIN_TOKEN: 'adm', WHATSAPP_VERIFY_TOKEN: 'vt', DEBOUNCE_SECONDS: '0' } as NodeJS.ProcessEnv;
 
 function setup() {
   const engine = new Engine({ provider: new MockProvider(), env });

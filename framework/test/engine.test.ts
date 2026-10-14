@@ -165,3 +165,33 @@ describe('guardas de salida', () => {
     expect(r.replies[0].text).toContain('0.7 mm');
   });
 });
+
+describe('pausa con vencimiento y agrupación de ráfagas', () => {
+  it('la pausa por derivación vence sola', async () => {
+    let now = new Date('2026-10-12T20:00:00Z');
+    const e = new Engine({ provider: new MockProvider(), env, pauseHours: 12, now: () => now });
+    await e.handle('_plantilla', msg('quiero hablar con una persona'));
+    now = new Date('2026-10-13T02:00:00Z');
+    expect((await e.handle('_plantilla', msg('hola?'))).skipped).toBe('paused');
+    now = new Date('2026-10-13T09:00:00Z');
+    const r = await e.handle('_plantilla', msg('hola'));
+    expect(r.skipped).toBeUndefined();
+    expect(r.state.paused).toBe(false);
+  });
+  it('Debouncer agrupa mensajes y descarta repetidos', async () => {
+    const { Debouncer } = await import('../src/channels/debounce.js');
+    const out: IncomingMessage[] = [];
+    const d = new Debouncer(30, (m) => {
+      out.push(m);
+    });
+    d.push('u', msg('hola', { messageId: 'a' }));
+    d.push('u', msg('una consulta', { messageId: 'b' }));
+    d.push('u', msg('una consulta', { messageId: 'b' }));
+    d.push('u', msg('', { text: undefined, location: { lat: 1, lng: 2 }, messageId: 'c' }));
+    await new Promise((r) => setTimeout(r, 80));
+    expect(out).toHaveLength(1);
+    expect(out[0].text).toBe('hola\nuna consulta');
+    expect(out[0].location).toEqual({ lat: 1, lng: 2 });
+    expect(out[0].messageId).toBe('a+b+c');
+  });
+});
