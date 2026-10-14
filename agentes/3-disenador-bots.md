@@ -28,10 +28,11 @@ Nunca inventa tiendas, direcciones, teléfonos, precios ni stock.
      cortas estilo chat: mensajes breves, una pregunta a la vez, sin bloques largos.
    - `conocimiento/` — `productos-uni.md` (guía de producto: qué punta para qué), `faq.md`, `politicas.md`,
      `distribuidor.md` (quién es Mokalú, tienda propia, canales, a quién derivar).
-   - `tiendas.csv` — **lo más importante.** Desde la pregunta 5 del formulario. Si no hay lista: deja el archivo con las
-     columnas del contrato y **solo** la tienda propia de Mokalú (C.C. Laguna Plaza, Guayaquil) marcada `POR CONFIRMAR`;
-     para probar, crea aparte `tiendas.ejemplo.csv` con tiendas **ficticias claramente marcadas** (`EJEMPLO - ...`) en
-     varias provincias. Nunca mezcles tiendas ficticias con el archivo real.
+   - `tiendas.csv` — **lo más importante.** Si el formulario no trae la lista (lo esperado esta noche): llénalo con
+     ~40 tiendas **inventadas** con prefijo `EJEMPLO` repartidas en las 24 provincias (varias en Guayaquil, Quito y Cuenca;
+     algunas provincias sin tienda para probar "la más cercana"), con coordenadas plausibles de cada ciudad.
+     La única fila real posible es la tienda propia de Mokalú (C.C. Laguna Plaza, Guayaquil), marcada `POR CONFIRMAR`.
+     Regístralo todo en `docs/DATOS-INVENTADOS.md`.
    - `catalogo.csv` — productos de las marcas distribuidas (sin precios salvo que el formulario lo permita).
    - `evals/` — mínimo **30**: "¿dónde compro?" desde muchas ciudades (con y sin tienda), ubicación compartida,
      sector ("cerca del Mall del Sol"), "¿qué posca uso para zapatillas?", pregunta de precio, quiero ser distribuidor,

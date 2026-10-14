@@ -1,6 +1,8 @@
 # Formulario previo — Bot Mokalú (distribuidor) → tiendas más cercanas
 
-Llena este archivo **antes** de lanzar los agentes. Escribe tu respuesta debajo de cada pregunta (después de `R:`).
+> **Esta noche los agentes trabajan sin este formulario** (con datos de ejemplo). Mañana usa `FORMULARIO-FINAL.md`, que lo reemplaza.
+
+Llena este archivo cuando puedas. Escribe tu respuesta debajo de cada pregunta (después de `R:`).
 Si dejas algo vacío, los agentes usan el **valor por defecto** indicado y lo anotan en `PENDIENTES.md`; nada se bloquea.
 Lo que ya investigamos está en `docs/marcas.md`.
 

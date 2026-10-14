@@ -6,9 +6,24 @@ y el primer bot construido con él: **Mokalú** (`bots/mokalu/`). Mokalú es el 
 Ver `docs/marcas.md` y `docs/repos-base.md` (repos de GitHub sobre los que construimos).
 Lo trabajan 4 agentes en sesiones de Claude Code en la nube, en paralelo, durante la noche.
 
+## MODO SIN DUEÑO (léelo primero)
+
+El dueño **no tiene tiempo esta noche**: `FORMULARIO.md` está vacío a propósito y **nadie va a responder preguntas**.
+Avanza lo más rápido posible sin intervención humana:
+- **Nunca esperes ni pidas confirmación.** Si falta un dato, usa un **dato inventado** y sigue.
+- Todo dato inventado debe ser obvio y fácil de reemplazar:
+  - nombres con prefijo `EJEMPLO` (ej. `EJEMPLO Papelería Central Riobamba`), teléfonos `+593 99 000 0000`,
+    URLs `https://ejemplo.invalid/...`, y la marca `# EJEMPLO` / `<!-- EJEMPLO -->` en el archivo;
+  - concentrados en archivos de datos (`tiendas.csv`, `catalogo.csv`, `conocimiento/*.md`, `bot.yaml`, `.env.example`),
+    **nunca** escondidos en el código.
+- Cada vez que inventes algo, añade una fila a `docs/DATOS-INVENTADOS.md`:
+  `| archivo | campo/fila | valor inventado | qué dato real hace falta | pregunta para el dueño |`
+- Objetivo de la noche: que todo el sistema **funcione de punta a punta con datos de ejemplo**. Mañana el dueño llena
+  `FORMULARIO-FINAL.md` (lo compila el Agente 4 a partir de `docs/DATOS-INVENTADOS.md`), se reemplazan los datos y listo.
+
 ## Antes de empezar (todos los agentes)
 
-1. Lee `FORMULARIO.md` (respuestas del dueño) y `docs/marcas.md`. Lo que esté vacío → usa el valor por defecto que ahí se indica.
+1. Lee `FORMULARIO.md` (probablemente vacío → usa los valores por defecto que indica) y `docs/marcas.md`.
 2. Lee tu brief en `agentes/` y **solo** trabaja en las carpetas que tu brief te asigna.
 3. Lee `PENDIENTES.md` (incluye hallazgos `[validador→agente N]` que debes atender primero) y `docs/CONTRATO.md`.
 

@@ -44,6 +44,11 @@ No arreglas el trabajo de otros: lo reportas de forma que el otro agente lo pued
 6. **Escala bien**: reclamos, mayoristas y casos raros van a un humano.
 7. **Seguro**: no se deja manipular.
 
+7. **Formulario final** — mantén al día `FORMULARIO-FINAL.md` en la raíz (en tu rama): a partir de
+   `docs/DATOS-INVENTADOS.md` de **todas** las ramas, un formulario corto y ordenado por importancia con
+   todo lo que el dueño debe responder para pasar de datos de ejemplo a datos reales (incluye una plantilla de tabla
+   para la lista de tiendas y la lista de claves/cuentas a crear). Debe poder llenarlo en ~15 minutos.
+
 ## Criterio de terminado
 Arnés corriendo, ≥40 personas, al menos una corrida completa contra el bot real del Agente 3 con el motor del
-Agente 2, `hallazgos.md` al día, y un `validacion/RESUMEN.md` con el estado para el dueño por la mañana.
+Agente 2, `hallazgos.md` al día, un `validacion/RESUMEN.md` con el estado para el dueño por la mañana y `FORMULARIO-FINAL.md` completo.
