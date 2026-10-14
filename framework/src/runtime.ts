@@ -36,6 +36,7 @@ export function createEngine(env: NodeJS.ProcessEnv = process.env, log: (s: stri
     env,
     pauseOnHandoff: env.HANDOFF_PAUSE !== 'false',
     pauseHours: env.HANDOFF_PAUSE_HOURS ? Number(env.HANDOFF_PAUSE_HOURS) : undefined,
+    ratePerMinute: env.RATE_LIMIT_PER_MINUTE ? Number(env.RATE_LIMIT_PER_MINUTE) : undefined,
     log,
   });
 }

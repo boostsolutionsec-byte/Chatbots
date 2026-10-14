@@ -85,6 +85,8 @@ El servicio es un proceso Node sin estado propio (el estado va en Supabase si lo
 1. Crea un servicio desde este repositorio de GitHub. *Root directory*: `framework`.
 2. *Build command*: `npm install` · *Start command*: `npm start` (servidor HTTP) o `npm run telegram -- mokalu` (solo Telegram por polling).
 3. Variables de entorno: copia las de `.env.example` que uses (`ANTHROPIC_API_KEY`, `TELEGRAM_BOT_TOKEN`, `ADMIN_TOKEN`, `SUPABASE_*`…).
+   **En un servidor público define `SIM_TOKEN`**: así `/sim` y `/chat` (que usan tu clave de IA) piden ese token
+   (en el navegador: `https://<servicio>/chat/mokalu?token=<SIM_TOKEN>` la primera vez). `RATE_LIMIT_PER_MINUTE` frena el spam.
 4. Para Telegram por webhook (recomendado en producción): con la URL pública del servicio, ejecuta una vez
    `curl "https://api.telegram.org/bot<TOKEN>/setWebhook?url=https://<tu-servicio>/webhook/telegram/mokalu&secret_token=<TELEGRAM_WEBHOOK_SECRET>"`.
    (No uses polling y webhook a la vez.)

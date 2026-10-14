@@ -65,6 +65,21 @@ export function createApp(deps: AppDeps) {
     );
   });
 
+  // Si SIM_TOKEN está definido, /sim y /chat exigen el token (producción: que nadie use la IA gratis por ahí).
+  const testGuard = async (c: Context, next: () => Promise<void>) => {
+    if (!env.SIM_TOKEN) return next();
+    const auth = c.req.header('authorization');
+    const q = c.req.query('token');
+    const cookie = c.req.header('cookie')?.match(/(?:^|;\s*)sim_token=([^;]+)/)?.[1];
+    if (auth === `Bearer ${env.SIM_TOKEN}` || q === env.SIM_TOKEN || cookie === env.SIM_TOKEN) {
+      if (q === env.SIM_TOKEN) c.header('set-cookie', `sim_token=${encodeURIComponent(q)}; Path=/; HttpOnly; SameSite=Strict`);
+      return next();
+    }
+    return c.json({ error: 'no autorizado (falta SIM_TOKEN)' }, 401);
+  };
+  app.use('/sim/*', testGuard);
+  app.use('/chat/*', testGuard);
+
   // ── Simulador (Agentes 3 y 4, evals, n8n)
   app.post('/sim/:botId', async (c) => {
     const botId = c.req.param('botId');

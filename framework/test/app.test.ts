@@ -123,3 +123,25 @@ describe('admin: recarga y métricas', () => {
     expect(r.ok).toBe(true);
   });
 });
+
+describe('SIM_TOKEN y anti-spam', () => {
+  it('con SIM_TOKEN, /sim y /chat piden token', async () => {
+    const e2 = { ...env, SIM_TOKEN: 'tok' } as NodeJS.ProcessEnv;
+    const engine = new Engine({ provider: new MockProvider(), env: e2 });
+    const app = createApp({ engine, env: e2, log: () => {} });
+    expect((await post(app, '/sim/_plantilla', { userId: 'a', text: 'hola' })).status).toBe(401);
+    expect((await post(app, '/sim/_plantilla', { userId: 'a', text: 'hola' }, { authorization: 'Bearer tok' })).status).toBe(200);
+    expect((await app.request('/chat/_plantilla')).status).toBe(401);
+    const ok = await app.request('/chat/_plantilla?token=tok');
+    expect(ok.status).toBe(200);
+    expect(ok.headers.get('set-cookie')).toContain('sim_token=tok');
+  });
+  it('frena a quien manda demasiados mensajes por minuto', async () => {
+    const engine = new Engine({ provider: new MockProvider(), env, ratePerMinute: 3 });
+    const rs = [];
+    for (let i = 0; i < 6; i++) rs.push(await engine.handle('_plantilla', { channel: 'simulator', userId: 'sp', text: `hola ${i}`, timestamp: Date.now() }));
+    expect(rs[3].skipped).toBe('rate_limited');
+    expect(rs[3].replies[0].text).toMatch(/momentito/);
+    expect(rs[4].replies).toHaveLength(0);
+  });
+});

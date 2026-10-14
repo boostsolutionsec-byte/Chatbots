@@ -30,6 +30,8 @@ export interface EngineOptions {
   pauseOnHandoff?: boolean;
   /** Horas tras las cuales una pausa por derivación vence sola (defecto 12; 0 = nunca). */
   pauseHours?: number;
+  /** Máximo de mensajes por minuto por cliente antes de frenar (defecto 15; 0 = sin límite). */
+  ratePerMinute?: number;
   /** Mensajes de historial que ve el LLM (defecto 20). */
   historyLimit?: number;
   /** Máximo de rondas de herramientas por turno (defecto 4). */
@@ -61,7 +63,7 @@ export interface EngineReply {
     pendingField?: string;
     turnsWithoutProgress: number;
   };
-  skipped?: 'duplicate' | 'paused' | 'empty';
+  skipped?: 'duplicate' | 'paused' | 'empty' | 'rate_limited';
   model?: string;
   warnings?: string[];
 }
@@ -101,6 +103,7 @@ export class Engine {
       botsDir: opts.botsDir,
       pauseOnHandoff: opts.pauseOnHandoff ?? true,
       pauseHours: opts.pauseHours ?? 12,
+      ratePerMinute: opts.ratePerMinute ?? 15,
       historyLimit: opts.historyLimit ?? 20,
       maxToolRounds: opts.maxToolRounds ?? 4,
       fullKnowledgeChars: opts.fullKnowledgeChars ?? 40000,
@@ -200,6 +203,17 @@ export class Engine {
     if (conv.paused) {
       await this.store.saveConversation(conv);
       return base({ skipped: 'paused', state: this.state(rt, conv) });
+    }
+
+    // Anti-spam: demasiados mensajes en un minuto → no se llama a la IA (se avisa una sola vez).
+    const nowMs = nowFn().getTime();
+    const recent = conv.messages.filter((m) => m.role === 'user' && nowMs - m.at < 60_000).length;
+    if (this.opts.ratePerMinute > 0 && recent > this.opts.ratePerMinute) {
+      const warned = conv.messages.some((m) => m.role === 'assistant' && nowMs - m.at < 60_000 && m.text.startsWith('Dame un momentito'));
+      const text = 'Dame un momentito 🙏 recibí muchos mensajes seguidos; en un minuto te sigo ayudando.';
+      if (!warned) conv.messages.push({ role: 'assistant', text, at: nowMs });
+      await this.store.saveConversation(conv);
+      return base({ skipped: 'rate_limited', replies: warned ? [] : [{ text }], state: this.state(rt, conv) });
     }
 
     const ctx: ToolContext = {
