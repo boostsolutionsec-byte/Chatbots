@@ -153,7 +153,8 @@ async function buscarTienda(input: Record<string, unknown>, ctx: ToolContext): P
     // Si algún flujo pide "ubicacion", queda registrada.
     ctx.conversation.fields.ubicacion = r.lugar.matched === 'ubicacion_compartida' ? `${r.lugar.city} (GPS)` : (r.lugar.city || r.lugar.name);
   }
-  if (r.resultados.length) {
+  const repeated = r.resultados.length > 0 && r.resultados.every((x) => ctx.tiendasMostradas.some((t) => t.id === x.tienda.id));
+  if (r.resultados.length && !repeated) {
     ctx.actions.push('buscar_tienda');
     ctx.tiendasMostradas.push(...r.resultados.map((x) => x.tienda));
     const first = r.resultados[0].tienda;
@@ -277,6 +278,9 @@ async function registrarCampo(input: Record<string, unknown>, ctx: ToolContext):
 async function guardarLead(input: Record<string, unknown>, ctx: ToolContext): Promise<ToolResult> {
   const c = ctx.conversation;
   const data = { ...c.fields, nota: input.nota, canal: c.channel };
+  if (ctx.actions.includes('guardar_lead') || (c.lead && JSON.stringify({ ...c.lead, nota: undefined }) === JSON.stringify({ ...data, nota: undefined }))) {
+    return { ok: true, ya_guardado: true };
+  }
   c.lead = data;
   await ctx.store.saveOrder({ id: `lead_${c.botId}_${c.userId}_${Date.now()}`, botId: c.botId, userId: c.userId, data, createdAt: Date.now() });
   ctx.actions.push('guardar_lead');
