@@ -108,3 +108,18 @@ describe('transporte de grabación', () => {
     expect(t.sent).toHaveLength(1);
   });
 });
+
+describe('admin: recarga y métricas', () => {
+  it('reload y métricas con token', async () => {
+    const { app } = setup();
+    await post(app, '/sim/_plantilla', { userId: 'm1', text: 'soy de quito' });
+    await post(app, '/sim/_plantilla', { userId: 'm2', text: 'vivo en tena' });
+    expect((await app.request('/admin/_plantilla/metricas')).status).toBe(401);
+    const m = await (await app.request('/admin/_plantilla/metricas', { headers: { authorization: 'Bearer adm' } })).json();
+    expect(m.conversaciones).toBe(2);
+    expect(m.por_tipo.ciudad.quito).toBe(1);
+    expect(m.por_tipo.sin_cobertura.tena).toBe(1);
+    const r = await (await post(app, '/admin/_plantilla/reload', {}, { authorization: 'Bearer adm' })).json();
+    expect(r.ok).toBe(true);
+  });
+});

@@ -170,6 +170,9 @@ async function buscarTienda(input: Record<string, unknown>, ctx: ToolContext): P
     // Si algún flujo pide "ubicacion", queda registrada.
     ctx.conversation.fields.ubicacion = r.lugar.matched === 'ubicacion_compartida' ? `${r.lugar.city} (GPS)` : (r.lugar.city || r.lugar.name);
   }
+  if (r.lugar && r.lugar.kind !== 'provincia' && r.resultados[0]?.motivo !== 'misma_ciudad') {
+    ctx.actions.push(`sin_cobertura:${r.lugar.city || r.lugar.name}`);
+  }
   const repeated = r.resultados.length > 0 && r.resultados.every((x) => ctx.tiendasMostradas.some((t) => t.id === x.tienda.id));
   if (r.resultados.length && !repeated) {
     ctx.actions.push('buscar_tienda');

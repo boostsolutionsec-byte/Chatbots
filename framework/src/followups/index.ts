@@ -50,11 +50,12 @@ export function dueFollowups(bot: LoadedBot, conv: Conversation, now = Date.now(
     if (!applies) return;
     const isTemplate = rule.mensaje.startsWith('plantilla:');
     let message: OutgoingMessage | undefined;
+    const texto = (rule as { texto?: string }).texto;
     if (conv.channel === 'whatsapp') {
-      if (isTemplate) message = { template: { name: rule.mensaje.slice('plantilla:'.length).trim(), vars: [] } };
-      else if (elapsed < WINDOW_24H_MS) message = { text: rule.mensaje };
+      // Dentro de 24 h un texto libre es gratis y no necesita aprobación (G-6); fuera, solo plantilla.
+      if (elapsed < WINDOW_24H_MS && (texto || !isTemplate)) message = { text: texto ?? rule.mensaje };
+      else if (isTemplate) message = { template: { name: rule.mensaje.slice('plantilla:'.length).trim(), vars: [], language: (rule as { idioma_plantilla?: string }).idioma_plantilla } };
     } else {
-      const texto = (rule as { texto?: string }).texto;
       if (!isTemplate) message = { text: rule.mensaje };
       else if (texto) message = { text: texto };
     }

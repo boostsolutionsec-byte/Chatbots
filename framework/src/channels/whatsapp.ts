@@ -15,6 +15,8 @@ export class WhatsAppCloudAdapter implements ChannelAdapter {
       phoneNumberId: string;
       appSecret?: string;
       transport?: MetaTransport;
+      /** Idioma por defecto de las plantillas (G-15): WHATSAPP_TEMPLATE_LANG. */
+      templateLanguage?: string;
       /** Último mensaje del cliente (para la ventana de 24 h). */
       lastUserAt?: (userId: string) => Promise<number | undefined>;
       now?: () => number;
@@ -81,7 +83,7 @@ export class WhatsAppCloudAdapter implements ChannelAdapter {
         type: 'template',
         template: {
           name: msg.template.name,
-          language: { code: 'es' },
+          language: { code: msg.template.language ?? this.opts.templateLanguage ?? 'es' },
           components: msg.template.vars.length ? [{ type: 'body', parameters: msg.template.vars.map((v) => ({ type: 'text', text: v })) }] : [],
         },
       });

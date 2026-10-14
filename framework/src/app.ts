@@ -164,6 +164,26 @@ export function createApp(deps: AppDeps) {
     return c.json({ ok: true });
   });
 
+  // Recargar la carpeta del bot sin reiniciar (tras editar tiendas.csv, prompt o conocimiento) — G-9
+  app.post('/admin/:botId/reload', (c) => {
+    const auth = c.req.header('authorization');
+    if (!env.ADMIN_TOKEN || auth !== `Bearer ${env.ADMIN_TOKEN}`) return c.json({ error: 'no autorizado' }, 401);
+    try {
+      const rt = engine.runtime(c.req.param('botId'), true);
+      return c.json({ ok: true, tiendas: rt.bot.tiendas.length, avisos: rt.bot.warnings });
+    } catch (e) {
+      return c.json({ error: (e as Error).message }, 400);
+    }
+  });
+
+  // Métricas para el dueño: intenciones, ciudades sin tienda, derivaciones — G-8
+  app.get('/admin/:botId/metricas', async (c) => {
+    const auth = c.req.header('authorization');
+    if (!env.ADMIN_TOKEN || auth !== `Bearer ${env.ADMIN_TOKEN}`) return c.json({ error: 'no autorizado' }, 401);
+    const list = (await engine.store.listConversations?.(c.req.param('botId'))) ?? [];
+    return c.json(metrics(list));
+  });
+
   app.get('/admin/:botId/conversations', async (c) => {
     const auth = c.req.header('authorization');
     if (!env.ADMIN_TOKEN || auth !== `Bearer ${env.ADMIN_TOKEN}`) return c.json({ error: 'no autorizado' }, 401);
@@ -172,4 +192,23 @@ export function createApp(deps: AppDeps) {
   });
 
   return app;
+}
+
+/** Cuenta etiquetas de las conversaciones: { total, por_tipo: { ciudad: {quito: 3}, sin_cobertura: {...}, ... } }. */
+export function metrics(convs: { tags?: string[]; paused?: boolean }[]) {
+  const porTipo: Record<string, Record<string, number>> = {};
+  for (const c of convs) {
+    for (const t of c.tags ?? []) {
+      const [tipo, ...rest] = t.split(':');
+      const valor = rest.join(':') || '(sí)';
+      porTipo[tipo] ??= {};
+      porTipo[tipo][valor] = (porTipo[tipo][valor] ?? 0) + 1;
+    }
+  }
+  const ordenar = (o: Record<string, number>) => Object.fromEntries(Object.entries(o).sort((a, b) => b[1] - a[1]));
+  return {
+    conversaciones: convs.length,
+    en_pausa_con_humano: convs.filter((c) => c.paused).length,
+    por_tipo: Object.fromEntries(Object.entries(porTipo).map(([k, v]) => [k, ordenar(v)])),
+  };
 }

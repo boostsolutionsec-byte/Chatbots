@@ -22,7 +22,8 @@ export interface OutgoingMessage {
   text?: string;
   buttons?: { id: string; title: string }[];
   mediaUrl?: string;
-  template?: { name: string; vars: string[] };
+  /** Plantilla aprobada de WhatsApp; `language` según cómo la aprobó Meta (es, es_EC, es_LA…). */
+  template?: { name: string; vars: string[]; language?: string };
   /** Ubicación a enviar (pin de tienda). */
   location?: { lat: number; lng: number; name?: string; address?: string };
   /** Pedir al cliente que comparta su ubicación (botón nativo en Telegram/WhatsApp). */

@@ -9,6 +9,7 @@ import { TelegramAdapter } from './channels/telegram.js';
 import { WhatsAppCloudAdapter } from './channels/whatsapp.js';
 import { InstagramAdapter } from './channels/instagram.js';
 import { PeriskopeAdapter } from './channels/periskope.js';
+import { EvolutionAdapter } from './channels/evolution.js';
 import { createMetaTransport } from './channels/meta.js';
 import type { ChannelAdapter } from './types.js';
 
@@ -60,6 +61,7 @@ export function createAdapterFactory(engine: Engine, env: NodeJS.ProcessEnv = pr
             phoneNumberId: env.WHATSAPP_PHONE_NUMBER_ID,
             appSecret: env.WHATSAPP_APP_SECRET,
             transport: createMetaTransport(env.WHATSAPP_TOKEN, env),
+            templateLanguage: env.WHATSAPP_TEMPLATE_LANG || undefined,
             lastUserAt: lastUserAt(botId),
           });
         break;
@@ -68,9 +70,13 @@ export function createAdapterFactory(engine: Engine, env: NodeJS.ProcessEnv = pr
           a = new InstagramAdapter({
             igUserId: env.INSTAGRAM_USER_ID,
             appSecret: env.INSTAGRAM_APP_SECRET,
-            transport: createMetaTransport(env.INSTAGRAM_TOKEN, env),
+            transport: createMetaTransport(env.INSTAGRAM_TOKEN, env, env.INSTAGRAM_GRAPH_HOST),
             lastUserAt: lastUserAt(botId),
           });
+        break;
+      case 'evolution':
+        if (env.EVOLUTION_WEBHOOK_SECRET)
+          a = new EvolutionAdapter({ apiUrl: env.EVOLUTION_API_URL, apiKey: env.EVOLUTION_API_KEY, instance: env.EVOLUTION_INSTANCE, webhookSecret: env.EVOLUTION_WEBHOOK_SECRET, enableSend: env.EVOLUTION_ENABLE_SEND === 'true' });
         break;
       case 'periskope':
         if (env.PERISKOPE_WEBHOOK_SECRET)

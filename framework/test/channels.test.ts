@@ -197,3 +197,18 @@ describe('P-2 / P-3', () => {
     expect(list.interactive.action.sections[0].rows).toHaveLength(10);
   });
 });
+
+describe('Evolution API (esqueleto)', () => {
+  it('parsea texto y ubicación; ignora propios y grupos; no envía por defecto', async () => {
+    const { EvolutionAdapter } = await import('../src/channels/evolution.js');
+    const ev = new EvolutionAdapter({ webhookSecret: 's', instance: 'i' });
+    expect(ev.verifyWebhook({ headers: {}, query: { secret: 's' }, body: {} })).toBe(true);
+    const body = (data: unknown) => ({ headers: {}, query: {}, body: { event: 'messages.upsert', data } });
+    expect(ev.parseWebhook(body({ key: { remoteJid: '593990000000@s.whatsapp.net', id: 'e1' }, message: { conversation: 'hola' }, messageTimestamp: 1 }))[0]).toMatchObject({ userId: '593990000000', text: 'hola', messageId: 'e1' });
+    expect(ev.parseWebhook(body({ key: { remoteJid: '5@s.whatsapp.net', id: 'e2' }, message: { locationMessage: { degreesLatitude: -2, degreesLongitude: -79 } } }))[0].location).toEqual({ lat: -2, lng: -79 });
+    expect(ev.parseWebhook(body({ key: { remoteJid: '5@s.whatsapp.net', fromMe: true, id: 'e3' }, message: { conversation: 'yo' } }))).toEqual([]);
+    expect(ev.parseWebhook(body({ key: { remoteJid: '123@g.us', id: 'e4' }, message: { conversation: 'grupo' } }))).toEqual([]);
+    await ev.send('5', { text: 'hola', location: { lat: 1, lng: 2 } });
+    expect(ev.sent.map((x) => x.path)).toEqual(['/message/sendLocation/i', '/message/sendText/i']);
+  });
+});

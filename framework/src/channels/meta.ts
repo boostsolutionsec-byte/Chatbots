@@ -50,9 +50,10 @@ export class RecordingTransport implements MetaTransport {
  * META_ENABLE_SEND=true + tokens (ver .env.example). Lo crea `createMetaTransport`.
  */
 export class GraphApiTransport implements MetaTransport {
-  constructor(private token: string, private version = 'v21.0', private fetchImpl: typeof fetch = fetch) {}
+  /** `host`: graph.facebook.com (WhatsApp, Instagram vía página de Facebook) o graph.instagram.com (Instagram con inicio de sesión de Instagram, G-13). */
+  constructor(private token: string, private version = 'v21.0', private fetchImpl: typeof fetch = fetch, private host = 'graph.facebook.com') {}
   async post(path: string, payload: unknown): Promise<unknown> {
-    const res = await this.fetchImpl(`https://graph.facebook.com/${this.version}/${path}`, {
+    const res = await this.fetchImpl(`https://${this.host}/${this.version}/${path}`, {
       method: 'POST',
       headers: { 'content-type': 'application/json', authorization: `Bearer ${this.token}` },
       body: JSON.stringify(payload),
@@ -63,8 +64,8 @@ export class GraphApiTransport implements MetaTransport {
   }
 }
 
-export function createMetaTransport(token: string | undefined, env: NodeJS.ProcessEnv = process.env): MetaTransport {
-  if (env.META_ENABLE_SEND === 'true' && token) return new GraphApiTransport(token, env.META_GRAPH_VERSION || undefined);
+export function createMetaTransport(token: string | undefined, env: NodeJS.ProcessEnv = process.env, host?: string): MetaTransport {
+  if (env.META_ENABLE_SEND === 'true' && token) return new GraphApiTransport(token, env.META_GRAPH_VERSION || undefined, fetch, host || undefined);
   return new DisabledTransport();
 }
 

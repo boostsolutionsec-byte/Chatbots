@@ -487,6 +487,7 @@ export function computeTags(conv: Conversation, actions: string[]): string[] {
     else if (a.startsWith('derivar:')) {
       tags.add(`resultado:derivado_${a.slice('derivar:'.length)}`);
     } else if (a === 'guardar_lead') tags.add('resultado:lead');
+    else if (a.startsWith('sin_cobertura:')) tags.add(`sin_cobertura:${slug(a.slice('sin_cobertura:'.length))}`);
   }
   return [...tags].sort();
 }
