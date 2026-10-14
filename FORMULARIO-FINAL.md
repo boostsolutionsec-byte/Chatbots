@@ -5,7 +5,7 @@
 > reemplaza los datos en los archivos. Ordenado por importancia: si solo tienes 5 minutos, llena la sección 1.
 > **No** pongas aquí tokens ni claves (van como secretos, ver sección 6).
 >
-> Última actualización: 2026-10-14 03:35 · fuentes: rama `agente/3-bots` (16 filas), `agente/1-ingenieria-inversa`, `agente/2-framework`.
+> Última actualización (cierre de la noche): 2026-10-14 04:30 · fuentes: `docs/DATOS-INVENTADOS.md` de `agente/3-bots` (19 filas), `agente/1-ingenieria-inversa` (2), `agente/2-framework` (4, solo plantilla de prueba: no hay que llenar nada) y `.env.example` del Agente 2.
 
 ---
 
@@ -30,7 +30,15 @@ R:
 **1.3** Tienda propia de Mokalú en C.C. Laguna Plaza: número de local, link de Maps, WhatsApp de la tienda y **días** que abre (hoy supuesto: 10h00–18h00, lun–sáb).
 R:
 
-**1.4** Si en la ciudad del cliente no hay tienda: ¿le damos la más cercana por distancia **y** la tienda online `mokalu.com.ec/tienda/` con envío? (hoy: la web solo si la tienda más cercana está a > 60 km o si el cliente la pide)
+**1.4** Hoy **todas** las tiendas de ejemplo dicen tener `uni-ball;POSCA`. ¿Hay tiendas que solo tienen bolígrafos uni-ball y no POSCA? (según el Agente 2, el motor ya responde "aquí hay uni-ball; POSCA está en…")
+R:
+
+**1.5** Si en la ciudad del cliente no hay tienda: ¿le damos la más cercana por distancia **y** la tienda online `mokalu.com.ec/tienda/` con envío? (hoy: la web solo si la tienda más cercana está a > 60 km o si el cliente la pide)
+R:
+
+## 1b. Inteligencia artificial (1 min)
+
+**1b.1** ¿Qué IA usamos en producción? El Agente 2 dejó por defecto **DeepSeek** (más barato, ya lo usan en n8n) y Claude como alternativa. (DeepSeek / Claude / la que cueste menos)
 R:
 
 ## 2. A dónde manda el bot a cada persona (2 min)
@@ -38,6 +46,7 @@ R:
 | Caso | Hoy (inventado) | Tu respuesta (WhatsApp o correo) |
 |---|---|---|
 | Cliente con dudas / pide una persona | `WHATSAPP_ASESOR_VENTAS` sin valor | |
+| Servicio al cliente general (si es distinto) | `WHATSAPP_SERVICIO_CLIENTE` sin valor | |
 | Papelería que quiere ser punto de venta, mayoristas, colegios, empresas | `WHATSAPP_DISTRIBUIDORES` sin valor | |
 | Reclamos y garantía | `WHATSAPP_RECLAMOS` sin valor | |
 
@@ -71,10 +80,11 @@ Pégalas como **secretos** (archivo `.env` local o variables del entorno en la n
 
 | Variable | Qué es | Dónde se saca | Obligatoria para |
 |---|---|---|---|
-| `ANTHROPIC_API_KEY` | clave de IA | console.anthropic.com → API Keys | bot con IA real fuera de la sesión de Claude Code |
-| `TELEGRAM_BOT_TOKEN` | bot de prueba | Telegram → @BotFather → `/newbot` | probar en el celular |
+| `DEEPSEEK_API_KEY` **o** `ANTHROPIC_API_KEY` | clave de IA (según 1b.1) | platform.deepseek.com / console.anthropic.com → API Keys | bot con IA real |
+| `TELEGRAM_BOT_TOKEN` (y opcional `TELEGRAM_ADMIN_CHAT_ID` para recibir avisos de derivación) | bot de prueba | Telegram → @BotFather → `/newbot` | probar en el celular |
+| `ADMIN_TOKEN`, `SIM_TOKEN` | contraseñas que inventas tú (largas) | — | proteger el panel y el simulador si el servicio queda público |
 | `WHATSAPP_ASESOR_VENTAS`, `WHATSAPP_DISTRIBUIDORES`, `WHATSAPP_RECLAMOS` | números a donde se deriva | sección 2 de este formulario | derivar a humanos |
-| (opcional) `SUPABASE_URL`, `SUPABASE_SERVICE_KEY` | guardar conversaciones | supabase.com → proyecto → Settings → API | historial y leads |
+| (opcional) `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY` | guardar conversaciones | supabase.com → proyecto → Settings → API | historial y leads |
 | Fase 2: Meta Business verificado, app de WhatsApp/Instagram, token permanente | WhatsApp e Instagram | ver `PASOS-HUMANOS.md` | más adelante |
 
 ---
@@ -87,7 +97,9 @@ Cada respuesta corresponde a filas de `docs/DATOS-INVENTADOS.md`:
 |---|---|
 | 1.1, 1.2 | `bots/mokalu/tiendas.csv` (todas las filas `EJEMPLO`), `bots/mokalu/evals/*` que citan tiendas |
 | 1.3 | `tiendas.csv` fila `mokalu-laguna-plaza`, `bot.yaml` destino `tienda_mokalu` |
-| 1.4 | `bot.yaml` → `localizador.ofrecer_ademas`, `distancia_lejana_km`; `conocimiento/politicas.md` |
+| 1.4 | `tiendas.csv` columna `marcas` |
+| 1.5 | `bot.yaml` → `localizador.ofrecer_ademas`, `distancia_lejana_km`; `conocimiento/politicas.md` |
+| 1b.1 | `.env` → `LLM_PROVIDER` |
 | 2 | `.env` (secretos), `bot.yaml` → `destinos`, `reglas_derivacion` (umbral mayorista) |
 | 2.2 | `bot.yaml` → `horario_humano` |
 | 3.1–3.5 | `conocimiento/politicas.md`, `conocimiento/faq.md`, `catalogo.csv` |
