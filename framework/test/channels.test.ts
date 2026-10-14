@@ -212,3 +212,35 @@ describe('Evolution API (esqueleto)', () => {
     expect(ev.sent.map((x) => x.path)).toEqual(['/message/sendLocation/i', '/message/sendText/i']);
   });
 });
+
+describe('Telegram long polling (API simulada)', () => {
+  it('borra webhook, procesa updates en orden y avanza el offset', async () => {
+    const calls: { method: string; body: Record<string, unknown> }[] = [];
+    let polls = 0;
+    let adapter: TelegramAdapter;
+    const fetchImpl = (async (url: string, init: { body: string }) => {
+      const method = url.split('/').pop()!;
+      const body = JSON.parse(init.body);
+      calls.push({ method, body });
+      if (method === 'getUpdates') {
+        polls++;
+        if (polls === 1) return new Response(JSON.stringify({ ok: true, result: [
+          { update_id: 10, message: { message_id: 1, chat: { id: 7 }, date: 1, text: 'hola' } },
+          { update_id: 11, callback_query: { id: 'cb', from: { id: 7 }, data: 'si' } },
+        ] }));
+        adapter.stop();
+        return new Response(JSON.stringify({ ok: true, result: [] }));
+      }
+      return new Response(JSON.stringify({ ok: true, result: true }));
+    }) as unknown as typeof fetch;
+    adapter = new TelegramAdapter({ token: 'T', fetchImpl });
+    const got: string[] = [];
+    await adapter.startPolling(async (m) => {
+      got.push(m.text ?? '');
+    }, { timeoutSec: 0 });
+    expect(calls[0].method).toBe('deleteWebhook');
+    expect(got).toEqual(['hola', 'si']);
+    expect(calls.filter((c) => c.method === 'getUpdates')[1].body.offset).toBe(12);
+    expect(calls.some((c) => c.method === 'answerCallbackQuery')).toBe(true);
+  });
+});

@@ -70,6 +70,9 @@ Cuando el bot derive, llega un aviso con la conversación; para devolverle el ch
 | `GET/POST /webhook/whatsapp/:botId` · `/webhook/instagram/:botId` | Meta (verificación + firma). **Envío apagado** |
 | `POST /admin/:botId/:userId/resume` | reactivar el bot tras derivar (header `Authorization: Bearer $ADMIN_TOKEN`) |
 | `GET /admin/:botId/conversations` | listado de conversaciones (mismo token) |
+| `GET /admin/:botId/metricas` | conteos por etiqueta: ciudades, intenciones, derivaciones y **ciudades sin tienda** (`sin_cobertura`) |
+| `POST /admin/:botId/reload` | recarga la carpeta del bot (tras editar `tiendas.csv`, prompt o conocimiento) sin reiniciar |
+| `POST /webhook/evolution/:botId?secret=…` | Evolution API (WhatsApp no oficial) — esqueleto, **envío apagado** |
 
 Los webhooks responden 200 de inmediato y procesan en segundo plano; mensajes repetidos (mismo id) se ignoran y las ráfagas
 del mismo cliente se agrupan (`DEBOUNCE_SECONDS`, 3 s por defecto).
