@@ -287,3 +287,27 @@ describe('formatDias', () => {
     expect(formatDias(['sab'])).toBe('sábado');
   });
 });
+
+describe('ClaudeCliProvider', () => {
+  it('envía prompt del bot + conocimiento + reglas + herramientas, y parsea la respuesta', async () => {
+    const { ClaudeCliProvider } = await import('../src/llm/claude-cli.js');
+    const p = new ClaudeCliProvider({ env: {} });
+    let seen = '';
+    p.runner = async (system) => {
+      seen = system;
+      return '{"tool_calls":[{"name":"buscar_tienda","input":{"ubicacion":"loja"}}]}';
+    };
+    const r = await p.complete({ system: 'REGLAS', cacheableSystemPrefix: 'Soy Sofi + conocimiento', messages: [{ role: 'user', content: 'hola' }], tools: TOOL_DEFINITIONS, model: 'haiku' });
+    expect(seen).toContain('Soy Sofi + conocimiento');
+    expect(seen).toContain('REGLAS');
+    expect(seen).toContain('buscar_tienda');
+    expect(r.toolCalls?.[0].name).toBe('buscar_tienda');
+  });
+  it('respeta el máximo de llamadas', async () => {
+    const { ClaudeCliProvider } = await import('../src/llm/claude-cli.js');
+    const p = new ClaudeCliProvider({ env: { CLAUDE_CLI_MAX_CALLS: '1' } });
+    p.runner = async () => '{"respuesta":"ok"}';
+    await p.complete({ system: '', messages: [{ role: 'user', content: 'a' }], model: 'haiku' });
+    await expect(p.complete({ system: '', messages: [{ role: 'user', content: 'a' }], model: 'haiku' })).rejects.toThrow(/CLAUDE_CLI_MAX_CALLS/);
+  });
+});

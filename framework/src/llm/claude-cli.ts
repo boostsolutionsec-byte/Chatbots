@@ -46,7 +46,7 @@ export class ClaudeCliProvider implements LLMProvider {
     await this.acquire();
     try {
       const tools = args.tools ?? [];
-      const system = `${args.system}\n\n${toolInstructions(tools)}`;
+      const system = [args.cacheableSystemPrefix, args.system, toolInstructions(tools)].filter(Boolean).join('\n\n');
       const prompt = renderTranscript(args.messages);
       const raw = await this.run(system, prompt, args.model);
       return parseTextProtocol(raw, tools);
@@ -67,7 +67,11 @@ export class ClaudeCliProvider implements LLMProvider {
     }
   }
 
+  /** Reemplazable en pruebas. */
+  runner?: (system: string, prompt: string, model: string) => Promise<string>;
+
   private run(system: string, prompt: string, model: string): Promise<string> {
+    if (this.runner) return this.runner(system, prompt, model);
     const bin = this.opts.bin ?? 'claude';
     const cliArgs = [
       '-p',
