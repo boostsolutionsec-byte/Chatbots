@@ -80,6 +80,10 @@ localizador:
   acepta: [ciudad, canton, provincia, sector, ubicacion_compartida]
   max_resultados: 2
   si_no_hay_en_ciudad: mas_cercana_por_distancia
+  alias:                          # alias propios → coordenadas (Gazetteer.addAlias del framework)
+    mokalu: "-2.1870,-80.0060"            # "¿dónde queda Mokalú?" → tienda propia (POR CONFIRMAR coordenadas)
+    tienda de mokalu: "-2.1870,-80.0060"
+    tienda mokalu: "-2.1870,-80.0060"
   ofrecer_ademas: tienda_online   # si la más cercana está lejos (> 60 km) ofrecer envío nacional (POR CONFIRMAR)
   distancia_lejana_km: 60        # 60–300 km: tienda + opción online en una línea
   distancia_muy_lejana_km: 300   # > 300 km (ej. Galápagos): primero la tienda online
