@@ -24,3 +24,7 @@ Formato: `- [ ] [quién] Qué hacer — por qué / dónde — (agente que lo pid
 - [ ] [dueño] Configurar las URLs de webhook que indique `framework/README.md`.
 
 ## Añadidos por los agentes
+- [ ] [dueño] (Opcional) Si tiene acceso al **código real del bot de SellerChat** (no la landing), dar acceso al repo para repetir la ingeniería inversa — los tres candidatos del formulario no lo contienen — (agente 1)
+- [ ] [dueño] Fase 2: decidir si el número de WhatsApp de Mokalú seguirá usándose en la app del celular → activar **Coexistencia** (app WhatsApp Business ≥ 2.24.17) al conectar la Cloud API; **no** usar conexiones por QR/no oficiales con el número real (riesgo de bloqueo) — ver `docs/ingenieria-inversa/05-canales.md` (agente 1)
+- [ ] [dueño] Fase 2: completar la **verificación del negocio** en Meta Business (sube el límite de 250 conversaciones iniciadas por día) — (agente 1)
+- [ ] [dueño] Fase 2: revisar la tarifa vigente de WhatsApp para Ecuador en la página oficial de precios de Meta (cambio de cobro de mensajes de servicio desde oct-2026) — (agente 1)

@@ -102,4 +102,28 @@ El runner de evals (`framework`) debe dar una nota por eval y un resumen en `rep
 
 ## Propuestas (Agente 1 añade aquí)
 
+> Agente 1 · 2026-10-14 · Base: `docs/ingenieria-inversa/00-RESUMEN.md`. Son **propuestas**; el Agente 2 decide y, si adopta alguna, la anota en "Cambios".
+
+- **P-1 · Tools estándar del motor** (el LLM nunca recibe `tiendas.csv` entero): `buscar_tienda({texto?, lat?, lng?, producto?})` → usa `StoreLocator.find`;
+  `buscar_producto({texto})` → filas de `catalogo.csv`; `derivar_humano({destino, motivo, prioridad?})`; `guardar_dato({campo, valor})`; `etiquetar({tag})`.
+  Motivo: impedir que el modelo invente tiendas/teléfonos (`02` etapa 9).
+- **P-2 · `OutgoingMessage` ampliado**: `location?: {lat:number; lng:number; name?:string; address?:string}`, `list?: {title:string; rows:{id:string; title:string; description?:string}[]}`,
+  `requestLocation?: boolean`. Cada adaptador degrada (lista→botones→texto numerado). Límites WhatsApp: botones ≤ 3 (título ≤ 20 car.), lista ≤ 10 filas (`05` §2).
+- **P-3 · `IncomingMessage.externalId: string`** (wamid / mid / update_id) para **idempotencia**, y `media?: {type:'audio'|'image'|'video'|'document'; url?:string; id?:string; mime?:string}`
+  en lugar de solo `mediaUrl`, para distinguir audio de imagen (`02` etapas 3 y 5).
+- **P-4 · Debounce por usuario**: agrupar mensajes del mismo usuario recibidos en una ventana configurable (`bot.yaml → entrada.agrupar_segundos`, defecto 3) antes de llamar al LLM.
+- **P-5 · Modo de conversación**: `Conversation.modo: 'bot'|'humano'|'pausado'` con `modo_hasta` (expira, defecto 12 h). En `humano` el bot no responde (`02` etapa 6).
+- **P-6 · Guardas de salida** (en el motor, configurables desde `limites`): (a) cada nombre de tienda/teléfono/dirección en la respuesta debe venir de un resultado de tool del mismo turno;
+  (b) bloquear precios si `limites.nunca` contiene precios (regex `\$|USD|dólar|\d+[.,]\d{2}`); (c) `max_palabras_por_mensaje`. Si falla: regenerar 1 vez, luego respuesta segura.
+- **P-7 · Etiquetas y resumen**: `Conversation.tags: string[]` y `Conversation.resumen_corto?: string` (2–3 líneas, generado al derivar o cerrar). `Handoff` incluye `resumen_corto`.
+  Convención de tags: `intencion:*`, `ciudad:*`, `producto:*`, `resultado:*`, `canal:*` (`04` §3).
+- **P-8 · Reglas de seguimiento en el motor**: máx. 1 seguimiento sin respuesta por conversación; se cancela si el cliente escribe; clave única `(bot, usuario, regla)`;
+  en WhatsApp/Instagram `despues_de` ≤ 23h (validación al cargar `bot.yaml`); no enviar fuera de 08h00–20h00 de `horario_humano.zona`.
+  Nota: dentro de la ventana de 24 h no hace falta plantilla; `plantilla:` solo es obligatoria fuera de ventana.
+- **P-9 · Evals**: añadir a `espera`: `tienda_id_en: [...]` (más preciso que ciudad), `no_inventa_tiendas: true` (todas las tiendas citadas existen en el CSV),
+  `deriva_a: <destino>`, `max_burbujas: n`, `pregunta_unica: true`. `docs/ingenieria-inversa/conversaciones-ejemplo.md` trae 30+ casos listos para convertir.
+- **P-10 · Respuesta fuera de alcance** (política WhatsApp 2026 contra bots de propósito general): `bot.yaml → limites.fuera_de_tema: "<mensaje>"` y el núcleo del prompt
+  obliga a usarlo para temas ajenos al negocio (`07` §3).
+- **P-11 · Transparencia**: el núcleo del prompt del framework obliga a reconocer que es un asistente virtual si se lo preguntan (no configurable a "ocultar").
+
 ## Cambios
