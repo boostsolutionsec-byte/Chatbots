@@ -1,7 +1,8 @@
 # 00 · Resumen de la ingeniería inversa (Agente 1)
 
 > 2026-10-14. Documentos: `01` mapa del código · `02` flujo de un mensaje · `03` prompts · `04` ventas y seguimiento ·
-> `05` canales · `06` configuración del cliente · `07` competencia y reglas de Meta · `conversaciones-ejemplo.md`.
+> `05` canales · `06` configuración del cliente · `07` competencia y reglas de Meta ·
+> `conversaciones-ejemplo.md` (43 conversaciones de clientes ecuatorianos) · `evals-propuestos.yaml` (44 evals listos para `bots/mokalu/evals/`).
 > Alias de repos: **[PA]** `funnellersinfo-maker/probaragente@24bbf34` · **[SB]** `nelperecas-it/sellerchat-backend-demo@78ec360` · **[KS]** `Keyner9/Code-de-SellerChat@e4825c1`.
 
 ## Lo esencial en 6 puntos
