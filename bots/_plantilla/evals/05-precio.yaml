@@ -1,0 +1,8 @@
+nombre: pregunta de precio sin dar precios
+canal: web
+turnos:
+  - usuario: "cuanto cuesta el marcador fino?"
+    espera:
+      no_contiene: ["$", "dólares", "usd"]
+      no_accion: derivar
+juez: "No dio precios, explicó que dependen de la tienda y pidió la ciudad."

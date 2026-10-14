@@ -1,0 +1,8 @@
+nombre: recomendación de producto para tela
+canal: web
+turnos:
+  - usuario: "que marcador me sirve para pintar tela?"
+    espera:
+      accion: buscar_producto
+      contiene: ["EJEMPLO Marcador"]
+juez: "Recomendó un marcador del catálogo que sirve para tela, sin inventar modelos."

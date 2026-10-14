@@ -1,0 +1,728 @@
+[
+ {
+  "lat": -2.1894,
+  "lng": -79.885,
+  "id": "gye-centro",
+  "nombre": "EJEMPLO Papelería Malecón",
+  "ciudad": "Guayaquil",
+  "provincia": "Guayas",
+  "direccion": "EJEMPLO Av. 9 de Octubre y Chile, Centro",
+  "maps_url": "https://ejemplo.invalid/maps/gye-centro",
+  "whatsapp": "+593 99 000 0001",
+  "telefono": "+593 99 000 0001",
+  "horario": "lun-sáb 09h00-19h00",
+  "marcas": [
+   "uni-ball",
+   "POSCA"
+  ],
+  "vende_online": false
+ },
+ {
+  "lat": -2.1544,
+  "lng": -79.893,
+  "id": "gye-mall-sol",
+  "nombre": "EJEMPLO Arte & Color Mall del Sol",
+  "ciudad": "Guayaquil",
+  "provincia": "Guayas",
+  "direccion": "EJEMPLO C.C. Mall del Sol, planta baja (sector Mall del Sol)",
+  "maps_url": "https://ejemplo.invalid/maps/gye-mall-sol",
+  "whatsapp": "+593 99 000 0002",
+  "telefono": "+593 99 000 0002",
+  "horario": "lun-sáb 09h00-19h00",
+  "marcas": [
+   "uni-ball",
+   "POSCA"
+  ],
+  "vende_online": true,
+  "web": "https://ejemplo.invalid/gye-mall-sol"
+ },
+ {
+  "lat": -2.165,
+  "lng": -79.905,
+  "id": "gye-urdesa",
+  "nombre": "EJEMPLO Librería Urdesa",
+  "ciudad": "Guayaquil",
+  "provincia": "Guayas",
+  "direccion": "EJEMPLO Av. Víctor Emilio Estrada, Urdesa Central",
+  "maps_url": "https://ejemplo.invalid/maps/gye-urdesa",
+  "whatsapp": "+593 99 000 0003",
+  "telefono": "+593 99 000 0003",
+  "horario": "lun-sáb 09h00-19h00",
+  "marcas": [
+   "uni-ball",
+   "POSCA"
+  ],
+  "vende_online": false
+ },
+ {
+  "lat": -2.135,
+  "lng": -79.9,
+  "id": "gye-alborada",
+  "nombre": "EJEMPLO Papelería Alborada",
+  "ciudad": "Guayaquil",
+  "provincia": "Guayas",
+  "direccion": "EJEMPLO Av. Rodolfo Baquerizo, Alborada 9na etapa",
+  "maps_url": "https://ejemplo.invalid/maps/gye-alborada",
+  "whatsapp": "+593 99 000 0004",
+  "telefono": "+593 99 000 0004",
+  "horario": "lun-sáb 09h00-19h00",
+  "marcas": [
+   "uni-ball",
+   "POSCA"
+  ],
+  "vende_online": false
+ },
+ {
+  "lat": -2.229,
+  "lng": -79.896,
+  "id": "gye-sur",
+  "nombre": "EJEMPLO Útiles del Sur",
+  "ciudad": "Guayaquil",
+  "provincia": "Guayas",
+  "direccion": "EJEMPLO Av. 25 de Julio, cerca de C.C. Mall del Sur",
+  "maps_url": "https://ejemplo.invalid/maps/gye-sur",
+  "whatsapp": "+593 99 000 0005",
+  "telefono": "+593 99 000 0005",
+  "horario": "lun-sáb 09h00-19h00",
+  "marcas": [
+   "uni-ball",
+   "POSCA"
+  ],
+  "vende_online": false
+ },
+ {
+  "lat": -2.172,
+  "lng": -79.945,
+  "id": "gye-ceibos",
+  "nombre": "EJEMPLO Taller de Arte Los Ceibos",
+  "ciudad": "Guayaquil",
+  "provincia": "Guayas",
+  "direccion": "EJEMPLO Av. del Bombero, Los Ceibos (sector Riocentro Ceibos)",
+  "maps_url": "https://ejemplo.invalid/maps/gye-ceibos",
+  "whatsapp": "+593 99 000 0006",
+  "telefono": "+593 99 000 0006",
+  "horario": "lun-sáb 09h00-19h00",
+  "marcas": [
+   "uni-ball",
+   "POSCA"
+  ],
+  "vende_online": true,
+  "web": "https://ejemplo.invalid/gye-ceibos"
+ },
+ {
+  "lat": -2.187,
+  "lng": -80.006,
+  "id": "mokalu-laguna-plaza",
+  "nombre": "Mokalú — C.C. Laguna Plaza",
+  "ciudad": "Guayaquil",
+  "provincia": "Guayas",
+  "direccion": "C.C. Laguna Plaza, km 12,5 vía a la costa",
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=C.C.+Laguna+Plaza+Guayaquil",
+  "whatsapp": "+593 99 000 0007",
+  "horario": "10h00-18h00",
+  "marcas": [
+   "uni-ball",
+   "POSCA"
+  ],
+  "vende_online": true,
+  "web": "https://mokalu.com.ec/tienda/"
+ },
+ {
+  "lat": -2.14,
+  "lng": -79.865,
+  "id": "sam-entreplaza",
+  "nombre": "EJEMPLO Papelería Samborondón",
+  "ciudad": "Samborondón",
+  "provincia": "Guayas",
+  "direccion": "EJEMPLO Km 2,5 vía a Samborondón, plaza comercial",
+  "maps_url": "https://ejemplo.invalid/maps/sam-entreplaza",
+  "whatsapp": "+593 99 000 0008",
+  "telefono": "+593 99 000 0008",
+  "horario": "lun-sáb 09h00-19h00",
+  "marcas": [
+   "uni-ball",
+   "POSCA"
+  ],
+  "vende_online": false
+ },
+ {
+  "lat": -2.17,
+  "lng": -79.838,
+  "id": "duran-centro",
+  "nombre": "EJEMPLO Papelería Durán",
+  "ciudad": "Durán",
+  "provincia": "Guayas",
+  "direccion": "EJEMPLO Av. Nicolás Lapentti, Durán",
+  "maps_url": "https://ejemplo.invalid/maps/duran-centro",
+  "whatsapp": "+593 99 000 0009",
+  "telefono": "+593 99 000 0009",
+  "horario": "lun-sáb 09h00-19h00",
+  "marcas": [
+   "uni-ball",
+   "POSCA"
+  ],
+  "vende_online": false
+ },
+ {
+  "lat": -2.1347,
+  "lng": -79.5872,
+  "id": "milagro-centro",
+  "nombre": "EJEMPLO Bazar Milagro",
+  "ciudad": "Milagro",
+  "provincia": "Guayas",
+  "direccion": "EJEMPLO Calle García Moreno, centro de Milagro",
+  "maps_url": "https://ejemplo.invalid/maps/milagro-centro",
+  "whatsapp": "+593 99 000 0010",
+  "telefono": "+593 99 000 0010",
+  "horario": "lun-sáb 09h00-19h00",
+  "marcas": [
+   "uni-ball",
+   "POSCA"
+  ],
+  "vende_online": false
+ },
+ {
+  "lat": -0.22,
+  "lng": -78.512,
+  "id": "uio-centro",
+  "nombre": "EJEMPLO Papelería Centro Histórico",
+  "ciudad": "Quito",
+  "provincia": "Pichincha",
+  "direccion": "EJEMPLO Calle Guayaquil y Chile, Centro Histórico",
+  "maps_url": "https://ejemplo.invalid/maps/uio-centro",
+  "whatsapp": "+593 99 000 0011",
+  "telefono": "+593 99 000 0011",
+  "horario": "lun-sáb 09h00-19h00",
+  "marcas": [
+   "uni-ball",
+   "POSCA"
+  ],
+  "vende_online": false
+ },
+ {
+  "lat": -0.176,
+  "lng": -78.48,
+  "id": "uio-carolina",
+  "nombre": "EJEMPLO Arte Quicentro",
+  "ciudad": "Quito",
+  "provincia": "Pichincha",
+  "direccion": "EJEMPLO Av. Naciones Unidas, sector La Carolina / Quicentro",
+  "maps_url": "https://ejemplo.invalid/maps/uio-carolina",
+  "whatsapp": "+593 99 000 0012",
+  "telefono": "+593 99 000 0012",
+  "horario": "lun-sáb 09h00-19h00",
+  "marcas": [
+   "uni-ball",
+   "POSCA"
+  ],
+  "vende_online": true,
+  "web": "https://ejemplo.invalid/uio-carolina"
+ },
+ {
+  "lat": -0.105,
+  "lng": -78.49,
+  "id": "uio-condado",
+  "nombre": "EJEMPLO Librería El Condado",
+  "ciudad": "Quito",
+  "provincia": "Pichincha",
+  "direccion": "EJEMPLO Av. La Prensa, sector El Condado (norte)",
+  "maps_url": "https://ejemplo.invalid/maps/uio-condado",
+  "whatsapp": "+593 99 000 0013",
+  "telefono": "+593 99 000 0013",
+  "horario": "lun-sáb 09h00-19h00",
+  "marcas": [
+   "uni-ball",
+   "POSCA"
+  ],
+  "vende_online": false
+ },
+ {
+  "lat": -0.2,
+  "lng": -78.433,
+  "id": "uio-cumbaya",
+  "nombre": "EJEMPLO Estudio de Arte Cumbayá",
+  "ciudad": "Quito",
+  "provincia": "Pichincha",
+  "direccion": "EJEMPLO Av. Interoceánica, Cumbayá",
+  "maps_url": "https://ejemplo.invalid/maps/uio-cumbaya",
+  "whatsapp": "+593 99 000 0014",
+  "telefono": "+593 99 000 0014",
+  "horario": "lun-sáb 09h00-19h00",
+  "marcas": [
+   "uni-ball",
+   "POSCA"
+  ],
+  "vende_online": true,
+  "web": "https://ejemplo.invalid/uio-cumbaya"
+ },
+ {
+  "lat": -0.295,
+  "lng": -78.55,
+  "id": "uio-quitumbe",
+  "nombre": "EJEMPLO Papelería Quitumbe",
+  "ciudad": "Quito",
+  "provincia": "Pichincha",
+  "direccion": "EJEMPLO Av. Quitumbe Ñan, sur de Quito",
+  "maps_url": "https://ejemplo.invalid/maps/uio-quitumbe",
+  "whatsapp": "+593 99 000 0015",
+  "telefono": "+593 99 000 0015",
+  "horario": "lun-sáb 09h00-19h00",
+  "marcas": [
+   "uni-ball",
+   "POSCA"
+  ],
+  "vende_online": false
+ },
+ {
+  "lat": -0.329,
+  "lng": -78.445,
+  "id": "sangolqui-centro",
+  "nombre": "EJEMPLO Papelería Los Chillos",
+  "ciudad": "Sangolquí",
+  "provincia": "Pichincha",
+  "direccion": "EJEMPLO Av. General Enríquez, Valle de los Chillos",
+  "maps_url": "https://ejemplo.invalid/maps/sangolqui-centro",
+  "whatsapp": "+593 99 000 0016",
+  "telefono": "+593 99 000 0016",
+  "horario": "lun-sáb 09h00-19h00",
+  "marcas": [
+   "uni-ball",
+   "POSCA"
+  ],
+  "vende_online": false
+ },
+ {
+  "lat": -2.8975,
+  "lng": -79.0045,
+  "id": "cue-centro",
+  "nombre": "EJEMPLO Papelería Calderón Cuenca",
+  "ciudad": "Cuenca",
+  "provincia": "Azuay",
+  "direccion": "EJEMPLO Calle Bolívar, junto al Parque Calderón, Centro",
+  "maps_url": "https://ejemplo.invalid/maps/cue-centro",
+  "whatsapp": "+593 99 000 0017",
+  "telefono": "+593 99 000 0017",
+  "horario": "lun-sáb 09h00-19h00",
+  "marcas": [
+   "uni-ball",
+   "POSCA"
+  ],
+  "vende_online": false
+ },
+ {
+  "lat": -2.92,
+  "lng": -79.014,
+  "id": "cue-mall-rio",
+  "nombre": "EJEMPLO Arte Mall del Río",
+  "ciudad": "Cuenca",
+  "provincia": "Azuay",
+  "direccion": "EJEMPLO C.C. Mall del Río, Av. Felipe II",
+  "maps_url": "https://ejemplo.invalid/maps/cue-mall-rio",
+  "whatsapp": "+593 99 000 0018",
+  "telefono": "+593 99 000 0018",
+  "horario": "lun-sáb 09h00-19h00",
+  "marcas": [
+   "uni-ball",
+   "POSCA"
+  ],
+  "vende_online": true,
+  "web": "https://ejemplo.invalid/cue-mall-rio"
+ },
+ {
+  "lat": -2.89,
+  "lng": -78.98,
+  "id": "cue-totoracocha",
+  "nombre": "EJEMPLO Útiles Totoracocha",
+  "ciudad": "Cuenca",
+  "provincia": "Azuay",
+  "direccion": "EJEMPLO Av. Hurtado de Mendoza, Totoracocha",
+  "maps_url": "https://ejemplo.invalid/maps/cue-totoracocha",
+  "whatsapp": "+593 99 000 0019",
+  "telefono": "+593 99 000 0019",
+  "horario": "lun-sáb 09h00-19h00",
+  "marcas": [
+   "uni-ball",
+   "POSCA"
+  ],
+  "vende_online": false
+ },
+ {
+  "lat": -1.2491,
+  "lng": -78.6168,
+  "id": "amb-centro",
+  "nombre": "EJEMPLO Papelería Ambato Centro",
+  "ciudad": "Ambato",
+  "provincia": "Tungurahua",
+  "direccion": "EJEMPLO Calle Sucre, centro de Ambato",
+  "maps_url": "https://ejemplo.invalid/maps/amb-centro",
+  "whatsapp": "+593 99 000 0020",
+  "telefono": "+593 99 000 0020",
+  "horario": "lun-sáb 09h00-19h00",
+  "marcas": [
+   "uni-ball",
+   "POSCA"
+  ],
+  "vende_online": false
+ },
+ {
+  "lat": -1.242,
+  "lng": -78.635,
+  "id": "amb-ficoa",
+  "nombre": "EJEMPLO Arte Ficoa",
+  "ciudad": "Ambato",
+  "provincia": "Tungurahua",
+  "direccion": "EJEMPLO Av. Los Guaytambos, Ficoa",
+  "maps_url": "https://ejemplo.invalid/maps/amb-ficoa",
+  "whatsapp": "+593 99 000 0021",
+  "telefono": "+593 99 000 0021",
+  "horario": "lun-sáb 09h00-19h00",
+  "marcas": [
+   "uni-ball",
+   "POSCA"
+  ],
+  "vende_online": false
+ },
+ {
+  "lat": -1.671,
+  "lng": -78.647,
+  "id": "rio-centro",
+  "nombre": "EJEMPLO Papelería Central Riobamba",
+  "ciudad": "Riobamba",
+  "provincia": "Chimborazo",
+  "direccion": "EJEMPLO Calle 10 de Agosto, centro de Riobamba",
+  "maps_url": "https://ejemplo.invalid/maps/rio-centro",
+  "whatsapp": "+593 99 000 0022",
+  "telefono": "+593 99 000 0022",
+  "horario": "lun-sáb 09h00-19h00",
+  "marcas": [
+   "uni-ball",
+   "POSCA"
+  ],
+  "vende_online": false
+ },
+ {
+  "lat": -0.935,
+  "lng": -78.615,
+  "id": "lat-centro",
+  "nombre": "EJEMPLO Librería Latacunga",
+  "ciudad": "Latacunga",
+  "provincia": "Cotopaxi",
+  "direccion": "EJEMPLO Calle Quito, centro de Latacunga",
+  "maps_url": "https://ejemplo.invalid/maps/lat-centro",
+  "whatsapp": "+593 99 000 0023",
+  "telefono": "+593 99 000 0023",
+  "horario": "lun-sáb 09h00-19h00",
+  "marcas": [
+   "uni-ball",
+   "POSCA"
+  ],
+  "vende_online": false
+ },
+ {
+  "lat": 0.351,
+  "lng": -78.122,
+  "id": "iba-centro",
+  "nombre": "EJEMPLO Papelería Ibarra",
+  "ciudad": "Ibarra",
+  "provincia": "Imbabura",
+  "direccion": "EJEMPLO Calle Bolívar, centro de Ibarra",
+  "maps_url": "https://ejemplo.invalid/maps/iba-centro",
+  "whatsapp": "+593 99 000 0024",
+  "telefono": "+593 99 000 0024",
+  "horario": "lun-sáb 09h00-19h00",
+  "marcas": [
+   "uni-ball",
+   "POSCA"
+  ],
+  "vende_online": false
+ },
+ {
+  "lat": 0.234,
+  "lng": -78.262,
+  "id": "ota-centro",
+  "nombre": "EJEMPLO Bazar Otavalo",
+  "ciudad": "Otavalo",
+  "provincia": "Imbabura",
+  "direccion": "EJEMPLO Calle Sucre, cerca de la Plaza de Ponchos",
+  "maps_url": "https://ejemplo.invalid/maps/ota-centro",
+  "whatsapp": "+593 99 000 0025",
+  "telefono": "+593 99 000 0025",
+  "horario": "lun-sáb 09h00-19h00",
+  "marcas": [
+   "uni-ball",
+   "POSCA"
+  ],
+  "vende_online": false
+ },
+ {
+  "lat": 0.812,
+  "lng": -77.717,
+  "id": "tul-centro",
+  "nombre": "EJEMPLO Papelería Tulcán",
+  "ciudad": "Tulcán",
+  "provincia": "Carchi",
+  "direccion": "EJEMPLO Calle Sucre, centro de Tulcán",
+  "maps_url": "https://ejemplo.invalid/maps/tul-centro",
+  "whatsapp": "+593 99 000 0026",
+  "telefono": "+593 99 000 0026",
+  "horario": "lun-sáb 09h00-19h00",
+  "marcas": [
+   "uni-ball",
+   "POSCA"
+  ],
+  "vende_online": false
+ },
+ {
+  "lat": -3.993,
+  "lng": -79.204,
+  "id": "loj-centro",
+  "nombre": "EJEMPLO Papelería Loja",
+  "ciudad": "Loja",
+  "provincia": "Loja",
+  "direccion": "EJEMPLO Calle Bolívar, centro de Loja",
+  "maps_url": "https://ejemplo.invalid/maps/loj-centro",
+  "whatsapp": "+593 99 000 0027",
+  "telefono": "+593 99 000 0027",
+  "horario": "lun-sáb 09h00-19h00",
+  "marcas": [
+   "uni-ball",
+   "POSCA"
+  ],
+  "vende_online": false
+ },
+ {
+  "lat": -3.258,
+  "lng": -79.955,
+  "id": "mch-centro",
+  "nombre": "EJEMPLO Papelería Machala",
+  "ciudad": "Machala",
+  "provincia": "El Oro",
+  "direccion": "EJEMPLO Av. 25 de Junio, centro de Machala",
+  "maps_url": "https://ejemplo.invalid/maps/mch-centro",
+  "whatsapp": "+593 99 000 0028",
+  "telefono": "+593 99 000 0028",
+  "horario": "lun-sáb 09h00-19h00",
+  "marcas": [
+   "uni-ball",
+   "POSCA"
+  ],
+  "vende_online": false
+ },
+ {
+  "lat": -3.476,
+  "lng": -80.231,
+  "id": "hua-centro",
+  "nombre": "EJEMPLO Bazar Huaquillas",
+  "ciudad": "Huaquillas",
+  "provincia": "El Oro",
+  "direccion": "EJEMPLO Av. La República, Huaquillas",
+  "maps_url": "https://ejemplo.invalid/maps/hua-centro",
+  "whatsapp": "+593 99 000 0029",
+  "telefono": "+593 99 000 0029",
+  "horario": "lun-sáb 09h00-19h00",
+  "marcas": [
+   "uni-ball",
+   "POSCA"
+  ],
+  "vende_online": false
+ },
+ {
+  "lat": -1.0546,
+  "lng": -80.4545,
+  "id": "ptv-centro",
+  "nombre": "EJEMPLO Papelería Portoviejo",
+  "ciudad": "Portoviejo",
+  "provincia": "Manabí",
+  "direccion": "EJEMPLO Calle Chile, centro de Portoviejo",
+  "maps_url": "https://ejemplo.invalid/maps/ptv-centro",
+  "whatsapp": "+593 99 000 0030",
+  "telefono": "+593 99 000 0030",
+  "horario": "lun-sáb 09h00-19h00",
+  "marcas": [
+   "uni-ball",
+   "POSCA"
+  ],
+  "vende_online": false
+ },
+ {
+  "lat": -0.955,
+  "lng": -80.725,
+  "id": "mta-centro",
+  "nombre": "EJEMPLO Arte Manta",
+  "ciudad": "Manta",
+  "provincia": "Manabí",
+  "direccion": "EJEMPLO Av. Flavio Reyes, Manta",
+  "maps_url": "https://ejemplo.invalid/maps/mta-centro",
+  "whatsapp": "+593 99 000 0031",
+  "telefono": "+593 99 000 0031",
+  "horario": "lun-sáb 09h00-19h00",
+  "marcas": [
+   "uni-ball",
+   "POSCA"
+  ],
+  "vende_online": true,
+  "web": "https://ejemplo.invalid/mta-centro"
+ },
+ {
+  "lat": 0.9682,
+  "lng": -79.6517,
+  "id": "esm-centro",
+  "nombre": "EJEMPLO Papelería Esmeraldas",
+  "ciudad": "Esmeraldas",
+  "provincia": "Esmeraldas",
+  "direccion": "EJEMPLO Calle Bolívar, centro de Esmeraldas",
+  "maps_url": "https://ejemplo.invalid/maps/esm-centro",
+  "whatsapp": "+593 99 000 0032",
+  "telefono": "+593 99 000 0032",
+  "horario": "lun-sáb 09h00-19h00",
+  "marcas": [
+   "uni-ball",
+   "POSCA"
+  ],
+  "vende_online": false
+ },
+ {
+  "lat": -0.253,
+  "lng": -79.175,
+  "id": "sdo-centro",
+  "nombre": "EJEMPLO Papelería Santo Domingo",
+  "ciudad": "Santo Domingo",
+  "provincia": "Santo Domingo de los Tsáchilas",
+  "direccion": "EJEMPLO Av. Quito, centro de Santo Domingo",
+  "maps_url": "https://ejemplo.invalid/maps/sdo-centro",
+  "whatsapp": "+593 99 000 0033",
+  "telefono": "+593 99 000 0033",
+  "horario": "lun-sáb 09h00-19h00",
+  "marcas": [
+   "uni-ball",
+   "POSCA"
+  ],
+  "vende_online": false
+ },
+ {
+  "lat": -1.8022,
+  "lng": -79.5344,
+  "id": "bab-centro",
+  "nombre": "EJEMPLO Bazar Babahoyo",
+  "ciudad": "Babahoyo",
+  "provincia": "Los Ríos",
+  "direccion": "EJEMPLO Calle General Barona, Babahoyo",
+  "maps_url": "https://ejemplo.invalid/maps/bab-centro",
+  "whatsapp": "+593 99 000 0034",
+  "telefono": "+593 99 000 0034",
+  "horario": "lun-sáb 09h00-19h00",
+  "marcas": [
+   "uni-ball",
+   "POSCA"
+  ],
+  "vende_online": false
+ },
+ {
+  "lat": -1.0286,
+  "lng": -79.4635,
+  "id": "qvd-centro",
+  "nombre": "EJEMPLO Papelería Quevedo",
+  "ciudad": "Quevedo",
+  "provincia": "Los Ríos",
+  "direccion": "EJEMPLO Av. 7 de Octubre, Quevedo",
+  "maps_url": "https://ejemplo.invalid/maps/qvd-centro",
+  "whatsapp": "+593 99 000 0035",
+  "telefono": "+593 99 000 0035",
+  "horario": "lun-sáb 09h00-19h00",
+  "marcas": [
+   "uni-ball",
+   "POSCA"
+  ],
+  "vende_online": false
+ },
+ {
+  "lat": -2.215,
+  "lng": -80.952,
+  "id": "sal-centro",
+  "nombre": "EJEMPLO Papelería Salinas",
+  "ciudad": "Salinas",
+  "provincia": "Santa Elena",
+  "direccion": "EJEMPLO Malecón de Salinas",
+  "maps_url": "https://ejemplo.invalid/maps/sal-centro",
+  "whatsapp": "+593 99 000 0036",
+  "telefono": "+593 99 000 0036",
+  "horario": "lun-sáb 09h00-19h00",
+  "marcas": [
+   "uni-ball",
+   "POSCA"
+  ],
+  "vende_online": false
+ },
+ {
+  "lat": -2.739,
+  "lng": -78.846,
+  "id": "azo-centro",
+  "nombre": "EJEMPLO Librería Azogues",
+  "ciudad": "Azogues",
+  "provincia": "Cañar",
+  "direccion": "EJEMPLO Calle Bolívar, centro de Azogues",
+  "maps_url": "https://ejemplo.invalid/maps/azo-centro",
+  "whatsapp": "+593 99 000 0037",
+  "telefono": "+593 99 000 0037",
+  "horario": "lun-sáb 09h00-19h00",
+  "marcas": [
+   "uni-ball",
+   "POSCA"
+  ],
+  "vende_online": false
+ },
+ {
+  "lat": -0.9938,
+  "lng": -77.8129,
+  "id": "ten-centro",
+  "nombre": "EJEMPLO Papelería Tena",
+  "ciudad": "Tena",
+  "provincia": "Napo",
+  "direccion": "EJEMPLO Av. 15 de Noviembre, Tena",
+  "maps_url": "https://ejemplo.invalid/maps/ten-centro",
+  "whatsapp": "+593 99 000 0038",
+  "telefono": "+593 99 000 0038",
+  "horario": "lun-sáb 09h00-19h00",
+  "marcas": [
+   "uni-ball",
+   "POSCA"
+  ],
+  "vende_online": false
+ },
+ {
+  "lat": -1.4924,
+  "lng": -78.0024,
+  "id": "puy-centro",
+  "nombre": "EJEMPLO Papelería Puyo",
+  "ciudad": "Puyo",
+  "provincia": "Pastaza",
+  "direccion": "EJEMPLO Calle Atahualpa, centro de Puyo",
+  "maps_url": "https://ejemplo.invalid/maps/puy-centro",
+  "whatsapp": "+593 99 000 0039",
+  "telefono": "+593 99 000 0039",
+  "horario": "lun-sáb 09h00-19h00",
+  "marcas": [
+   "uni-ball",
+   "POSCA"
+  ],
+  "vende_online": false
+ },
+ {
+  "lat": 0.0847,
+  "lng": -76.8828,
+  "id": "nlo-centro",
+  "nombre": "EJEMPLO Bazar Lago Agrio",
+  "ciudad": "Nueva Loja",
+  "provincia": "Sucumbíos",
+  "direccion": "EJEMPLO Av. Quito, Nueva Loja (Lago Agrio)",
+  "maps_url": "https://ejemplo.invalid/maps/nlo-centro",
+  "whatsapp": "+593 99 000 0040",
+  "telefono": "+593 99 000 0040",
+  "horario": "lun-sáb 09h00-19h00",
+  "marcas": [
+   "uni-ball",
+   "POSCA"
+  ],
+  "vende_online": false
+ }
+]

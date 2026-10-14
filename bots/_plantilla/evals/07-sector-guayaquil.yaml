@@ -1,0 +1,9 @@
+nombre: sector conocido de Guayaquil
+canal: web
+turnos:
+  - usuario: "estoy cerca del mall del sol"
+    espera:
+      tienda_en: [guayaquil]
+      tienda_id: [ej-gye-2, ej-gye-1]
+resultado_final:
+  accion: buscar_tienda

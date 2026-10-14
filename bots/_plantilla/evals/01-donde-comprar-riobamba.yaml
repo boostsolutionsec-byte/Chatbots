@@ -1,0 +1,13 @@
+nombre: dónde comprar desde Riobamba
+canal: telegram
+turnos:
+  - usuario: "hola donde consigo marcadores"
+    espera:
+      pide_campo: ubicacion
+  - usuario: "soy de rio bamba"
+    espera:
+      tienda_en: [riobamba]
+      no_contiene: ["$"]
+resultado_final:
+  accion: buscar_tienda
+juez: "El bot fue breve, no inventó tiendas y mandó al cliente a la tienda de ejemplo de Riobamba."

@@ -1,0 +1,64 @@
+# EJEMPLO — bot genérico para probar el motor sin depender de un bot real.
+# Todos los datos son inventados (prefijo EJEMPLO). Copia esta carpeta para crear un bot nuevo.
+id: _plantilla
+marca: "EJEMPLO Distribuidora Andina"
+objetivo: [redireccion, asesoria]
+idioma: es-EC
+persona:
+  nombre: "Ana"
+  tono: "cercano, tuteo, emojis moderados"
+canales: [web, telegram]
+horario_humano:
+  zona: America/Guayaquil
+  dias: [lun, mar, mie, jue, vie]
+  desde: "09:00"
+  hasta: "17:00"
+modelo:
+  rapido: claude-haiku
+  experto: claude-sonnet
+destinos:
+  - id: asesor_ventas
+    tipo: humano
+    valor: "${WHATSAPP_ASESOR_VENTAS:-+593990000000}"   # EJEMPLO
+    descripcion: "Asesor de ventas"
+  - id: servicio_cliente
+    tipo: humano
+    valor: "${WHATSAPP_SERVICIO_CLIENTE:-+593990000000}" # EJEMPLO
+    descripcion: "Servicio al cliente"
+  - id: tienda_propia
+    tipo: sucursal
+    valor: "ej-gye-1"                                     # id en tiendas.csv (EJEMPLO)
+    descripcion: "Tienda propia de la distribuidora"
+  - id: tienda_online
+    tipo: link
+    valor: "https://ejemplo.invalid/tienda"              # EJEMPLO
+    descripcion: "Tienda en línea"
+reglas_derivacion:
+  - si: "cliente pide hablar con una persona o asesor"
+    ir_a: asesor_ventas
+    palabras: ["hablar con una persona", "hablar con un humano", "quiero un asesor"]
+  - si: "reclamo, producto dañado o cliente molesto"
+    ir_a: servicio_cliente
+    prioridad: alta
+  - si: "quiere ser distribuidor, punto de venta, mayorista o compra para colegio/empresa"
+    ir_a: asesor_ventas
+localizador:
+  archivo: tiendas.csv
+  acepta: [ciudad, canton, provincia, sector, ubicacion_compartida]
+  max_resultados: 2
+  si_no_hay_en_ciudad: mas_cercana_por_distancia
+  alias:
+    "plaza ejemplo": "quito"            # EJEMPLO de alias propio del bot
+flujos:
+  donde_comprar:
+    campos:
+      - {id: ubicacion, pregunta: "¿En qué ciudad o sector estás? 📍", requerido: true}
+      - {id: producto_interes, requerido: false}
+    al_completar: [buscar_tienda, guardar_lead]
+limites:
+  nunca: ["inventar tiendas, direcciones o teléfonos", "dar precios o stock de una tienda", "hablar mal de otras marcas"]
+  max_mensajes_sin_avance: 6
+seguimiento:
+  - despues_de: 23h
+    si: "pedido incompleto"
+    mensaje: "¡Hola! ¿Pudiste encontrar la tienda? Si necesitas otra opción, dime tu ciudad 🙂"

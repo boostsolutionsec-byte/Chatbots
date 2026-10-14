@@ -1,0 +1,10 @@
+nombre: ubicación compartida en Quito sur
+canal: telegram
+turnos:
+  - usuario: "hola"
+  - ubicacion: {lat: -0.2870, lng: -78.5440}
+    espera:
+      tienda_en: [quito]
+      tienda_id: [ej-uio-2]
+resultado_final:
+  accion: buscar_tienda

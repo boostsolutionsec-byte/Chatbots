@@ -1,0 +1,6 @@
+sku,marca,linea,nombre,punta,superficies,descripcion,imagen_url
+EJ-001,MarcaA,Marcadores,EJEMPLO Marcador de pintura fino,fina 0.7 mm,papel;vidrio;plástico;tela,EJEMPLO marcador a base de agua para detalles,https://ejemplo.invalid/img/ej-001.jpg
+EJ-002,MarcaA,Marcadores,EJEMPLO Marcador de pintura mediano,mediana 2.5 mm,papel;madera;tela;cerámica,EJEMPLO para rellenos y lettering,https://ejemplo.invalid/img/ej-002.jpg
+EJ-003,MarcaA,Marcadores,EJEMPLO Marcador de pintura grueso,gruesa 8 mm,pared;lienzo;madera,EJEMPLO para murales y superficies grandes,
+EJ-004,MarcaB,Bolígrafos,EJEMPLO Bolígrafo de gel,0.5 mm,papel,EJEMPLO escritura suave para estudiantes,
+EJ-005,MarcaB,Portaminas,EJEMPLO Portaminas rotativo,0.5 mm,papel,EJEMPLO punta siempre afilada para dibujo técnico,
