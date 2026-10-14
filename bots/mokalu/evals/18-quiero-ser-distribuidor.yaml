@@ -3,11 +3,12 @@ canal: telegram
 turnos:
   - usuario: "Hola tengo una papeleria en Loja y quiero vender productos posca"
     espera:
-      pide_campo: nombre_negocio
+      deriva_a: distribuidores
+      no_contiene: ["$", "descuento"]
   - usuario: "Papelería La Estrella"
     espera:
-      deriva_a: distribuidores
+      max_palabras: 40
 resultado_final:
   accion: derivar
   destino: distribuidores
-juez: "Mostró entusiasmo, pidió el nombre del negocio (ya tenía la ciudad) y derivó al equipo comercial sin dar condiciones ni precios mayoristas."
+juez: "Mostró entusiasmo y derivó de inmediato al equipo comercial (ya tenía la ciudad), pidiendo el nombre del negocio como dato opcional, sin dar condiciones ni precios mayoristas."

@@ -99,7 +99,7 @@ flujos:
     al_completar: [recomendar_producto, buscar_tienda]
   quiero_ser_distribuidor:
     campos:
-      - {id: nombre_negocio, pregunta: "¿Cómo se llama tu negocio?", requerido: true}
+      - {id: nombre_negocio, pregunta: "¿Cómo se llama tu negocio?", requerido: false}
       - {id: ubicacion, pregunta: "¿En qué ciudad está?", requerido: true}
     al_completar: [guardar_lead, derivar:distribuidores]
 
