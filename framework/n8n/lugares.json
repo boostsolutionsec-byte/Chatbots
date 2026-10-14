@@ -1,0 +1,974 @@
+[
+ {
+  "nombre": "Guayaquil",
+  "alias": [
+   "gye",
+   "guayaquil",
+   "guayas",
+   "gayakil",
+   "guayakil",
+   "guayakil",
+   "gquil",
+   "guayaco",
+   "la perla del pacifico"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "Guayaquil",
+  "provincia": "Guayas",
+  "lat": -2.1894,
+  "lng": -79.8891
+ },
+ {
+  "nombre": "Mall del Sol",
+  "alias": [
+   "mall del sol",
+   "malldelsol"
+  ],
+  "tipo": "sector",
+  "ciudad": "Guayaquil",
+  "provincia": "Guayas",
+  "lat": -2.1544,
+  "lng": -79.893
+ },
+ {
+  "nombre": "Urdesa",
+  "alias": [
+   "urdesa",
+   "urdesa central"
+  ],
+  "tipo": "sector",
+  "ciudad": "Guayaquil",
+  "provincia": "Guayas",
+  "lat": -2.165,
+  "lng": -79.905
+ },
+ {
+  "nombre": "Alborada",
+  "alias": [
+   "alborada",
+   "la alborada"
+  ],
+  "tipo": "sector",
+  "ciudad": "Guayaquil",
+  "provincia": "Guayas",
+  "lat": -2.135,
+  "lng": -79.9
+ },
+ {
+  "nombre": "Kennedy",
+  "alias": [
+   "kennedy",
+   "policentro",
+   "san marino"
+  ],
+  "tipo": "sector",
+  "ciudad": "Guayaquil",
+  "provincia": "Guayas",
+  "lat": -2.17,
+  "lng": -79.899
+ },
+ {
+  "nombre": "Los Ceibos",
+  "alias": [
+   "ceibos",
+   "los ceibos",
+   "riocentro ceibos"
+  ],
+  "tipo": "sector",
+  "ciudad": "Guayaquil",
+  "provincia": "Guayas",
+  "lat": -2.172,
+  "lng": -79.945
+ },
+ {
+  "nombre": "Vía a la Costa",
+  "alias": [
+   "via a la costa",
+   "vía a la costa",
+   "puerto azul",
+   "laguna plaza",
+   "chongon"
+  ],
+  "tipo": "sector",
+  "ciudad": "Guayaquil",
+  "provincia": "Guayas",
+  "lat": -2.187,
+  "lng": -80.006
+ },
+ {
+  "nombre": "Sur de Guayaquil",
+  "alias": [
+   "sur de guayaquil",
+   "mall del sur",
+   "guasmo",
+   "25 de julio"
+  ],
+  "tipo": "sector",
+  "ciudad": "Guayaquil",
+  "provincia": "Guayas",
+  "lat": -2.229,
+  "lng": -79.896
+ },
+ {
+  "nombre": "Centro de Guayaquil",
+  "alias": [
+   "centro de guayaquil",
+   "malecon 2000",
+   "malecón 2000",
+   "9 de octubre",
+   "centro guayaquil"
+  ],
+  "tipo": "sector",
+  "ciudad": "Guayaquil",
+  "provincia": "Guayas",
+  "lat": -2.1894,
+  "lng": -79.885
+ },
+ {
+  "nombre": "Samborondón",
+  "alias": [
+   "samborondon",
+   "samborondón",
+   "la puntilla",
+   "entreplaza"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "Samborondón",
+  "provincia": "Guayas",
+  "lat": -2.14,
+  "lng": -79.865
+ },
+ {
+  "nombre": "Durán",
+  "alias": [
+   "duran",
+   "durán"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "Durán",
+  "provincia": "Guayas",
+  "lat": -2.17,
+  "lng": -79.838
+ },
+ {
+  "nombre": "Daule",
+  "alias": [
+   "daule",
+   "la aurora"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "Daule",
+  "provincia": "Guayas",
+  "lat": -1.86,
+  "lng": -79.977
+ },
+ {
+  "nombre": "Milagro",
+  "alias": [
+   "milagro"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "Milagro",
+  "provincia": "Guayas",
+  "lat": -2.1347,
+  "lng": -79.5872
+ },
+ {
+  "nombre": "Playas",
+  "alias": [
+   "playas",
+   "general villamil"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "Playas",
+  "provincia": "Guayas",
+  "lat": -2.63,
+  "lng": -80.39
+ },
+ {
+  "nombre": "Quito",
+  "alias": [
+   "uio",
+   "quito",
+   "pichincha",
+   "kito",
+   "qito",
+   "la capital",
+   "capital",
+   "quitu"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "Quito",
+  "provincia": "Pichincha",
+  "lat": -0.1807,
+  "lng": -78.4678
+ },
+ {
+  "nombre": "Centro Histórico de Quito",
+  "alias": [
+   "centro historico",
+   "centro histórico",
+   "plaza grande"
+  ],
+  "tipo": "sector",
+  "ciudad": "Quito",
+  "provincia": "Pichincha",
+  "lat": -0.22,
+  "lng": -78.512
+ },
+ {
+  "nombre": "La Carolina",
+  "alias": [
+   "la carolina",
+   "quicentro",
+   "parque la carolina",
+   "naciones unidas"
+  ],
+  "tipo": "sector",
+  "ciudad": "Quito",
+  "provincia": "Pichincha",
+  "lat": -0.176,
+  "lng": -78.48
+ },
+ {
+  "nombre": "El Condado",
+  "alias": [
+   "condado",
+   "el condado",
+   "carcelen",
+   "carcelén"
+  ],
+  "tipo": "sector",
+  "ciudad": "Quito",
+  "provincia": "Pichincha",
+  "lat": -0.105,
+  "lng": -78.49
+ },
+ {
+  "nombre": "Cumbayá",
+  "alias": [
+   "cumbaya",
+   "cumbayá",
+   "tumbaco"
+  ],
+  "tipo": "sector",
+  "ciudad": "Quito",
+  "provincia": "Pichincha",
+  "lat": -0.2,
+  "lng": -78.433
+ },
+ {
+  "nombre": "Quitumbe",
+  "alias": [
+   "quitumbe",
+   "sur de quito",
+   "el recreo"
+  ],
+  "tipo": "sector",
+  "ciudad": "Quito",
+  "provincia": "Pichincha",
+  "lat": -0.295,
+  "lng": -78.55
+ },
+ {
+  "nombre": "Valle de los Chillos",
+  "alias": [
+   "los chillos",
+   "valle de los chillos",
+   "sangolqui",
+   "sangolquí",
+   "san rafael"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "Sangolquí",
+  "provincia": "Pichincha",
+  "lat": -0.329,
+  "lng": -78.445
+ },
+ {
+  "nombre": "Cayambe",
+  "alias": [
+   "cayambe"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "Cayambe",
+  "provincia": "Pichincha",
+  "lat": 0.041,
+  "lng": -78.145
+ },
+ {
+  "nombre": "Cuenca",
+  "alias": [
+   "cuenca",
+   "azuay",
+   "cuenka"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "Cuenca",
+  "provincia": "Azuay",
+  "lat": -2.9001,
+  "lng": -79.0059
+ },
+ {
+  "nombre": "Mall del Río",
+  "alias": [
+   "mall del rio",
+   "mall del río"
+  ],
+  "tipo": "sector",
+  "ciudad": "Cuenca",
+  "provincia": "Azuay",
+  "lat": -2.92,
+  "lng": -79.014
+ },
+ {
+  "nombre": "Gualaceo",
+  "alias": [
+   "gualaceo"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "Gualaceo",
+  "provincia": "Azuay",
+  "lat": -2.892,
+  "lng": -78.776
+ },
+ {
+  "nombre": "Ambato",
+  "alias": [
+   "ambato",
+   "tungurahua",
+   "anbato"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "Ambato",
+  "provincia": "Tungurahua",
+  "lat": -1.2491,
+  "lng": -78.6168
+ },
+ {
+  "nombre": "Baños",
+  "alias": [
+   "baños",
+   "banos",
+   "baños de agua santa"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "Baños",
+  "provincia": "Tungurahua",
+  "lat": -1.396,
+  "lng": -78.424
+ },
+ {
+  "nombre": "Riobamba",
+  "alias": [
+   "riobamba",
+   "chimborazo",
+   "rio bamba",
+   "riobanba",
+   "ríobamba"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "Riobamba",
+  "provincia": "Chimborazo",
+  "lat": -1.671,
+  "lng": -78.647
+ },
+ {
+  "nombre": "Latacunga",
+  "alias": [
+   "latacunga",
+   "cotopaxi"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "Latacunga",
+  "provincia": "Cotopaxi",
+  "lat": -0.935,
+  "lng": -78.615
+ },
+ {
+  "nombre": "Ibarra",
+  "alias": [
+   "ibarra",
+   "imbabura"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "Ibarra",
+  "provincia": "Imbabura",
+  "lat": 0.351,
+  "lng": -78.122
+ },
+ {
+  "nombre": "Otavalo",
+  "alias": [
+   "otavalo"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "Otavalo",
+  "provincia": "Imbabura",
+  "lat": 0.234,
+  "lng": -78.262
+ },
+ {
+  "nombre": "Tulcán",
+  "alias": [
+   "tulcan",
+   "tulcán",
+   "carchi"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "Tulcán",
+  "provincia": "Carchi",
+  "lat": 0.812,
+  "lng": -77.717
+ },
+ {
+  "nombre": "Loja",
+  "alias": [
+   "loja"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "Loja",
+  "provincia": "Loja",
+  "lat": -3.993,
+  "lng": -79.204
+ },
+ {
+  "nombre": "Machala",
+  "alias": [
+   "machala",
+   "el oro"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "Machala",
+  "provincia": "El Oro",
+  "lat": -3.258,
+  "lng": -79.955
+ },
+ {
+  "nombre": "Huaquillas",
+  "alias": [
+   "huaquillas"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "Huaquillas",
+  "provincia": "El Oro",
+  "lat": -3.476,
+  "lng": -80.231
+ },
+ {
+  "nombre": "Portoviejo",
+  "alias": [
+   "portoviejo",
+   "manabi",
+   "manabí",
+   "porto viejo"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "Portoviejo",
+  "provincia": "Manabí",
+  "lat": -1.0546,
+  "lng": -80.4545
+ },
+ {
+  "nombre": "Manta",
+  "alias": [
+   "manta"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "Manta",
+  "provincia": "Manabí",
+  "lat": -0.9677,
+  "lng": -80.7089
+ },
+ {
+  "nombre": "Chone",
+  "alias": [
+   "chone"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "Chone",
+  "provincia": "Manabí",
+  "lat": -0.698,
+  "lng": -80.094
+ },
+ {
+  "nombre": "Esmeraldas",
+  "alias": [
+   "esmeraldas",
+   "esmeralda"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "Esmeraldas",
+  "provincia": "Esmeraldas",
+  "lat": 0.9682,
+  "lng": -79.6517
+ },
+ {
+  "nombre": "Atacames",
+  "alias": [
+   "atacames"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "Atacames",
+  "provincia": "Esmeraldas",
+  "lat": 0.87,
+  "lng": -79.846
+ },
+ {
+  "nombre": "Santo Domingo",
+  "alias": [
+   "santo domingo",
+   "santo domingo de los tsachilas",
+   "santo domingo de los tsáchilas",
+   "sto domingo",
+   "sto. domingo",
+   "santo domingo de los colorados"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "Santo Domingo",
+  "provincia": "Santo Domingo de los Tsáchilas",
+  "lat": -0.253,
+  "lng": -79.175
+ },
+ {
+  "nombre": "Babahoyo",
+  "alias": [
+   "babahoyo",
+   "los rios",
+   "los ríos"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "Babahoyo",
+  "provincia": "Los Ríos",
+  "lat": -1.8022,
+  "lng": -79.5344
+ },
+ {
+  "nombre": "Quevedo",
+  "alias": [
+   "quevedo"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "Quevedo",
+  "provincia": "Los Ríos",
+  "lat": -1.0286,
+  "lng": -79.4635
+ },
+ {
+  "nombre": "Salinas",
+  "alias": [
+   "salinas"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "Salinas",
+  "provincia": "Santa Elena",
+  "lat": -2.215,
+  "lng": -80.952
+ },
+ {
+  "nombre": "Santa Elena",
+  "alias": [
+   "santa elena",
+   "la libertad"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "Santa Elena",
+  "provincia": "Santa Elena",
+  "lat": -2.226,
+  "lng": -80.858
+ },
+ {
+  "nombre": "Montañita",
+  "alias": [
+   "montañita",
+   "montanita"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "Montañita",
+  "provincia": "Santa Elena",
+  "lat": -1.827,
+  "lng": -80.753
+ },
+ {
+  "nombre": "Azogues",
+  "alias": [
+   "azogues",
+   "cañar",
+   "canar"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "Azogues",
+  "provincia": "Cañar",
+  "lat": -2.739,
+  "lng": -78.846
+ },
+ {
+  "nombre": "Tena",
+  "alias": [
+   "tena",
+   "napo"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "Tena",
+  "provincia": "Napo",
+  "lat": -0.9938,
+  "lng": -77.8129
+ },
+ {
+  "nombre": "Puyo",
+  "alias": [
+   "puyo",
+   "pastaza"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "Puyo",
+  "provincia": "Pastaza",
+  "lat": -1.4924,
+  "lng": -78.0024
+ },
+ {
+  "nombre": "Nueva Loja",
+  "alias": [
+   "nueva loja",
+   "lago agrio",
+   "sucumbios",
+   "sucumbíos",
+   "lagoagrio"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "Nueva Loja",
+  "provincia": "Sucumbíos",
+  "lat": 0.0847,
+  "lng": -76.8828
+ },
+ {
+  "nombre": "Guaranda",
+  "alias": [
+   "guaranda",
+   "bolivar",
+   "bolívar"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "Guaranda",
+  "provincia": "Bolívar",
+  "lat": -1.5926,
+  "lng": -79.001
+ },
+ {
+  "nombre": "Macas",
+  "alias": [
+   "macas",
+   "morona santiago",
+   "morona"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "Macas",
+  "provincia": "Morona Santiago",
+  "lat": -2.3087,
+  "lng": -78.1114
+ },
+ {
+  "nombre": "Zamora",
+  "alias": [
+   "zamora",
+   "zamora chinchipe"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "Zamora",
+  "provincia": "Zamora Chinchipe",
+  "lat": -4.0692,
+  "lng": -78.9567
+ },
+ {
+  "nombre": "Coca",
+  "alias": [
+   "coca",
+   "el coca",
+   "puerto francisco de orellana",
+   "orellana"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "Puerto Francisco de Orellana",
+  "provincia": "Orellana",
+  "lat": -0.4625,
+  "lng": -76.987
+ },
+ {
+  "nombre": "Puerto Ayora",
+  "alias": [
+   "puerto ayora",
+   "santa cruz",
+   "galapagos",
+   "galápagos",
+   "isla santa cruz"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "Puerto Ayora",
+  "provincia": "Galápagos",
+  "lat": -0.743,
+  "lng": -90.315
+ },
+ {
+  "nombre": "Puerto Baquerizo Moreno",
+  "alias": [
+   "san cristobal",
+   "san cristóbal",
+   "puerto baquerizo"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "Puerto Baquerizo Moreno",
+  "provincia": "Galápagos",
+  "lat": -0.902,
+  "lng": -89.61
+ },
+ {
+  "nombre": "La Mariscal",
+  "alias": [
+   "la mariscal",
+   "mariscal",
+   "plaza foch",
+   "la foch"
+  ],
+  "tipo": "sector",
+  "ciudad": "Quito",
+  "provincia": "Pichincha",
+  "lat": -0.203,
+  "lng": -78.491
+ },
+ {
+  "nombre": "La Floresta",
+  "alias": [
+   "la floresta",
+   "floresta",
+   "gonzalez suarez",
+   "gonzález suárez"
+  ],
+  "tipo": "sector",
+  "ciudad": "Quito",
+  "provincia": "Pichincha",
+  "lat": -0.211,
+  "lng": -78.485
+ },
+ {
+  "nombre": "Sauces / Garzota",
+  "alias": [
+   "sauces",
+   "la garzota",
+   "garzota",
+   "samanes",
+   "los samanes"
+  ],
+  "tipo": "sector",
+  "ciudad": "Guayaquil",
+  "provincia": "Guayas",
+  "lat": -2.125,
+  "lng": -79.897
+ },
+ {
+  "nombre": "Ciudad Celeste",
+  "alias": [
+   "ciudad celeste",
+   "vía a samborondón km 10",
+   "via a samborondon"
+  ],
+  "tipo": "sector",
+  "ciudad": "Samborondón",
+  "provincia": "Guayas",
+  "lat": -2.09,
+  "lng": -79.858
+ },
+ {
+  "nombre": "Vilcabamba",
+  "alias": [
+   "vilcabamba"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "Vilcabamba",
+  "provincia": "Loja",
+  "lat": -4.26,
+  "lng": -79.222
+ },
+ {
+  "nombre": "Puerto López",
+  "alias": [
+   "puerto lopez",
+   "puerto lópez"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "Puerto López",
+  "provincia": "Manabí",
+  "lat": -1.56,
+  "lng": -80.81
+ },
+ {
+  "nombre": "Pedernales",
+  "alias": [
+   "pedernales"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "Pedernales",
+  "provincia": "Manabí",
+  "lat": 0.071,
+  "lng": -80.052
+ },
+ {
+  "nombre": "Jipijapa",
+  "alias": [
+   "jipijapa"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "Jipijapa",
+  "provincia": "Manabí",
+  "lat": -1.348,
+  "lng": -80.579
+ },
+ {
+  "nombre": "Pasaje",
+  "alias": [
+   "pasaje"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "Pasaje",
+  "provincia": "El Oro",
+  "lat": -3.33,
+  "lng": -79.807
+ },
+ {
+  "nombre": "Santa Rosa",
+  "alias": [
+   "santa rosa"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "Santa Rosa",
+  "provincia": "El Oro",
+  "lat": -3.449,
+  "lng": -79.96
+ },
+ {
+  "nombre": "Salcedo",
+  "alias": [
+   "salcedo"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "Salcedo",
+  "provincia": "Cotopaxi",
+  "lat": -1.045,
+  "lng": -78.59
+ },
+ {
+  "nombre": "Alausí",
+  "alias": [
+   "alausi",
+   "alausí"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "Alausí",
+  "provincia": "Chimborazo",
+  "lat": -2.2,
+  "lng": -78.847
+ },
+ {
+  "nombre": "Cañar",
+  "alias": [
+   "ciudad de cañar"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "Cañar",
+  "provincia": "Cañar",
+  "lat": -2.56,
+  "lng": -78.938
+ },
+ {
+  "nombre": "Yantzaza",
+  "alias": [
+   "yantzaza"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "Yantzaza",
+  "provincia": "Zamora Chinchipe",
+  "lat": -3.827,
+  "lng": -78.759
+ },
+ {
+  "nombre": "Sucúa",
+  "alias": [
+   "sucua",
+   "sucúa"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "Sucúa",
+  "provincia": "Morona Santiago",
+  "lat": -2.46,
+  "lng": -78.17
+ },
+ {
+  "nombre": "Shushufindi",
+  "alias": [
+   "shushufindi"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "Shushufindi",
+  "provincia": "Sucumbíos",
+  "lat": -0.186,
+  "lng": -76.647
+ },
+ {
+  "nombre": "El Carmen",
+  "alias": [
+   "el carmen"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "El Carmen",
+  "provincia": "Manabí",
+  "lat": -0.27,
+  "lng": -79.456
+ },
+ {
+  "nombre": "La Concordia",
+  "alias": [
+   "la concordia"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "La Concordia",
+  "provincia": "Santo Domingo de los Tsáchilas",
+  "lat": 0.006,
+  "lng": -79.396
+ },
+ {
+  "nombre": "Nobol",
+  "alias": [
+   "nobol",
+   "narcisa de jesus"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "Nobol",
+  "provincia": "Guayas",
+  "lat": -1.914,
+  "lng": -80.004
+ },
+ {
+  "nombre": "Machachi",
+  "alias": [
+   "machachi",
+   "mejia",
+   "mejía"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "Machachi",
+  "provincia": "Pichincha",
+  "lat": -0.51,
+  "lng": -78.567
+ },
+ {
+  "nombre": "Pelileo",
+  "alias": [
+   "pelileo",
+   "san pedro de pelileo"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "Pelileo",
+  "provincia": "Tungurahua",
+  "lat": -1.33,
+  "lng": -78.543
+ }
+]

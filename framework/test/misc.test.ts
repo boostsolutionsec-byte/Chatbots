@@ -327,3 +327,15 @@ describe('Anthropic: caché de conversación', () => {
     expect(r.toolCalls?.[0]).toMatchObject({ id: 'x', name: 'buscar_tienda' });
   });
 });
+
+describe('paquete n8n generado', () => {
+  it('localizador.js corre como nodo Code (si fue generado)', async () => {
+    const { existsSync, readFileSync } = await import('node:fs');
+    const f = new URL('../n8n/localizador.js', import.meta.url).pathname;
+    if (!existsSync(f)) return;
+    const run = (json: unknown) => new Function('$json', readFileSync(f, 'utf8'))(json) as { json: { atajo: boolean; respuesta?: string; chatId: number } };
+    expect(run({ message: { chat: { id: 9 }, text: 'hola' } }).json).toMatchObject({ atajo: true, chatId: 9 });
+    expect(run({ message: { chat: { id: 9 }, text: 'tengo un reclamo' } }).json.atajo).toBe(false);
+    expect(run({ message: { chat: { id: 9 }, location: { latitude: -1.67, longitude: -78.65 } } }).json.respuesta).toMatch(/Riobamba/);
+  });
+});

@@ -2,7 +2,7 @@
   "name": "chatbots-framework",
   "version": "0.1.0",
   "private": true,
-  "description": "Motor reutilizable de chatbots de venta y atención: un bot = una carpeta bots/<id>/",
+  "description": "Motor reutilizable de chatbots de venta y atenci\u00f3n: un bot = una carpeta bots/<id>/",
   "type": "module",
   "engines": {
     "node": ">=20"
@@ -17,7 +17,8 @@
     "sim": "tsx src/cli/sim.ts",
     "eval": "tsx src/cli/eval.ts",
     "telegram": "tsx src/cli/telegram.ts",
-    "validate": "tsx src/cli/validate.ts"
+    "validate": "tsx src/cli/validate.ts",
+    "n8n:build": "tsx src/cli/n8n-build.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.133.0",
