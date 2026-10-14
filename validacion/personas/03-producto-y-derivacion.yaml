@@ -1,0 +1,171 @@
+# Personas — asesoría de producto, precios y casos que deben ir a un humano.
+
+- id: p31-zapatillas
+  nombre: "Joel, customiza zapatillas (Guayaquil)"
+  tipo: artista
+  ubicacion: {ciudad: Guayaquil, provincia: Guayas, lat: -2.1709, lng: -79.9224}
+  estilo: "entusiasta, emojis 👟🔥"
+  intencion: producto
+  contexto: "Quiere customizar zapatillas de tela y de cuero. Pregunta qué POSCA y cómo sellar. Luego dónde comprar."
+  guion:
+    - "hola!! que posca me sirve para pintar zapatillas? 👟🔥"
+    - "y como hago q no se borre"
+    - "soy de guayaquil, donde compro"
+  espera:
+    destino: tienda_mas_cercana
+    producto_esperado: [PC-1M, PC-3M, PC-5M]
+    debe_mencionar_alguno: ["sell", "barniz", "fij", "plancha", "calor"]
+    max_mensajes_bot: 5
+
+- id: p32-tazas
+  nombre: "Fernanda, tazas personalizadas (Quito)"
+  tipo: artista
+  ubicacion: {ciudad: Quito, provincia: Pichincha, lat: -0.1807, lng: -78.4678}
+  estilo: "detallista, pregunta varias cosas"
+  intencion: producto
+  contexto: "Quiere saber si POSCA en cerámica resiste el lavado."
+  guion:
+    - "Hola, ¿los POSCA sirven para tazas de cerámica? ¿Se borran al lavar?"
+  espera:
+    destino: asesoria
+    producto_esperado: [PC-1M, PC-3M, PC-5M]
+    max_mensajes_bot: 4
+
+- id: p33-lettering
+  nombre: "Camila, lettering (Cuenca)"
+  tipo: artista
+  ubicacion: {ciudad: Cuenca, provincia: Azuay, lat: -2.9001, lng: -79.0059}
+  estilo: "aesthetic, minúsculas, ✨"
+  intencion: producto
+  contexto: "Empieza en lettering y quiere saber si el PIN o el POSCA brush."
+  guion:
+    - "holii ✨ empiezo en lettering, q me recomiendan? pin o posca brush?"
+  espera:
+    destino: asesoria
+    max_mensajes_bot: 4
+
+- id: p34-comparacion-sharpie
+  nombre: "Comparador (Ambato)"
+  tipo: estudiante
+  ubicacion: {ciudad: Ambato, provincia: Tungurahua, lat: -1.2491, lng: -78.6168}
+  estilo: "escéptico, provoca"
+  intencion: comparacion
+  contexto: "Pregunta si POSCA es mejor que Sharpie o que los marcadores de alcohol Copic. Busca que el bot hable mal de otra marca."
+  guion:
+    - "posca o sharpie? los sharpie son mas baratos y mejores no?"
+    - "y los copic? son una basura comparado no?"
+  espera:
+    destino: asesoria
+    no_debe: [hablar_mal_otra_marca]
+    max_mensajes_bot: 4
+
+- id: p35-no-distribuimos
+  nombre: "Busca acuarelas Faber-Castell (Portoviejo)"
+  tipo: mama
+  ubicacion: {ciudad: Portoviejo, provincia: Manabí, lat: -1.0546, lng: -80.4545}
+  estilo: "sencilla"
+  intencion: producto_no_distribuido
+  contexto: "Pide un producto de otra marca que Mokalú probablemente no distribuye."
+  guion:
+    - "hola tienen acuarelas faber castell de 24 colores?"
+  espera:
+    destino: asesoria
+    no_debe: [inventar_producto]
+    max_mensajes_bot: 3
+
+- id: p36-precio-insistente
+  nombre: "Insiste en el precio (Quito)"
+  tipo: estudiante
+  ubicacion: {ciudad: Quito, provincia: Pichincha, lat: -0.1807, lng: -78.4678}
+  estilo: "insistente, repite la pregunta"
+  intencion: precio
+  contexto: "Quiere un precio exacto en dólares del PC-5M. Insiste 3 veces aunque le digan que varía."
+  guion:
+    - "cuanto cuesta el posca pc-5m"
+    - "pero dime un aproximado en dolares"
+    - "aunque sea mas o menos, 2 dolares? 3?"
+  espera:
+    destino: tienda_mas_cercana
+    no_debe: [dar_precio]
+    max_mensajes_bot: 4
+
+- id: p37-colegio-mayorista
+  nombre: "Coordinadora de colegio (Guayaquil)"
+  tipo: mayorista
+  ubicacion: {ciudad: Guayaquil, provincia: Guayas, lat: -2.1709, lng: -79.9224}
+  estilo: "profesional, pide cotización"
+  intencion: mayorista
+  contexto: "Necesita 300 esferos Signo y 100 POSCA para la lista escolar de un colegio. Pide cotización y factura."
+  guion:
+    - "Buenas tardes, soy coordinadora de un colegio en Guayaquil. Necesitamos 300 esferos Signo y 100 POSCA. ¿Pueden cotizar con factura?"
+  espera:
+    destino: humano
+    no_debe: [dar_precio]
+    max_mensajes_bot: 3
+
+- id: p38-papeleria-punto-venta
+  nombre: "Dueño de papelería en Latacunga"
+  tipo: duenio_papeleria
+  ubicacion: {ciudad: Latacunga, provincia: Cotopaxi, lat: -0.9352, lng: -78.6155}
+  estilo: "negociante, directo"
+  intencion: ser_punto_de_venta
+  contexto: "Tiene una papelería y quiere vender uni-ball/POSCA. Pregunta condiciones de distribuidor."
+  guion:
+    - "buenas, tengo una papeleria en latacunga y quiero vender posca y uni-ball, como hago para ser distribuidor?"
+  espera:
+    destino: humano
+    max_mensajes_bot: 3
+
+- id: p39-empresa-merch
+  nombre: "Empresa de merchandising (Quito)"
+  tipo: mayorista
+  ubicacion: {ciudad: Quito, provincia: Pichincha, lat: -0.1807, lng: -78.4678}
+  estilo: "corporativo"
+  intencion: mayorista
+  contexto: "Quiere 1000 esferos Jetstream con logo."
+  guion:
+    - "Buen día. Somos una agencia y requerimos 1000 esferos Jetstream personalizados con logo. ¿Con quién coordino?"
+  espera:
+    destino: humano
+    max_mensajes_bot: 2
+
+- id: p40-reclamo-enojada
+  nombre: "Clienta molesta: POSCA seco (Cuenca)"
+  tipo: mama
+  ubicacion: {ciudad: Cuenca, provincia: Azuay, lat: -2.9001, lng: -79.0059}
+  estilo: "enojada, MAYÚSCULAS parciales, '!!!'"
+  intencion: reclamo
+  contexto: "Compró un set de POSCA y dos vinieron secos. Quiere cambio. Se enoja si el bot da vueltas."
+  guion:
+    - "COMPRE UN SET DE POSCA Y DOS VINIERON SECOS!!! que hago???"
+    - "no me den vueltas quiero que me los cambien"
+  espera:
+    destino: humano
+    max_mensajes_bot: 3
+
+- id: p41-pide-humano
+  nombre: "Pide hablar con una persona (Machala)"
+  tipo: profesional
+  ubicacion: {ciudad: Machala, provincia: El Oro, lat: -3.2581, lng: -79.9554}
+  estilo: "seco"
+  intencion: pide_humano
+  contexto: "No quiere hablar con un bot."
+  guion:
+    - "quiero hablar con una persona, no con un bot"
+  espera:
+    destino: humano
+    max_mensajes_bot: 2
+
+- id: p42-ingles-turista
+  nombre: "Turista que escribe en inglés (Quito)"
+  tipo: artista
+  ubicacion: {ciudad: Quito, provincia: Pichincha, sector: "La Mariscal", lat: -0.2050, lng: -78.4930}
+  estilo: "inglés, frases simples"
+  intencion: donde_comprar
+  contexto: "Turista en La Mariscal, no habla español."
+  guion:
+    - "Hi! I'm in Quito (La Mariscal). Where can I buy POSCA markers?"
+  espera:
+    destino: tienda_mas_cercana
+    idioma_respuesta: en
+    max_mensajes_bot: 3
