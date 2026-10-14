@@ -10,6 +10,18 @@ export interface LocatorOptions {
   alias?: Record<string, string>;
   /** Distancia (km) bajo la cual una tienda por GPS cuenta como "misma ciudad". */
   sameCityKm?: number;
+  /** Lugares propios del bot (localizador.lugares → lugares.csv). */
+  lugares?: LugarExtra[];
+}
+
+export interface LugarExtra {
+  nombre: string;
+  alias?: string[];
+  tipo?: string;
+  ciudad?: string;
+  provincia?: string;
+  lat?: number;
+  lng?: number;
 }
 
 export interface LocateResult {
@@ -37,11 +49,15 @@ interface IndexedStore {
 
 export class Locator implements StoreLocator {
   readonly gazetteer: Gazetteer;
+  /** Lugares del bot que no se pudieron registrar (sin provincia válida o sin coordenadas). */
+  readonly ignoredLugares: string[];
   private stores: IndexedStore[];
-  private opts: Required<Omit<LocatorOptions, 'alias'>>;
+  private opts: Required<Omit<LocatorOptions, 'alias' | 'lugares'>>;
 
   constructor(tiendas: Tienda[], opts: LocatorOptions = {}) {
-    this.gazetteer = new Gazetteer(opts.alias ?? {});
+    this.gazetteer = new Gazetteer();
+    this.ignoredLugares = (opts.lugares ?? []).filter((l) => !this.gazetteer.addPlace(l)).map((l) => l.nombre);
+    for (const [alias, target] of Object.entries(opts.alias ?? {})) this.gazetteer.addAlias(alias, target);
     this.opts = {
       maxResults: opts.maxResults ?? 2,
       fallback: opts.fallback ?? 'mas_cercana_por_distancia',
@@ -79,7 +95,7 @@ export class Locator implements StoreLocator {
     const hasCoords = typeof q.lat === 'number' && typeof q.lng === 'number' && Number.isFinite(q.lat) && Number.isFinite(q.lng);
 
     if (hasCoords) {
-      lugar = { ...this.gazetteer.nearestCity(q.lat!, q.lng!), lat: q.lat!, lng: q.lng!, matched: 'ubicacion_compartida' };
+      lugar = { ...this.gazetteer.nearestCity(q.lat!, q.lng!, true), lat: q.lat!, lng: q.lng!, matched: 'ubicacion_compartida' };
     } else if (q.text) {
       const m = this.gazetteer.resolve(q.text);
       if (m) {
@@ -140,7 +156,7 @@ export class Locator implements StoreLocator {
             aviso,
             `No hay tiendas en ${lugar.city || lugar.name}. Dile con claridad que la más cercana está en ${resultados[0].tienda.ciudad}` +
               (resultados[0].distanciaKm !== undefined ? ` (a unos ${Math.round(resultados[0].distanciaKm)} km)` : '') +
-              (online.length ? ' y menciona la opción de compra en línea/envío.' : '.'),
+              '.',
           );
         }
       }

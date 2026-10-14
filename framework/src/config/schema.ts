@@ -39,6 +39,8 @@ export const reglaDerivacionSchema = z
     prioridad: z.enum(['normal', 'alta']).default('normal'),
     /** Palabras clave opcionales que disparan la regla sin depender del LLM. */
     palabras: z.array(z.string()).optional(),
+    /** Mensaje fijo para el cliente al derivar por esta regla. */
+    mensaje: z.string().optional(),
   })
   .passthrough();
 
@@ -53,12 +55,16 @@ export const botConfigSchema = z
       .passthrough()
       .default({ nombre: 'Asistente', tono: 'cordial' }),
     canales: z.array(z.string()).default(['web']),
+    /** Variables libres para {{variable}} en prompts/sistema.md. */
+    variables: z.record(z.string(), z.unknown()).default({}),
     horario_humano: z
       .object({
         zona: z.string().default('America/Guayaquil'),
         dias: z.array(dia).default(['lun', 'mar', 'mie', 'jue', 'vie']),
         desde: hhmm.default('09:00'),
         hasta: hhmm.default('18:00'),
+        /** Texto que se añade al derivar fuera de horario. */
+        fuera_de_horario: z.string().optional(),
       })
       .passthrough()
       .optional(),
@@ -76,6 +82,14 @@ export const botConfigSchema = z
         si_no_hay_en_ciudad: z.string().default('mas_cercana_por_distancia'),
         /** Alias propios del bot: { "mall del sol": "guayaquil" } o { "sector x": "-2.1,-79.9" } */
         alias: z.record(z.string(), z.string()).optional(),
+        /** CSV con lugares propios: nombre,alias,tipo,ciudad,provincia,lat,lng (alias separados por ;). */
+        lugares: z.string().optional(),
+        /** id de un destino tipo link (tienda online) a ofrecer si la tienda más cercana está lejos. */
+        ofrecer_ademas: z.string().optional(),
+        /** Desde esta distancia (km) se ofrece además la compra online. */
+        distancia_lejana_km: z.number().positive().default(60),
+        /** Desde esta distancia (km) se ofrece primero la compra online. */
+        distancia_muy_lejana_km: z.number().positive().default(300),
       })
       .passthrough()
       .optional(),
@@ -85,6 +99,10 @@ export const botConfigSchema = z
         nunca: z.array(z.string()).default([]),
         max_mensajes_sin_avance: z.number().int().min(1).default(6),
         max_caracteres_respuesta: z.number().int().min(50).optional(),
+        /** Máximo de palabras por mensaje (salvo cuando se listan tiendas). */
+        max_palabras_por_mensaje: z.number().int().min(5).optional(),
+        /** Respuesta para temas ajenos al negocio (política de WhatsApp contra bots de propósito general). */
+        fuera_de_tema: z.string().optional(),
       })
       .passthrough()
       .default({ nunca: [], max_mensajes_sin_avance: 6 }),

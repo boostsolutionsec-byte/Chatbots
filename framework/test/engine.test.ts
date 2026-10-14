@@ -142,3 +142,26 @@ describe('Engine con MockProvider y bots/_plantilla', () => {
     expect(r.state.fields).toEqual({});
   });
 });
+
+describe('guardas de salida', () => {
+  it('precio prohibido → reintento sin precio', async () => {
+    const provider = new MockProvider([{ text: 'El marcador cuesta $4,50 😊' }, { text: 'Los precios dependen de cada tienda 🙏' }]);
+    const e = new Engine({ provider, env });
+    const r = await e.handle('_plantilla', msg('cuanto cuesta?'));
+    expect(r.replies[0].text).toBe('Los precios dependen de cada tienda 🙏');
+    expect(provider.calls).toHaveLength(2);
+  });
+  it('si el reintento insiste, se quitan las oraciones con montos', async () => {
+    const provider = new MockProvider([{ text: 'Cuesta 5 dólares. ¿En qué ciudad estás?' }, { text: 'Vale $5.' }]);
+    const e = new Engine({ provider, env });
+    const r = await e.handle('_plantilla', msg('precio?'));
+    expect(r.replies[0].text).toBe('¿En qué ciudad estás?');
+  });
+  it('no confunde medidas con precios', async () => {
+    const provider = new MockProvider([{ text: 'Punta fina 0.7 mm, ideal para detalles.' }]);
+    const e = new Engine({ provider, env });
+    const r = await e.handle('_plantilla', msg('que punta?'));
+    expect(provider.calls).toHaveLength(1);
+    expect(r.replies[0].text).toContain('0.7 mm');
+  });
+});

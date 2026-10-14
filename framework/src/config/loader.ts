@@ -5,6 +5,7 @@ import YAML from 'yaml';
 import { botConfigSchema, type BotConfig } from './schema.js';
 import { parseCsv } from './csv.js';
 import type { Producto, Tienda } from '../types.js';
+import type { LugarExtra } from '../locator/locator.js';
 
 export interface KnowledgeDoc {
   file: string;
@@ -20,6 +21,8 @@ export interface LoadedBot {
   knowledge: KnowledgeDoc[];
   tiendas: Tienda[];
   catalogo: Producto[];
+  /** Lugares propios del bot (localizador.lugares). */
+  lugares: LugarExtra[];
   evalsDir: string;
   /** Avisos no fatales (variables de entorno faltantes, filas inválidas…). */
   warnings: string[];
@@ -135,6 +138,26 @@ export function parseTiendas(csv: string, warnings: string[] = []): Tienda[] {
   return out;
 }
 
+export function parseLugares(csv: string, warnings: string[] = []): LugarExtra[] {
+  const out: LugarExtra[] = [];
+  parseCsv(csv).forEach((r, i) => {
+    if (!r.nombre) {
+      warnings.push(`lugares.csv fila ${i + 2}: falta nombre; se ignora`);
+      return;
+    }
+    out.push({
+      nombre: r.nombre,
+      alias: (r.alias ?? '').split(/[;|]/).map((a) => a.trim()).filter(Boolean),
+      tipo: r.tipo || undefined,
+      ciudad: r.ciudad || undefined,
+      provincia: r.provincia || undefined,
+      lat: num(r.lat),
+      lng: num(r.lng),
+    });
+  });
+  return out;
+}
+
 export function parseCatalogo(csv: string, warnings: string[] = []): Producto[] {
   const out: Producto[] = [];
   parseCsv(csv).forEach((r, i) => {
@@ -198,12 +221,18 @@ export function loadBot(idOrDir: string, opts: { env?: NodeJS.ProcessEnv; botsDi
 
   const tiendasFile = join(dir, config.localizador?.archivo ?? 'tiendas.csv');
   const tiendas = existsSync(tiendasFile) ? parseTiendas(readFileSync(tiendasFile, 'utf8'), warnings) : [];
+  const lugaresName = (config.localizador as { lugares?: string } | undefined)?.lugares;
+  const lugaresFile = lugaresName ? join(dir, lugaresName) : undefined;
+  if (lugaresFile && !existsSync(lugaresFile)) warnings.push(`localizador.lugares: no existe ${lugaresName}`);
+  const lugares = lugaresFile && existsSync(lugaresFile) ? parseLugares(readFileSync(lugaresFile, 'utf8'), warnings) : [];
   const catalogoFile = join(dir, 'catalogo.csv');
   const catalogo = existsSync(catalogoFile) ? parseCatalogo(readFileSync(catalogoFile, 'utf8'), warnings) : [];
 
   const promptFile = join(dir, 'prompts', 'sistema.md');
   const tpl = existsSync(promptFile) ? readFileSync(promptFile, 'utf8') : DEFAULT_SYSTEM;
-  const systemPrompt = renderTemplate(tpl, config as Record<string, unknown>);
+  const systemPrompt = renderTemplate(tpl, { ...(config as Record<string, unknown>), ...config.variables });
+  const unresolved = [...new Set([...systemPrompt.matchAll(/\{\{\s*([\w.]+)\s*\}\}/g)].map((m) => m[1]))];
+  if (unresolved.length) warnings.push(`prompts/sistema.md: variables sin valor: ${unresolved.join(', ')}`);
 
   return {
     id: config.id,
@@ -213,6 +242,7 @@ export function loadBot(idOrDir: string, opts: { env?: NodeJS.ProcessEnv; botsDi
     knowledge: readKnowledge(join(dir, 'conocimiento')),
     tiendas,
     catalogo,
+    lugares,
     evalsDir: join(dir, 'evals'),
     warnings,
   };

@@ -23,6 +23,8 @@ export interface GazetteerMatch {
   alternatives: ResolvedPlace[];
 }
 
+const DIRECTIONS = new Set(['norte', 'sur', 'centro', 'este', 'oeste']);
+
 const PRIORITY: Record<PlaceKind, number> = { sector: 5, capital: 4, canton: 3, parroquia: 2, provincia: 1 };
 
 function stripParens(s: string): string {
@@ -96,6 +98,28 @@ export class Gazetteer {
     if (found?.length) for (const p of found) this.add(alias, p);
   }
 
+  /**
+   * Lugar propio de un bot (bot.yaml → localizador.lugares: lugares.csv con nombre,alias,tipo,ciudad,provincia,lat,lng).
+   * Si ya existe un lugar con ese nombre en esa provincia, solo se le suman los alias.
+   */
+  addPlace(p: { nombre: string; alias?: string[]; tipo?: string; ciudad?: string; provincia?: string; lat?: number; lng?: number }): boolean {
+    const code = p.provincia ? this.provinceCode(p.provincia) : undefined;
+    const existing = this.lookup(p.nombre, code);
+    const tipo = normalize(p.tipo ?? '');
+    const kind: PlaceKind = tipo === 'sector' || tipo === 'barrio' ? 'sector' : tipo === 'parroquia' ? 'parroquia' : tipo === 'provincia' ? 'provincia' : 'canton';
+    if (existing && (!code || existing.provinceCode === code) && (kind !== 'sector' || existing.kind === 'sector')) {
+      for (const a of [p.nombre, ...(p.alias ?? [])]) this.add(a, existing);
+    } else {
+      if (!code || p.lat === undefined || p.lng === undefined || !Number.isFinite(p.lat) || !Number.isFinite(p.lng)) return false;
+      const prov = PROVINCES.find((x) => x.code === code)!;
+      const city = p.ciudad?.trim() || p.nombre;
+      const place: ResolvedPlace = { name: p.nombre, city: kind === 'provincia' ? '' : city, provinceCode: code, province: prov.name, lat: p.lat, lng: p.lng, kind, matched: '' };
+      for (const a of [p.nombre, ...(p.alias ?? [])]) this.add(a, place);
+    }
+    this.fuzzyKeys = [...this.index.keys()].filter((k) => k.replace(/ /g, '').length >= 5);
+    return true;
+  }
+
   /** Registra una ciudad que no está en el diccionario (p. ej. la ciudad de una tienda). */
   addCity(name: string, provinceCode: string, lat: number, lng: number) {
     if (this.index.has(normalize(name))) return;
@@ -123,13 +147,16 @@ export class Gazetteer {
     return [...(chosen.length ? chosen : list)].sort((a, b) => PRIORITY[b.kind] - PRIORITY[a.kind])[0];
   }
 
-  /** Ciudad (no sector, no provincia) más cercana a unas coordenadas. */
-  nearestCity(lat: number, lng: number): ResolvedPlace {
+  /**
+   * Lugar más cercano a unas coordenadas. Por defecto solo ciudades/parroquias; con `includeSectors`
+   * también sectores (para etiquetar bien una ubicación compartida: GPS en La Carolina → "La Carolina, Quito").
+   */
+  nearestCity(lat: number, lng: number, includeSectors = false): ResolvedPlace {
     let best: ResolvedPlace | undefined;
     let bestD = Infinity;
     for (const list of this.index.values()) {
       for (const p of list) {
-        if (p.kind === 'provincia' || p.kind === 'sector') continue;
+        if (p.kind === 'provincia' || (p.kind === 'sector' && !includeSectors)) continue;
         const d = haversineKm({ lat, lng }, p);
         if (d < bestD) {
           bestD = d;
@@ -194,8 +221,14 @@ export class Gazetteer {
     const provinceHits = hits.filter((h) => h.places.every((p) => p.kind === 'provincia'));
     const placeHits = hits.filter((h) => h.places.some((p) => p.kind !== 'provincia'));
     const provCodes = new Set(provinceHits.flatMap((h) => h.places.map((p) => p.provinceCode)));
+    // Si se nombra una ciudad y un sector de OTRA ciudad ("malecón de Salinas"), gana la ciudad.
+    const isCity = (p: ResolvedPlace) => p.kind === 'capital' || p.kind === 'canton';
+    const cityNames = new Set(placeHits.flatMap((h) => h.places.filter(isCity).map((p) => normalize(p.city || p.name))));
+    const filteredHits = cityNames.size
+      ? placeHits.filter((h) => h.places.some(isCity) || h.places.some((p) => cityNames.has(normalize(p.city))))
+      : placeHits;
     // El último lugar mencionado gana ("soy de Quito pero vivo en Ambato" → Ambato).
-    const pick = (placeHits.length ? placeHits : provinceHits).sort((a, b) => b.start - a.start)[0];
+    const pick = (filteredHits.length ? filteredHits : provinceHits).sort((a, b) => b.start - a.start)[0];
     let candidates = pick.places;
     if (provCodes.size && placeHits.length) {
       const filtered = candidates.filter((p) => provCodes.has(p.provinceCode));
@@ -204,7 +237,16 @@ export class Gazetteer {
     // Para un nombre que es ciudad y provincia a la vez (Loja, Esmeraldas), gana la ciudad.
     const sorted = [...candidates].sort((a, b) => PRIORITY[b.kind] - PRIORITY[a.kind]);
     const matched = toks.slice(pick.start, pick.start + pick.len).join(' ');
-    const main = { ...sorted[0], matched, fuzzy: pick.fuzzy || undefined };
+    let main: ResolvedPlace = { ...sorted[0], matched, fuzzy: pick.fuzzy || undefined };
+    // Ciudad + "sur/norte/centro" → sector de esa ciudad si existe ("gayakil x el sur" → Sur de Guayaquil).
+    if (isCity(main)) {
+      const dir = toks.find((t) => DIRECTIONS.has(t));
+      if (dir) {
+        const city = normalize(main.city || main.name);
+        const sector = (this.index.get(`${dir} de ${city}`) ?? this.index.get(`${dir} ${city}`) ?? []).find((p) => normalize(p.city) === city);
+        if (sector) main = { ...sector, matched: `${matched} ${dir}`, fuzzy: main.fuzzy };
+      }
+    }
     const alternatives = sorted
       .slice(1)
       .filter((p) => p.kind !== 'provincia' && !(p.provinceCode === main.provinceCode && p.city === main.city))

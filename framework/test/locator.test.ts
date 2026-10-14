@@ -193,7 +193,7 @@ describe('Locator', () => {
     const r = loc.locate({ text: 'vivo en Tena' });
     expect(r.resultados[0].motivo).toBe('mas_cercana');
     expect(r.resultados[0].distanciaKm).toBeGreaterThan(0);
-    expect(r.aviso).toMatch(/en línea/); // hay una tienda con vende_online
+    expect(r.online.map((t) => t.id)).toContain('gye-costa'); // hay una tienda con vende_online
   });
 
   it('solo provincia → tiendas de esa provincia', () => {

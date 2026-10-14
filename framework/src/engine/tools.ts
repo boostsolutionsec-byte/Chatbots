@@ -1,5 +1,5 @@
 import type { LoadedBot } from '../config/loader.js';
-import type { Destino } from '../config/schema.js';
+import type { Destino, ReglaDerivacion } from '../config/schema.js';
 import type { HandoffNotifier } from '../handoff/index.js';
 import { transcriptOf } from '../handoff/index.js';
 import type { Locator, LocateResult } from '../locator/locator.js';
@@ -165,8 +165,7 @@ async function buscarTienda(input: Record<string, unknown>, ctx: ToolContext): P
     ctx.actions.push('buscar_tienda_sin_resultado');
   }
 
-  const lejos = r.resultados[0]?.motivo !== 'misma_ciudad';
-  const online = lejos ? r.online.slice(0, 2).map(publicTienda) : [];
+  const online = onlineOffer(ctx, r);
   let sugerencia: string | undefined;
   if (r.resultados.length) {
     const intro =
@@ -176,21 +175,50 @@ async function buscarTienda(input: Record<string, unknown>, ctx: ToolContext): P
           ? `En ${r.lugar.province} te queda así 👇`
           : `En ${r.lugar?.city || r.lugar?.name} todavía no tenemos punto de venta 😕 Lo más cercano es:`;
     const body = r.resultados.map((x) => formatTienda(x.tienda, x.distanciaKm)).join('\n\n');
-    const onl = online.length ? `\n\nTambién puedes comprar en línea: ${online.map((o) => o.web ?? o.nombre).join(' · ')}` : '';
-    sugerencia = `${intro}\n\n${body}${onl}`;
+    if (online?.primero) sugerencia = `${online.texto}\n\nSi prefieres ir en persona, lo más cercano es:\n\n${body}`;
+    else sugerencia = `${intro}\n\n${body}${online ? `\n\n${online.texto}` : ''}`;
   } else if (r.derivar) {
     sugerencia = undefined;
   } else if (!r.lugar) {
     sugerencia = '¿En qué ciudad o sector estás? Así te digo la tienda más cercana 📍';
+  } else if (online) {
+    sugerencia = online.texto;
   }
   return {
     lugar_entendido: r.lugar ? { nombre: r.lugar.name, ciudad: r.lugar.city, provincia: r.lugar.province, tipo: r.lugar.kind } : null,
     tiendas: r.resultados.map((x) => ({ ...publicTienda(x.tienda), distancia_km: x.distanciaKm, motivo: x.motivo })),
-    compra_online: online,
+    compra_online: online ? { link: online.link, descripcion: online.descripcion, ofrecer_primero: online.primero } : null,
     aviso: r.aviso,
     derivar_a: r.derivar,
     sugerencia,
   };
+}
+
+/**
+ * Opción de compra en línea cuando la tienda física queda lejos:
+ *  - con `localizador.ofrecer_ademas: <destino link>` se ofrece ese destino (p. ej. la tienda online del distribuidor);
+ *  - sin él, la web de alguna tienda con vende_online (solo si existe).
+ * Desde `distancia_lejana_km` se ofrece además; desde `distancia_muy_lejana_km` (o sin tiendas) se ofrece primero.
+ */
+function onlineOffer(ctx: ToolContext, r: LocateResult): { texto: string; link?: string; descripcion?: string; primero: boolean } | undefined {
+  const loc = ctx.bot.config.localizador;
+  const lejana = loc?.distancia_lejana_km ?? 60;
+  const muyLejana = loc?.distancia_muy_lejana_km ?? 300;
+  const first = r.resultados[0];
+  if (first?.motivo === 'misma_ciudad') return undefined;
+  if (!r.lugar) return undefined;
+  const d = first?.distanciaKm;
+  if (first && (d === undefined || d < lejana)) return undefined;
+  const primero = !first || (d !== undefined && d >= muyLejana);
+  if (loc?.ofrecer_ademas) {
+    const dest = ctx.bot.config.destinos.find((x) => x.id === loc.ofrecer_ademas);
+    if (dest?.valor) {
+      return { texto: `También puedes comprar en línea con envío: ${dest.valor}`, link: dest.valor, descripcion: dest.descripcion, primero };
+    }
+    return undefined;
+  }
+  const web = r.online.find((t) => t.web)?.web;
+  return web ? { texto: `También puedes comprar en línea: ${web}`, link: web, primero } : undefined;
 }
 
 // ───────────────────────── buscar_producto
@@ -289,28 +317,34 @@ async function guardarLead(input: Record<string, unknown>, ctx: ToolContext): Pr
 
 // ───────────────────────── derivar
 
-export function pickDestino(bot: LoadedBot, destinoId: string | undefined, motivo: string): { destino?: Destino; prioridad: 'normal' | 'alta' } {
+export function pickDestino(
+  bot: LoadedBot,
+  destinoId: string | undefined,
+  motivo: string,
+): { destino?: Destino; prioridad: 'normal' | 'alta'; regla?: ReglaDerivacion } {
   const destinos = bot.config.destinos;
+  const m = new Set(tokens(motivo).filter((t) => t.length > 3 && !STOPWORDS.has(t)));
+  const score = (r: ReglaDerivacion) => tokens(`${r.si} ${(r.palabras ?? []).join(' ')}`).filter((w) => m.has(w)).length;
   if (destinoId) {
     const d = destinos.find((x) => x.id === destinoId);
-    const regla = bot.config.reglas_derivacion.find((r) => r.ir_a === destinoId);
-    if (d) return { destino: d, prioridad: regla?.prioridad ?? 'normal' };
+    // Entre las reglas de ese destino, la que más se parece al motivo.
+    const reglas = bot.config.reglas_derivacion.filter((r) => r.ir_a === destinoId);
+    const regla = reglas.sort((a, b) => score(b) - score(a))[0];
+    if (d) return { destino: d, prioridad: regla?.prioridad ?? 'normal', regla };
   }
-  // Busca la regla cuyo texto se parezca más al motivo.
-  const m = new Set(tokens(motivo).filter((t) => t.length > 3 && !STOPWORDS.has(t)));
-  let best: { score: number; ir_a: string; prioridad: 'normal' | 'alta' } | undefined;
+  // Busca la regla cuyo texto se parezca más al motivo (empate → la primera, como dice el contrato).
+  let best: { s: number; r: ReglaDerivacion } | undefined;
   for (const r of bot.config.reglas_derivacion) {
-    const words = tokens(`${r.si} ${(r.palabras ?? []).join(' ')}`);
-    const score = words.filter((w) => m.has(w)).length;
-    if (!best || score > best.score) best = { score, ir_a: r.ir_a, prioridad: r.prioridad };
+    const s = score(r);
+    if (!best || s > best.s) best = { s, r };
   }
-  const d = best ? destinos.find((x) => x.id === best!.ir_a) : undefined;
-  return { destino: d ?? destinos.find((x) => x.tipo === 'humano') ?? destinos[0], prioridad: best?.prioridad ?? 'normal' };
+  const d = best ? destinos.find((x) => x.id === best!.r.ir_a) : undefined;
+  return { destino: d ?? destinos.find((x) => x.tipo === 'humano') ?? destinos[0], prioridad: best?.r.prioridad ?? 'normal', regla: d ? best?.r : undefined };
 }
 
 async function derivar(input: Record<string, unknown>, ctx: ToolContext): Promise<ToolResult> {
   const motivo = String(input.motivo ?? 'sin motivo');
-  const { destino, prioridad: p0 } = pickDestino(ctx.bot, typeof input.destino === 'string' ? input.destino : undefined, motivo);
+  const { destino, prioridad: p0, regla } = pickDestino(ctx.bot, typeof input.destino === 'string' ? input.destino : undefined, motivo);
   const prioridad = input.prioridad === 'alta' ? 'alta' : p0;
   if (!destino) return { error: 'No hay destinos configurados en bot.yaml; no prometas que alguien escribirá. Pide disculpas y da la información que tengas.' };
   const c = ctx.conversation;
@@ -342,8 +376,10 @@ async function derivar(input: Record<string, unknown>, ctx: ToolContext): Promis
       c.pausedReason = `derivado a ${destino.id}: ${motivo}`;
     }
   }
-  const quien = destino.descripcion ?? 'un asesor';
-  const cuando = abierto === false && horarioTxt ? ` Nuestro equipo atiende ${horarioTxt}; te escribirán apenas estén disponibles.` : ' En breve te escriben por aquí.';
+  const quien = destino.descripcion?.split(':')[0] ?? 'un asesor';
+  const fuera = abierto === false ? (h?.fuera_de_horario ?? (horarioTxt ? `Nuestro equipo atiende ${horarioTxt}; te escribirán apenas estén disponibles.` : undefined)) : undefined;
+  const base = regla?.mensaje ?? `Te comunico con ${quien.charAt(0).toLowerCase()}${quien.slice(1)} 🙌`;
+  const cuando = fuera ? ` ${fuera}` : regla?.mensaje ? '' : ' En breve te escriben por aquí.';
   return {
     ok: true,
     destino: destino.id,
@@ -352,7 +388,7 @@ async function derivar(input: Record<string, unknown>, ctx: ToolContext): Promis
     equipo_disponible_ahora: abierto,
     horario: horarioTxt,
     bot_pausado: !!c.paused,
-    sugerencia: `Te comunico con ${quien.charAt(0).toLowerCase()}${quien.slice(1)} 🙌${cuando}`,
+    sugerencia: `${base}${cuando}`,
   };
 }
 
