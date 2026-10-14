@@ -36,10 +36,14 @@ export const TOOL_DEFINITIONS: ToolDefinition[] = [
   },
   {
     name: 'registrar_campo',
-    description: 'Guarda un dato que dio el cliente y que el flujo necesita (ver <estado>).',
+    description: 'Guarda un dato que dio el cliente y que un flujo necesita (ver Flujos y <estado>). Indica el flujo si lo sabes.',
     input_schema: {
       type: 'object',
-      properties: { campo: { type: 'string' }, valor: { type: 'string' } },
+      properties: {
+        campo: { type: 'string' },
+        valor: { type: 'string' },
+        flujo: { type: 'string', description: 'id del flujo (p. ej. donde_comprar). Recomendado cuando el campo aparece en varios flujos.' },
+      },
       required: ['campo', 'valor'],
     },
   },
@@ -53,7 +57,9 @@ export const TOOL_DEFINITIONS: ToolDefinition[] = [
   },
   {
     name: 'derivar',
-    description: 'Pasa la conversación a un humano u otro destino según las reglas de derivación. Úsala solo si una regla aplica.',
+    description:
+      'Pasa la conversación a un humano u otro destino según las reglas de derivación (úsala solo si una regla aplica). ' +
+      'También sirve para mostrar un destino tipo "sucursal" (la tienda propia) o "link" (p. ej. tienda online).',
     input_schema: {
       type: 'object',
       properties: {
@@ -150,7 +156,16 @@ async function buscarTienda(input: Record<string, unknown>, ctx: ToolContext): P
   if (!text && (lat === undefined || lng === undefined)) {
     return { error: 'Falta la ubicación: pide la ciudad o sector, o que comparta su ubicación.' };
   }
-  const r: LocateResult = ctx.locator.locate({ text, lat, lng, producto });
+  let r: LocateResult = ctx.locator.locate({ text, lat, lng, producto });
+  // "por el sur" en un mensaje y "gye" en el siguiente → Sur de Guayaquil.
+  if (text && r.lugar && (r.lugar.kind === 'capital' || r.lugar.kind === 'canton') && !/\b(norte|sur|centro)\b/i.test(text)) {
+    const recent = ctx.conversation.messages.filter((m) => m.role === 'user').slice(-3).map((m) => m.text).join(' ');
+    const dir = recent.match(/\b(norte|sur|centro)\b/i)?.[1];
+    if (dir) {
+      const again = ctx.locator.locate({ text: `${text} ${dir}`, producto });
+      if (again.lugar && again.lugar.kind === 'sector') r = again;
+    }
+  }
   if (r.lugar) {
     // Si algún flujo pide "ubicacion", queda registrada.
     ctx.conversation.fields.ubicacion = r.lugar.matched === 'ubicacion_compartida' ? `${r.lugar.city} (GPS)` : (r.lugar.city || r.lugar.name);
@@ -280,30 +295,57 @@ export function missingFields(bot: LoadedBot, conv: Conversation, flowId?: strin
 
 async function registrarCampo(input: Record<string, unknown>, ctx: ToolContext): Promise<ToolResult> {
   const campo = String(input.campo ?? '').trim();
-  const valor = String(input.valor ?? '').trim();
+  let valor = String(input.valor ?? '').trim();
   if (!campo || !valor) return { error: 'campo y valor son obligatorios' };
+  if (campo === 'ubicacion') {
+    // Solo se guarda una ubicación que el localizador entiende (evita "sur", "acá", "cerca").
+    const place = ctx.locator.gazetteer.resolve(valor);
+    if (!place) return { error: `No reconozco "${valor}" como ciudad o sector de Ecuador. Pregunta la ciudad (una sola vez).`, sugerencia: missingQuestion(ctx, 'ubicacion') };
+    valor = place.place.city || place.place.name;
+  }
   const flows = flowFields(ctx.bot).filter(([, f]) => f.campos.some((c) => c.id === campo));
+  const explicit = typeof input.flujo === 'string' && ctx.bot.config.flujos[input.flujo] ? input.flujo : undefined;
   ctx.conversation.fields[campo] = valor;
   ctx.actions.push(`registrar_campo:${campo}`);
-  if (flows.length && !ctx.conversation.activeFlow) ctx.conversation.activeFlow = flows[0][0];
+  if (explicit) ctx.conversation.activeFlow = explicit;
+  else if (!ctx.conversation.activeFlow && flows.length === 1) ctx.conversation.activeFlow = flows[0][0];
   const flowId = ctx.conversation.activeFlow;
   const faltan = flowId ? missingFields(ctx.bot, ctx.conversation, flowId) : [];
-  const result: ToolResult = { ok: true, campos: ctx.conversation.fields, faltan };
+  const result: ToolResult = { ok: true, campos: ctx.conversation.fields, flujo: flowId ?? null, faltan };
+  // Las acciones al_completar solo corren si el flujo es inequívoco (explícito o único con ese campo).
   if (flowId && !faltan.length) {
     const flujo = ctx.bot.config.flujos[flowId];
     result.flujo_completo = flowId;
     for (const action of flujo?.al_completar ?? []) {
       if (action === 'buscar_tienda' && ctx.conversation.fields.ubicacion && !ctx.actions.includes('buscar_tienda')) {
-        result.buscar_tienda = await buscarTienda({ ubicacion: ctx.conversation.fields.ubicacion, producto: ctx.conversation.fields.producto_interes }, ctx);
-        result.sugerencia = (result.buscar_tienda as ToolResult).sugerencia;
+        const r = await buscarTienda({ ubicacion: ctx.conversation.fields.ubicacion, producto: ctx.conversation.fields.producto_interes }, ctx);
+        result.buscar_tienda = r;
+        result.sugerencia = [result.sugerencia, r.sugerencia].filter(Boolean).join('\n\n') || undefined;
+      } else if ((action === 'recomendar_producto' || action === 'buscar_producto') && !ctx.actions.includes('buscar_producto')) {
+        const consulta = Object.entries(ctx.conversation.fields).filter(([k]) => k !== 'ubicacion').map(([, v]) => v).join(' ');
+        const r = await buscarProducto({ consulta }, ctx);
+        result.buscar_producto = r;
+        result.sugerencia = [r.sugerencia, result.sugerencia].filter(Boolean).join('\n\n') || undefined;
       } else if (action === 'guardar_lead' && !ctx.actions.includes('guardar_lead')) {
         await guardarLead({}, ctx);
+      } else if (action.startsWith('derivar:') && !ctx.actions.some((a) => a.startsWith('derivar'))) {
+        const r = await derivar({ destino: action.slice('derivar:'.length), motivo: `flujo ${flowId} completo` }, ctx);
+        result.derivar = r;
+        result.sugerencia = [result.sugerencia, r.sugerencia].filter(Boolean).join('\n\n') || undefined;
       }
     }
   } else if (faltan[0]?.pregunta) {
     result.sugerencia = faltan[0].pregunta;
   }
   return result;
+}
+
+function missingQuestion(ctx: ToolContext, campo: string): string | undefined {
+  for (const f of Object.values(ctx.bot.config.flujos)) {
+    const c = f.campos.find((x) => x.id === campo && x.pregunta);
+    if (c) return c.pregunta;
+  }
+  return undefined;
 }
 
 async function guardarLead(input: Record<string, unknown>, ctx: ToolContext): Promise<ToolResult> {
@@ -361,13 +403,25 @@ async function derivar(input: Record<string, unknown>, ctx: ToolContext): Promis
     resumen: typeof input.resumen === 'string' ? input.resumen : undefined,
     createdAt: Date.now(),
   } as const;
-  await ctx.store.saveHandoff({ ...handoff });
-  ctx.actions.push(`derivar:${destino.id}`);
+  if (destino.tipo !== 'sucursal') {
+    await ctx.store.saveHandoff({ ...handoff });
+    ctx.actions.push(`derivar:${destino.id}`);
+  }
 
   const abierto = isOpen(ctx.bot.config.horario_humano, ctx.now());
   const h = ctx.bot.config.horario_humano;
   const horarioTxt = h ? `${h.dias.join(', ')} de ${h.desde} a ${h.hasta}` : undefined;
 
+  if (destino.tipo === 'sucursal') {
+    // Tienda propia: se muestra como una tienda más (id en tiendas.csv), sin pausar el bot ni avisar a nadie.
+    const t = ctx.bot.tiendas.find((x) => x.id === destino.valor);
+    if (!t) return { error: `El destino ${destino.id} apunta a la tienda "${destino.valor}" que no está en tiendas.csv. No inventes la dirección.` };
+    ctx.actions.push('buscar_tienda');
+    ctx.tiendasMostradas.push(t);
+    ctx.motivos.push('misma_ciudad');
+    if (t.lat !== undefined && t.lng !== undefined) ctx.extras.push({ location: { lat: t.lat, lng: t.lng, name: t.nombre, address: t.direccion } });
+    return { ok: true, destino: destino.id, tipo: 'sucursal', tienda: publicTienda(t), sugerencia: formatTienda(t) };
+  }
   if (destino.tipo === 'link') {
     const link = destino.valor || '(link no configurado)';
     return { ok: true, destino: destino.id, tipo: 'link', link, sugerencia: `Aquí puedes continuar: ${link}` };

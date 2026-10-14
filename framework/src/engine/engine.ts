@@ -219,9 +219,10 @@ export class Engine {
       const override = tooSlow ? this.opts.env.LLM_MODEL_EXPERTO : this.opts.env.LLM_MODEL_RAPIDO;
       model = override || resolveModel(this.provider.name, alias);
       const detected = msg.text ? rt.locator.gazetteer.resolve(msg.text)?.place : undefined;
+      const lang = detectLanguage(msg.text ?? '');
       const pendingBefore = this.state(rt, conv).pendingField;
       let forcedSearch = false;
-      const { cacheable, dynamic } = this.systemPrompt(rt, conv, userText, nowFn(), detected);
+      const { cacheable, dynamic } = this.systemPrompt(rt, conv, userText, nowFn(), detected, lang);
 
       for (let round = 0; round <= this.opts.maxToolRounds; round++) {
         const lastRound = round === this.opts.maxToolRounds;
@@ -253,7 +254,11 @@ export class Engine {
             result = { error: `Falló la herramienta: ${(e as Error).message}` };
           }
           executed.push({ ...c, result });
-          results.push({ id: c.id, name: c.name, content: JSON.stringify(result) });
+          // Cliente en otro idioma: sin texto sugerido en español, para que el modelo redacte en su idioma (H-14).
+          const forLlm = lang !== 'es' && result && typeof result === 'object' && 'sugerencia' in result
+            ? { ...(result as Record<string, unknown>), sugerencia: undefined, idioma: `Redacta la respuesta en ${LANG_NAMES[lang] ?? lang} con estos datos.` }
+            : result;
+          results.push({ id: c.id, name: c.name, content: JSON.stringify(forLlm) });
         }
         llmMessages.push({ role: 'user', content: '', toolResults: results });
       }
@@ -345,6 +350,7 @@ export class Engine {
     userText: string,
     now: Date = this.opts.now(),
     detected?: { name: string; city: string; province: string; kind: string },
+    lang = 'es',
   ): { cacheable: string; dynamic: string } {
     const { bot } = rt;
     const c = bot.config;
@@ -379,6 +385,7 @@ export class Engine {
       `canal: ${conv.channel ?? 'desconocido'}`,
       h ? `hora_local: ${localTime(h.zona, now).label} (${h.zona})` : undefined,
       h ? `equipo_humano_disponible: ${isOpen(h, now) ? 'sí' : 'no'} (${h.dias.join(',')} ${h.desde}-${h.hasta})` : undefined,
+      lang !== 'es' ? `idioma_cliente: ${LANG_NAMES[lang] ?? lang} → responde en ese idioma` : undefined,
       `campos_recolectados: ${JSON.stringify(conv.fields)}`,
       detected ? `ubicacion_detectada_en_mensaje: ${detected.name}${detected.city && detected.city !== detected.name ? ` (${detected.city})` : ''}, ${detected.province}` : undefined,
       pending ? `campo_pendiente: ${pending.campo}` : undefined,
@@ -433,6 +440,21 @@ export function guardReply(text: string, executed: ExecutedToolCall[], rt: BotRu
   });
   out = out.replace(/https?:\/\/[^\s)>\]]+/g, (m) => (allowed.includes(m.replace(/[.,;!?]+$/, '')) ? m : '[link no verificado]'));
   return out;
+}
+
+const LANG_NAMES: Record<string, string> = { en: 'inglés', pt: 'portugués', fr: 'francés', it: 'italiano', de: 'alemán' };
+
+/** Idioma del mensaje por palabras frecuentes (heurística barata; 'es' por defecto). */
+export function detectLanguage(text: string): string {
+  const words = text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').match(/[a-z']+/g) ?? [];
+  if (words.length < 3) return 'es';
+  const score = (list: Set<string>) => words.filter((w) => list.has(w)).length;
+  const es = score(new Set(['el', 'la', 'los', 'las', 'de', 'que', 'en', 'y', 'donde', 'quiero', 'hola', 'para', 'por', 'un', 'una', 'es', 'con', 'mi', 'tienen', 'puedo', 'comprar']));
+  const en = score(new Set(['the', 'i', 'you', 'where', 'can', 'buy', 'is', 'are', 'to', 'and', 'my', 'hi', 'hello', 'do', 'have', 'what', 'which', 'store', 'shop', 'near', "i'm", 'im', 'visiting', 'markers']));
+  const pt = score(new Set(['onde', 'posso', 'comprar', 'voce', 'obrigado', 'ola', 'tem', 'uma', 'loja', 'perto', 'estou', 'nao']));
+  if (en > es && en >= 2) return 'en';
+  if (pt > es && pt >= 2) return 'pt';
+  return 'es';
 }
 
 function asksLocation(text: string): boolean {

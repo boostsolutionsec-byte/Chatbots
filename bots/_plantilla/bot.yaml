@@ -25,6 +25,10 @@ destinos:
     tipo: humano
     valor: "${WHATSAPP_SERVICIO_CLIENTE:-+593990000000}" # EJEMPLO
     descripcion: "Servicio al cliente"
+  - id: tienda_propia
+    tipo: sucursal
+    valor: "ej-gye-1"                                     # id en tiendas.csv (EJEMPLO)
+    descripcion: "Tienda propia de la distribuidora"
   - id: tienda_online
     tipo: link
     valor: "https://ejemplo.invalid/tienda"              # EJEMPLO

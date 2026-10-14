@@ -206,3 +206,43 @@ describe('H-13: ubicación detectada', () => {
     expect(r.actions).toContain('buscar_tienda');
   });
 });
+
+describe('idioma, sucursal y validación de ubicación', () => {
+  it('detecta inglés y quita la sugerencia en español', async () => {
+    const { detectLanguage } = await import('../src/engine/engine.js');
+    expect(detectLanguage("Hi! I'm visiting Cuenca, where can I buy markers?")).toBe('en');
+    expect(detectLanguage('hola donde puedo comprar en cuenca')).toBe('es');
+    expect(detectLanguage('ok')).toBe('es');
+    const provider = new MockProvider([{ text: '', toolCalls: [{ id: 'a', name: 'buscar_tienda', input: { ubicacion: 'cuenca' } }] }, { text: 'You can buy at EJEMPLO Arte Cuenca' }]);
+    const e = new Engine({ provider, env });
+    await e.handle('_plantilla', msg("Hi! I'm visiting Cuenca, where can I buy markers?"));
+    expect(provider.calls[0].system).toContain('idioma_cliente: inglés');
+    const toolMsg = provider.calls[1].messages.at(-1)!.toolResults![0].content;
+    expect(toolMsg).not.toContain('Genial');
+    expect(toolMsg).toContain('inglés');
+  });
+  it('registrar_campo rechaza ubicaciones que no entiende', async () => {
+    const provider = new MockProvider([{ text: '', toolCalls: [{ id: 'a', name: 'registrar_campo', input: { campo: 'ubicacion', valor: 'por el sur' } }] }, { text: '¿En qué ciudad?' }]);
+    const e = new Engine({ provider, env });
+    const r = await e.handle('_plantilla', msg('donde venden por el sur'));
+    expect(r.state.fields.ubicacion).toBeUndefined();
+    expect((r.toolCalls[0].result as { error?: string }).error).toMatch(/No reconozco/);
+  });
+  it('"por el sur" y luego "quito" → tienda del sur de Quito', async () => {
+    const e = new Engine({ provider: new MockProvider(), env });
+    await e.handle('_plantilla', msg('donde venden por el sur'));
+    const r = await e.handle('_plantilla', msg('quito'));
+    expect(r.tiendas[0].id).toBe('ej-uio-2');
+  });
+});
+
+describe('destino sucursal', () => {
+  it('derivar a una sucursal muestra la tienda sin pausar', async () => {
+    const provider = new MockProvider([{ text: '', toolCalls: [{ id: 'a', name: 'derivar', input: { destino: 'tienda_propia', motivo: 'pregunta dónde queda la tienda propia' } }] }, { text: '' }]);
+    const e = new Engine({ provider, env });
+    const r = await e.handle('_plantilla', msg('donde queda su tienda?'));
+    expect(r.tiendas[0].id).toBe('ej-gye-1');
+    expect(r.state.paused).toBe(false);
+    expect(r.replies[0].text).toContain('EJEMPLO Papelería Centro Guayaquil');
+  });
+});
