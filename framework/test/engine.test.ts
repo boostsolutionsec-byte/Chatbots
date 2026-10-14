@@ -195,3 +195,14 @@ describe('pausa con vencimiento y agrupación de ráfagas', () => {
     expect(out[0].messageId).toBe('a+b+c');
   });
 });
+
+describe('H-13: ubicación detectada', () => {
+  it('si el modelo vuelve a preguntar la ciudad, el motor busca la tienda', async () => {
+    const provider = new MockProvider([{ text: '¿En qué ciudad estás?' }, { text: 'En Santo Domingo... ' }]);
+    const e = new Engine({ provider, env });
+    const r = await e.handle('_plantilla', msg('buenas en sto domingo donde hay marcadores'));
+    expect(r.toolCalls[0].name).toBe('buscar_tienda');
+    expect(provider.calls[0].system).toContain('ubicacion_detectada_en_mensaje: Santo Domingo');
+    expect(r.actions).toContain('buscar_tienda');
+  });
+});

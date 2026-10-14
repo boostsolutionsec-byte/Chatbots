@@ -115,3 +115,16 @@ El runner de evals (`framework`) debe dar una nota por eval y un resumen en `rep
   - Evals: además de `pide_campo`, `tienda_en`, `no_contiene`, se aceptan en `espera`: `contiene: [..]`, `tienda_id: [..]`, `deriva_a: <destino>`,
     `accion: <herramienta>`, `no_accion: <herramienta>`, `max_caracteres: N`; un turno puede ser `ubicacion: {lat, lng}` en lugar de `usuario`.
     `resultado_final.accion` se cumple si esa herramienta se usó en cualquier turno. `juez` se evalúa con LLM solo si hay IA real.
+
+- (agente 2, 2026-10-14 — segunda tanda) **Simulador fijado en el contrato (H-07)**: `POST /sim/:botId` body `{userId, text?, location?: {lat,lng}, buttonId?, messageId?, channel?, reset?: true}`
+  → `{replies: OutgoingMessage[], toolCalls: [{name,input,result}], actions: string[], tiendas: Tienda[], motivos: string[], prioridad?, state: {fields, activeFlow?, paused, pendingField?, turnsWithoutProgress}, skipped?: 'duplicate'|'paused'|'empty', model?}`.
+  `POST /sim/:botId/reset {userId}` también reinicia. Mensajes del mismo `userId` se procesan en orden.
+- **Propuestas del Agente 1 adoptadas**: P-1 (herramientas con nuestros nombres: `buscar_tienda`, `buscar_producto`, `registrar_campo`, `guardar_lead`, `derivar`, `consultar_horario`);
+  P-2 parcial (`OutgoingMessage.location`; listas/`requestLocation` pendientes); P-3 como `messageId` (idempotencia); P-4 (`DEBOUNCE_SECONDS`, defecto 3, en webhooks y Telegram);
+  P-5 como `paused` + `pausedAt` que vence a las `HANDOFF_PAUSE_HOURS` (defecto 12); P-6 (teléfonos/links no verificados se borran; precios y largo → 1 reintento);
+  P-8 parcial (una vez por regla, no si está en pausa, ventana de 24 h); P-9 (claves de evals, ver arriba); P-10 (`limites.fuera_de_tema`); P-11 (regla fija de transparencia).
+- **Campos de `bot.yaml` del Agente 3 soportados**: `variables`, `reglas_derivacion[].mensaje`, `horario_humano.fuera_de_horario`, `localizador.lugares`, `localizador.ofrecer_ademas`,
+  `localizador.distancia_lejana_km` (defecto 60) y `distancia_muy_lejana_km` (defecto 300), `limites.max_palabras_por_mensaje`, `limites.fuera_de_tema`.
+  `localizador.filtro_producto` se acepta (el filtro por `marcas` está siempre activo cuando se pide un producto que coincide con una marca).
+- `LocatorResult.nota?` (aclaración, p. ej. "no declara POSCA; tiene: uni-ball"). Si hay tienda en la ciudad pero sin la marca pedida, se muestra igual (H-12).
+- Evals: `tienda_en` se cumple si la **primera** tienda recomendada está en una de las ciudades.

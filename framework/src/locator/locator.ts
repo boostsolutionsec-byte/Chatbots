@@ -111,12 +111,11 @@ export class Locator implements StoreLocator {
       };
     }
 
-    const { pool, productoAviso } = this.filterByProduct(q.producto);
+    const { pool, productoAviso, wanted } = this.filterByProduct(q.producto);
     const point = { lat: lugar.lat, lng: lugar.lng };
-    const withDist = pool.map((s) => ({
-      s,
-      d: s.lat !== undefined && s.lng !== undefined ? haversineKm(point, { lat: s.lat, lng: s.lng }) : undefined,
-    }));
+    const dist = (s: IndexedStore) => ({ s, d: s.lat !== undefined && s.lng !== undefined ? haversineKm(point, { lat: s.lat, lng: s.lng }) : undefined });
+    const withDist = pool.map(dist);
+    const withDistAll = this.stores.map(dist);
     const byDist = (a: { d?: number }, b: { d?: number }) => (a.d ?? 1e9) - (b.d ?? 1e9);
     const max = this.opts.maxResults;
     const toResult = (x: { s: IndexedStore; d?: number }, motivo: MotivoTienda): LocatorResult => ({
@@ -139,9 +138,23 @@ export class Locator implements StoreLocator {
       aviso = join(aviso, 'Solo se dijo la provincia: si quieres afinar, pregunta la ciudad.');
     } else {
       const city = normalize(lugar.city || lugar.name);
-      const sameCity = withDist.filter((x) => x.s.city === city || (hasCoords && x.d !== undefined && x.d <= this.opts.sameCityKm));
+      const inCity = (x: { s: IndexedStore; d?: number }) => x.s.city === city || (hasCoords && x.d !== undefined && x.d <= this.opts.sameCityKm);
+      const sameCity = withDist.filter(inCity);
+      const sameCityAny = withDistAll.filter(inCity);
       if (sameCity.length) {
         resultados = sameCity.sort(byDist).slice(0, max).map((x) => toResult(x, 'misma_ciudad'));
+      } else if (sameCityAny.length && wanted?.length) {
+        // Hay tienda en su ciudad pero no declara la marca pedida (H-12): nunca decir "no hay punto de venta".
+        const local = sameCityAny.sort(byDist)[0];
+        const conMarca = withDist.filter((x) => x.s !== local.s).sort(byDist)[0];
+        resultados = [{ ...toResult(local, 'misma_ciudad'), nota: `no declara ${q.producto}; tiene: ${local.s.tienda.marcas.join(', ') || 'sin marcas declaradas'}` }];
+        if (conMarca && max > 1) resultados.push({ ...toResult(conMarca, conMarca.s.provinceCode === lugar.provinceCode ? 'misma_provincia' : 'mas_cercana'), nota: `sí declara ${q.producto}` });
+        aviso = join(
+          aviso,
+          `En ${lugar.city || lugar.name} SÍ hay punto de venta (${local.s.tienda.nombre}), pero no declara ${q.producto} (tiene: ${local.s.tienda.marcas.join(', ') || '—'}). ` +
+            (conMarca ? `La más cercana que declara ${q.producto} es ${conMarca.s.tienda.nombre} en ${conMarca.s.tienda.ciudad}. ` : '') +
+            'No digas que no hay tienda en su ciudad; sugiere escribirles antes de ir para confirmar.',
+        );
       } else if (this.opts.fallback.startsWith('derivar:')) {
         derivar = this.opts.fallback.slice('derivar:'.length);
         aviso = join(aviso, `No hay tiendas en ${lugar.city || lugar.name}. La configuración pide derivar a "${derivar}".`);
@@ -167,7 +180,7 @@ export class Locator implements StoreLocator {
     return { lugar, ambiguo, resultados, online, aviso, derivar };
   }
 
-  private filterByProduct(producto?: string): { pool: IndexedStore[]; productoAviso?: string } {
+  private filterByProduct(producto?: string): { pool: IndexedStore[]; productoAviso?: string; wanted?: string[] } {
     if (!producto) return { pool: this.stores };
     const p = normalize(producto);
     const allMarcas = new Set(this.stores.flatMap((s) => s.marcas));
@@ -175,7 +188,7 @@ export class Locator implements StoreLocator {
     if (!wanted.length) return { pool: this.stores };
     const pool = this.stores.filter((s) => s.marcas.length === 0 || s.marcas.some((m) => wanted.includes(m)));
     if (!pool.length) return { pool: this.stores, productoAviso: `Ninguna tienda declara la marca "${producto}".` };
-    return { pool };
+    return { pool, wanted };
   }
 }
 

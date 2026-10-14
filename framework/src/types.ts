@@ -71,6 +71,8 @@ export interface LocatorResult {
   tienda: Tienda;
   distanciaKm?: number;
   motivo: MotivoTienda;
+  /** Aclaración opcional (p. ej. "no declara POSCA; tiene: uni-ball"). */
+  nota?: string;
 }
 
 export interface StoreLocator {

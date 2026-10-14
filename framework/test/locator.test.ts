@@ -226,9 +226,12 @@ describe('Locator', () => {
   });
 
   it('filtra por marca si se pide un producto', async () => {
-    const r = await loc.find({ text: 'santo domingo', producto: 'posca' });
+    const r = await loc.find({ text: 'quito', producto: 'posca' });
     expect(r.every((x) => x.tienda.marcas.includes('POSCA'))).toBe(true);
-    expect(r[0].tienda.id).not.toBe('sd-1');
+    // Si la única tienda local no declara la marca, igual se muestra (con nota) y luego la más cercana que sí la tiene.
+    const sd = await loc.find({ text: 'santo domingo', producto: 'posca' });
+    expect(sd[0].tienda.id).toBe('sd-1');
+    expect(sd[1].tienda.marcas).toContain('POSCA');
   });
 
   it('ubicación no reconocida → sin resultados y aviso', () => {
@@ -255,5 +258,20 @@ describe('Locator', () => {
 describe('Gazetteer: no sobrecorrige', () => {
   it.each(['Papeleria y Bazar EJEMPLO Mi Cuaderno', 'Lcda. EJEMPLO Ana Mera, Unidad Educativa EJEMPLO', 'ese q brilla pues el d tiktok', 'hacen envios? cuanto se demora'])('"%s" no es un lugar', (text) => {
     expect(g.resolve(text)).toBeUndefined();
+  });
+});
+
+describe('Locator: filtro de marca no esconde la tienda local (H-12)', () => {
+  const tiendas: Tienda[] = [
+    t('duran-1', 'Durán', 'Guayas', -2.172, -79.83, { marcas: ['uni-ball'] }),
+    t('gye-1', 'Guayaquil', 'Guayas', -2.19, -79.885, { marcas: ['uni-ball', 'POSCA'] }),
+  ];
+  it('Durán con POSCA pedido → tienda de Durán (sin POSCA) + la más cercana con POSCA', () => {
+    const r = new Locator(tiendas).locate({ text: 'vivo en duran', producto: 'posca' });
+    expect(r.resultados[0]).toMatchObject({ motivo: 'misma_ciudad' });
+    expect(r.resultados[0].tienda.id).toBe('duran-1');
+    expect(r.resultados[0].nota).toMatch(/no declara posca/);
+    expect(r.resultados[1].tienda.id).toBe('gye-1');
+    expect(r.aviso).toMatch(/SÍ hay punto de venta/);
   });
 });

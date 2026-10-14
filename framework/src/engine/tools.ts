@@ -177,7 +177,7 @@ async function buscarTienda(input: Record<string, unknown>, ctx: ToolContext): P
         : r.lugar?.kind === 'provincia'
           ? `En ${r.lugar.province} te queda así 👇`
           : `En ${r.lugar?.city || r.lugar?.name} todavía no tenemos punto de venta 😕 Lo más cercano es:`;
-    const body = r.resultados.map((x) => formatTienda(x.tienda, x.distanciaKm)).join('\n\n');
+    const body = r.resultados.map((x) => formatTienda(x.tienda, x.distanciaKm) + (x.nota ? `\n_(${x.nota})_` : '')).join('\n\n');
     if (online?.primero) sugerencia = `${online.texto}\n\nSi prefieres ir en persona, lo más cercano es:\n\n${body}`;
     else sugerencia = `${intro}\n\n${body}${online ? `\n\n${online.texto}` : ''}`;
   } else if (r.derivar) {
@@ -189,7 +189,7 @@ async function buscarTienda(input: Record<string, unknown>, ctx: ToolContext): P
   }
   return {
     lugar_entendido: r.lugar ? { nombre: r.lugar.name, ciudad: r.lugar.city, provincia: r.lugar.province, tipo: r.lugar.kind } : null,
-    tiendas: r.resultados.map((x) => ({ ...publicTienda(x.tienda), distancia_km: x.distanciaKm, motivo: x.motivo })),
+    tiendas: r.resultados.map((x) => ({ ...publicTienda(x.tienda), distancia_km: x.distanciaKm, motivo: x.motivo, nota: x.nota })),
     compra_online: online ? { link: online.link, descripcion: online.descripcion, ofrecer_primero: online.primero } : null,
     aviso: r.aviso,
     derivar_a: r.derivar,
