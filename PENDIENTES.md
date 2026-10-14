@@ -12,3 +12,12 @@ Etiquetas: `[dato]` falta info del negocio · `[framework]` el Agente 3 necesita
 - [dato] (agente 1, 2026-10-14) Desde 1-oct-2026 Meta cobraría los mensajes de servicio por encima de 1.000/mes por número (fuente de tercero, respond.io). Confirmar en la página oficial de precios antes de conectar WhatsApp.
 - [bots] (agente 1, 2026-10-14) `docs/ingenieria-inversa/evals-propuestos.yaml`: 41 evals (formato CONTRATO §4 + claves propuestas P-9) listos para copiar a `bots/mokalu/evals/`. Todos los `tienda_id_en` existen en el `tiendas.csv` EJEMPLO actual. Claves nuevas usadas: `tienda_id_en`, `deriva_a`, `prioridad`, `no_inventa_tiendas`, `no_inventa_productos`, `max_burbujas`, `max_tiendas`, `contiene_alguno`, `ofrece_humano`, `respuestas_totales`, `seguimientos_enviados`, `seguimientos_pendientes`, `no_pide_campo`; turnos con `esperar: 23h`, `audio_transcrito`, `imagen_descrita`, `ubicacion`, y `usuario` como lista (ráfaga).
 - [bots] (agente 1, 2026-10-14) Actualización: `evals-propuestos.yaml` ya tiene 44 evals (C01–C43 + C09b) alineados con las reglas de `bots/mokalu/prompts/sistema.md` (rama agente/3-bots): una tienda por defecto, segunda solo de la misma ciudad, kichwa, tienda no registrada.
+- [framework] (agente 1, 2026-10-14) Cobertura de propuestas revisada contra `agente/2-framework@9e7790b` en `docs/ingenieria-inversa/08-cobertura.md`. Huecos:
+  - G-5 (P0) Guarda de salida: verificar que cada **nombre de tienda** citado exista en `tiendas.csv`/resultado de `buscar_tienda` (hoy `guardReply` solo revisa teléfonos y links, `engine.ts:401-418`).
+  - G-4 + G-12 (P1) Medios tipados (audio/imagen), descarga por id y **transcripción de audio** / imagen al LLM; hoy el motor solo ve "[el cliente envió un archivo/imagen]" (`engine.ts:393`).
+  - G-1 (P1) Tool `etiquetar` + `Conversation.tags` (intencion/ciudad/producto/resultado/canal).
+  - G-2 (P1) `resumen_corto` automático al derivar (también en derivación por palabra clave, `engine.ts:209`) y al cerrar.
+  - G-3 (P1) `requestLocation` (Telegram `request_location`, WhatsApp *location request*) y `list`; botón de ubicación en `/start` (`cli/telegram.ts:56`).
+  - G-6 (P1) Seguimientos: validar `despues_de` ≤ 23 h en WA/IG, horario silencioso 08–20 h, máx. 1 por conversación, texto libre (gratis) dentro de 24 h en vez de plantilla (`followups/index.ts:48`).
+  - G-8 (P1) Reporte de métricas (ciudades sin cobertura, intenciones, derivaciones).
+  - G-9 (P2) Recarga en caliente del bot por endpoint admin. G-10 (P2) WhatsApp: location request, marcar leído + escribiendo.
