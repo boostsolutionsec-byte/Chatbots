@@ -128,3 +128,7 @@ El runner de evals (`framework`) debe dar una nota por eval y un resumen en `rep
   `localizador.filtro_producto` se acepta (el filtro por `marcas` está siempre activo cuando se pide un producto que coincide con una marca).
 - `LocatorResult.nota?` (aclaración, p. ej. "no declara POSCA; tiene: uni-ball"). Si hay tienda en la ciudad pero sin la marca pedida, se muestra igual (H-12).
 - Evals: `tienda_en` se cumple si la **primera** tienda recomendada está en una de las ciudades.
+- (agente 2, 2026-10-14 — tercera tanda) `IncomingMessage.media?: {type: audio|image|video|document|sticker, id?, url?, mime?}`; `OutgoingMessage.requestLocation?` y `list?`;
+  `template.language?`; `Conversation.tags?` (`canal:*`, `ciudad:*`, `producto:*`, `intencion:*`, `resultado:*`, `sin_cobertura:*`) y `lastFollowupAt?`;
+  `registrar_campo` acepta `flujo`; `al_completar` acepta `derivar:<destino>` y `recomendar_producto`; destinos `sucursal` se muestran como tienda;
+  `seguimiento[].texto` (texto libre dentro de 24 h) e `idioma_plantilla`. Endpoints admin nuevos: `POST /admin/:botId/reload`, `GET /admin/:botId/metricas`.
