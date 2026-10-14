@@ -149,9 +149,10 @@ canal: whatsapp · intención: donde_comprar
 👤 Estoy en Duran x la entrada, me queda mas cerca gye o hay algo aca?
 🤖 ¡Hay en Durán! 🙌
    📍 *EJEMPLO Papelería Durán* — <dirección>
-   Si te queda mejor cruzar a Guayaquil, también tienes *EJEMPLO Papelería Malecón* en el centro. ¿Te paso alguna ubicación?
+   🗺️ <Maps> · 📲 <WhatsApp> · 🕒 <horario>
+   ¿Te ayudo a elegir qué llevar?
 ```
-**Debe:** prioriza la de la misma ciudad · `tienda_id_en: [duran-centro, gye-centro]` · máx. 2 tiendas.
+**Debe:** prioriza la tienda de la misma ciudad · `tienda_id_en: [duran-centro]` · no añade una segunda tienda de otra ciudad (regla del prompt del Agente 3: la segunda tienda solo si es de la misma ciudad).
 
 ### C12 · Turista en Montañita (en inglés)
 canal: instagram · intención: donde_comprar
@@ -440,6 +441,33 @@ canal: whatsapp · perfil: jubilado que pinta óleo · intención: asesoria
 ```
 **Debe:** usa "usted" · no promete compatibilidad no confirmada (sugiere probar) · `tienda_id_en: [tul-centro]`.
 
+### C41 · Saludo en kichwa
+canal: whatsapp · intención: donde_comprar
+```
+👤 alli puncha mashi, posca tiyanchu otavalopi?
+🤖 ¡Alli puncha! 😊 Sí, en Otavalo puedes encontrar POSCA:
+   📍 *EJEMPLO Bazar Otavalo* — <dirección>
+   🗺️ <Maps> · 📲 <WhatsApp>
+```
+**Debe:** responde con cariño al saludo y sigue en español · entiende "Otavalo" dentro de la frase · `tienda_id_en: [ota-centro]`.
+
+### C42 · Solo un signo de pregunta
+canal: instagram (respuesta a una historia con POSCA)
+```
+👤 ?
+🤖 ¡Hola! 🎨 ¿Buscas dónde comprar POSCA? Dime tu ciudad o sector y te paso la tienda más cercana.
+```
+**Debe:** no responde "no entendí" · `pide_campo: ubicacion` · una sola pregunta.
+
+### C43 · Nombra una tienda que no está en el CSV
+canal: whatsapp
+```
+👤 la papeleria EJEMPLO El Lápiz Feliz de riobamba vende posca?
+🤖 Esa tienda no la tengo registrada, así que no te puedo confirmar 🙏 La que sí tengo en Riobamba es:
+   📍 *EJEMPLO Papelería Central Riobamba* — <dirección>
+```
+**Debe:** no confirma que la tienda nombrada vende uni/POSCA ni da su contacto · `tienda_id_en: [rio-centro]` · `no_inventa_tiendas`.
+
 ---
 
 ## Resumen para convertir a evals
@@ -456,7 +484,7 @@ canal: whatsapp · perfil: jubilado que pinta óleo · intención: asesoria
 | C08 | ambigüedad | `pide_campo` → `tienda_id_en` | gye-sur |
 | C09 | lugar ambiguo | `pide_campo` → `tienda_id_en` | iba-centro (variante Pelileo: amb-centro, amb-ficoa) |
 | C10 | sector→ciudad | `tienda_id_en` | sangolqui-centro |
-| C11 | ciudad vecina | `tienda_id_en`, `max 2` | duran-centro (+gye-centro) |
+| C11 | ciudad vecina | `tienda_id_en`, 1 tienda | duran-centro |
 | C12 | idioma | `tienda_id_en` | sal-centro |
 | C13 | asesoría | catálogo + `tienda_id_en` | PC-1M, PC-5M · sam-entreplaza |
 | C14 | seguridad | `no_contiene` | "apta", "lavavajillas sí" |
@@ -481,3 +509,6 @@ canal: whatsapp · perfil: jubilado que pinta óleo · intención: asesoria
 | C38 | no-seguimiento | 0 seguimientos | sdo-centro |
 | C39 | memoria | no repite pregunta | lat-centro |
 | C40 | usted | tono + `tienda_id_en` | tul-centro |
+| C41 | kichwa | `tienda_id_en` | ota-centro |
+| C42 | mensaje vacío | `pide_campo` | ubicacion |
+| C43 | tienda no registrada | `no_inventa_tiendas` | rio-centro |
