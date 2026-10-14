@@ -56,9 +56,23 @@ Escribe la pregunta en **negrita** y la respuesta debajo. Corto y claro, como lo
 ## 6. Personalidad → `prompts/sistema.md`
 Cómo habla el bot y ejemplos de buenas respuestas. Si quieres que suene distinto, cambia los ejemplos del final.
 
-## 7. Comprobar que no rompiste nada
-Pide a Claude: *"corre las pruebas del bot mokalu"* (`npm run eval -- mokalu` en `framework/`).
-Las pruebas están en `evals/` y el resultado se guarda en `reportes/`.
+## 7. Probar el bot tú mismo
+En la carpeta `framework/` (pídeselo a Claude si no usas la terminal):
+- **Chat en el navegador:** `npm run dev` → abre `http://localhost:3000/chat/mokalu`.
+- **Telegram:** crea el bot con @BotFather, pon el token como `TELEGRAM_BOT_TOKEN` en `framework/.env` y corre `npm run telegram -- mokalu`.
+- Escríbele como un cliente: "soy de Riobamba", "qué posca para zapatillas", "cuánto cuesta", "quiero ser distribuidor".
+  Anota cada respuesta mala y dile a Claude: *"cuando escriben X, el bot respondió Y; debería decir Z"*.
+
+## 8. Comprobar que no rompiste nada
+Pide a Claude: *"corre las pruebas del bot mokalu"*. Por dentro:
+- `npm run validate -- mokalu` → revisa que `bot.yaml`, `tiendas.csv` y las pruebas estén bien escritos (sin IA, gratis).
+- `npm run eval -- mokalu --ia` → conversa con el bot en las 81 pruebas de `evals/` y pone nota; reporte en `reportes/`.
+
+⚠️ Al cambiar a las tiendas reales, las pruebas que nombran tiendas EJEMPLO (`tienda_id_en: [rio-centro]`) hay que
+actualizarlas con los nuevos `id`. Pídele a Claude: *"actualiza las evals con las tiendas nuevas"*.
+
+## 9. Herramientas de prueba del Agente 3 (opcional)
+`herramientas/` tiene un arnés en Python que se usó esta noche antes de que existiera el motor. No hace falta para producción.
 
 ## Datos de ejemplo que debes reemplazar
 La lista completa está en `docs/DATOS-INVENTADOS.md` (y en `FORMULARIO-FINAL.md` cuando el Agente 4 lo compile).
