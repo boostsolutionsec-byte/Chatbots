@@ -128,11 +128,15 @@ describe('Engine con MockProvider y bots/_plantilla', () => {
   it('pasa el modelo resuelto y el conocimiento cacheable al proveedor', async () => {
     const provider = new MockProvider();
     const e = new Engine({ provider, env });
-    await e.handle('_plantilla', msg('hola'));
+    await e.handle('_plantilla', msg('hacen envíos?'));
     expect(provider.calls[0].model).toBe('claude-haiku');
     expect(provider.calls[0].cacheableSystemPrefix).toContain('Ana');
-    expect(provider.calls[0].cacheableSystemPrefix).toContain('Preguntas frecuentes');
+    expect(provider.calls[0].cacheableSystemPrefix).toContain('Reglas del sistema');
+    // Conocimiento: solo el fragmento que aplica, en la parte dinámica
+    expect(provider.calls[0].system).toContain('envíos');
+    expect(provider.calls[0].system).not.toContain('Venden directamente');
     expect(provider.calls[0].system).toContain('<estado>');
+    expect(provider.calls[0].maxTokens).toBe(300);
   });
 
   it('/reiniciar borra la conversación en el simulador', async () => {

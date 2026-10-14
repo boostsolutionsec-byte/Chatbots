@@ -36,8 +36,14 @@ export interface EngineOptions {
   historyLimit?: number;
   /** Máximo de rondas de herramientas por turno (defecto 4). */
   maxToolRounds?: number;
-  /** Conocimiento total por debajo de este tamaño va completo y cacheado (defecto 40000 caracteres). */
+  /** Conocimiento total por debajo de este tamaño va completo (defecto 0 = siempre se seleccionan fragmentos). */
   fullKnowledgeChars?: number;
+  /** Máximo de caracteres de conocimiento por turno (~4 caracteres por token; defecto 1600 ≈ 400 tokens). */
+  knowledgeChars?: number;
+  /** Máximo de tokens de salida del LLM (defecto 300). */
+  maxOutputTokens?: number;
+  /** Respuestas por plantilla sin llamar a la IA cuando el caso es claro (defecto true). */
+  shortcuts?: boolean;
   now?: () => Date;
   log?: (msg: string) => void;
 }
@@ -104,9 +110,12 @@ export class Engine {
       pauseOnHandoff: opts.pauseOnHandoff ?? true,
       pauseHours: opts.pauseHours ?? 12,
       ratePerMinute: opts.ratePerMinute ?? 15,
-      historyLimit: opts.historyLimit ?? 20,
+      historyLimit: opts.historyLimit ?? 6,
+      knowledgeChars: opts.knowledgeChars ?? 1600,
+      maxOutputTokens: opts.maxOutputTokens ?? 300,
+      shortcuts: opts.shortcuts ?? true,
       maxToolRounds: opts.maxToolRounds ?? 4,
-      fullKnowledgeChars: opts.fullKnowledgeChars ?? 40000,
+      fullKnowledgeChars: opts.fullKnowledgeChars ?? 0,
       now: opts.now ?? (() => new Date()),
       log: opts.log ?? (() => {}),
     };
@@ -262,6 +271,7 @@ export class Engine {
           messages: llmMessages,
           tools: lastRound ? [] : TOOL_DEFINITIONS,
           model,
+          maxTokens: this.opts.maxOutputTokens,
         });
         let calls = (res.toolCalls ?? []).filter((c) => TOOL_DEFINITIONS.some((t) => t.name === c.name));
         // H-13: el cliente dijo dónde está y el modelo, en vez de buscar, vuelve a preguntar la ciudad → buscamos nosotros.
@@ -306,6 +316,7 @@ export class Engine {
           messages: [...this.history(conv), { role: 'assistant', content: finalText }, { role: 'user', content: '(reescribe tu último mensaje cumpliendo las reglas)' }],
           tools: [],
           model,
+          maxTokens: this.opts.maxOutputTokens,
         });
         const fixed = retry.text?.trim();
         const still = fixed ? outputProblems(fixed, rt.bot, ctx.actions.includes('buscar_tienda')) : problems;
@@ -396,7 +407,7 @@ export class Engine {
     const { bot } = rt;
     const c = bot.config;
     const full = rt.knowledgeChars <= this.opts.fullKnowledgeChars;
-    const knowledge = full ? rt.chunks : selectKnowledge(rt.chunks, `${userText} ${conv.messages.slice(-4).map((m) => m.text).join(' ')}`, this.opts.fullKnowledgeChars / 2);
+    const knowledge = full ? rt.chunks : selectKnowledge(rt.chunks, `${userText} ${conv.messages.filter((m) => m.role === 'user').slice(-2).map((m) => m.text).join(' ')}`, this.opts.knowledgeChars);
     const knowledgeBlock = knowledge.length ? `\n\n# Conocimiento del negocio\n${renderKnowledge(knowledge)}` : '';
     const cacheable = `${bot.systemPrompt.trim()}${full ? knowledgeBlock : ''}`;
 
@@ -426,6 +437,8 @@ export class Engine {
       ([id, f]) => `- ${id}: campos ${f.campos.map((x) => `${x.id}${x.requerido ? '*' : ''}`).join(', ')}${f.al_completar.length ? ` → al completar: ${f.al_completar.join(', ')}` : ''}`,
     );
     if (flowLines.length) parts.push(`## Flujos (campos con * son requeridos; guárdalos con registrar_campo)\n${flowLines.join('\n')}`);
+    // Todo lo anterior es estable entre turnos → va al prefijo cacheable (caché de contexto de DeepSeek/Anthropic).
+    const stable = parts.splice(0, parts.length).join('\n\n');
     if (!full && knowledgeBlock) parts.push(knowledgeBlock.trim());
 
     const h = c.horario_humano;
@@ -442,7 +455,7 @@ export class Engine {
       `turnos_sin_avance: ${conv.turnsWithoutProgress}/${c.limites.max_mensajes_sin_avance}`,
     ].filter(Boolean);
     parts.push(`<estado>\n${estado.join('\n')}\n</estado>`);
-    return { cacheable, dynamic: parts.join('\n\n') };
+    return { cacheable: `${cacheable}\n\n${stable}`, dynamic: parts.join('\n\n') };
   }
 }
 

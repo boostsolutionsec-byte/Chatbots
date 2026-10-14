@@ -1,5 +1,8 @@
 import type { KnowledgeDoc } from '../config/loader.js';
-import { STOPWORDS, tokens } from '../locator/normalize.js';
+import { tokens } from '../locator/normalize.js';
+
+/** Palabras vacías propias (NO las del localizador: allí 'taza', 'tela', 'zapatillas' son vacías y aquí son clave). */
+const KNOWLEDGE_STOPWORDS = new Set('a al como con cual de del donde el ella en es esa ese eso esta este hay la las le lo los me mi no o para pero por que q se si sin su te tu un una uno y ya yo hola gracias quiero quisiera tienen tiene puedo puede hacer sirve usar uso cuanto'.split(' '));
 
 export interface Chunk {
   file: string;
@@ -32,8 +35,8 @@ export function chunkKnowledge(docs: KnowledgeDoc[]): Chunk[] {
 }
 
 /** Puntaje simple por palabras compartidas (sin dependencias ni embeddings). */
-export function selectKnowledge(chunks: Chunk[], query: string, maxChars: number): Chunk[] {
-  const q = new Set(tokens(query).filter((t) => t.length > 2 && !STOPWORDS.has(t)));
+export function selectKnowledge(chunks: Chunk[], query: string, maxChars: number, maxChunks = 3): Chunk[] {
+  const q = new Set(tokens(query).filter((t) => t.length > 2 && !KNOWLEDGE_STOPWORDS.has(t)));
   const scored = chunks.map((c, i) => {
     const words = tokens(`${c.heading} ${c.text}`);
     let score = 0;
@@ -45,6 +48,7 @@ export function selectKnowledge(chunks: Chunk[], query: string, maxChars: number
   const out: Chunk[] = [];
   let used = 0;
   for (const s of scored) {
+    if (s.score <= 0 || out.length >= maxChunks) break;
     if (used + s.c.text.length > maxChars) continue;
     out.push(s.c);
     used += s.c.text.length;

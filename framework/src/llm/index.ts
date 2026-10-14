@@ -10,14 +10,14 @@ export { resolveModel } from './models.js';
 /**
  * Selección automática del proveedor:
  *  1. LLM_PROVIDER explícito: anthropic | deepseek | claude-cli | mock
- *  2. ANTHROPIC_API_KEY → Anthropic
- *  3. DEEPSEEK_API_KEY → DeepSeek
+ *  2. DEEPSEEK_API_KEY → DeepSeek (proveedor por defecto de producción: más barato)
+ *  3. ANTHROPIC_API_KEY → Anthropic (opcional)
  *  4. `claude` instalado (sesión de Claude Code) → ClaudeCli (solo desarrollo)
  *  5. Mock
  */
 export function createProvider(env: NodeJS.ProcessEnv = process.env): LLMProvider {
   const explicit = env.LLM_PROVIDER?.trim().toLowerCase();
-  const pick = explicit || (env.ANTHROPIC_API_KEY ? 'anthropic' : env.DEEPSEEK_API_KEY ? 'deepseek' : ClaudeCliProvider.available() ? 'claude-cli' : 'mock');
+  const pick = explicit || (env.DEEPSEEK_API_KEY ? 'deepseek' : env.ANTHROPIC_API_KEY ? 'anthropic' : ClaudeCliProvider.available() ? 'claude-cli' : 'mock');
   switch (pick) {
     case 'anthropic':
       if (!env.ANTHROPIC_API_KEY) throw new Error('LLM_PROVIDER=anthropic pero falta ANTHROPIC_API_KEY');
