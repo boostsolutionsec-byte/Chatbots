@@ -3,11 +3,14 @@ import { ConsoleNotifier, type HandoffNotifier } from '../handoff/index.js';
 import { resolveModel } from '../llm/models.js';
 import { Locator } from '../locator/locator.js';
 import { MemoryStore } from '../store/memory.js';
+import { MockProvider } from '../llm/mock.js';
 import type {
   Conversation,
   IncomingMessage,
+  LLMCompleteArgs,
   LLMMessage,
   LLMProvider,
+  LLMResponse,
   OutgoingMessage,
   Store,
   Tienda,
@@ -108,6 +111,19 @@ export class Engine {
 
   get provider(): LLMProvider {
     return this.opts.provider;
+  }
+
+  private fallback = new MockProvider();
+
+  /** Llama al LLM; si falla (caída, timeout, límite), responde con reglas deterministas para no dejar al cliente sin respuesta. */
+  private async complete(botId: string, args: LLMCompleteArgs): Promise<LLMResponse> {
+    try {
+      return await this.provider.complete(args);
+    } catch (e) {
+      if (this.provider.name === 'mock') throw e;
+      this.opts.log(`[${botId}] la IA (${this.provider.name}) falló: ${(e as Error).message} → respuesta de respaldo`);
+      return this.fallback.complete(args);
+    }
   }
 
   /** Carga (o devuelve en caché) un bot. `reload` fuerza releer la carpeta. */
@@ -226,7 +242,7 @@ export class Engine {
 
       for (let round = 0; round <= this.opts.maxToolRounds; round++) {
         const lastRound = round === this.opts.maxToolRounds;
-        const res = await this.provider.complete({
+        const res = await this.complete(botId, {
           system: dynamic,
           cacheableSystemPrefix: cacheable,
           messages: llmMessages,
@@ -270,7 +286,7 @@ export class Engine {
       if (problems.length) {
         this.opts.log(`[${botId}] guarda de salida: ${problems.join('; ')} → reintento`);
         const { cacheable, dynamic } = this.systemPrompt(rt, conv, userText, nowFn());
-        const retry = await this.provider.complete({
+        const retry = await this.complete(botId, {
           system: `${dynamic}\n\n## Corrección obligatoria\nTu borrador tenía problemas: ${problems.join('; ')}. Reescríbelo corrigiéndolo, sin mencionar la corrección.`,
           cacheableSystemPrefix: cacheable,
           messages: [...this.history(conv), { role: 'assistant', content: finalText }, { role: 'user', content: '(reescribe tu último mensaje cumpliendo las reglas)' }],

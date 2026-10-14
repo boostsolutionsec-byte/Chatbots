@@ -285,3 +285,14 @@ describe('G-5: nombres de tienda inventados', () => {
     expect(r.replies[0].text).not.toContain('El Sol');
   });
 });
+
+describe('respaldo si la IA falla', () => {
+  it('usa reglas deterministas y no deja al cliente sin respuesta', async () => {
+    const broken = { name: 'anthropic', complete: async () => { throw new Error('529 overloaded'); } };
+    const logs: string[] = [];
+    const e = new Engine({ provider: broken, env, log: (s) => logs.push(s) });
+    const r = await e.handle('_plantilla', msg('soy de cuenca'));
+    expect(r.tiendas[0].id).toBe('ej-cue-1');
+    expect(logs.join(' ')).toMatch(/respuesta de respaldo/);
+  });
+});
