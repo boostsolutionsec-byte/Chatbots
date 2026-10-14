@@ -135,7 +135,7 @@ export interface LLMCompleteArgs {
 export interface LLMResponse {
   text: string;
   toolCalls?: ToolCall[];
-  usage?: { inputTokens?: number; outputTokens?: number };
+  usage?: { inputTokens?: number; outputTokens?: number; cachedInputTokens?: number };
 }
 
 export interface LLMProvider {

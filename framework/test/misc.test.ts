@@ -339,3 +339,15 @@ describe('paquete n8n generado', () => {
     expect(run({ message: { chat: { id: 9 }, location: { latitude: -1.67, longitude: -78.65 } } }).json.respuesta).toMatch(/Riobamba/);
   });
 });
+
+describe('medidor de costo', () => {
+  it('suma tokens y USD con precios.yaml', async () => {
+    const { addUsage, emptyCost } = await import('../src/llm/cost.js');
+    const c = emptyCost();
+    addUsage(c, 'deepseek-chat', { inputTokens: 1_000_000, cachedInputTokens: 500_000, outputTokens: 100_000 }, { 'deepseek-chat': { entrada: 0.27, entrada_cache: 0.07, salida: 1.1 } });
+    expect(c.usd).toBeCloseTo(0.135 + 0.035 + 0.11, 5);
+    const e = new Engine({ provider: new MockProvider([{ text: 'ok', usage: { inputTokens: 900, outputTokens: 40 } }]), env });
+    const r = await e.handle('_plantilla', { channel: 'simulator', userId: 'c', text: 'me ayudas?', timestamp: Date.now() });
+    expect(r.costo).toMatchObject({ llamadas: 1, inputTokens: 900, outputTokens: 40 });
+  });
+});

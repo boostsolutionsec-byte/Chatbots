@@ -27,7 +27,7 @@ export class DeepSeekProvider implements LLMProvider {
     if (!res.ok) throw new Error(`DeepSeek ${res.status}: ${(await res.text()).slice(0, 300)}`);
     const json = (await res.json()) as {
       choices: { message: { content?: string | null; tool_calls?: { id: string; function: { name: string; arguments: string } }[] } }[];
-      usage?: { prompt_tokens?: number; completion_tokens?: number };
+      usage?: { prompt_tokens?: number; completion_tokens?: number; prompt_cache_hit_tokens?: number };
     };
     const msg = json.choices[0]?.message ?? {};
     const toolCalls: ToolCall[] = (msg.tool_calls ?? []).map((c) => {
@@ -42,7 +42,7 @@ export class DeepSeekProvider implements LLMProvider {
     return {
       text: (msg.content ?? '').trim(),
       toolCalls: toolCalls.length ? toolCalls : undefined,
-      usage: { inputTokens: json.usage?.prompt_tokens, outputTokens: json.usage?.completion_tokens },
+      usage: { inputTokens: json.usage?.prompt_tokens, outputTokens: json.usage?.completion_tokens, cachedInputTokens: json.usage?.prompt_cache_hit_tokens },
     };
   }
 }

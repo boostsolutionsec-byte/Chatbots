@@ -14,6 +14,8 @@ import { parseTextProtocol, renderTranscript, toolInstructions } from './text-pr
 export class ClaudeCliProvider implements LLMProvider {
   name = 'claude-cli';
   calls = 0;
+  /** Uso de tokens de la última llamada (lo reporta `claude -p --output-format json`). */
+  lastUsage?: { inputTokens?: number; outputTokens?: number; cachedInputTokens?: number };
   private running = 0;
   private queue: (() => void)[] = [];
   private maxCalls: number;
@@ -49,7 +51,7 @@ export class ClaudeCliProvider implements LLMProvider {
       const system = [args.cacheableSystemPrefix, args.system, toolInstructions(tools)].filter(Boolean).join('\n\n');
       const prompt = renderTranscript(args.messages);
       const raw = await this.run(system, prompt, args.model);
-      return parseTextProtocol(raw, tools);
+      return { ...parseTextProtocol(raw, tools), usage: this.lastUsage };
     } finally {
       this.release();
     }
@@ -100,8 +102,10 @@ export class ClaudeCliProvider implements LLMProvider {
       child.on('close', (code) => {
         clearTimeout(timer);
         try {
-          const parsed = JSON.parse(out) as { result?: string; is_error?: boolean };
+          const parsed = JSON.parse(out) as { result?: string; is_error?: boolean; usage?: { input_tokens?: number; output_tokens?: number; cache_read_input_tokens?: number; cache_creation_input_tokens?: number } };
           if (parsed.is_error) return reject(new Error(`claude -p error: ${parsed.result ?? err}`));
+          const u = parsed.usage;
+          this.lastUsage = u ? { inputTokens: (u.input_tokens ?? 0) + (u.cache_read_input_tokens ?? 0) + (u.cache_creation_input_tokens ?? 0), outputTokens: u.output_tokens, cachedInputTokens: u.cache_read_input_tokens } : undefined;
           resolve(parsed.result ?? '');
         } catch {
           if (code === 0 && out.trim()) resolve(out.trim());

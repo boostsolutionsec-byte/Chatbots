@@ -10,70 +10,48 @@ import { formatDias, isOpen, localTime } from './time.js';
 export const TOOL_DEFINITIONS: ToolDefinition[] = [
   {
     name: 'buscar_tienda',
-    description:
-      'Busca las tiendas/puntos de venta más cercanos. ÚNICA fuente válida de nombres, direcciones, teléfonos y links de tiendas. ' +
-      'Úsala apenas sepas la ciudad, sector, provincia o ubicación compartida del cliente.',
+    description: 'Tiendas más cercanas al cliente (única fuente de tiendas y contactos).',
     input_schema: {
       type: 'object',
       properties: {
-        ubicacion: { type: 'string', description: 'Lo que dijo el cliente sobre dónde está (ciudad, sector, provincia), tal cual.' },
-        lat: { type: 'number', description: 'Latitud si el cliente compartió su ubicación.' },
-        lng: { type: 'number', description: 'Longitud si el cliente compartió su ubicación.' },
-        producto: { type: 'string', description: 'Marca o producto que busca (opcional, para filtrar tiendas).' },
+        ubicacion: { type: 'string', description: 'Lo que dijo el cliente: ciudad, sector o provincia.' },
+        lat: { type: 'number' },
+        lng: { type: 'number' },
+        producto: { type: 'string', description: 'Marca buscada (opcional).' },
       },
     },
   },
   {
     name: 'buscar_producto',
-    description: 'Busca en el catálogo del bot. ÚNICA fuente válida de productos, modelos y características.',
-    input_schema: {
-      type: 'object',
-      properties: {
-        consulta: { type: 'string', description: 'Qué busca o para qué lo quiere (ej. "marcador para tela", "posca punta fina").' },
-      },
-      required: ['consulta'],
-    },
+    description: 'Busca en el catálogo (única fuente de modelos).',
+    input_schema: { type: 'object', properties: { consulta: { type: 'string' } }, required: ['consulta'] },
   },
   {
     name: 'registrar_campo',
-    description: 'Guarda un dato que dio el cliente y que un flujo necesita (ver Flujos y <estado>). Indica el flujo si lo sabes.',
+    description: 'Guarda un dato del cliente que pide un flujo.',
     input_schema: {
       type: 'object',
-      properties: {
-        campo: { type: 'string' },
-        valor: { type: 'string' },
-        flujo: { type: 'string', description: 'id del flujo (p. ej. donde_comprar). Recomendado cuando el campo aparece en varios flujos.' },
-      },
+      properties: { campo: { type: 'string' }, valor: { type: 'string' }, flujo: { type: 'string' } },
       required: ['campo', 'valor'],
     },
   },
   {
     name: 'guardar_lead',
-    description: 'Guarda al cliente interesado con los datos recolectados (al completar un flujo o si deja sus datos).',
-    input_schema: {
-      type: 'object',
-      properties: { nota: { type: 'string', description: 'Resumen breve del interés del cliente.' } },
-    },
+    description: 'Guarda al cliente interesado.',
+    input_schema: { type: 'object', properties: { nota: { type: 'string' } } },
   },
   {
     name: 'derivar',
-    description:
-      'Pasa la conversación a un humano u otro destino según las reglas de derivación (úsala solo si una regla aplica). ' +
-      'También sirve para mostrar un destino tipo "sucursal" (la tienda propia) o "link" (p. ej. tienda online).',
+    description: 'Pasa a un destino según las reglas de derivación (humano, tienda propia o link).',
     input_schema: {
       type: 'object',
-      properties: {
-        destino: { type: 'string', description: 'id del destino (ver reglas de derivación).' },
-        motivo: { type: 'string', description: 'Qué regla aplica y por qué.' },
-        prioridad: { type: 'string', enum: ['normal', 'alta'] },
-        resumen: { type: 'string', description: 'Resumen para el humano.' },
-      },
+      properties: { destino: { type: 'string' }, motivo: { type: 'string' }, prioridad: { type: 'string', enum: ['normal', 'alta'] }, resumen: { type: 'string' } },
       required: ['motivo'],
     },
   },
   {
     name: 'consultar_horario',
-    description: 'Dice si el equipo humano está atendiendo ahora y su horario.',
+    description: 'Horario del equipo humano y si atiende ahora.',
     input_schema: { type: 'object', properties: {} },
   },
 ];

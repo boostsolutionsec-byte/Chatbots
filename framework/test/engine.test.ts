@@ -131,7 +131,7 @@ describe('Engine con MockProvider y bots/_plantilla', () => {
     await e.handle('_plantilla', msg('hacen envíos?'));
     expect(provider.calls[0].model).toBe('claude-haiku');
     expect(provider.calls[0].cacheableSystemPrefix).toContain('Ana');
-    expect(provider.calls[0].cacheableSystemPrefix).toContain('Reglas del sistema');
+    expect(provider.calls[0].cacheableSystemPrefix).toContain('Reglas (obligatorias)');
     // Conocimiento: solo el fragmento que aplica, en la parte dinámica
     expect(provider.calls[0].system).toContain('envíos');
     expect(provider.calls[0].system).not.toContain('Venden directamente');

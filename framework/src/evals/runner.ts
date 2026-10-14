@@ -67,6 +67,8 @@ export interface EvalResult {
   paso: boolean;
   error?: string;
   ms: number;
+  /** Costo del bot en la eval (sin contar el juez). */
+  costo?: { llamadas: number; inputTokens: number; outputTokens: number; usd?: number };
 }
 
 export function loadEvals(dir: string): { cases: EvalCase[]; errors: string[] } {
@@ -314,6 +316,7 @@ export async function runEval(engine: Engine, botId: string, ev: EvalCase, opts:
   const turnos: TurnResult[] = [];
   const allActions: string[] = [];
   const paraJuez: string[] = [];
+  const costo = { llamadas: 0, inputTokens: 0, outputTokens: 0, usd: undefined as number | undefined };
   const channel = (['web', 'telegram', 'whatsapp', 'instagram', 'simulator'].includes(ev.canal) ? ev.canal : 'simulator') as IncomingMessage['channel'];
   try {
     for (const turno of ev.turnos) {
@@ -349,6 +352,12 @@ export async function runEval(engine: Engine, botId: string, ev: EvalCase, opts:
       const r = await engine.handle(botId, { channel, userId, text: input.text, location: input.location, timestamp: clock }, { now: new Date(clock) });
       clock += 60_000;
       allActions.push(...r.actions);
+      if (r.costo) {
+        costo.llamadas += r.costo.llamadas;
+        costo.inputTokens += r.costo.inputTokens;
+        costo.outputTokens += r.costo.outputTokens;
+        if (r.costo.usd !== undefined) costo.usd = (costo.usd ?? 0) + r.costo.usd;
+      }
       const { checks, paraJuez: pj } = checkTurn(turno.espera, r, ctx);
       paraJuez.push(...pj);
       turnos.push({
@@ -388,7 +397,7 @@ export async function runEval(engine: Engine, botId: string, ev: EvalCase, opts:
   const checkScore = all.length ? all.filter((x) => x.ok).length / all.length : 1;
   const nota = Math.round(juez ? (all.length ? checkScore * 0.7 + (juez.nota / 10) * 0.3 : juez.nota / 10) * 100 : checkScore * 100);
   const paso = all.every((x) => x.ok) && (!juez || juez.nota >= 6);
-  return { nombre: ev.nombre, archivo: ev.archivo, turnos, checksFinales, juez, nota, paso, ms: Date.now() - started };
+  return { nombre: ev.nombre, archivo: ev.archivo, turnos, checksFinales, juez, nota, paso, ms: Date.now() - started, costo };
 }
 
 export async function runAll(
@@ -420,6 +429,7 @@ export function renderReport(botId: string, provider: string, results: EvalResul
     '',
     `- Proveedor de IA: **${provider}**${provider === 'mock' ? ' (determinista, sin IA: prueba el motor y los datos, no la calidad de la conversación)' : ''}`,
     `- Resultado: **${passed}/${results.length}** evals pasaron · nota promedio **${avg}/100**`,
+    costLine(results),
     unchecked.size ? `- Claves que solo evalúa el juez LLM: ${[...unchecked].map(([k, n]) => `\`${k}\` (${n})`).join(', ')}` : '',
     '',
     '| # | Eval | Nota | Pasó | Juez | Archivo |',
@@ -450,4 +460,13 @@ export function renderReport(botId: string, provider: string, results: EvalResul
 
 export function reportFileName(date = new Date()): string {
   return `evals-${date.toISOString().slice(0, 16).replace(/[:T]/g, '-')}.md`;
+}
+
+function costLine(results: EvalResult[]): string {
+  const c = results.reduce(
+    (a, r) => ({ l: a.l + (r.costo?.llamadas ?? 0), i: a.i + (r.costo?.inputTokens ?? 0), o: a.o + (r.costo?.outputTokens ?? 0), u: a.u + (r.costo?.usd ?? 0), t: a.t + r.turnos.length }),
+    { l: 0, i: 0, o: 0, u: 0, t: 0 },
+  );
+  if (!c.t) return '';
+  return `- Costo del bot (sin juez): ${c.l} llamadas a la IA en ${c.t} turnos · ${c.i} tokens de entrada · ${c.o} de salida · ~US$${c.u.toFixed(4)} (≈ ${Math.round(c.i / Math.max(1, c.l))} tok entrada por llamada; precios en precios.yaml)`;
 }
