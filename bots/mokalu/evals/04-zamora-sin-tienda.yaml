@@ -4,6 +4,7 @@ turnos:
   - usuario: "Vivo en Zamora, hay donde comprar posca?"
     espera:
       tienda_en: [loja]
+      no_inventa_tiendas: true
       motivo: mas_cercana
 resultado_final:
   accion: buscar_tienda

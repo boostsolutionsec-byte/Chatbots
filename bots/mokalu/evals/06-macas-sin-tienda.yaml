@@ -4,6 +4,7 @@ turnos:
   - usuario: "Macas"
     espera:
       tienda_en: [riobamba, puyo, azogues]
+      no_inventa_tiendas: true
       motivo: mas_cercana
 resultado_final:
   accion: buscar_tienda

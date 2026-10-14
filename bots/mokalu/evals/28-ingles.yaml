@@ -4,6 +4,7 @@ turnos:
   - usuario: "Hi! I'm visiting Cuenca, where can I buy posca markers?"
     espera:
       tienda_en: [cuenca]
+      no_inventa_tiendas: true
       idioma: en
 resultado_final:
   accion: buscar_tienda

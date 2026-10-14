@@ -4,6 +4,7 @@ turnos:
   - usuario: "Buenas, estoy en Quito, dónde puedo comprar marcadores posca?"
     espera:
       tienda_en: [quito]
+      no_inventa_tiendas: true
       no_pide_campo: ubicacion
       no_contiene: ["$"]
 resultado_final:

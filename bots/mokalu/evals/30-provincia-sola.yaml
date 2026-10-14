@@ -4,6 +4,7 @@ turnos:
   - usuario: "soy de manabí"
     espera:
       tienda_en: [portoviejo, manta]
+      no_inventa_tiendas: true
 resultado_final:
   accion: buscar_tienda
 juez: "Dio tienda(s) de Manabí (Portoviejo o Manta) o preguntó en qué ciudad de Manabí está; no mandó a otra provincia."

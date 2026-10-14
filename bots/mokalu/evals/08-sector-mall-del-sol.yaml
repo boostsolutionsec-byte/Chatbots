@@ -3,8 +3,10 @@ canal: telegram
 turnos:
   - usuario: "donde compro posca cerca del Mall del Sol?"
     espera:
-      contiene: ["EJEMPLO Arte & Color Mall del Sol"]
+      tienda_id_en: [gye-mall-sol]
+      no_inventa_tiendas: true
       tienda_en: [guayaquil]
+      no_inventa_tiendas: true
 resultado_final:
   accion: buscar_tienda
 juez: "Usó el sector para dar la tienda más cercana al Mall del Sol, no una cualquiera de Guayaquil."

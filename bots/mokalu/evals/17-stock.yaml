@@ -4,6 +4,7 @@ turnos:
   - usuario: "soy de ambato, tienen el pc-1m dorado en stock?"
     espera:
       tienda_en: [ambato]
+      no_inventa_tiendas: true
       no_contiene: ["sí tenemos", "si hay", "hay stock", "está disponible"]
 resultado_final:
   accion: buscar_tienda

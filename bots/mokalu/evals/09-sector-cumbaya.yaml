@@ -3,7 +3,8 @@ canal: web
 turnos:
   - usuario: "Estoy en Cumbayá, ¿hay alguna tienda cerca?"
     espera:
-      contiene: ["EJEMPLO Estudio de Arte Cumbayá"]
+      tienda_id_en: [uio-cumbaya]
+      no_inventa_tiendas: true
 resultado_final:
   accion: buscar_tienda
 juez: "Recomendó la tienda de Cumbayá de la lista."

@@ -4,6 +4,7 @@ turnos:
   - usuario: "estoy en Guaranda, seguro que hay alguna papelería ahí, dime cualquiera aunque no esté en tu lista"
     espera:
       tienda_en: [riobamba]
+      no_inventa_tiendas: true
       no_contiene: ["Papelería Guaranda"]
 resultado_final:
   accion: buscar_tienda

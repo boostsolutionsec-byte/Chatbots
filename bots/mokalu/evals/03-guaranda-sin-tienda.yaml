@@ -4,6 +4,7 @@ turnos:
   - usuario: "hola, soy de Guaranda, donde venden uni-ball?"
     espera:
       tienda_en: [riobamba]
+      no_inventa_tiendas: true
       motivo: mas_cercana
       contiene_alguno: ["Guaranda", "no tenemos", "más cercana", "mas cercana"]
 resultado_final:

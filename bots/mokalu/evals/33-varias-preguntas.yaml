@@ -10,6 +10,7 @@ turnos:
   - usuario: "vale, estoy en ibarra"
     espera:
       tienda_en: [ibarra]
+      no_inventa_tiendas: true
   - usuario: "gracias!!"
     espera:
       max_palabras: 30

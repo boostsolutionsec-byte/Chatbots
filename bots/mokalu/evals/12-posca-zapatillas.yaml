@@ -9,6 +9,7 @@ turnos:
   - usuario: "estoy en cuenca"
     espera:
       tienda_en: [cuenca]
+      no_inventa_tiendas: true
 resultado_final:
   accion: buscar_tienda
 juez: "Recomendó puntas concretas (fina para contorno, PC-5M para relleno), mencionó sellar con barniz probando antes, y luego dio tienda de Cuenca. Mensajes cortos."

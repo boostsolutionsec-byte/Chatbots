@@ -6,7 +6,8 @@ turnos:
       pide_campo: ubicacion
   - ubicacion: {lat: -0.1790, lng: -78.4830}
     espera:
-      contiene: ["EJEMPLO Arte Quicentro"]
+      tienda_id_en: [uio-carolina]
+      no_inventa_tiendas: true
 resultado_final:
   accion: buscar_tienda
 juez: "Usó la ubicación compartida y dio la tienda más cercana (La Carolina/Quicentro) con su link de mapa."

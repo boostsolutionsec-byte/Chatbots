@@ -4,6 +4,7 @@ turnos:
   - usuario: "q tal, del coca. venden posca x aca?"
     espera:
       tienda_en: [nueva loja]
+      no_inventa_tiendas: true
       motivo: mas_cercana
 resultado_final:
   accion: buscar_tienda

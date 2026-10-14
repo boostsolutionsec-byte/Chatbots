@@ -1,7 +1,7 @@
 # Evals del bot Mokalú
 
 40 conversaciones de prueba con el formato de `docs/CONTRATO.md` §4. Datos de tiendas = `tiendas.csv` (EJEMPLO):
-si cambian las tiendas reales, revisar los `contiene` con nombres de tienda.
+al cambiar a tiendas reales, actualizar los `tienda_id_en` (ids de `tiendas.csv`).
 
 Claves de `espera` usadas (las del contrato + extensiones pedidas en `PENDIENTES.md` con `[framework]`):
 
@@ -10,6 +10,8 @@ Claves de `espera` usadas (las del contrato + extensiones pedidas en `PENDIENTES
 | `pide_campo: X` | el bot pregunta por el campo X del flujo (contrato) |
 | `tienda_en: [ciudades]` | la(s) tienda(s) recomendada(s) son de alguna de esas ciudades (contrato) |
 | `no_contiene: [...]` | ninguno de esos textos aparece (contrato; sin distinguir mayúsculas) |
+| `tienda_id_en: [ids]` | la tienda recomendada es una de esas filas de `tiendas.csv` (propuesta P-9) |
+| `no_inventa_tiendas: true` | toda tienda/teléfono citado existe en `tiendas.csv` (P-9) |
 | `contiene: [...]` | todos esos textos aparecen |
 | `contiene_alguno: [...]` | al menos uno aparece |
 | `no_pide_campo: X` | no vuelve a preguntar un dato ya dado |
