@@ -41,11 +41,21 @@ Sirve para que el bot entienda "estoy en Guaranda" o "cerca del Mall del Sol" au
 Si un cliente escribe un sector que el bot no entiende, añade una fila: `nombre, alias (separados por ;), tipo, ciudad, provincia, lat, lng`.
 
 ## 3. Preguntas frecuentes → `conocimiento/faq.md`
-Escribe la pregunta en **negrita** y la respuesta debajo. Corto y claro, como lo dirías por chat.
+Cada pregunta es un bloque que empieza con `## ` seguido de **palabras clave** (las que usaría un cliente), y debajo la
+respuesta en 1–3 líneas. Ejemplo:
+```
+## envío domicilio enviar tienda online
+Mokalú hace envíos a todo el país desde https://mokalu.com.ec/tienda/.
+```
+El bot solo lee los bloques que coinciden con lo que pregunta el cliente (así gasta menos). Bloques cortos = más barato.
+
+## 3b. Respuestas sin IA → `plantillas-respuesta.md`
+Saludo, "dónde compro en X", precio, horario, distribuidor y reclamo se responden con plantillas fijas desde n8n, sin gastar IA.
+Cambia ahí el texto si quieres otro tono.
 
 ## 4. Productos → `catalogo.csv` y `conocimiento/productos-uni.md`
 - `catalogo.csv`: una fila por producto que distribuyes (sin precios).
-- `productos-uni.md`: la guía "qué punta para qué". Si un cliente recibe una mala recomendación, corrígela aquí.
+- `productos-uni.md`: la guía "qué punta para qué" en bloques `## palabras clave`. Si un cliente recibe una mala recomendación, corrige el bloque.
 
 ## 5. Reglas y a quién se deriva → `conocimiento/politicas.md` y `bot.yaml`
 - Precios, envíos, reclamos: `politicas.md` (texto normal).
