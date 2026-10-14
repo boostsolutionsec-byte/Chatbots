@@ -5,12 +5,13 @@
  *   npm run sim -- --target mock                       # bot de reglas (sin framework), cliente guion, sin juez IA
  *   npm run sim -- --target http --url http://localhost:3000 --bot mokalu --cliente ia --juez ia
  *   npm run sim -- --solo p01,p19 --cliente ia --juez ia --concurrencia 2
+ *   npm run sim -- --target engine --framework <dir>/framework --bots-dir <dir>/bots --cliente ia --juez ia
  */
 import { mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { loadPersonas, loadTiendas, resolveTiendasPath, validatePersona } from './data.js';
-import { HttpSimTarget, MockBotTarget, type BotTarget } from './targets.js';
+import { botContext, loadPersonas, loadTiendas, resolveTiendasPath, validatePersona } from './data.js';
+import { EngineTarget, HttpSimTarget, MockBotTarget, type BotTarget } from './targets.js';
 import { LLMCustomer, ScriptedCustomer } from './customer.js';
 import { autoLLM } from './llm.js';
 import { pool, runConversation } from './conversation.js';
@@ -35,7 +36,8 @@ async function main() {
   const outDir = arg('salida', join(REPO, 'validacion', 'reportes'))!;
   const personasDir = arg('personas', join(REPO, 'validacion', 'personas'))!;
 
-  const tp = resolveTiendasPath(REPO, botId, arg('tiendas'));
+  const botsDirArg = arg('bots-dir');
+  const tp = resolveTiendasPath(REPO, botId, arg('tiendas') ?? (botsDirArg ? join(resolve(botsDirArg), botId, 'tiendas.csv') : undefined));
   const tiendas = loadTiendas(tp.path);
   let personas = loadPersonas(personasDir);
   const malas = personas.flatMap((p) => validatePersona(p).map((e) => `${p.id}: ${e}`));
@@ -44,7 +46,9 @@ async function main() {
 
   const bot: BotTarget = targetKind === 'http'
     ? new HttpSimTarget(arg('url', process.env.SIM_URL ?? 'http://localhost:3000')!, botId)
-    : new MockBotTarget(tiendas);
+    : targetKind === 'engine'
+      ? await EngineTarget.create(resolve(arg('framework', join(REPO, 'framework'))!), resolve(arg('bots-dir', join(REPO, 'bots'))!), botId)
+      : new MockBotTarget(tiendas);
   const llm = clienteKind === 'ia' || juezKind === 'ia' ? autoLLM() : undefined;
   const runId = new Date().toISOString().replace(/[:.]/g, '-');
   const permitidos = (arg('permitidos', process.env.SIM_PERMITIDOS ?? 'https://mokalu.com.ec') ?? '').split(',').filter(Boolean);
@@ -56,6 +60,7 @@ async function main() {
       runId,
       juez: juezKind === 'ia' ? llm : undefined,
       permitidos,
+      contextoBot: botContext(join(dirname(tp.path), 'bot.yaml')),
     }),
   (r, n) => console.log(`  [${n}/${personas.length}] ${r.personaId}: ${r.notaPersona}/10${r.error ? ' ERROR ' + r.error : ''}`));
 

@@ -10,6 +10,8 @@ export interface RunOpts {
   runId: string;
   juez?: SimLLM; // sin juez = solo chequeos deterministas
   permitidos?: string[];
+  /** horario humano, destinos, web… del bot.yaml para que el juez no los tome por inventados */
+  contextoBot?: string;
 }
 
 export async function runConversation(p: Persona, customer: Customer, bot: BotTarget, tiendas: Tienda[], o: RunOpts): Promise<Resultado> {
@@ -39,7 +41,7 @@ export async function runConversation(p: Persona, customer: Customer, bot: BotTa
   let juez: string | undefined;
   if (o.juez && transcript.some((t) => t.rol === 'bot')) {
     try {
-      const j = await llmJudge(o.juez, p, transcript, tiendas, det.obs);
+      const j = await llmJudge(o.juez, p, transcript, tiendas, det.obs, o.contextoBot);
       juezNotas = j.notas;
       juez = j.comentario;
     } catch (e) {

@@ -115,3 +115,35 @@ export class MockBotTarget implements BotTarget {
     return [`${pre}¿En qué ciudad o sector estás? Así te digo la tienda más cercana 📍`];
   }
 }
+
+/**
+ * Bot real en el mismo proceso: importa el `Engine` del framework del Agente 2 desde una carpeta
+ * (p. ej. una copia de integración con `framework/` de agente/2-framework y `bots/` de agente/3-bots).
+ * Útil mientras el servidor `/sim/:botId` no existe. El proveedor de IA lo elige el framework
+ * (`createProvider`: ANTHROPIC_API_KEY → Anthropic; si no, `claude -p`; si no, Mock; o `LLM_PROVIDER`).
+ */
+export class EngineTarget implements BotTarget {
+  name: string;
+  private constructor(private engine: { handle(botId: string, msg: unknown): Promise<{ replies: unknown }> }, private botId: string, desc: string) {
+    this.name = desc;
+  }
+  static async create(frameworkDir: string, botsDir: string, botId: string): Promise<EngineTarget> {
+    const { pathToFileURL } = await import('node:url');
+    const { join } = await import('node:path');
+    const eng = await import(pathToFileURL(join(frameworkDir, 'src/engine/engine.ts')).href);
+    const llm = await import(pathToFileURL(join(frameworkDir, 'src/llm/index.ts')).href);
+    const provider = llm.createProvider(process.env);
+    const engine = new eng.Engine({ provider, botsDir });
+    return new EngineTarget(engine, botId, `engine:${frameworkDir} (${provider.constructor?.name ?? 'provider'}) bot=${botId}`);
+  }
+  async send(input: BotInput): Promise<string[]> {
+    const r = await this.engine.handle(this.botId, {
+      channel: 'simulator',
+      userId: input.userId,
+      text: input.text,
+      location: input.location,
+      timestamp: Date.now(),
+    });
+    return normalizeReplies(r.replies);
+  }
+}

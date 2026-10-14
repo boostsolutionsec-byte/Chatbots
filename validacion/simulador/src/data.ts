@@ -76,3 +76,20 @@ export function resolveTiendasPath(repoRoot: string, botId: string, override?: s
   if (existsSync(real)) return { path: real, esMock: false };
   return { path: join(repoRoot, 'validacion', 'simulador', 'fixtures', 'tiendas-mock.csv'), esMock: true };
 }
+
+/** Resumen de bot.yaml (horario humano, destinos, web, límites) para darle contexto al juez. */
+export function botContext(botYamlPath: string): string {
+  if (!existsSync(botYamlPath)) return '';
+  try {
+    const b = parseYaml(readFileSync(botYamlPath, 'utf8')) ?? {};
+    const lines: string[] = [];
+    if (b.persona) lines.push(`persona: ${JSON.stringify(b.persona)}`);
+    if (b.horario_humano) lines.push(`horario_humano: ${JSON.stringify(b.horario_humano)}`);
+    if (Array.isArray(b.destinos)) lines.push(...b.destinos.map((d: Record<string, unknown>) => `destino ${d.id} (${d.tipo}): ${d.descripcion ?? ''} ${String(d.valor ?? '').startsWith('${') ? '' : d.valor ?? ''}`));
+    if (b.variables) lines.push(`variables: ${JSON.stringify(b.variables)}`);
+    if (b.limites?.nunca) lines.push(`limites.nunca: ${JSON.stringify(b.limites.nunca)}`);
+    return lines.join('\n');
+  } catch {
+    return '';
+  }
+}

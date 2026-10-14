@@ -13,7 +13,10 @@ export const RUBRICA = `Rúbrica (0 = mal, 1 = a medias, 2 = bien; null si no ap
 
 export interface JuezSalida { notas: Partial<Notas>; comentario: string }
 
-export function judgePrompt(p: Persona, transcript: Turno[], tiendas: Tienda[], obsDeterministas: string[]): string {
+const fila = (t: Tienda) =>
+  `${t.nombre} · ${t.direccion} · ${t.ciudad} (${t.provincia}) · maps ${t.maps_url || '—'} · WhatsApp ${t.whatsapp || '—'} · horario ${t.horario || '—'} · marcas ${t.marcas || '—'} · online ${t.vende_online || '—'} ${t.web || ''}`;
+
+export function judgePrompt(p: Persona, transcript: Turno[], tiendas: Tienda[], obsDeterministas: string[], contextoBot = ''): string {
   const esp = tiendasEsperadas(p, tiendas);
   const conv = transcript.map((t) => `${t.rol === 'cliente' ? 'CLIENTE' : 'BOT'}: ${t.location ? `[ubicación ${t.location.lat},${t.location.lng}] ` : ''}${t.texto}`).join('\n');
   return [
@@ -21,9 +24,10 @@ export function judgePrompt(p: Persona, transcript: Turno[], tiendas: Tienda[], 
     `Ubicación real: ${p.ubicacion.sector ? p.ubicacion.sector + ', ' : ''}${p.ubicacion.ciudad} (${p.ubicacion.provincia}).`,
     `Resultado esperado: ${JSON.stringify(p.espera)}`,
     esp
-      ? `Tiendas correctas según tiendas.csv (${esp.motivo}${esp.otraCiudad ? ', está en OTRA ciudad: el bot debe avisarlo' : ''}): ${esp.correctas.map((t) => `${t.nombre} · ${t.direccion} · ${t.ciudad} · ${t.whatsapp}`).join(' | ')}`
+      ? `Tiendas correctas según tiendas.csv (${esp.motivo}${esp.otraCiudad ? ', está en OTRA ciudad: el bot debe avisarlo' : ''}):\n${esp.correctas.map((t) => '  - ' + fila(t)).join('\n')}`
       : 'No hay tiendas cargadas.',
-    `Todas las tiendas que existen en los datos: ${tiendas.map((t) => `${t.nombre} (${t.ciudad})`).join('; ')}`,
+    `Todas las tiendas que existen en los datos (filas completas):\n${tiendas.map((t) => '  - ' + fila(t)).join('\n')}`,
+    contextoBot ? `Datos de configuración del bot (también son datos válidos, no inventados):\n${contextoBot}` : '',
     `Chequeos automáticos ya detectados: ${obsDeterministas.length ? obsDeterministas.join(' | ') : 'ninguno'}`,
     '',
     'CONVERSACIÓN:',
@@ -41,8 +45,8 @@ esté en la lista de tiendas dada.
 ${RUBRICA}
 Responde únicamente con el JSON pedido.`;
 
-export async function llmJudge(llm: SimLLM, p: Persona, transcript: Turno[], tiendas: Tienda[], obs: string[]): Promise<JuezSalida> {
-  const out = await llm.complete(JUDGE_SYSTEM, judgePrompt(p, transcript, tiendas, obs), { model: 'rapido', maxTokens: 400 });
+export async function llmJudge(llm: SimLLM, p: Persona, transcript: Turno[], tiendas: Tienda[], obs: string[], contextoBot = ''): Promise<JuezSalida> {
+  const out = await llm.complete(JUDGE_SYSTEM, judgePrompt(p, transcript, tiendas, obs, contextoBot), { model: 'rapido', maxTokens: 400 });
   const j = extractJson<Record<string, unknown>>(out);
   if (!j) return { notas: {}, comentario: `juez sin JSON: ${out.slice(0, 160)}` };
   const notas: Partial<Notas> = {};
