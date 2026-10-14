@@ -278,8 +278,13 @@ export class Engine {
           model,
         });
         const fixed = retry.text?.trim();
-        if (fixed && outputProblems(fixed, rt.bot, ctx.actions.includes('buscar_tienda')).filter((p) => p.startsWith('precio')).length === 0) finalText = fixed;
-        else finalText = stripPrices(finalText, rt.bot);
+        const still = fixed ? outputProblems(fixed, rt.bot, ctx.actions.includes('buscar_tienda')) : problems;
+        if (fixed && !still.some((p) => p.startsWith('precio') || p.startsWith('tienda'))) finalText = fixed;
+        else if (still.some((p) => p.startsWith('tienda'))) {
+          // Nombre de tienda inventado y el reintento no lo corrigió: usamos el texto armado con datos reales, o lo quitamos.
+          const safe = [...executed].reverse().map((e) => (e.result as { sugerencia?: string })?.sugerencia).find(Boolean);
+          finalText = safe ?? stripUnknownStores(stripPrices(fixed || finalText, rt.bot), rt.bot);
+        } else finalText = stripPrices(finalText, rt.bot);
       }
     }
     finalText = guardReply(finalText, executed, rt);
@@ -505,6 +510,44 @@ export function outputProblems(text: string, bot: LoadedBot, listedStores: boole
   if (maxW && !listedStores && words > Math.ceil(maxW * 1.5)) out.push(`largo: ${words} palabras (máximo ${maxW})`);
   const maxC = bot.config.limites.max_caracteres_respuesta;
   if (maxC && !listedStores && text.length > Math.ceil(maxC * 1.5)) out.push(`largo: ${text.length} caracteres (máximo ${maxC})`);
+  const unknown = unknownStoreNames(text, bot);
+  if (unknown.length) out.push(`tienda: ${unknown.map((u) => `"${u}"`).join(', ')} no está en la lista de tiendas; usa solo tiendas de buscar_tienda`);
+  return out;
+}
+
+const STOREISH = /\b(papeler[ií]a|librer[ií]a|tienda|bazar|almac[eé]n|distribuidora|[uú]tiles|arte|comercial|ejemplo|store|shop)\b/i;
+
+/**
+ * G-5: nombres que parecen de tienda (en *negrita* o tras 📍) y no existen en tiendas.csv, destinos ni catálogo.
+ * Ej.: "📍 *Papelería La Económica*" cuando no está en la lista → inventado.
+ */
+export function unknownStoreNames(text: string, bot: LoadedBot): string[] {
+  const n = (s: string) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
+  const known = [
+    ...bot.tiendas.map((t) => t.nombre),
+    ...bot.config.destinos.map((d) => d.descripcion ?? ''),
+    ...bot.catalogo.map((p) => p.nombre),
+    bot.config.marca,
+    String(bot.config.persona.nombre ?? ''),
+  ]
+    .map(n)
+    .filter((k) => k.length >= 3);
+  const candidates = new Set<string>();
+  for (const m of text.matchAll(/\*([^*\n]{3,80})\*/g)) candidates.add(m[1].trim());
+  for (const m of text.matchAll(/📍\s*\*?([^*\n]{3,80})/g)) candidates.add(m[1].trim());
+  const out: string[] = [];
+  for (const c of candidates) {
+    if (!STOREISH.test(c)) continue;
+    const nc = n(c);
+    if (!nc || known.some((k) => nc.includes(k) || k.includes(nc))) continue;
+    out.push(c);
+  }
+  return out;
+}
+
+function stripUnknownStores(text: string, bot: LoadedBot): string {
+  let out = text;
+  for (const u of unknownStoreNames(text, bot)) out = out.split(u).join('una tienda de nuestra lista');
   return out;
 }
 

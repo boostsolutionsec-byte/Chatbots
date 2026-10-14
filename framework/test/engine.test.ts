@@ -262,3 +262,26 @@ describe('P-2 / P-3 en el motor', () => {
     expect(provider.calls[0].messages.at(-1)!.content).toContain('nota de voz');
   });
 });
+
+describe('G-5: nombres de tienda inventados', () => {
+  it('detecta tiendas que no están en la lista', async () => {
+    const { unknownStoreNames } = await import('../src/engine/engine.js');
+    const { loadBot } = await import('../src/config/loader.js');
+    const bot = loadBot('_plantilla', { env });
+    expect(unknownStoreNames('Ve a 📍 *Papelería La Económica* en el centro', bot)).toEqual(['Papelería La Económica']);
+    expect(unknownStoreNames('📍 *EJEMPLO Arte Cuenca*\nCalle Larga', bot)).toEqual([]);
+    expect(unknownStoreNames('Te recomiendo el *EJEMPLO Marcador de pintura fino*', bot)).toEqual([]);
+    expect(unknownStoreNames('*¡Genial!* gracias', bot)).toEqual([]);
+  });
+  it('si el reintento insiste, se reemplaza por el texto con datos reales', async () => {
+    const provider = new MockProvider([
+      { text: '', toolCalls: [{ id: 'a', name: 'buscar_tienda', input: { ubicacion: 'loja' } }] },
+      { text: 'Ve a 📍 *Librería El Sol* en Loja' },
+      { text: 'Ve a 📍 *Librería El Sol*, es la mejor' },
+    ]);
+    const e = new Engine({ provider, env });
+    const r = await e.handle('_plantilla', msg('soy de loja'));
+    expect(r.replies[0].text).toContain('EJEMPLO Arte Loja');
+    expect(r.replies[0].text).not.toContain('El Sol');
+  });
+});
