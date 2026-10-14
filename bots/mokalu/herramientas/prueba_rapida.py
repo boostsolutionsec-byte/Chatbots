@@ -46,7 +46,7 @@ def find(text=None, lat=None, lng=None):
 
 sistema = open(f"{BOT}/prompts/sistema.md", encoding="utf-8").read()
 for k, v in cfg.get("variables", {}).items():
-    sistema = sistema.replace("{{" + k + "}}", str(v))
+    sistema = sistema.replace("{{variables." + k + "}}", str(v))
 sistema += "\n\n# Conocimiento\n" + open(f"{BOT}/conocimiento/productos-uni.md", encoding="utf-8").read()
 
 for c in cases:

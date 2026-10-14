@@ -71,7 +71,7 @@ def find(text=None, lat=None, lng=None):
 
 SISTEMA = open(BOT / "prompts/sistema.md", encoding="utf-8").read()
 for k, v in (CFG.get("variables") or {}).items():
-    SISTEMA = SISTEMA.replace("{{" + k + "}}", str(v))
+    SISTEMA = SISTEMA.replace("{{variables." + k + "}}", str(v))
 for f in sorted((BOT / "conocimiento").glob("*.md")):
     SISTEMA += f"\n\n# Conocimiento: {f.name}\n" + f.read_text(encoding="utf-8")
 SISTEMA += """

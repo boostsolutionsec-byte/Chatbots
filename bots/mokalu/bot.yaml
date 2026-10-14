@@ -25,7 +25,7 @@ modelo:
   rapido: claude-haiku
   experto: claude-sonnet
 
-variables:                  # usables en prompts/sistema.md como {{variable}}
+variables:                  # en prompts/sistema.md se usan como {{variables.nombre}}
   nombre_bot: "Sofi"
   marca_distribuidor: "Mokalú"
   marcas: "uni (POSCA, PIN, uni-ball Signo, Jetstream, Kuru Toga)"
