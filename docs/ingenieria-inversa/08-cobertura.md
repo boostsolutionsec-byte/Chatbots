@@ -71,6 +71,22 @@
 
 ---
 
-## 5. Re-verificación final
+## 5. Re-verificación final (contra `agente/2-framework@9231232`)
 
-Ver la sección al final del archivo (se repite la revisión contra el último commit de `agente/2-framework` antes de cerrar la noche).
+Único commit nuevo desde la revisión: `9231232` "H-12 (tienda local sin la marca), H-13 (ubicación detectada), H-14 (idioma), contrato actualizado"
+(8 archivos, +95/−15). Las citas de las secciones 1–4 siguen siendo de `9e7790b`; en `9231232` las líneas de `engine.ts` se desplazan
+(+2 tras la línea 78, ≈+11 tras la 216).
+
+**Mejoras nuevas que tocan esta tabla**
+- Regla de idioma en el núcleo ("Responde en el idioma del cliente…", `engine.ts` reglas del sistema) → cubre la práctica 7 de `00-RESUMEN.md` y el eval C12 (turista en inglés).
+- Si el cliente dice dónde está y el modelo vuelve a preguntar la ciudad, el motor llama solo a `buscar_tienda` (`asksLocation` + `ubicacion_detectada_en_mensaje` en `<estado>`) → refuerza la práctica 3 y los evals C07, C10, C19.
+- Tienda local que no declara la marca pedida: se muestra con nota y la más cercana con la marca (`LocatorResult.nota`, `locator.ts`) → nunca se dice "no hay punto de venta" si sí hay uno (riesgo de `00-RESUMEN.md`).
+- `docs/CONTRATO.md` → Cambios ahora fija el simulador y declara P-2 y P-8 como **parciales**, coherente con este documento.
+
+**Estado de los huecos tras la re-verificación**
+
+| Id | ¿Cerrado en 9231232? |
+|---|---|
+| G-1 etiquetas · G-2 resumen automático · G-3 requestLocation/list · G-4 medios/transcripción · G-5 nombres de tienda en la guarda · G-6 seguimientos · G-8 métricas · G-9 recarga · G-10 WA location request · G-12 descarga de medios · G-13 host Instagram · G-14 Evolution · G-15 idioma de plantilla | ❌ siguen abiertos (sin cambios en `tools.ts` salvo la nota, ni en `followups/`, `channels/meta.ts`, `channels/whatsapp.ts`) |
+
+Nota sobre `PENDIENTES.md`: el Agente 2 escribió "Todos los `[framework]` del Agente 3 y P-1…P-11 del Agente 1"; según esta revisión, **P-1, P-2, P-3, P-6, P-7 y P-8 están parciales** (detalle en §1).
