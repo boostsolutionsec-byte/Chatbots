@@ -81,7 +81,8 @@ localizador:
   max_resultados: 2
   si_no_hay_en_ciudad: mas_cercana_por_distancia
   ofrecer_ademas: tienda_online   # si la más cercana está lejos (> 60 km) ofrecer envío nacional (POR CONFIRMAR)
-  distancia_lejana_km: 60
+  distancia_lejana_km: 60        # 60–300 km: tienda + opción online en una línea
+  distancia_muy_lejana_km: 300   # > 300 km (ej. Galápagos): primero la tienda online
   filtro_producto: marcas         # si pide POSCA, preferir tiendas cuya columna marcas incluya POSCA
 
 flujos:
