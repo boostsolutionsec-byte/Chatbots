@@ -12,6 +12,13 @@ Telegram Trigger → Leer tiendas (Data Table) → Responder sin IA (Code)
 Sin IA: saludo, "dónde compro en <ciudad/sector>", ubicación GPS, reclamo, distribuidor/mayorista, pedir una persona,
 precio, horario. Con IA: preguntas de producto (con 1–2 fragmentos de la guía) y mensajes mezclados.
 
+## Precisión medida (sin IA, 2026-10-14)
+- `probar.cjs`: 30/30 casos difíciles (ciudades mal escritas, sectores, reclamos, mayoristas, saludos, "dónde queda Mokalú").
+- `probar-personas.cjs`: 48 clientes simulados del validador → todos los de "dónde compro", reclamo y distribuidor van al
+  destino correcto; las preguntas de producto y los ataques pasan a DeepSeek.
+- **Falta medir:** las respuestas de DeepSeek (≈1 de cada 3 conversaciones) y todo con las tiendas reales.
+- Memoria: recuerda la ciudad de cada chat 2 días (`$getWorkflowStaticData`, solo funciona con el workflow **activo**).
+
 ## Antes de encenderlo
 1. Crear un bot **nuevo** en @BotFather para Mokalú y crear su credencial de Telegram en n8n.
 2. En los 4 nodos de Telegram cambiar la credencial: n8n puso sola la **"Telegram account" existente** y, si se enciende así,

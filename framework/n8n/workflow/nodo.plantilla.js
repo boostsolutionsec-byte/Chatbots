@@ -3,6 +3,11 @@
 const msg = $('Telegram Trigger').first().json.message || {};
 const chatId = msg.chat ? msg.chat.id : null;
 const texto = (msg.text || msg.caption || '').slice(0, 500);
+const memo = $getWorkflowStaticData('global');
+memo.chats = memo.chats || {};
+const hoyMs = Date.now();
+for (const k of Object.keys(memo.chats)) if (hoyMs - memo.chats[k].ts > 7 * 864e5) delete memo.chats[k]; // olvida tras 7 días
+const previo = (chatId != null && memo.chats[chatId] && hoyMs - memo.chats[chatId].ts < 2 * 864e5) ? memo.chats[chatId] : null;
 const tiendas = $input.all().map(i => i.json).filter(t => t.nombre && t.lat !== '' && t.lat != null);
 
 const CONFIG = {
@@ -14,7 +19,7 @@ const CONFIG = {
 // [nombre, alias|alias, ciudad, provincia, lat, lng] — fuente: framework/n8n/lugares.json
 const LUGARES = __LUGARES__;
 
-const norm = s => (s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9ñ ]/g, ' ').replace(/\s+/g, ' ').trim();
+const norm = s => (s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9ñ ]/g, ' ').replace(/\s+/g, ' ').trim();
 const t = ' ' + norm(texto) + ' ';
 const has = list => list.some(k => t.includes(' ' + k + ' ') || (k.includes(' ') && t.includes(k)));
 const km = (a, b, c, d) => { const r = Math.PI / 180, x = Math.sin((c - a) * r / 2) ** 2 + Math.cos(a * r) * Math.cos(c * r) * Math.sin((d - b) * r / 2) ** 2; return 6371 * 2 * Math.asin(Math.sqrt(x)); };
@@ -27,11 +32,16 @@ const aviso = enHorario ? '' : ` Te responden en horario de atención (${CONFIG.
 let lugar = null, lat = null, lng = null;
 if (msg.location) { lat = msg.location.latitude; lng = msg.location.longitude; }
 else {
-  let mejor = 0;
-  for (const l of LUGARES) for (const a of [norm(l[0]), ...l[1].split('|')]) {
-    if (a && a.length > mejor && t.includes(' ' + a + ' ')) { mejor = a.length; lugar = l; }
-  }
+  // Todas las coincidencias; gana la más larga, pero un sector le gana a su propia ciudad ("guayaco, por urdesa").
+  const hits = [];
+  for (const l of LUGARES) for (const a of [norm(l[0]), ...l[1].split('|')]) if (a && t.includes(' ' + a + ' ')) hits.push({ l, n: a.length, sector: l[0] !== l[2] });
+  hits.sort((x, y) => y.n - x.n);
+  lugar = hits.length ? (hits.find(h => h.sector && h.l[2] === hits[0].l[2]) || hits[0]).l : null;
   if (lugar) { lat = lugar[4]; lng = lugar[5]; }
+}
+const lugarNuevo = !!(lugar || msg.location);
+if (!lugarNuevo && previo && previo.lat != null) { // recuerda la ciudad que dio antes
+  lat = previo.lat; lng = previo.lng; lugar = LUGARES.find(l => l[2] === previo.ciudad) || [previo.ciudad, '', previo.ciudad, '', lat, lng];
 }
 let cercanas = [];
 if (lat != null && tiendas.length) {
@@ -41,7 +51,8 @@ if (lat != null && tiendas.length) {
   }
 }
 const ciudad = lugar ? lugar[2] : null;
-const ficha = s => `📍 *${s.nombre}* — ${s.direccion}\n🗺️ ${s.maps_url} · 📲 ${s.whatsapp} · 🕒 ${s.horario}`;
+const md = v => String(v == null ? '' : v).replace(/([_*`\[])/g, '\\$1'); // escapa Markdown de Telegram
+const ficha = s => `📍 *${md(s.nombre)}* — ${md(s.direccion)}\n🗺️ ${s.maps_url} · 📲 ${md(s.whatsapp)} · 🕒 ${md(s.horario)}`;
 
 const FRAG = __FRAG__;
 const pal = new Set(norm(texto).split(' ').filter(w => w.length > 3));
@@ -50,23 +61,30 @@ const preguntaProducto = fragsUtiles.length > 0 && !has(['donde', 'comprar', 'co
 
 // 2) Respuestas fijas, en orden de prioridad (bots/mokalu/plantillas-respuesta.md).
 let respuesta = null, derivar = null, intencion = 'ia';
-if (has(['reclamo', 'defectuoso', 'dañado', 'danado', 'vino seco', 'vinieron secos', 'no sirve', 'estafa', 'devolucion', 'garantia', 'queja'])) {
+const pideDonde = has(['donde', 'comprar', 'compro', 'consigo', 'venden', 'tienda', 'local', 'conseguir']);
+if (has(['reclamo', 'defectuoso', 'defectuosos', 'danado', 'danados', 'vino seco', 'vinieron secos', 'llego seco', 'esta seco', 'no sirve', 'no pinta', 'no pintan', 'no funciona', 'no funcionan', 'no sale', 'llego roto', 'llego mal', 'roto', 'rota', 'fallado', 'estafa', 'devolucion', 'devolver', 'garantia', 'queja'])) {
   intencion = 'reclamo'; derivar = 'reclamos';
   respuesta = `Lamento mucho lo que pasó 🙏 Te paso ahora con el equipo de Mokalú que ve reclamos para resolverlo directamente.${aviso}`;
-} else if (has(['ser distribuidor', 'punto de venta', 'revender', 'vender posca', 'al por mayor', 'mayorista', 'mayoristas', 'proforma', 'cotizacion', 'colegio', 'empresa'])
-  || (t.includes('distribuidor') && has(['tengo', 'mi negocio', 'mi papeleria', 'mi tienda']))) {
+} else if (has(['ser distribuidor', 'ser distribuidora', 'distribuir', 'punto de venta', 'revender', 'vender posca', 'vender sus productos', 'asesora de ventas', 'asesor de ventas', 'trabajar con ustedes', 'al por mayor', 'por mayor', 'mayorista', 'mayoristas', 'proforma', 'cotizacion', 'para mi colegio', 'para el colegio', 'para la escuela', 'para mi empresa', 'para la empresa', 'para mi negocio'])
+  || /\b([5-9]\d|\d{3,})\s*(marcadores|poscas|posca|unidades|cajas|esferos|boligrafos)/.test(t)
+  || (t.includes('distribuidor') && has(['tengo', 'mi negocio', 'mi papeleria', 'mi tienda', 'quiero', 'como']))) {
   intencion = 'distribuidor'; derivar = 'distribuidores';
   respuesta = `¡Qué buena noticia! 🙌 Te conecto con el equipo comercial de Mokalú. Si quieres, déjame el nombre de tu negocio y tu ciudad para pasárselos.${aviso}`;
 } else if (has(['hablar con una persona', 'asesor', 'asesora', 'humano', 'persona real'])) {
   intencion = 'humano'; derivar = 'asesor_ventas';
   respuesta = `Claro 🙂 Te paso con una persona del equipo de Mokalú.${aviso}`;
+} else if (t.includes(' mokalu ') && has(['donde', 'direccion', 'queda', 'quedan', 'ubicados', 'ubicacion', 'local', 'tienda', 'estan'])) {
+  intencion = 'mokalu';
+  const m = tiendas.find(x => x.tienda_id === 'mokalu-laguna-plaza');
+  respuesta = m ? `La tienda de Mokalú está en Guayaquil:\n${ficha(m)}\nSi estás en otra ciudad, dime cuál y te paso el punto de venta más cercano 📍`
+                : `La tienda de Mokalú está en el C.C. Laguna Plaza, vía a la costa, Guayaquil 📍 Si estás en otra ciudad, dime cuál y te paso el punto de venta más cercano.`;
 } else if (has(['precio', 'precios', 'cuanto cuesta', 'cuanto vale', 'valor', 'dolares']) && !cercanas.length) {
   intencion = 'precio';
   respuesta = 'El precio lo pone cada tienda, así que no te quiero dar un dato equivocado 🙏 Dime tu ciudad y te paso el WhatsApp de la tienda más cercana para que te lo confirmen.';
 } else if (has(['horario', 'a que hora', 'atienden', 'abren']) && !cercanas.length) {
   intencion = 'horario';
   respuesta = `Nuestro equipo atiende ${CONFIG.horarioHumano} 🕒 Yo te respondo a cualquier hora: ¿en qué ciudad estás para pasarte la tienda más cercana?`;
-} else if (cercanas.length && !preguntaProducto && (texto.split(' ').length <= 12 || msg.location || has(['donde', 'comprar', 'compro', 'consigo', 'venden', 'tienda', 'local']))) {
+} else if (cercanas.length && !preguntaProducto && (lugarNuevo ? (texto.split(' ').length <= 12 || msg.location || pideDonde) : pideDonde)) {
   const s = cercanas[0];
   intencion = 'donde_compro';
   if (s.ciudad === ciudad || s.km <= 5) {
@@ -74,9 +92,12 @@ if (has(['reclamo', 'defectuoso', 'dañado', 'danado', 'vino seco', 'vinieron se
   } else if (s.km <= CONFIG.lejosKm) {
     respuesta = `En ${ciudad} aún no tenemos punto de venta 😕 La más cercana está en ${s.ciudad}, a ~${s.km} km:\n${ficha(s)}`;
   } else {
-    respuesta = `En ${ciudad} aún no tenemos punto de venta 😕 Puedes pedir en la tienda online de Mokalú, con envíos a todo el país: ${CONFIG.webTienda}\nLa tienda física más cercana está en ${s.ciudad} (~${s.km} km): *${s.nombre}*, 📲 ${s.whatsapp}.`;
+    respuesta = `En ${ciudad} aún no tenemos punto de venta 😕 Puedes pedir en la tienda online de Mokalú, con envíos a todo el país: ${CONFIG.webTienda}\nLa tienda física más cercana está en ${s.ciudad} (~${s.km} km): *${md(s.nombre)}*, 📲 ${md(s.whatsapp)}.`;
   }
-} else if (!texto.trim() || /^(hola|holi|buenas|buenos dias|buenas tardes|buenas noches|hi|hello|ola)$/.test(norm(texto)) || !/[a-z]/.test(norm(texto))) {
+} else if (has(['donde', 'consigo', 'conseguir', 'venden', 'local', 'tienda']) && !cercanas.length && !preguntaProducto) {
+  intencion = 'pedir_ciudad';
+  respuesta = '¡Claro! ¿En qué ciudad o sector estás? 📍 (también puedes enviarme tu ubicación) Así te paso la tienda más cercana.';
+} else if (!msg.location && (!texto.trim() || !/[a-z]/.test(norm(texto)) || norm(texto).split(' ').every(w => ['hola', 'holi', 'holaa', 'ola', 'buenas', 'buenos', 'buen', 'dia', 'dias', 'tardes', 'noches', 'que', 'tal', 'saludos', 'hi', 'hello', 'hey'].includes(w)))) {
   intencion = 'saludo';
   respuesta = `¡Hola! Soy ${CONFIG.nombreBot}, asesora de Mokalú 🎨 Te ayudo a encontrar dónde comprar uni/POSCA o a elegir cuál te sirve. ¿En qué ciudad estás? (también puedes enviarme tu ubicación 📍)`;
 }
@@ -89,6 +110,14 @@ if (!respuesta) {
   if (cercanas.length) contexto += `TIENDAS (cliente en ${ciudad}):\n` + cercanas.slice(0, 2).map(s => `${s.nombre} (${s.ciudad}, ~${s.km} km) — ${s.direccion} · ${s.maps_url} · WhatsApp ${s.whatsapp} · ${s.horario}`).join('\n') + '\n';
   if (!cercanas.length) contexto += 'TIENDAS: aún no sabes la ciudad del cliente; si quiere comprar, pregúntala.\n';
   if (!enHorario) contexto += `Ahora el equipo humano no atiende (horario: ${CONFIG.horarioHumano}).\n`;
+  if (previo && previo.ultimo) contexto += `TU MENSAJE ANTERIOR: ${previo.ultimo}\n`;
+}
+if (chatId != null) {
+  const c = memo.chats[chatId] || {};
+  if (lugarNuevo && lat != null) Object.assign(c, { ciudad, lat, lng });
+  c.ultimo = respuesta ? respuesta.replace(/\s+/g, ' ').slice(0, 220) : c.ultimo;
+  c.ts = hoyMs;
+  memo.chats[chatId] = c;
 }
 
 return [{ json: { chatId, texto, intencion, atajo: !!respuesta, respuesta, derivar, ciudad, contexto } }];
