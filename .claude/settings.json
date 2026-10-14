@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__claude-code-remote",
+      "mcp__n8n",
+      "Artifact",
+      "WebSearch",
+      "WebFetch",
+      "Bash(git:*)",
+      "Bash(npm:*)",
+      "Bash(npx:*)",
+      "Bash(node:*)",
+      "Bash(python3:*)",
+      "Bash(claude -p:*)"
+    ]
+  }
+}
