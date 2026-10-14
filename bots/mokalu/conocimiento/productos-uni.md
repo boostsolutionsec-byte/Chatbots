@@ -1,62 +1,54 @@
-# Guía de producto uni / POSCA — qué recomendar
+# Productos uni / POSCA (fragmentos)
+<!-- Cada "##" es un fragmento independiente: el motor recupera solo los relevantes por las palabras del título (etiquetas).
+     Mantener cada fragmento corto (< 500 caracteres). Fuentes [F#] en docs/marcas.md. Sin precios ni stock. -->
 
-Fuentes completas en `docs/marcas.md` (referencias [F#]). Sin precios ni stock: eso depende de cada tienda.
-Qué modelos y colores distribuye realmente Mokalú: <!-- POR CONFIRMAR -->
+## POSCA qué es · marcador pintura acrílica agua opaca superficies permanente
+POSCA = marcador de pintura acrílica al agua, opaca, mate y sin olor. Pinta papel, cartón, madera, tela, vidrio, metal, plástico, cerámica, piedra, lienzo y cuero. Seca rápido y se pinta capa sobre capa. Permanente en superficies porosas; en vidrio, metal o plástico se puede quitar si no se sella. [F4][F5]
 
-## POSCA en una frase
-Marcador de **pintura acrílica al agua**, opaca, mate y sin olor, que pinta sobre casi todo (papel, cartón, madera,
-tela, vidrio, metal, plástico, cerámica, piedra, lienzo, cuero). Seca rápido y se puede pintar **capa sobre capa**;
-los colores claros cubren igual que los oscuros. [F4][F5]
-- Permanente en superficies porosas (papel, madera, tela). En superficies lisas (vidrio, metal, plástico) se puede
-  raspar/limpiar si no se sella. [F4]
+## POSCA puntas modelos grosor mm PC-1MR PC-1M PC-3M PC-5M PC-7M PC-8K PC-17K PCF-350
+PC-1MR 0,7 mm calibrada (detalles mínimos) · PC-1M 0,7 mm (contornos) · PC-3M 0,9–1,3 mm (dibujo general) · PC-5M 1,8–2,5 mm (todo terreno, más colores) · PC-7M 4,5–5,5 mm (rellenos) · PC-8K 8 mm biselada (áreas grandes) · PC-17K 15–17 mm (murales) · PCF-350 pincel. Kit de inicio: PC-1M + PC-3M + PC-5M. [F7–F11]
 
-## ¿Qué punta? (elige por el trazo)
+## POSCA cómo usar agitar cebar no sale pintura seca
+Agitar con la tapa puesta ~10 s hasta oír la bolita; presionar la punta en un papel hasta que baje la pintura (sin exagerar). Capas finas, dejar secar entre capas. Guardar tapada y horizontal. Si llegó seca o con la punta dañada → reclamo. [F4][F12]
 
-| Necesito… | Modelo | Ancho |
-|---|---|---|
-| detalles mínimos, firmas, ojos, letras pequeñas | **PC-1MR** (punta calibrada con anillo metálico) | 0,7 mm |
-| contornos y detalles | **PC-1M** | 0,7 mm |
-| dibujar en general, lettering, rocas | **PC-3M** | 0,9–1,3 mm |
-| la todo terreno, rellenos pequeños | **PC-5M** (la de más colores) | 1,8–2,5 mm |
-| rellenos medianos, carteles | **PC-7M** | 4,5–5,5 mm |
-| áreas grandes, letras de cartel | **PC-8K** (biselada) | 8 mm |
-| murales, vitrinas, fondos | **PC-17K** (biselada extra ancha) | 15–17 mm |
-| trazo tipo pincel, caligrafía, degradados | **PCF-350** (pincel) | variable |
+## zapatillas tenis sneakers custom cuero lona POSCA sellar barniz no se borre
+Zapatillas: PC-1M o PC-3M para contornos y PC-5M para rellenar. Cuero: limpiar/desengrasar antes. Al final barniz acrílico al agua en capas finas; probar antes en una zona escondida (algunos selladores disuelven la pintura). [F13]
 
-Combo de inicio típico: **PC-1M + PC-3M + PC-5M**.
+## taza cerámica porcelana lavavajillas hornear decorativa alimentos
+Taza: PC-1M o PC-3M por fuera, lejos del borde donde va la boca. Hornear según el folleto POSCA (porcelana ~160 °C, 45 min) y barnizar. Queda decorativa: lavar a mano, no lavavajillas, no apta para alimentos. [F12]
 
-## ¿Qué POSCA para qué proyecto?
+## ropa tela camiseta tote bag lavar planchar
+Tela: PC-3M o PC-5M con un cartón dentro de la prenda. Planchar por el reverso sin vapor. Lavar al revés en ciclo suave; el color baja tras muchos lavados y se puede retocar. [F12]
 
-| Proyecto | Recomendación | Cómo fijar |
-|---|---|---|
-| **Zapatillas** (cuero/lona) | PC-1M o PC-3M para contornos, PC-5M para rellenar | Limpiar antes; barniz acrílico al agua en capas finas. **Probar** en zona escondida (algunos selladores disuelven la pintura). [F13] |
-| **Tazas / cerámica** | PC-1M / PC-3M; pintar solo por fuera, lejos del borde | Hornear según el folleto POSCA (porcelana ~160 °C, 45 min) y barnizar. **Decorativa**: lavar a mano, no lavavajillas. [F12] |
-| **Ropa / tela / tote bags** | PC-3M / PC-5M; cartón dentro de la prenda | Planchar por el reverso, sin vapor; lavar al revés, ciclo suave. El color baja tras muchos lavados y se retoca. [F12] |
-| **Lienzo / cuadros** | PC-5M + PC-8K para fondos, PC-1M para detalles | Barniz acrílico al final (opcional). |
-| **Rocas pintadas** | PC-3M / PC-5M; PC-1M para puntillismo | Barniz en spray si van afuera. |
-| **Vidrio / ventanas / espejos** | PC-5M / PC-8K | Removible si no se sella; barniz en spray para que dure. |
-| **Lettering / bullet journal** | PC-1MR, PC-1M, PC-3M; uni PIN para tinta negra | — |
-| **Murales / vitrinas** | PC-8K y PC-17K | Barniz si es exterior. |
-| **Cuadernos de bocetos con acuarela** | uni PIN (tinta resistente al agua) | — |
+## vidrio ventana espejo metal plástico vitrina
+Vidrio, metal o plástico: PC-5M o PC-8K. Sin sellar se puede limpiar; para que dure, barniz en spray transparente a ~30 cm en capas finas. [F12]
 
-## Cómo usar una POSCA (para explicar en 2 líneas)
-1. Agita con la tapa puesta ~10 s hasta oír la bolita.
-2. Presiona la punta varias veces sobre un papel de prueba hasta que baje la pintura (sin exagerar).
-3. Capas finas; deja secar entre capas. Guarda tapada y horizontal. [F4][F12]
+## mural pared grande cartel letrero vitrina
+Áreas grandes: PC-8K (8 mm) y PC-17K (15–17 mm); PC-5M para detalles. Si es exterior, barnizar. [F9]
 
-## POSCA vs. marcadores de alcohol
-- POSCA: **cubre** (opaca), pinta sobre cualquier superficie, capas encima, no traspasa el papel.
-- Alcohol: tinta transparente, degradados suaves en papel, traspasa el papel. [F6]
-- Frase corta: *"¿Cubrir y pintar sobre cualquier cosa? POSCA. ¿Degradados suaves en papel? Alcohol."*
+## rocas piedras lienzo cuadro madera tablas surf
+Rocas: PC-3M/PC-5M, PC-1M para puntillismo. Lienzo o madera: PC-8K para fondos, PC-5M y PC-1M para detalles. Si va a la intemperie, barniz al final.
 
-## Otras líneas uni
-- **uni PIN** — estilógrafo de tinta pigmentada, resistente al agua al secar; tamaños 005 a 08 y brush. Para entintar antes de acuarela y dibujo técnico. [F15]
-- **uni-ball Signo** — bolígrafo de gel pigmentado, resistente al agua y a la decoloración (0,28–0,7 mm). La Signo blanca sirve para brillos. [F16]
-- **Jetstream** — tinta híbrida de secado rápido; no se corre: ideal para zurdos. [F17]
-- **Kuru Toga** — portaminas que gira la mina al escribir para mantener la punta fina (0,3 / 0,5 mm). [F18]
+## lettering caligrafía bullet journal letras
+Lettering: PC-1MR o PC-1M para letras finas, PC-3M para trazos marcados, PCF-350 pincel para caligrafía. Tinta negra en papel: uni PIN.
 
-## Productos que Mokalú NO distribuye (respuesta tipo)
-Si preguntan por otra marca (Copic, Molotow, Sharpie, Faber-Castell, Pilot…): "Esa marca no la manejamos 🙏 En uni
-tenemos <alternativa más parecida>. ¿Te cuento dónde conseguirla?" — sin hablar mal de la otra marca.
-Alternativas: marcador de pintura → POSCA · marcador permanente fino → POSCA PC-1M (si es sobre superficies) o uni PIN (papel) ·
-estilógrafo → uni PIN · bolígrafo de gel → Signo.
+## POSCA vs alcohol Copic marcadores alcohol diferencia
+POSCA cubre (opaca), pinta sobre cualquier superficie y no traspasa el papel. Los marcadores de alcohol son tinta transparente para degradados suaves en papel. Cubrir/cualquier superficie → POSCA; degradados en papel → alcohol. [F6]
+
+## otras marcas no distribuimos Copic Molotow Sharpie Faber-Castell Pilot acuarelas alternativa
+No las manejamos. Alternativas uni: marcador de pintura (Molotow, Sharpie Paint) → POSCA · marcador de alcohol (Copic) → POSCA PC-3M/PC-5M o uni PIN · acuarelas → uni PIN para entintar antes · bolígrafo de gel → Signo. Nunca hablar mal de otra marca.
+
+## uni PIN estilógrafo fineliner tinta acuarela dibujo técnico
+uni PIN: tinta pigmentada resistente al agua al secar, para entintar antes de acuarela y dibujo técnico. Tamaños 005 a 08 y brush. [F15]
+
+## Signo gel bolígrafo esfero blanco brillos
+uni-ball Signo: gel pigmentado, resistente al agua y a la decoloración (0,28–0,7 mm). La Signo blanca sirve para brillos sobre ilustraciones. [F16]
+
+## Jetstream zurdo esfero no se corre secado rápido
+Jetstream (SX/SXN-101): tinta híbrida de secado rápido que no se corre; buena opción para zurdos. 0,5 / 0,7 / 1,0 mm. [F17]
+
+## Kuru Toga portaminas lápiz mina arquitectura
+Kuru Toga: portaminas que gira la mina al escribir para mantener la punta fina. Mina 0,3 o 0,5 mm. [F18]
+
+## niños seguridad tóxico
+POSCA es a base de agua y sin olor. Niños: con supervisión de un adulto, sin llevarlos a la boca. No afirmar "no tóxico" ni certificaciones (por confirmar con la ficha local).
