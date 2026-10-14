@@ -21,7 +21,7 @@ export interface DueFollowup {
  * el campo opcional `texto` de la regla, o se omite.
  */
 export function dueFollowups(bot: LoadedBot, conv: Conversation, now = Date.now()): DueFollowup[] {
-  if (conv.paused || !conv.lastUserAt) return [];
+  if (conv.paused || conv.lastUserAt === undefined) return [];
   const out: DueFollowup[] = [];
   bot.config.seguimiento.forEach((rule, i) => {
     const key = `seg${i}:${rule.despues_de}`;

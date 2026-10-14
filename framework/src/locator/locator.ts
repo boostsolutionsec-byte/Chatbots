@@ -130,7 +130,10 @@ export class Locator implements StoreLocator {
         derivar = this.opts.fallback.slice('derivar:'.length);
         aviso = join(aviso, `No hay tiendas en ${lugar.city || lugar.name}. La configuración pide derivar a "${derivar}".`);
       } else {
-        const nearest = withDist.sort(byDist).slice(0, max);
+        // Fuera de su ciudad solo se ofrecen alternativas que no queden mucho más lejos que la primera.
+        const sorted = withDist.sort(byDist);
+        const d0 = sorted[0]?.d ?? 0;
+        const nearest = sorted.slice(0, max).filter((x, i) => i === 0 || (x.d ?? Infinity) <= d0 * 1.5 + 10);
         resultados = nearest.map((x) => toResult(x, x.s.provinceCode === lugar!.provinceCode ? 'misma_provincia' : 'mas_cercana'));
         if (resultados.length) {
           aviso = join(
