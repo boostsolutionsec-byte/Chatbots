@@ -120,17 +120,18 @@ canal: instagram · intención: donde_comprar
 ```
 **Debe:** no asume ciudad · pide aclaración una sola vez · `tienda_id_en: [gye-sur]`.
 
-### C09 · Cantón que el bot no conoce (Pelileo)
+### C09 · Lugar ambiguo o desconocido ("La Esperanza")
 canal: whatsapp · intención: donde_comprar
 ```
-👤 buenas soy de pelileo
-🤖 ¡Hola! No tengo Pelileo en mi lista todavía 🙈 ¿Qué ciudad grande te queda más cerca?
-👤 ambato
-🤖 Entonces te quedan bien:
-   📍 *EJEMPLO Papelería Ambato Centro* — <dirección>
-   📍 *EJEMPLO Arte Ficoa* — <dirección>
+👤 buenas soy de la esperanza
+🤖 ¡Hola! Hay varios lugares llamados La Esperanza en Ecuador 🙈 ¿Qué ciudad grande te queda más cerca?
+👤 ibarra
+🤖 Entonces te queda bien:
+   📍 *EJEMPLO Papelería Ibarra* — <dirección>
+   🕒 <horario> · 📲 <WhatsApp>
 ```
-**Debe:** si el localizador no reconoce el lugar, **pregunta** en vez de adivinar · `tienda_id_en: [amb-centro, amb-ficoa]` · registrar "pelileo" como lugar no reconocido (para ampliar `lugares.csv`).
+**Debe:** si el localizador no reconoce el lugar o hay varios con el mismo nombre, **pregunta** en vez de adivinar · `tienda_id_en: [iba-centro]` · registrar "la esperanza" como lugar ambiguo.
+Variante (lugar conocido sin tienda): "soy de Pelileo" → el localizador lo conoce (gazetteer del Agente 2) → recomienda directo `amb-centro`/`amb-ficoa` por distancia, sin preguntar.
 
 ### C10 · Valle de los Chillos
 canal: telegram · intención: donde_comprar
@@ -453,7 +454,7 @@ canal: whatsapp · perfil: jubilado que pinta óleo · intención: asesoria
 | C06 | sin cobertura | `deriva_a` | asesor_ventas |
 | C07 | sector | `tienda_id_en` | gye-alborada |
 | C08 | ambigüedad | `pide_campo` → `tienda_id_en` | gye-sur |
-| C09 | lugar desconocido | `pide_campo` | amb-centro, amb-ficoa |
+| C09 | lugar ambiguo | `pide_campo` → `tienda_id_en` | iba-centro (variante Pelileo: amb-centro, amb-ficoa) |
 | C10 | sector→ciudad | `tienda_id_en` | sangolqui-centro |
 | C11 | ciudad vecina | `tienda_id_en`, `max 2` | duran-centro (+gye-centro) |
 | C12 | idioma | `tienda_id_en` | sal-centro |
