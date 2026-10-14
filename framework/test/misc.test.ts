@@ -311,3 +311,19 @@ describe('ClaudeCliProvider', () => {
     await expect(p.complete({ system: '', messages: [{ role: 'user', content: 'a' }], model: 'haiku' })).rejects.toThrow(/CLAUDE_CLI_MAX_CALLS/);
   });
 });
+
+describe('Anthropic: caché de conversación', () => {
+  it('marca solo el último bloque', async () => {
+    const { withConversationCache, AnthropicProvider } = await import('../src/llm/anthropic.js');
+    const m = withConversationCache(toAnthropicMessages([{ role: 'user', content: 'hola' }, { role: 'assistant', content: 'hey' }, { role: 'user', content: 'soy de loja' }]));
+    expect(JSON.stringify(m[2])).toContain('cache_control');
+    expect(JSON.stringify(m[0])).not.toContain('cache_control');
+    // Cliente simulado: verifica system con caché y parseo de tool_use
+    let req: Record<string, unknown> = {};
+    const fake = { messages: { create: async (r: Record<string, unknown>) => { req = r; return { content: [{ type: 'tool_use', id: 'x', name: 'buscar_tienda', input: { ubicacion: 'loja' } }], usage: { input_tokens: 1, output_tokens: 1 } }; } } };
+    const p = new AnthropicProvider('k', fake as never);
+    const r = await p.complete({ system: 'dyn', cacheableSystemPrefix: 'bot', messages: [{ role: 'user', content: 'hola' }], tools: TOOL_DEFINITIONS, model: 'claude-haiku-5-5' });
+    expect(JSON.stringify(req.system)).toContain('ephemeral');
+    expect(r.toolCalls?.[0]).toMatchObject({ id: 'x', name: 'buscar_tienda' });
+  });
+});

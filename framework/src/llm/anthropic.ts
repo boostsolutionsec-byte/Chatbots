@@ -24,7 +24,7 @@ export class AnthropicProvider implements LLMProvider {
       model: args.model,
       max_tokens: args.maxTokens ?? 1024,
       system,
-      messages: toAnthropicMessages(args.messages),
+      messages: withConversationCache(toAnthropicMessages(args.messages)),
       tools: args.tools?.map((t) => ({ name: t.name, description: t.description, input_schema: t.input_schema as Anthropic.Tool.InputSchema })),
     });
 
@@ -63,6 +63,19 @@ export function toAnthropicMessages(messages: LLMMessage[]): Anthropic.MessagePa
         else out.push({ role: 'user', content });
       }
     }
+  }
+  return out;
+}
+
+/** Marca el último bloque de la conversación con cache_control: cada turno reutiliza el historial ya cacheado. */
+export function withConversationCache(messages: Anthropic.MessageParam[]): Anthropic.MessageParam[] {
+  if (!messages.length) return messages;
+  const out = messages.map((m) => ({ ...m, content: typeof m.content === 'string' ? [{ type: 'text' as const, text: m.content }] : [...m.content] }));
+  const last = out[out.length - 1];
+  const blocks = last.content as Anthropic.ContentBlockParam[];
+  const i = blocks.length - 1;
+  if (i >= 0 && (blocks[i].type === 'text' || blocks[i].type === 'tool_result')) {
+    blocks[i] = { ...blocks[i], cache_control: { type: 'ephemeral' } } as Anthropic.ContentBlockParam;
   }
   return out;
 }
