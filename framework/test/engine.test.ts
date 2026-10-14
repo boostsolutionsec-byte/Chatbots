@@ -246,3 +246,19 @@ describe('destino sucursal', () => {
     expect(r.replies[0].text).toContain('EJEMPLO Papelería Centro Guayaquil');
   });
 });
+
+describe('P-2 / P-3 en el motor', () => {
+  it('pide ubicación con botón nativo mientras falta la ciudad', async () => {
+    const e = new Engine({ provider: new MockProvider(), env });
+    const r = await e.handle('_plantilla', msg('hola'));
+    expect(r.replies[0].requestLocation).toBe(true);
+    const r2 = await e.handle('_plantilla', msg('soy de quito'));
+    expect(r2.replies[0].requestLocation).toBeUndefined();
+  });
+  it('nota de voz → pide que lo escriba', async () => {
+    const provider = new MockProvider();
+    const e = new Engine({ provider, env });
+    await e.handle('_plantilla', msg('', { text: undefined, media: { type: 'audio', id: 'x' }, mediaUrl: 'telegram-file:x' }));
+    expect(provider.calls[0].messages.at(-1)!.content).toContain('nota de voz');
+  });
+});

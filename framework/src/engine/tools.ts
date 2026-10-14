@@ -400,7 +400,7 @@ async function derivar(input: Record<string, unknown>, ctx: ToolContext): Promis
     destino: destino.id,
     motivo,
     prioridad,
-    resumen: typeof input.resumen === 'string' ? input.resumen : undefined,
+    resumen: typeof input.resumen === 'string' && input.resumen.trim() ? input.resumen : resumenCorto(c, motivo),
     createdAt: Date.now(),
   } as const;
   if (destino.tipo !== 'sucursal') {
@@ -448,6 +448,13 @@ async function derivar(input: Record<string, unknown>, ctx: ToolContext): Promis
     bot_pausado: !!c.paused,
     sugerencia: `${base}${cuando}`,
   };
+}
+
+/** Resumen de 2–3 líneas para el humano que recibe la derivación (P-7). */
+export function resumenCorto(c: Conversation, motivo: string): string {
+  const datos = Object.entries(c.fields).map(([k, v]) => `${k}: ${v}`).join(' · ');
+  const ultimos = c.messages.filter((m) => m.role === 'user').slice(-2).map((m) => `"${m.text.slice(0, 120)}"`).join(' / ');
+  return [`Motivo: ${motivo}`, datos ? `Datos: ${datos}` : undefined, ultimos ? `Último del cliente: ${ultimos}` : undefined].filter(Boolean).join('\n');
 }
 
 // ───────────────────────── consultar_horario

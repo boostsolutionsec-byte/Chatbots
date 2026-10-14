@@ -324,6 +324,7 @@ export async function runEval(engine: Engine, botId: string, ev: EvalCase, opts:
         const due = dueFollowups(rt.bot, conv, clock);
         for (const f of due) {
           conv.followupsSent.push(f.key);
+          conv.lastFollowupAt = clock;
           conv.messages.push({ role: 'assistant', text: f.message.text ?? `[plantilla ${f.message.template?.name}]`, at: clock });
         }
         if (due.length) {

@@ -55,7 +55,12 @@ export class WhatsAppCloudAdapter implements ChannelAdapter {
             case 'audio':
             case 'video':
             case 'document':
-              out.push({ ...base, mediaUrl: `whatsapp-media:${m[m.type]?.id ?? ''}`, text: m[m.type]?.caption });
+              out.push({
+                ...base,
+                mediaUrl: `whatsapp-media:${m[m.type]?.id ?? ''}`,
+                media: { type: m.type, id: m[m.type]?.id },
+                text: m[m.type]?.caption,
+              });
               break;
             default:
               break;
@@ -86,7 +91,19 @@ export class WhatsAppCloudAdapter implements ChannelAdapter {
       out.push({ ...base, type: 'location', location: { latitude: msg.location.lat, longitude: msg.location.lng, name: msg.location.name, address: msg.location.address } });
     }
     if (msg.mediaUrl) out.push({ ...base, type: 'image', image: { link: msg.mediaUrl, caption: msg.text?.slice(0, 1024) } });
-    else if (msg.buttons?.length && msg.text) {
+    else if (msg.requestLocation && msg.text && !msg.buttons?.length) {
+      out.push({ ...base, type: 'interactive', interactive: { type: 'location_request_message', body: { text: msg.text.slice(0, 1024) }, action: { name: 'send_location' } } });
+    } else if (msg.list?.rows.length && msg.text) {
+      out.push({
+        ...base,
+        type: 'interactive',
+        interactive: {
+          type: 'list',
+          body: { text: msg.text.slice(0, 1024) },
+          action: { button: msg.list.title.slice(0, 20), sections: [{ title: msg.list.title.slice(0, 24), rows: msg.list.rows.slice(0, 10).map((r) => ({ id: r.id.slice(0, 200), title: r.title.slice(0, 24), description: r.description?.slice(0, 72) })) }] },
+        },
+      });
+    } else if (msg.buttons?.length && msg.text) {
       out.push({
         ...base,
         type: 'interactive',

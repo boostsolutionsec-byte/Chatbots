@@ -2,7 +2,7 @@ import type { LoadedBot } from '../config/loader.js';
 import { listBots, botsDir } from '../config/loader.js';
 import type { Engine } from '../engine/engine.js';
 import { missingFields } from '../engine/tools.js';
-import { parseDuration } from '../engine/time.js';
+import { localTime, parseDuration } from '../engine/time.js';
 import type { ChannelAdapter, Conversation, OutgoingMessage } from '../types.js';
 import { WINDOW_24H_MS } from '../channels/meta.js';
 
@@ -22,6 +22,12 @@ export interface DueFollowup {
  */
 export function dueFollowups(bot: LoadedBot, conv: Conversation, now = Date.now()): DueFollowup[] {
   if (conv.paused || conv.lastUserAt === undefined) return [];
+  // P-8: máximo un seguimiento sin respuesta; si el cliente no contestó al anterior, no se insiste.
+  if (conv.lastFollowupAt !== undefined && conv.lastFollowupAt > conv.lastUserAt) return [];
+  // P-8: solo entre 08h00 y 20h00 hora local del bot.
+  const zona = bot.config.horario_humano?.zona ?? 'America/Guayaquil';
+  const local = localTime(zona, new Date(now));
+  if (local.minutes < 8 * 60 || local.minutes >= 20 * 60) return [];
   const out: DueFollowup[] = [];
   bot.config.seguimiento.forEach((rule, i) => {
     const key = `seg${i}:${rule.despues_de}`;
@@ -54,7 +60,7 @@ export function dueFollowups(bot: LoadedBot, conv: Conversation, now = Date.now(
     }
     if (message) out.push({ key, message });
   });
-  return out;
+  return out.slice(0, 1);
 }
 
 /** Revisa periódicamente las conversaciones y envía seguimientos. Requiere un Store con listConversations. */
@@ -76,6 +82,7 @@ export function startFollowups(
             await adapter.send(c.userId, f.message);
             const fresh = await engine.store.getConversation(botId, c.userId);
             fresh.followupsSent.push(f.key);
+            fresh.lastFollowupAt = Date.now();
             fresh.messages.push({ role: 'assistant', text: f.message.text ?? `[plantilla ${f.message.template?.name}]`, at: Date.now() });
             fresh.lastBotAt = Date.now();
             await engine.store.saveConversation(fresh);

@@ -16,6 +16,7 @@ interface TgMessage {
   location?: { latitude: number; longitude: number };
   photo?: { file_id: string }[];
   voice?: { file_id: string };
+  sticker?: { file_id: string };
 }
 
 export interface TelegramOptions {
@@ -70,9 +71,12 @@ export class TelegramAdapter implements ChannelAdapter {
 
   async send(userId: string, msg: OutgoingMessage): Promise<void> {
     const chat_id = userId;
-    const reply_markup = msg.buttons?.length
-      ? { inline_keyboard: msg.buttons.map((b) => [{ text: b.title.slice(0, 60), callback_data: b.id.slice(0, 64) }]) }
-      : undefined;
+    const buttons = msg.buttons?.length ? msg.buttons : msg.list?.rows.map((r) => ({ id: r.id, title: r.title }));
+    const reply_markup = buttons?.length
+      ? { inline_keyboard: buttons.map((b) => [{ text: b.title.slice(0, 60), callback_data: b.id.slice(0, 64) }]) }
+      : msg.requestLocation
+        ? { keyboard: [[{ text: '📍 Compartir mi ubicación', request_location: true }]], resize_keyboard: true, one_time_keyboard: true }
+        : undefined;
     if (msg.location) {
       await this.call('sendVenue', {
         chat_id,
@@ -141,7 +145,14 @@ export function parseTelegramUpdate(u: TgUpdate): IncomingMessage[] {
   if (!m) return [];
   const text = m.text ?? m.caption;
   const location = m.location ? { lat: m.location.latitude, lng: m.location.longitude } : undefined;
-  const mediaUrl = m.photo?.length ? `telegram-file:${m.photo[m.photo.length - 1].file_id}` : m.voice ? `telegram-file:${m.voice.file_id}` : undefined;
+  const media = m.photo?.length
+    ? { type: 'image' as const, id: m.photo[m.photo.length - 1].file_id }
+    : m.voice
+      ? { type: 'audio' as const, id: m.voice.file_id }
+      : m.sticker
+        ? { type: 'sticker' as const, id: m.sticker.file_id }
+        : undefined;
+  const mediaUrl = media ? `telegram-file:${media.id}` : undefined;
   if (!text && !location && !mediaUrl) return [];
   return [
     {
@@ -150,6 +161,7 @@ export function parseTelegramUpdate(u: TgUpdate): IncomingMessage[] {
       text,
       location,
       mediaUrl,
+      media,
       messageId: `${m.chat.id}_${m.message_id}`,
       timestamp: m.date * 1000,
       raw: u,

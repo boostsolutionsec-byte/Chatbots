@@ -213,6 +213,14 @@ export function loadBot(idOrDir: string, opts: { env?: NodeJS.ProcessEnv; botsDi
   if (config.id !== basename(dir)) warnings.push(`bot.yaml: id "${config.id}" no coincide con la carpeta "${basename(dir)}"`);
   for (const m of missing) warnings.push(`variable de entorno sin valor: ${m}`);
 
+  // P-8: en WhatsApp/Instagram los seguimientos libres deben caer dentro de la ventana de 24 h.
+  if (config.canales.some((c) => c === 'whatsapp' || c === 'instagram')) {
+    for (const sg of config.seguimiento) {
+      const m = sg.despues_de.match(/^(\d+)(m|h|d)$/);
+      const hours = m ? Number(m[1]) * (m[2] === 'm' ? 1 / 60 : m[2] === 'h' ? 1 : 24) : 0;
+      if (hours > 23 && !sg.mensaje.startsWith('plantilla:')) warnings.push(`seguimiento "${sg.despues_de}": pasa la ventana de 24 h de WhatsApp/Instagram; usa una plantilla aprobada (plantilla:<nombre>)`);
+    }
+  }
   // Validaciones cruzadas
   const destinoIds = new Set(config.destinos.map((d) => d.id));
   for (const r of config.reglas_derivacion) {

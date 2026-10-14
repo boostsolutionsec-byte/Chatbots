@@ -7,6 +7,8 @@ export interface IncomingMessage {
   userId: string;
   text?: string;
   mediaUrl?: string;
+  /** Tipo de adjunto (P-3): permite distinguir una nota de voz de una foto. */
+  media?: { type: 'audio' | 'image' | 'video' | 'document' | 'sticker'; id?: string; url?: string; mime?: string };
   location?: { lat: number; lng: number };
   /** Id del mensaje en el canal, para idempotencia. */
   messageId?: string;
@@ -23,6 +25,10 @@ export interface OutgoingMessage {
   template?: { name: string; vars: string[] };
   /** Ubicación a enviar (pin de tienda). */
   location?: { lat: number; lng: number; name?: string; address?: string };
+  /** Pedir al cliente que comparta su ubicación (botón nativo en Telegram/WhatsApp). */
+  requestLocation?: boolean;
+  /** Lista de opciones (WhatsApp: lista ≤10 filas; otros canales: botones o texto numerado). */
+  list?: { title: string; rows: { id: string; title: string; description?: string }[] };
 }
 
 export interface ChannelAdapter {
@@ -161,7 +167,11 @@ export interface Conversation {
   /** Turnos del bot seguidos sin avance (sin campo nuevo ni acción). */
   turnsWithoutProgress: number;
   lead?: Record<string, unknown>;
+  /** Etiquetas automáticas (P-7): canal:*, ciudad:*, producto:*, intencion:*, resultado:*. */
+  tags?: string[];
   lastUserAt?: number;
+  /** Último seguimiento automático enviado (P-8: máximo uno sin respuesta). */
+  lastFollowupAt?: number;
   lastBotAt?: number;
   followupsSent: string[];
   seenMessageIds: string[];

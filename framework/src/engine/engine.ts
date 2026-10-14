@@ -298,7 +298,13 @@ export class Engine {
       conv.turnsWithoutProgress = 0;
     }
 
-    const replies: OutgoingMessage[] = [{ text: finalText.trim() }, ...ctx.extras];
+    conv.tags = computeTags(conv, ctx.actions);
+    const main: OutgoingMessage = { text: finalText.trim() };
+    // Si sigue faltando la ubicación, el canal puede ofrecer el botón nativo "Compartir ubicación" (P-2).
+    if (!conv.paused && !ctx.tiendasMostradas.length && this.state(rt, conv).pendingField === 'ubicacion' && rt.bot.config.localizador?.acepta.includes('ubicacion_compartida') !== false) {
+      main.requestLocation = true;
+    }
+    const replies: OutgoingMessage[] = [main, ...ctx.extras];
     conv.messages.push({ role: 'assistant', text: finalText.trim(), at: nowFn().getTime(), toolCalls: executed.map(({ result: _r, ...c }) => c) });
     conv.lastBotAt = nowFn().getTime();
     await this.store.saveConversation(conv);
@@ -415,7 +421,11 @@ export function composeUserText(msg: IncomingMessage): string {
   if (msg.text?.trim()) parts.push(msg.text.trim());
   if (msg.buttonId && !msg.text) parts.push(`[botón: ${msg.buttonId}]`);
   if (msg.location) parts.push(`[ubicación compartida: ${msg.location.lat}, ${msg.location.lng}]`);
-  if (msg.mediaUrl) parts.push('[el cliente envió un archivo/imagen]');
+  const type = msg.media?.type ?? (msg.mediaUrl ? 'document' : undefined);
+  if (type === 'audio') parts.push('[el cliente envió una nota de voz que no se puede escuchar: pídele con amabilidad que lo escriba]');
+  else if (type === 'image') parts.push('[el cliente envió una foto que no puedes ver: pídele que te escriba qué producto o modelo es]');
+  else if (type === 'sticker') parts.push('[el cliente envió un sticker]');
+  else if (type) parts.push('[el cliente envió un archivo que no puedes abrir]');
   return parts.join('\n');
 }
 
@@ -455,6 +465,25 @@ export function detectLanguage(text: string): string {
   if (en > es && en >= 2) return 'en';
   if (pt > es && pt >= 2) return 'pt';
   return 'es';
+}
+
+/** Etiquetas automáticas de la conversación (P-7), para filtrar en Supabase/CRM. */
+export function computeTags(conv: Conversation, actions: string[]): string[] {
+  const tags = new Set((conv.tags ?? []).filter((t) => !t.startsWith('ciudad:') && !t.startsWith('producto:') && !t.startsWith('canal:')));
+  const slug = (s: string) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  if (conv.channel) tags.add(`canal:${conv.channel}`);
+  if (conv.fields.ubicacion) tags.add(`ciudad:${slug(conv.fields.ubicacion.replace(/\(GPS\)/, ''))}`);
+  if (conv.fields.producto_interes) tags.add(`producto:${slug(conv.fields.producto_interes)}`);
+  for (const a of actions) {
+    if (a === 'buscar_tienda') {
+      tags.add('intencion:donde_comprar');
+      tags.add('resultado:tienda_mostrada');
+    } else if (a === 'buscar_producto') tags.add('intencion:asesoria');
+    else if (a.startsWith('derivar:')) {
+      tags.add(`resultado:derivado_${a.slice('derivar:'.length)}`);
+    } else if (a === 'guardar_lead') tags.add('resultado:lead');
+  }
+  return [...tags].sort();
 }
 
 function asksLocation(text: string): boolean {

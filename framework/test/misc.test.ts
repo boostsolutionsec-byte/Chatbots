@@ -248,3 +248,33 @@ describe('seguimientos, horario, conocimiento, derivación', () => {
     expect(bodies[0]).toMatchObject({ tipo: 'derivacion', motivo: 'm' });
   });
 });
+
+describe('P-7 / P-8', () => {
+  const bot = loadBot('_plantilla', { env });
+  it('etiquetas y resumen de derivación', async () => {
+    const store = new (await import('../src/store/memory.js')).MemoryStore();
+    const engine = new Engine({ provider: new MockProvider(), env, store });
+    await engine.handle('_plantilla', { channel: 'telegram', userId: 'x', text: 'soy de quito', timestamp: Date.now() });
+    await engine.resume('_plantilla', 'x');
+    await engine.handle('_plantilla', { channel: 'telegram', userId: 'x', text: 'tengo un reclamo', timestamp: Date.now() });
+    const c = await store.getConversation('_plantilla', 'x');
+    expect(c.tags).toEqual(expect.arrayContaining(['canal:telegram', 'ciudad:quito', 'intencion:donde_comprar', 'resultado:derivado_servicio_cliente']));
+    expect(store.handoffs[0].resumen).toContain('ubicacion: Quito');
+  });
+  it('seguimientos: no de noche y máximo uno sin respuesta', () => {
+    const c = newConversation('_plantilla', 'u');
+    c.channel = 'telegram';
+    const base = Date.parse('2026-10-12T15:00:00Z'); // 10:00 en Guayaquil
+    c.lastUserAt = base;
+    expect(dueFollowups(bot, c, base + 23 * 3600_000)).toHaveLength(1); // 09:00 del día siguiente
+    expect(dueFollowups(bot, c, base + 23 * 3600_000 + 12 * 3600_000)).toHaveLength(0); // 21:00 → no (y además pasado el doble)
+    c.lastFollowupAt = base + 23 * 3600_000;
+    expect(dueFollowups(bot, c, base + 24 * 3600_000)).toHaveLength(0);
+  });
+  it('aviso si un seguimiento libre pasa la ventana de 24 h en WhatsApp', () => {
+    const dir = mkdtempSync(join(tmpdir(), 'bot-'));
+    mkdirSync(join(dir, 'wa'));
+    writeFileSync(join(dir, 'wa', 'bot.yaml'), 'id: wa\ncanales: [whatsapp]\nseguimiento:\n  - {despues_de: 2d, mensaje: "hola"}\n');
+    expect(loadBot('wa', { botsDir: dir }).warnings.join(' ')).toMatch(/ventana de 24 h/);
+  });
+});

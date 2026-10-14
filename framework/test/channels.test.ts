@@ -177,3 +177,23 @@ describe('Periskope, simulador y web', () => {
     expect(chatPage('bot<x>', 'Mi "bot"')).toContain('Mi &quot;bot&quot;');
   });
 });
+
+describe('P-2 / P-3', () => {
+  it('Telegram: botón de compartir ubicación y tipo de adjunto', async () => {
+    const calls: { body: Record<string, unknown> }[] = [];
+    const fetchImpl = (async (_u: string, init: { body: string }) => {
+      calls.push({ body: JSON.parse(init.body) });
+      return new Response(JSON.stringify({ ok: true, result: {} }));
+    }) as unknown as typeof fetch;
+    await new TelegramAdapter({ token: 'T', fetchImpl }).send('1', { text: '¿En qué ciudad estás?', requestLocation: true });
+    expect(JSON.stringify(calls[0].body.reply_markup)).toContain('request_location');
+    const voice = parseTelegramUpdate({ update_id: 9, message: { message_id: 1, chat: { id: 5 }, date: 1, voice: { file_id: 'v1' } } })[0];
+    expect(voice.media).toEqual({ type: 'audio', id: 'v1' });
+  });
+  it('WhatsApp: pedido de ubicación y lista', () => {
+    const wa = new WhatsAppCloudAdapter({ phoneNumberId: 'P' });
+    expect(wa.buildPayloads('5', { text: '¿Dónde estás?', requestLocation: true })[0]).toMatchObject({ interactive: { type: 'location_request_message' } });
+    const list = wa.buildPayloads('5', { text: 'Elige', list: { title: 'Ciudades', rows: Array.from({ length: 12 }, (_, i) => ({ id: `c${i}`, title: `Ciudad ${i}` })) } })[0] as { interactive: { action: { sections: { rows: unknown[] }[] } } };
+    expect(list.interactive.action.sections[0].rows).toHaveLength(10);
+  });
+});
