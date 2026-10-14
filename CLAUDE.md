@@ -21,6 +21,18 @@ Avanza lo más rápido posible sin intervención humana:
 - Objetivo de la noche: que todo el sistema **funcione de punta a punta con datos de ejemplo**. Mañana el dueño llena
   `FORMULARIO-FINAL.md` (lo compila el Agente 4 a partir de `docs/DATOS-INVENTADOS.md`), se reemplazan los datos y listo.
 
+## Presupuesto de operación (requisito del dueño)
+
+El bot en producción debe costar **centavos**: ~10 mensajes/día, **máximo 10 USD/mes todo incluido**, usando las
+cuentas de **n8n** y **DeepSeek** del dueño. Por eso:
+- Proveedor de producción por defecto: **DeepSeek** (`deepseek-chat`). Claude/Anthropic solo opcional o para desarrollo.
+- El localizador de tiendas es **determinista** (código, sin IA). Casos frecuentes (dónde compro en <ciudad>, horario,
+  saludo, distribuidor, reclamo) se responden con **plantillas sin IA**.
+- Cuando sí se llama a la IA: ≤ ~1.500 tokens de entrada y ≤ ~150 de salida por turno; prompt de sistema corto y estable
+  (caché); solo las 2-3 tiendas relevantes y los fragmentos de conocimiento que apliquen; historial recortado.
+- Cada reporte de evals indica tokens y USD estimados por turno.
+- Debe poder correr como **workflow de n8n** (Telegram/WhatsApp trigger → Code con localizador → DeepSeek → respuesta).
+
 ## Antes de empezar (todos los agentes)
 
 1. Lee `FORMULARIO.md` (probablemente vacío → usa los valores por defecto que indica) y `docs/marcas.md`.
