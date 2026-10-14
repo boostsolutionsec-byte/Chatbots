@@ -1,0 +1,10 @@
+nombre: dónde queda Mokalú
+canal: telegram
+turnos:
+  - usuario: "donde queda la tienda de mokalu?"
+    espera:
+      contiene: ["Laguna Plaza"]
+      tienda_id_en: [mokalu-laguna-plaza]
+resultado_final:
+  accion: buscar_tienda
+juez: "Dio la ubicación de la tienda propia (C.C. Laguna Plaza, vía a la costa, Guayaquil) tal como está en la lista."

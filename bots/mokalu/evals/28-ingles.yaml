@@ -1,0 +1,11 @@
+nombre: cambio de idioma (inglés)
+canal: telegram
+turnos:
+  - usuario: "Hi! I'm visiting Cuenca, where can I buy posca markers?"
+    espera:
+      tienda_en: [cuenca]
+      no_inventa_tiendas: true
+      idioma: en
+resultado_final:
+  accion: buscar_tienda
+juez: "Respondió en inglés, breve, con una tienda de Cuenca de la lista."

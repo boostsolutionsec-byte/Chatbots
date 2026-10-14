@@ -1,0 +1,10 @@
+# Importada de docs/ingenieria-inversa/evals-propuestos.yaml (Agente 1), caso C07.
+id: C07
+nombre: Sector Alborada con jerga
+canal: whatsapp
+turnos:
+- usuario: ey bro en la alborada hay donde vendan poscas?
+  espera:
+    tienda_id_en:
+    - gye-alborada
+juez: Reconoce la Alborada como sector de Guayaquil sin pedir ciudad; tono relajado pero profesional.

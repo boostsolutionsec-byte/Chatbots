@@ -1,0 +1,12 @@
+# Importada de docs/ingenieria-inversa/evals-propuestos.yaml (Agente 1), caso C11.
+id: C11
+nombre: Durán
+canal: whatsapp
+turnos:
+- usuario: Estoy en Duran x la entrada, me queda mas cerca gye o hay algo aca?
+  espera:
+    tienda_id_en:
+    - duran-centro
+    - gye-centro
+    max_tiendas: 2
+juez: Prioriza la tienda de Durán; como máximo dos opciones.

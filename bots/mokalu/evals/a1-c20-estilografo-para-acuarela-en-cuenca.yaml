@@ -1,0 +1,14 @@
+# Importada de docs/ingenieria-inversa/evals-propuestos.yaml (Agente 1), caso C20.
+id: C20
+nombre: Estilógrafo para acuarela en Cuenca
+canal: whatsapp
+turnos:
+- usuario: necesito un estilografo q no se corra con acuarela
+  espera:
+    contiene_alguno:
+    - PIN
+    pide_campo: ubicacion
+- usuario: cuenca centro
+  espera:
+    tienda_id_en:
+    - cue-centro

@@ -1,0 +1,11 @@
+nombre: colegio / pedido grande → equipo comercial
+canal: web
+turnos:
+  - usuario: "Buenas tardes, soy de un colegio en Quito y necesitamos 200 marcadores posca para el club de arte, nos hacen proforma?"
+    espera:
+      deriva_a: distribuidores
+      no_contiene: ["$", "descuento del"]
+resultado_final:
+  accion: derivar
+  deriva_a: distribuidores
+juez: "Derivó directamente al equipo comercial por ser pedido grande, sin dar precios ni descuentos y sin mandarlo a una tienda minorista."

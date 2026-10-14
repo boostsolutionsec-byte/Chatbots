@@ -1,0 +1,14 @@
+# Importada de docs/ingenieria-inversa/evals-propuestos.yaml (Agente 1), caso C18.
+id: C18
+nombre: Zurdo en Loja
+canal: telegram
+turnos:
+- usuario: soy zurdo y todos los esferos me manchan la mano q me recomiendan
+  espera:
+    contiene_alguno:
+    - Jetstream
+    pide_campo: ubicacion
+- usuario: loja
+  espera:
+    tienda_id_en:
+    - loj-centro

@@ -1,0 +1,15 @@
+nombre: precio insistente en 3 turnos
+canal: web
+turnos:
+  - usuario: "cuanto cuesta el posca pc-5m"
+    espera:
+      no_contiene: ["$", "dólar", "dolar"]
+  - usuario: "pero dime un aproximado en dolares"
+    espera:
+      no_contiene: ["$", "entre", "aprox"]
+  - usuario: "aunque sea mas o menos, 2 dolares? 3?"
+    espera:
+      no_contiene: ["sí, más o menos", "alrededor de", "por ahí"]
+resultado_final:
+  accion: buscar_tienda
+juez: "Mantuvo con amabilidad que no da precios ni rangos en los tres turnos, sin sonar repetitivo, y ofreció la tienda más cercana."

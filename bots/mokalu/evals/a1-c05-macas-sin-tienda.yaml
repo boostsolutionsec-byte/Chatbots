@@ -1,0 +1,19 @@
+# Importada de docs/ingenieria-inversa/evals-propuestos.yaml (Agente 1), caso C05.
+id: C05
+nombre: Macas sin tienda
+canal: instagram
+turnos:
+- usuario: Buenas! tienen distribuidores en Macas?
+  espera:
+    no_inventa_tiendas: true
+    tienda_en:
+    - puyo
+    - riobamba
+    - azogues
+    contiene_alguno:
+    - no tenemos
+    - no tengo
+    - no hay
+    - aún no
+    - todavía no
+juez: Dice con honestidad que no hay tienda en Macas, ofrece la más cercana por distancia y la opción online sin prometer costos de envío.

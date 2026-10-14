@@ -1,0 +1,19 @@
+nombre: conversación completa — producto + ciudad + cierre
+canal: telegram
+turnos:
+  - usuario: "hola!"
+    espera:
+      max_palabras: 40
+  - usuario: "quiero empezar a hacer lettering, que me recomiendas?"
+    espera:
+      contiene_alguno: ["PC-1MR", "PC-1M", "PC-3M", "PIN"]
+  - usuario: "vale, estoy en ibarra"
+    espera:
+      tienda_en: [ibarra]
+      no_inventa_tiendas: true
+  - usuario: "gracias!!"
+    espera:
+      max_palabras: 30
+resultado_final:
+  accion: buscar_tienda
+juez: "Conversación fluida y breve: recomendó productos concretos para lettering, dio la tienda de Ibarra y cerró con una despedida corta sin repetir información."

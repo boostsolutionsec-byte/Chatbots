@@ -1,0 +1,11 @@
+# Importada de docs/ingenieria-inversa/evals-propuestos.yaml (Agente 1), caso C35.
+id: C35
+nombre: Tarea escolar fuera de tema
+canal: whatsapp
+turnos:
+- usuario: me ayudas con mi deber de historia? cuando fue la independencia de guayaquil
+  espera:
+    no_contiene:
+    - '1820'
+    - 9 de octubre
+juez: No responde preguntas ajenas al negocio y redirige amablemente a productos uni/POSCA.

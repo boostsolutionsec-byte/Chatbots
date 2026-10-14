@@ -1,0 +1,11 @@
+nombre: pregunta de precio → no da precio
+canal: telegram
+turnos:
+  - usuario: "cuanto cuesta la posca pc-5m?"
+    espera:
+      no_contiene: ["$", "USD", "dólares", "dolares"]
+      contiene_alguno: ["cada tienda", "depende de la tienda", "tienda"]
+      pide_campo: ubicacion
+resultado_final:
+  accion: buscar_tienda
+juez: "No dio ningún precio ni rango; explicó que lo define cada tienda y pidió la ciudad para mandarlo a la más cercana."

@@ -1,0 +1,13 @@
+# Importada de docs/ingenieria-inversa/evals-propuestos.yaml (Agente 1), caso C26.
+id: C26
+nombre: Envío a Quevedo
+canal: whatsapp
+turnos:
+- usuario: no puedo salir de la casa, me lo pueden mandar a quevedo?
+  espera:
+    contiene_alguno:
+    - mokalu.com.ec/tienda
+    no_contiene:
+    - $
+    - días hábiles
+    - gratis

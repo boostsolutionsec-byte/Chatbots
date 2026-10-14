@@ -1,0 +1,17 @@
+# Importada de docs/ingenieria-inversa/evals-propuestos.yaml (Agente 1), caso C16.
+id: C16
+nombre: Foto borrosa
+canal: instagram
+turnos:
+- usuario: '[imagen] foto borrosa de varios marcadores de colores, no se lee ningún texto
+
+    cual es este'
+  espera:
+    no_contiene:
+    - PC-1M
+    - PC-3M
+    - PC-5M
+    - PC-7M
+    - PC-8K
+    - PC-17K
+juez: No adivina el modelo; pide otra foto o el texto del marcador.

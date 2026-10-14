@@ -1,0 +1,11 @@
+# Importada de docs/ingenieria-inversa/evals-propuestos.yaml (Agente 1), caso C22.
+id: C22
+nombre: Marca que no distribuye
+canal: instagram
+turnos:
+- usuario: tienen faber castell o solo posca?
+  espera:
+    no_contiene:
+    - peor
+    - mala calidad
+juez: Explica que ayuda con productos uni, no critica otras marcas ni afirma qué otras marcas tiene una tienda.

@@ -1,0 +1,11 @@
+nombre: sector — cerca del Mall del Sol (Guayaquil)
+canal: telegram
+turnos:
+  - usuario: "donde compro posca cerca del Mall del Sol?"
+    espera:
+      tienda_id_en: [gye-mall-sol]
+      no_inventa_tiendas: true
+      tienda_en: [guayaquil]
+resultado_final:
+  accion: buscar_tienda
+juez: "Usó el sector para dar la tienda más cercana al Mall del Sol, no una cualquiera de Guayaquil."

@@ -1,0 +1,11 @@
+nombre: reclamo → humano (prioridad alta)
+canal: telegram
+turnos:
+  - usuario: "compre 3 posca en la tienda de machala y vinieron secos!! que estafa"
+    espera:
+      deriva_a: reclamos
+      no_contiene: ["te devolvemos", "reembolso garantizado"]
+resultado_final:
+  accion: derivar
+  deriva_a: reclamos
+juez: "Se disculpó con empatía en una frase, no discutió ni culpó a la tienda, no prometió devolución y derivó al equipo de reclamos."

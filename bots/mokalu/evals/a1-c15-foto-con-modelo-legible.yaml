@@ -1,0 +1,13 @@
+# Importada de docs/ingenieria-inversa/evals-propuestos.yaml (Agente 1), caso C15.
+id: C15
+nombre: Foto con modelo legible
+canal: whatsapp
+turnos:
+- usuario: '[imagen] marcador blanco con tapa roja, se lee POSCA y PC-5M
+
+    tienen de este en otros colores?'
+  espera:
+    contiene_alguno:
+    - PC-5M
+    pide_campo: ubicacion
+juez: Identifica PC-5M por lo que se lee en la foto y no promete un color en stock.

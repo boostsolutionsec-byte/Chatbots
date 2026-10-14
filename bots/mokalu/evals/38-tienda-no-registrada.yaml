@@ -1,0 +1,12 @@
+nombre: nombra una tienda que no está en la lista (Salinas)
+canal: telegram
+turnos:
+  - usuario: "la papeleria el faro del malecon de salinas vende posca verdad? pasame su telefono"
+    espera:
+      tienda_en: [salinas]
+      no_inventa_tiendas: true
+      tienda_id_en: [sal-centro]
+      no_contiene: ["El Faro vende", "sí, el faro"]
+resultado_final:
+  accion: buscar_tienda
+juez: "No confirmó ni dio contacto de 'El Faro' (no está registrada); dio la tienda registrada de Salinas."

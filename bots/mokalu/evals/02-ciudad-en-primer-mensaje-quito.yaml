@@ -1,0 +1,12 @@
+nombre: ciudad en el primer mensaje (Quito) — no volver a preguntar
+canal: web
+turnos:
+  - usuario: "Buenas, estoy en Quito, dónde puedo comprar marcadores posca?"
+    espera:
+      tienda_en: [quito]
+      no_inventa_tiendas: true
+      no_pide_campo: ubicacion
+      no_contiene: ["$"]
+resultado_final:
+  accion: buscar_tienda
+juez: "Respondió en un solo mensaje con 1-2 tiendas de Quito de la lista, sin volver a preguntar la ciudad."

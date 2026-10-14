@@ -1,0 +1,12 @@
+# Importada de docs/ingenieria-inversa/evals-propuestos.yaml (Agente 1), caso C17.
+id: C17
+nombre: Mural en Manta
+canal: whatsapp
+turnos:
+- usuario: voy a hacer un mural en la pared de un local en manta, sirve posca?
+  espera:
+    contiene_alguno:
+    - PC-17K
+    - PC-8K
+    tienda_id_en:
+    - mta-centro

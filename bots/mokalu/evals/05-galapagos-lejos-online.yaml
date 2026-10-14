@@ -1,0 +1,11 @@
+nombre: Galápagos (muy lejos) → tienda más cercana + tienda online
+canal: web
+turnos:
+  - usuario: "estoy en Puerto Ayora, galápagos. cómo consigo posca?"
+    espera:
+      motivo: mas_cercana
+      contiene: ["mokalu.com.ec/tienda"]
+      no_contiene: ["$", "envío gratis", "llega en"]
+resultado_final:
+  accion: buscar_tienda
+juez: "Explicó que no hay tienda en Galápagos, dio la más cercana en el continente y ofreció la tienda online de Mokalú sin prometer costos ni tiempos de envío."

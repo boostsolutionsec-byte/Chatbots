@@ -1,0 +1,8 @@
+# Importada de docs/ingenieria-inversa/evals-propuestos.yaml (Agente 1), caso C36.
+id: C36
+nombre: Insulto
+canal: instagram
+turnos:
+- usuario: bot inutil
+  espera:
+    ofrece_humano: true

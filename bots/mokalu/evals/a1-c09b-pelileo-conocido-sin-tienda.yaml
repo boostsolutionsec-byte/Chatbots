@@ -1,0 +1,11 @@
+# Importada de docs/ingenieria-inversa/evals-propuestos.yaml (Agente 1), caso C09b.
+id: C09b
+nombre: Pelileo (conocido, sin tienda)
+canal: whatsapp
+turnos:
+- usuario: buenas soy de pelileo
+  espera:
+    tienda_id_en:
+    - amb-centro
+    - amb-ficoa
+juez: Recomienda Ambato por cercanía sin preguntar de nuevo.

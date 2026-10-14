@@ -1,0 +1,9 @@
+# Importada de docs/ingenieria-inversa/evals-propuestos.yaml (Agente 1), caso C10.
+id: C10
+nombre: Valle de los Chillos
+canal: telegram
+turnos:
+- usuario: vivo en el valle de los chillos, conocen algún lugar?
+  espera:
+    tienda_id_en:
+    - sangolqui-centro

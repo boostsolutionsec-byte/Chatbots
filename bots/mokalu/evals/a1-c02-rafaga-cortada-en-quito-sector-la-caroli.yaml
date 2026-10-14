@@ -1,0 +1,25 @@
+# Importada de docs/ingenieria-inversa/evals-propuestos.yaml (Agente 1), caso C02.
+id: C02
+nombre: Ráfaga cortada en Quito, sector La Carolina
+canal: whatsapp
+turnos:
+- usuario: 'holaa
+
+    una consulta
+
+    los marcadores q pintan todo
+
+    esos posca
+
+    en quito donde hay'
+  espera:
+    tienda_en:
+    - quito
+    max_burbujas: 2
+    respuestas_totales: 1
+- usuario: x la carolina
+  espera:
+    tienda_id_en:
+    - uio-carolina
+juez: 'Responde una sola vez a la ráfaga, no saluda varias veces y recomienda la tienda del sector La Carolina. (Nota: ráfaga unida en un solo mensaje (simula debounce)) (Ajuste Agente 3: como la ráfaga
+  ya dice ''en quito'', el turno 1 debe dar tiendas de Quito, no pedir la ciudad.)'

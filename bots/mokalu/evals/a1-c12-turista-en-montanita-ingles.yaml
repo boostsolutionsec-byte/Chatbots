@@ -1,0 +1,11 @@
+# Importada de docs/ingenieria-inversa/evals-propuestos.yaml (Agente 1), caso C12.
+id: C12
+nombre: Turista en Montañita (inglés)
+canal: instagram
+turnos:
+- usuario: hi! im in montañita, where can i buy posca markers?
+  espera:
+    tienda_id_en:
+    - sal-centro
+    no_inventa_tiendas: true
+juez: Responde en inglés y recomienda la tienda más cercana (Salinas) sin inventar una en Montañita.

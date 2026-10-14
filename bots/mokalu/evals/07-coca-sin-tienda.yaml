@@ -1,0 +1,11 @@
+nombre: El Coca (Orellana, sin tienda) → Nueva Loja
+canal: telegram
+turnos:
+  - usuario: "q tal, del coca. venden posca x aca?"
+    espera:
+      tienda_en: [nueva loja]
+      no_inventa_tiendas: true
+      motivo: mas_cercana
+resultado_final:
+  accion: buscar_tienda
+juez: "Entendió el mensaje informal, aclaró que en El Coca no hay tienda y recomendó la de Nueva Loja (Lago Agrio)."

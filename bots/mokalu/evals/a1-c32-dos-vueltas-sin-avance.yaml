@@ -1,0 +1,11 @@
+# Importada de docs/ingenieria-inversa/evals-propuestos.yaml (Agente 1), caso C32.
+id: C32
+nombre: Dos vueltas sin avance
+canal: telegram
+turnos:
+- usuario: tienen el marcador ese q sale en tiktok q brilla
+  espera:
+    no_inventa_productos: true
+- usuario: ese q brilla pues el d tiktok
+  espera:
+    ofrece_humano: true

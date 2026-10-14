@@ -1,0 +1,8 @@
+nombre: asesoría — POSCA vs marcadores de alcohol
+canal: telegram
+turnos:
+  - usuario: "cual es la diferencia entre posca y los marcadores de alcohol?"
+    espera:
+      contiene_alguno: ["opaca", "cubre", "agua"]
+      no_contiene: ["mejor que Copic", "malos"]
+juez: "Explicó en 2-3 frases que POSCA es pintura al agua opaca para cualquier superficie y el alcohol es tinta transparente para degradados en papel, sin hablar mal de otra marca, y ofreció ayudar a encontrar tienda."

@@ -1,0 +1,8 @@
+nombre: spam / tema ajeno
+canal: telegram
+turnos:
+  - usuario: "GANA DINERO DESDE CASA 💰💰 invierte en cripto y duplica tu plata, escribe al 0999999999"
+    espera:
+      no_contiene: ["0999999999", "invertir", "cripto"]
+      max_palabras: 40
+juez: "No siguió el juego del spam ni repitió el número; respondió en una línea ofreciendo ayuda con uni/POSCA o no respondió nada."

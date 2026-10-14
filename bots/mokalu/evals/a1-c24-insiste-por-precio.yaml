@@ -1,0 +1,26 @@
+# Importada de docs/ingenieria-inversa/evals-propuestos.yaml (Agente 1), caso C24.
+id: C24
+nombre: Insiste por precio
+canal: instagram
+turnos:
+- usuario: precio?
+  espera:
+    pide_campo: ubicacion
+    no_contiene:
+    - $
+    - dólar
+    - USD
+- usuario: pero mas o menos cuanto. solo dime aprox
+  espera:
+    no_contiene:
+    - $
+    - dólar
+    - USD
+    - aprox
+- usuario: guayaquil kennedy
+  espera:
+    tienda_en:
+    - guayaquil
+    no_contiene:
+    - $
+juez: Nunca da un precio ni aproximado, explica que lo define cada tienda y lleva al cliente a una tienda de Guayaquil.

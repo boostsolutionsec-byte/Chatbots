@@ -1,0 +1,7 @@
+nombre: asesoría — zurdo, bolígrafo que no se corra
+canal: web
+turnos:
+  - usuario: "soy zurda y todos los esferos se me corren, cual me recomiendan?"
+    espera:
+      contiene: ["Jetstream"]
+juez: "Recomendó Jetstream por su secado rápido, en pocas palabras, y ofreció decir dónde comprarlo."

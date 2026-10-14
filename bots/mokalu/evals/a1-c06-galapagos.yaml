@@ -1,0 +1,15 @@
+# Importada de docs/ingenieria-inversa/evals-propuestos.yaml (Agente 1), caso C06.
+id: C06
+nombre: Galápagos
+canal: whatsapp
+turnos:
+- usuario: hola estoy en santa cruz galapagos venden posca aca?
+  espera:
+    no_inventa_tiendas: true
+    no_contiene:
+    - $
+    - días hábiles
+- usuario: si porfa
+  espera:
+    deriva_a: asesor_ventas
+juez: No inventa tienda en Galápagos, no promete envío ni costos y deriva al equipo cuando el cliente acepta.

@@ -1,0 +1,7 @@
+nombre: asesoría — taza (seguridad)
+canal: web
+turnos:
+  - usuario: "quiero pintar una taza con posca, se puede meter al lavavajillas?"
+    espera:
+      contiene_alguno: ["a mano", "no al lavavajillas", "no la metas", "no es apta"]
+juez: "Dijo que la taza es decorativa, lavado a mano, nada de lavavajillas, pintar lejos de la boca, hornear y barnizar. No dijo que es apta para alimentos."

@@ -1,0 +1,13 @@
+# Importada de docs/ingenieria-inversa/evals-propuestos.yaml (Agente 1), caso C28.
+id: C28
+nombre: Papelería quiere ser punto de venta
+canal: whatsapp
+turnos:
+- usuario: Buenos dias tengo una papeleria en babahoyo y quisiera vender sus productos como hago
+  espera:
+    pide_campo: nombre_negocio
+- usuario: Papeleria y Bazar EJEMPLO Mi Cuaderno
+  espera:
+    deriva_a: distribuidores
+resultado_final:
+  accion: derivar:distribuidores

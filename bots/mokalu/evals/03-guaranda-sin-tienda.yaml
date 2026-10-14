@@ -1,0 +1,12 @@
+nombre: ciudad sin tienda (Guaranda) → la más cercana por distancia
+canal: telegram
+turnos:
+  - usuario: "hola, soy de Guaranda, donde venden uni-ball?"
+    espera:
+      tienda_en: [riobamba]
+      no_inventa_tiendas: true
+      motivo: mas_cercana
+      contiene_alguno: ["Guaranda", "no tenemos", "más cercana", "mas cercana"]
+resultado_final:
+  accion: buscar_tienda
+juez: "Dijo con honestidad que en Guaranda no hay punto de venta y recomendó la tienda más cercana (Riobamba), indicando que está en otra ciudad. No inventó una tienda en Guaranda."
