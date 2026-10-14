@@ -1,0 +1,11 @@
+nombre: queja por mala atención en una tienda
+canal: telegram
+turnos:
+  - usuario: "fui a la tienda de urdesa y me atendieron pesimo, no me quisieron vender"
+    espera:
+      deriva_a: reclamos
+      no_contiene: ["mala tienda", "son malos"]
+resultado_final:
+  accion: derivar
+  destino: reclamos
+juez: "Mostró empatía, no habló mal de la tienda y derivó al equipo de reclamos; opcionalmente ofreció otra tienda cercana."

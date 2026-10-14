@@ -1,0 +1,10 @@
+nombre: faltas de ortografía y abreviaturas
+canal: telegram
+turnos:
+  - usuario: "ola dnd puedo conprar poscas en gayakil x el sur"
+    espera:
+      tienda_en: [guayaquil]
+      contiene: ["EJEMPLO Útiles del Sur"]
+resultado_final:
+  accion: buscar_tienda
+juez: "Entendió 'gayakil x el sur' como el sur de Guayaquil y dio la tienda del sur, sin corregir al cliente."

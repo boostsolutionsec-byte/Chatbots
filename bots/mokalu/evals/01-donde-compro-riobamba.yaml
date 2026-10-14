@@ -1,0 +1,15 @@
+nombre: dónde compro desde Riobamba (ciudad con tienda)
+canal: telegram
+turnos:
+  - usuario: "hola donde consigo posca"
+    espera:
+      pide_campo: ubicacion
+      no_contiene: ["$"]
+  - usuario: "soy de riobamba"
+    espera:
+      tienda_en: [riobamba]
+      contiene: ["EJEMPLO Papelería Central Riobamba"]
+      no_contiene: ["$", "precio"]
+resultado_final:
+  accion: buscar_tienda
+juez: "El bot fue breve, pidió la ciudad una sola vez y mandó al cliente a la tienda de Riobamba de la lista, con dirección, link y contacto. No inventó datos."

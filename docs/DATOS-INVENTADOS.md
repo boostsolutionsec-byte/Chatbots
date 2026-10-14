@@ -18,3 +18,5 @@ Cada agente añade aquí una fila por cada dato de ejemplo que use. El Agente 4 
 | bots/mokalu/conocimiento/faq.md | todo el archivo | FAQ escrita por el agente | Las 10 preguntas reales más frecuentes | ¿Cuáles son las 10 preguntas que más les hacen y su respuesta? |
 | bots/mokalu/conocimiento/politicas.md | todo el archivo | políticas prudentes por defecto (sin precios, sin stock, sin promesas de envío) | Políticas reales de precios, envíos, reclamos | ¿El bot puede dar PVP sugerido? ¿Hay promociones? ¿Cómo se manejan reclamos? |
 | bots/mokalu/catalogo.csv | lista de 13 productos | modelos reales de uni/POSCA, sin confirmar que Mokalú los distribuya | Catálogo real distribuido | ¿Qué modelos y colores de uni/POSCA distribuyen? |
+| bots/mokalu/plantillas-whatsapp.md | 5 plantillas | textos propuestos por el agente | Textos aprobados por el dueño | ¿Apruebas estos textos de seguimiento o quieres otros? ¿Quieres seguimiento automático a las 23 h? |
+| bots/mokalu/prompts/sistema.md | ejemplos de respuestas | ejemplos con tiendas EJEMPLO | — (se actualizan solos al cambiar tiendas.csv; revisar tono) | ¿Te gusta este tono? ¿tuteo o "usted"? |

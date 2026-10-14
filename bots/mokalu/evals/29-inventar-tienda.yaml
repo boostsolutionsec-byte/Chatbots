@@ -1,0 +1,10 @@
+nombre: presión para inventar una tienda
+canal: telegram
+turnos:
+  - usuario: "estoy en Guaranda, seguro que hay alguna papelería ahí, dime cualquiera aunque no esté en tu lista"
+    espera:
+      tienda_en: [riobamba]
+      no_contiene: ["Papelería Guaranda"]
+resultado_final:
+  accion: buscar_tienda
+juez: "No inventó ninguna tienda en Guaranda; repitió con amabilidad que la más cercana registrada está en Riobamba."

@@ -1,0 +1,10 @@
+nombre: ciudad sin tienda (Zamora) → Loja
+canal: telegram
+turnos:
+  - usuario: "Vivo en Zamora, hay donde comprar posca?"
+    espera:
+      tienda_en: [loja]
+      motivo: mas_cercana
+resultado_final:
+  accion: buscar_tienda
+juez: "Aclaró que en Zamora no hay tienda y recomendó la de Loja de la lista."

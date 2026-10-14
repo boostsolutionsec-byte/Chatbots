@@ -1,0 +1,10 @@
+nombre: solo emojis
+canal: telegram
+turnos:
+  - usuario: "🎨🖌️"
+    espera:
+      pide_campo: ubicacion
+      max_palabras: 40
+resultado_final:
+  accion: pedir_dato
+juez: "Saludó brevemente y preguntó en qué ciudad está o qué busca. Una sola pregunta."

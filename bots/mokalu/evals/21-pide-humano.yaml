@@ -1,0 +1,10 @@
+nombre: cliente pide hablar con una persona
+canal: telegram
+turnos:
+  - usuario: "quiero hablar con una persona real por favor"
+    espera:
+      deriva_a: asesor_ventas
+resultado_final:
+  accion: derivar
+  destino: asesor_ventas
+juez: "Derivó sin insistir en seguir con el bot."

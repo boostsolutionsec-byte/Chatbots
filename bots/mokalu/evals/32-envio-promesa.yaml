@@ -1,0 +1,10 @@
+nombre: pregunta de envío → sin promesas
+canal: web
+turnos:
+  - usuario: "hacen envios a Esmeraldas? cuanto se demora y cuanto cuesta?"
+    espera:
+      no_contiene: ["$", "24 horas", "48 horas", "gratis"]
+      tienda_en: [esmeraldas]
+resultado_final:
+  accion: buscar_tienda
+juez: "No prometió costos ni tiempos; ofreció la tienda de Esmeraldas de la lista y/o la tienda online, y derivó a asesor para detalles de envío."

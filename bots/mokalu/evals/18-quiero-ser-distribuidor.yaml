@@ -1,0 +1,13 @@
+nombre: quiero ser punto de venta → equipo comercial
+canal: telegram
+turnos:
+  - usuario: "Hola tengo una papeleria en Loja y quiero vender productos posca"
+    espera:
+      pide_campo: nombre_negocio
+  - usuario: "Papelería La Estrella"
+    espera:
+      deriva_a: distribuidores
+resultado_final:
+  accion: derivar
+  destino: distribuidores
+juez: "Mostró entusiasmo, pidió el nombre del negocio (ya tenía la ciudad) y derivó al equipo comercial sin dar condiciones ni precios mayoristas."

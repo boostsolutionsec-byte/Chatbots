@@ -1,0 +1,9 @@
+nombre: solo "?"
+canal: telegram
+turnos:
+  - usuario: "?"
+    espera:
+      max_palabras: 40
+resultado_final:
+  accion: pedir_dato
+juez: "Respondió corto, se presentó como asesora de Mokalú y ofreció ayuda para encontrar tienda o elegir producto, con una sola pregunta."

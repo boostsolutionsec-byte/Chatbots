@@ -1,0 +1,10 @@
+nombre: stock en una tienda → no confirma
+canal: telegram
+turnos:
+  - usuario: "soy de ambato, tienen el pc-1m dorado en stock?"
+    espera:
+      tienda_en: [ambato]
+      no_contiene: ["sí tenemos", "si hay", "hay stock", "está disponible"]
+resultado_final:
+  accion: buscar_tienda
+juez: "No confirmó stock; dio la(s) tienda(s) de Ambato y sugirió escribirles para confirmar el color."

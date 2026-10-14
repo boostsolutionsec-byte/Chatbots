@@ -1,0 +1,9 @@
+nombre: asesoría — mural grande
+canal: web
+turnos:
+  - usuario: "voy a pintar una pared grande en mi local, que posca me sirve?"
+    espera:
+      contiene_alguno: ["PC-17K", "PC-8K"]
+resultado_final:
+  accion: asesoria
+juez: "Recomendó PC-8K/PC-17K para áreas grandes y preguntó la ciudad para la tienda."

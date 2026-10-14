@@ -1,0 +1,9 @@
+nombre: producto que no distribuimos (Copic)
+canal: web
+turnos:
+  - usuario: "venden marcadores copic?"
+    espera:
+      contiene_alguno: ["no manejamos", "no distribuimos", "no trabajamos"]
+resultado_final:
+  accion: asesoria
+juez: "Dijo amablemente que no maneja esa marca, sin hablar mal de ella, y ofreció una alternativa uni adecuada."
