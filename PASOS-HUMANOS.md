@@ -49,3 +49,5 @@ Formato: `- [ ] [quién] Qué hacer — por qué / dónde — (agente que lo pid
 - [ ] [dueño] Confirmar los **días** de atención de Mokalú (se asumió lunes a viernes, 9h00–17h30) y el pin exacto de Google Maps del Edificio 100 — (integrador, 2026-10-15)
 - [ ] [dueño] Revisar las tiendas con ubicación aproximada (columna `precision` = `ciudad` en `bots/mokalu/tiendas.csv`, 44 de 94): el bot las ubica en el centro de su ciudad. Pegar el pin de Google Maps de las más importantes mejora la recomendación dentro de Quito y Guayaquil — (integrador, 2026-10-15)
 - [ ] [dueño] Confirmar dirección de 2 tiendas sin dirección: Tía Tula Quito (código postal 170157) y Comercial Plinio García (Manta) — (integrador, 2026-10-15)
+- [ ] [dueño] Fotos: el nodo "Ver foto (ChatGPT)" usa la credencial **"OpenAi account"** de n8n; confirmar que esa cuenta de OpenAI tenga saldo (gasto esperado: centavos al mes). Si se prefiere, cambiarla por "n8n free OpenAI API credits" — (integrador, 2026-10-15)
+- [ ] [dueño] El nodo "Descargar foto" también usa la credencial de Telegram: cambiarla junto con los otros 4 nodos cuando se cree el bot nuevo en @BotFather — (integrador, 2026-10-15)

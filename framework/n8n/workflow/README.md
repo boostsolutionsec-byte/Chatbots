@@ -38,3 +38,11 @@ resueltos sin IA: **menos de 0,10 USD/mes** en IA. Las ejecuciones cuentan en el
 - `nodo.plantilla.js` — fuente del nodo Code (con `__LUGARES__`/`__FRAG__`); `nodo.js` — versión armada que está en n8n.
 - `probar.cjs` — `node framework/n8n/workflow/probar.js` prueba el nodo con 15 mensajes sin n8n.
 - `workflow.sdk.js` — definición completa del workflow (n8n Workflow SDK).
+
+## Fotos (2026-10-15)
+- `Telegram Trigger → ¿Mandó foto? → Descargar foto → Ver foto (ChatGPT) → Leer tiendas` (sin foto: directo a `Leer tiendas`).
+- `Ver foto (ChatGPT)`: OpenAI **gpt-4.1-mini**, detalle **bajo**, máx. 120 tokens, credencial "OpenAi account". Solo corre si el
+  cliente manda foto. Costo aproximado: menos de 1 centavo por foto.
+- La descripción entra al bot como texto (`[foto: …]`): producto → asesoría/tienda; "comprobante de pago" o "documento con
+  datos" → pasa al equipo de Mokalú sin IA. Si la descarga o ChatGPT fallan (`onError: continuar`), el caso pasa al equipo.
+- Audios, videos y documentos → al equipo (aún no se transcriben).

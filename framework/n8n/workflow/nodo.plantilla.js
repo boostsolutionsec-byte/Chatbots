@@ -2,7 +2,19 @@
 // y, si no, prepara un contexto corto para DeepSeek. Las tiendas vienen de la Data Table "Mokalú tiendas".
 const msg = $('Telegram Trigger').first().json.message || {};
 const chatId = msg.chat ? msg.chat.id : null;
-const texto = (msg.text || msg.caption || '').slice(0, 500);
+// Foto: la describe ChatGPT en el nodo "Ver foto (ChatGPT)" (solo corre si el cliente mandó una foto).
+let fotoDesc = '';
+if (msg.photo) {
+  try {
+    const n = $('Ver foto (ChatGPT)');
+    if (n && n.isExecuted) {
+      const j = n.first().json || {};
+      const d = typeof j.content === 'string' ? j.content : (j.text || (j.message && j.message.content) || (Array.isArray(j.output) && j.output[0] && j.output[0].content && j.output[0].content[0] && j.output[0].content[0].text) || '');
+      fotoDesc = String(d).replace(/\s+/g, ' ').trim().slice(0, 300);
+    }
+  } catch (e) { fotoDesc = ''; }
+}
+const texto = ((msg.text || msg.caption || '') + (fotoDesc ? ` [foto: ${fotoDesc}]` : '')).slice(0, 700);
 const memo = $getWorkflowStaticData('global');
 memo.chats = memo.chats || {};
 const hoyMs = Date.now();
@@ -59,7 +71,7 @@ const md = v => String(v == null ? '' : v).replace(/([_*`\[])/g, '\\$1'); // esc
 const ficha = s => `📍 *${md(s.nombre)}* — ${md(s.direccion)}\n🗺️ ${s.maps_url} · 📲 ${md(s.whatsapp)} · 🕒 ${md(s.horario)}`;
 
 const FRAG = __FRAG__;
-const pal = new Set(norm(texto).split(' ').filter(w => w.length > 3 && !['posca', 'poscas', 'marcador', 'marcadores', 'como', 'para', 'esta', 'este', 'estos', 'estas', 'tiene', 'tienen', 'mismo', 'misma', 'verdad', 'favor', 'gracias', 'quiero', 'tengo', 'pero', 'donde', 'cual', 'cuales'].includes(w))); // palabras demasiado comunes
+const pal = new Set(norm(texto).split(' ').filter(w => (w.length > 3 || /^(\d+[km]|1mr|pc|pcf)$/.test(w)) && !['color', 'colores', 'punta', 'puntas', 'marca', 'posca', 'poscas', 'marcador', 'marcadores', 'como', 'para', 'esta', 'este', 'estos', 'estas', 'tiene', 'tienen', 'mismo', 'misma', 'verdad', 'favor', 'gracias', 'quiero', 'tengo', 'pero', 'donde', 'cual', 'cuales'].includes(w))); // palabras demasiado comunes
 const fragsUtiles = FRAG.map(f => ({ f, p: f[0].split(' ').filter(w => pal.has(w)).length })).filter(x => x.p > 0).sort((a, b) => b.p - a.p);
 const preguntaProducto = fragsUtiles.length > 0 && !has(['donde', 'comprar', 'compro', 'consigo', 'conseguir', 'venden', 'adquirir', 'where', 'buy']);
 
@@ -69,10 +81,10 @@ const pideDonde = has(['donde', 'comprar', 'compro', 'consigo', 'venden', 'tiend
 if (has(['reclamo', 'defectuoso', 'defectuosos', 'danado', 'danados', 'vino seco', 'vinieron secos', 'vinieron secas', 'llego seco', 'llegaron secos', 'llegaron secas', 'llegaron danados', 'llegaron mal', 'llegaron rotos', 'esta seco', 'estan secos', 'no sirve', 'no pinta', 'no pintan', 'no funciona', 'no funcionan', 'no sale', 'llego roto', 'llego mal', 'roto', 'rota', 'fallado', 'estafa', 'devolucion', 'devolver', 'garantia', 'queja'])) {
   intencion = 'reclamo'; derivar = 'reclamos';
   respuesta = `Lamento mucho lo que pasó 🙏 Te paso ahora con el equipo de Mokalú que ve reclamos para resolverlo directamente.${waMok}${aviso}`;
-} else if (msg.photo || msg.document || msg.video) {
+} else if ((msg.photo && !fotoDesc) || msg.document || msg.video || msg.voice || msg.audio) {
   intencion = 'foto'; derivar = 'ventas';
-  respuesta = `¡Gracias por la imagen! 📸 Todavía no puedo verlas, así que se la paso al equipo de Mokalú para que te confirme.${waMok}${aviso}`;
-} else if (/\b\d{10}(\d{3})?\b/.test(t.replace(/ /g, '')) || has(['cedula', 'ruc', 'datos para la factura', 'datos para el envio', 'mi correo', 'correo electronico', 'factura', 'facturando', 'facturar', 'deposito', 'comprobante', 'transferencia', 'mi pedido', 'el pedido', 'un pedido', 'hacer un pedido', 'hacerles un pedido', 'concretar', 'cuando llega', 'cuando me llega', 'llega mi', 'la guia', 'servientrega', 'hacen envios', 'hacen envio', 'envio a', 'envios a', 'me envian', 'comprar con ustedes', 'comprarles', 'a domicilio'])) {
+  respuesta = `¡Gracias! 📎 Ese archivo se lo paso al equipo de Mokalú para que te confirme.${waMok}${aviso}`;
+} else if (/\b\d{10}(\d{3})?\b/.test(t.replace(/ /g, '')) || has(['cedula', 'ruc', 'datos para la factura', 'datos para el envio', 'mi correo', 'correo electronico', 'factura', 'facturando', 'facturar', 'deposito', 'comprobante', 'transferencia', 'mi pedido', 'el pedido', 'un pedido', 'hacer un pedido', 'hacerles un pedido', 'concretar', 'cuando llega', 'cuando me llega', 'llega mi', 'la guia', 'servientrega', 'hacen envios', 'hacen envio', 'envio a', 'envios a', 'me envian', 'comprar con ustedes', 'comprarles', 'a domicilio', 'comprobante de pago', 'documento con datos'])) {
   intencion = 'pedido'; derivar = 'ventas';
   respuesta = `¡Perfecto! 🙌 Pedidos, envíos a todo el país, facturas y pagos los atiende directamente el equipo de Mokalú; ya les avisé.${waMok}${aviso}`;
 } else if (has(['ser distribuidor', 'ser distribuidora', 'distribuir', 'punto de venta', 'revender', 'vender posca', 'vender sus productos', 'asesora de ventas', 'asesor de ventas', 'trabajar con ustedes', 'al por mayor', 'por mayor', 'mayorista', 'mayoristas', 'proforma', 'cotizacion', 'para mi colegio', 'para el colegio', 'para la escuela', 'para mi empresa', 'para la empresa', 'para mi negocio'])
@@ -124,6 +136,7 @@ if (!respuesta) {
   if (cercanas.length) contexto += `TIENDAS (cliente en ${ciudad}):\n` + cercanas.slice(0, 2).map(s => `${s.nombre} (${s.ciudad}, ~${s.km} km) — ${s.direccion} · ${s.maps_url} · WhatsApp ${s.whatsapp} · ${s.horario}`).join('\n') + '\n';
   if (!cercanas.length) contexto += 'TIENDAS: aún no sabes la ciudad del cliente; si quiere comprar, pregúntala.\n';
   if (!enHorario) contexto += `Ahora el equipo humano no atiende (horario: ${CONFIG.horarioHumano}).\n`;
+  if (fotoDesc) contexto += `FOTO DEL CLIENTE (descrita por visión, puede tener errores): ${fotoDesc}\n`;
   if (previo && previo.ultimo) contexto += `TU MENSAJE ANTERIOR: ${previo.ultimo}\n`;
 }
 if (chatId != null) {
