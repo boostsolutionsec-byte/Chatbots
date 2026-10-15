@@ -67,3 +67,6 @@ uni-ball Zento: bolígrafo de escritura muy suave y secado rápido, pensado para
 
 ## Shalaku portaminas economico estudiantes mina
 uni Shalaku: portaminas sencillo y económico para estudiantes (mina 0,5 mm). Para dibujo técnico o boceto con punta siempre fina, Kuru Toga. <!-- POR CONFIRMAR: líneas vistas en @uniball_ecuador (2026-10-15); detalles técnicos de fuentes generales -->
+
+## uni Chalk tiza líquida marcador pizarra vitrina mampara borrable
+uni Chalk: marcador de tiza líquida para vidrio, vitrinas, mamparas y pizarras; se borra con un paño húmedo. POSCA es pintura acrílica: cubre más y dura más, pero en vidrio también se puede quitar si no se sella. Para letras grandes en mamparas: punta 8K o 17K. <!-- visto en chats reales de Mokalú (2026) -->

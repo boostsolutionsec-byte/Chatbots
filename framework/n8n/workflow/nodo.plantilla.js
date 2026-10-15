@@ -37,7 +37,8 @@ if (msg.location) { lat = msg.location.latitude; lng = msg.location.longitude; }
 else {
   // Todas las coincidencias; gana la más larga, pero un sector le gana a su propia ciudad ("guayaco, por urdesa").
   const hits = [];
-  for (const l of LUGARES) for (const a of [norm(l[0]), ...l[1].split('|')]) if (a && t.includes(' ' + a + ' ')) hits.push({ l, n: a.length, sector: l[0] !== l[2] });
+  const tl = t.replace(/ cuanto (?:me |les |te )?duran /g, ' '); // "¿cuánto duran?" no es Durán
+  for (const l of LUGARES) for (const a of [norm(l[0]), ...l[1].split('|')]) if (a && tl.includes(' ' + a + ' ')) hits.push({ l, n: a.length, sector: l[0] !== l[2] });
   hits.sort((x, y) => y.n - x.n);
   lugar = hits.length ? (hits.find(h => h.sector && h.l[2] === hits[0].l[2]) || hits[0]).l : null;
   if (lugar) { lat = lugar[4]; lng = lugar[5]; }
@@ -58,7 +59,7 @@ const md = v => String(v == null ? '' : v).replace(/([_*`\[])/g, '\\$1'); // esc
 const ficha = s => `📍 *${md(s.nombre)}* — ${md(s.direccion)}\n🗺️ ${s.maps_url} · 📲 ${md(s.whatsapp)} · 🕒 ${md(s.horario)}`;
 
 const FRAG = __FRAG__;
-const pal = new Set(norm(texto).split(' ').filter(w => w.length > 3 && !['posca', 'poscas', 'marcador', 'marcadores'].includes(w))); // palabras demasiado comunes
+const pal = new Set(norm(texto).split(' ').filter(w => w.length > 3 && !['posca', 'poscas', 'marcador', 'marcadores', 'como', 'para', 'esta', 'este', 'estos', 'estas', 'tiene', 'tienen', 'mismo', 'misma', 'verdad', 'favor', 'gracias', 'quiero', 'tengo', 'pero', 'donde', 'cual', 'cuales'].includes(w))); // palabras demasiado comunes
 const fragsUtiles = FRAG.map(f => ({ f, p: f[0].split(' ').filter(w => pal.has(w)).length })).filter(x => x.p > 0).sort((a, b) => b.p - a.p);
 const preguntaProducto = fragsUtiles.length > 0 && !has(['donde', 'comprar', 'compro', 'consigo', 'conseguir', 'venden', 'adquirir', 'where', 'buy']);
 
@@ -68,6 +69,12 @@ const pideDonde = has(['donde', 'comprar', 'compro', 'consigo', 'venden', 'tiend
 if (has(['reclamo', 'defectuoso', 'defectuosos', 'danado', 'danados', 'vino seco', 'vinieron secos', 'vinieron secas', 'llego seco', 'llegaron secos', 'llegaron secas', 'llegaron danados', 'llegaron mal', 'llegaron rotos', 'esta seco', 'estan secos', 'no sirve', 'no pinta', 'no pintan', 'no funciona', 'no funcionan', 'no sale', 'llego roto', 'llego mal', 'roto', 'rota', 'fallado', 'estafa', 'devolucion', 'devolver', 'garantia', 'queja'])) {
   intencion = 'reclamo'; derivar = 'reclamos';
   respuesta = `Lamento mucho lo que pasó 🙏 Te paso ahora con el equipo de Mokalú que ve reclamos para resolverlo directamente.${waMok}${aviso}`;
+} else if (msg.photo || msg.document || msg.video) {
+  intencion = 'foto'; derivar = 'ventas';
+  respuesta = `¡Gracias por la imagen! 📸 Todavía no puedo verlas, así que se la paso al equipo de Mokalú para que te confirme.${waMok}${aviso}`;
+} else if (/\b\d{10}(\d{3})?\b/.test(t.replace(/ /g, '')) || has(['cedula', 'ruc', 'datos para la factura', 'datos para el envio', 'mi correo', 'correo electronico', 'factura', 'facturando', 'facturar', 'deposito', 'comprobante', 'transferencia', 'mi pedido', 'el pedido', 'un pedido', 'hacer un pedido', 'hacerles un pedido', 'concretar', 'cuando llega', 'cuando me llega', 'llega mi', 'la guia', 'servientrega', 'hacen envios', 'hacen envio', 'envio a', 'envios a', 'me envian', 'comprar con ustedes', 'comprarles', 'a domicilio'])) {
+  intencion = 'pedido'; derivar = 'ventas';
+  respuesta = `¡Perfecto! 🙌 Pedidos, envíos a todo el país, facturas y pagos los atiende directamente el equipo de Mokalú; ya les avisé.${waMok}${aviso}`;
 } else if (has(['ser distribuidor', 'ser distribuidora', 'distribuir', 'punto de venta', 'revender', 'vender posca', 'vender sus productos', 'asesora de ventas', 'asesor de ventas', 'trabajar con ustedes', 'al por mayor', 'por mayor', 'mayorista', 'mayoristas', 'proforma', 'cotizacion', 'para mi colegio', 'para el colegio', 'para la escuela', 'para mi empresa', 'para la empresa', 'para mi negocio'])
   || /\b([5-9]\d|\d{3,})\s*(marcadores|poscas|posca|unidades|cajas|esferos|boligrafos)/.test(t)
   || (t.includes('distribuidor') && has(['tengo', 'mi negocio', 'mi papeleria', 'mi tienda', 'quiero', 'como']))) {
@@ -80,9 +87,9 @@ if (has(['reclamo', 'defectuoso', 'defectuosos', 'danado', 'danados', 'vino seco
   intencion = 'mokalu';
   respuesta = (MOK ? `Mokalú está en Guayaquil:\n${ficha(MOK)}\n` : 'Mokalú está en Guayaquil, Av. del Bombero, La Vista, San Eduardo, Edificio 100 📍\n')
     + `También puedes comprar en la tienda online, con envíos a todo el país: ${CONFIG.webTienda}\nSi estás en otra ciudad, dime cuál y te paso el punto de venta más cercano 📍`;
-} else if (has(['precio', 'precios', 'cuanto cuesta', 'cuanto vale', 'valor', 'dolares']) && !cercanas.length) {
+} else if (has(['precio', 'precios', 'cuanto cuesta', 'cuanto vale', 'cuanto sale', 'a como', 'valor', 'valorcito', 'dolares', 'combo', 'promo', 'promos', 'promocion', 'descuento'])) {
   intencion = 'precio';
-  respuesta = 'El precio lo pone cada tienda, así que no te quiero dar un dato equivocado 🙏 Dime tu ciudad y te paso el WhatsApp de la tienda más cercana para que te lo confirmen.';
+  respuesta = `Los precios y promociones dependen del punto de venta, así que no te quiero dar un dato equivocado 🙏 ${cercanas.length ? `En ${ciudad} te lo confirman en *${md(cercanas[0].nombre)}* 📲 ${md(cercanas[0].whatsapp)}.` : 'Dime tu ciudad y te paso la tienda más cercana.'} Si prefieres comprar con envío a domicilio, pregúntale a Mokalú.${waMok}`;
 } else if (has(['horario', 'a que hora', 'atienden', 'abren']) && !cercanas.length) {
   intencion = 'horario';
   respuesta = `Nuestro equipo atiende ${CONFIG.horarioHumano} 🕒 Yo te respondo a cualquier hora: ¿en qué ciudad estás para pasarte la tienda más cercana?`;
@@ -94,14 +101,19 @@ if (has(['reclamo', 'defectuoso', 'defectuosos', 'danado', 'danados', 'vino seco
   } else if (s.km <= CONFIG.lejosKm) {
     respuesta = `En ${ciudad} aún no tenemos punto de venta 😕 La más cercana está en ${s.ciudad}, a ~${s.km} km:\n${ficha(s)}`;
   } else {
-    respuesta = `En ${ciudad} aún no tenemos punto de venta 😕 Puedes pedir en la tienda online de Mokalú, con envíos a todo el país: ${CONFIG.webTienda}\nLa tienda física más cercana está en ${s.ciudad} (~${s.km} km): *${md(s.nombre)}*, 📲 ${md(s.whatsapp)}.`;
+    respuesta = s.km > 300
+      ? `En ${ciudad} aún no tenemos punto de venta 😕 Pero Mokalú hace envíos a todo el país: pide en la tienda online ${CONFIG.webTienda} o escríbeles para coordinar.${waMok}`
+      : `En ${ciudad} aún no tenemos punto de venta 😕 Puedes pedir en la tienda online de Mokalú, con envíos a todo el país: ${CONFIG.webTienda}\nLa tienda física más cercana está en ${s.ciudad} (~${s.km} km): *${md(s.nombre)}*, 📲 ${md(s.whatsapp)}.`;
   }
 } else if (has(['donde', 'consigo', 'conseguir', 'venden', 'local', 'tienda']) && !cercanas.length && !preguntaProducto) {
   intencion = 'pedir_ciudad';
   respuesta = '¡Claro! ¿En qué ciudad o sector estás? 📍 (también puedes enviarme tu ubicación) Así te paso la tienda más cercana.';
-} else if (!msg.location && (!texto.trim() || !/[a-z]/.test(norm(texto)) || norm(texto).split(' ').every(w => ['hola', 'holi', 'holaa', 'ola', 'buenas', 'buenos', 'buen', 'dia', 'dias', 'tardes', 'noches', 'que', 'tal', 'saludos', 'estimados', 'estimado', 'senores', 'hi', 'hello', 'hey'].includes(w)))) {
+} else if (!msg.location && texto.trim() && !/[a-z0-9]/.test(norm(texto))) {
+  intencion = 'reaccion';
+  respuesta = texto.includes('?') ? '¿En qué te puedo ayudar? 🙂' : '🙂';
+} else if (!msg.location && (!texto.trim() || norm(texto).split(' ').every(w => ['hola', 'holi', 'holaa', 'ola', 'buenas', 'buenos', 'buen', 'dia', 'dias', 'tardes', 'noches', 'que', 'tal', 'saludos', 'estimados', 'estimado', 'senores', 'hi', 'hello', 'hey'].includes(w)))) {
   intencion = 'saludo';
-  respuesta = `¡Hola! Soy ${CONFIG.nombreBot}, asesora de Mokalú 🎨 Te ayudo a encontrar dónde comprar uni/POSCA o a elegir cuál te sirve. ¿En qué ciudad estás? (también puedes enviarme tu ubicación 📍)`;
+  respuesta = previo ? '¡Hola de nuevo! 🙂 ¿En qué te ayudo hoy?' : `¡Hola! Soy ${CONFIG.nombreBot}, asesora de Mokalú 🎨 Te ayudo a encontrar dónde comprar uni/POSCA o a elegir cuál te sirve. ¿En qué ciudad estás? (también puedes enviarme tu ubicación 📍)`;
 }
 
 // 3) Si va a la IA: solo 2 fragmentos de producto y, si hay, 1–2 tiendas cercanas.
