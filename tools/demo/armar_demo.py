@@ -3,6 +3,9 @@
 import json, os
 R = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 nodo = open(os.path.join(R, 'framework/n8n/workflow/nodo.js'), encoding='utf-8').read()
+# La demo es para uni-ball: siempre modo 'marca' (manda a la tienda más cercana), aunque el nodo de n8n esté en 'tienda'.
+assert "modo: 'tienda'" in nodo or "modo: 'marca'" in nodo, 'no encuentro CONFIG.modo en nodo.js'
+nodo = nodo.replace("modo: 'tienda'", "modo: 'marca'", 1)
 nodo = nodo.replace("Soy ${CONFIG.nombreBot}, asesora de Mokalú 🎨", "Soy la asistente virtual de uni-ball Ecuador 🎨")
 T = json.load(open(os.path.join(R, 'framework/n8n/tiendas.json'), encoding='utf-8'))
 T = [{**t, 'tienda_id': t['id']} for t in T]
