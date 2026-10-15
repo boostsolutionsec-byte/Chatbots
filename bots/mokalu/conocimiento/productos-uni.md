@@ -38,7 +38,7 @@ POSCA cubre (opaca), pinta sobre cualquier superficie y no traspasa el papel. Lo
 ## otras marcas no distribuimos Copic Molotow Sharpie Faber-Castell Pilot acuarelas alternativa
 No las manejamos. Alternativas uni: marcador de pintura (Molotow, Sharpie Paint) → POSCA · marcador de alcohol (Copic) → POSCA PC-3M/PC-5M o uni PIN · acuarelas → uni PIN para entintar antes · bolígrafo de gel → Signo. Nunca hablar mal de otra marca.
 
-## uni PIN estilógrafo fineliner tinta acuarela dibujo técnico
+## uni PIN Unipin estilógrafo fineliner tinta acuarela dibujo técnico
 uni PIN: tinta pigmentada resistente al agua al secar, para entintar antes de acuarela y dibujo técnico. Tamaños 005 a 08 y brush. [F15]
 
 ## Signo gel bolígrafo esfero blanco brillos
@@ -52,3 +52,18 @@ Kuru Toga: portaminas que gira la mina al escribir para mantener la punta fina. 
 
 ## niños seguridad tóxico
 POSCA es a base de agua y sin olor. Niños: con supervisión de un adulto, sin llevarlos a la boca. No afirmar "no tóxico" ni certificaciones (por confirmar con la ficha local).
+
+## Unipaint marcador pintura aceite permanente metal superficies rugosas exterior
+Unipaint (uni PAINT, PX-20/PX-21): marcador de pintura a base de aceite, permanente; marca metal, vidrio, plástico, madera y superficies rugosas, y resiste agua y exterior. Diferencia con POSCA: POSCA es al agua, sin olor y se puede repintar; Unipaint es más resistente pero tiene olor (usar en lugar ventilado). <!-- POR CONFIRMAR: líneas vistas en @uniball_ecuador (2026-10-15); detalles técnicos de fuentes generales -->
+
+## Emott rotulador color punta fina bullet journal colorear apuntes
+uni emott: rotulador de color con punta fina (0,4 mm), tinta al agua y muchos colores; ideal para bullet journal, apuntes y colorear con detalle. <!-- POR CONFIRMAR: líneas vistas en @uniball_ecuador (2026-10-15); detalles técnicos de fuentes generales -->
+
+## Eye roller boligrafo tinta liquida escritura suave
+uni-ball Eye: bolígrafo roller de tinta líquida, trazo suave y continuo (0,5 / 0,7 mm); para escribir y firmar con línea nítida. <!-- POR CONFIRMAR: líneas vistas en @uniball_ecuador (2026-10-15); detalles técnicos de fuentes generales -->
+
+## Zento boligrafo esfero escritura suave rapida
+uni-ball Zento: bolígrafo de escritura muy suave y secado rápido, pensado para escribir mucho sin cansarse. <!-- POR CONFIRMAR: líneas vistas en @uniball_ecuador (2026-10-15); detalles técnicos de fuentes generales -->
+
+## Shalaku portaminas economico estudiantes mina
+uni Shalaku: portaminas sencillo y económico para estudiantes (mina 0,5 mm). Para dibujo técnico o boceto con punta siempre fina, Kuru Toga. <!-- POR CONFIRMAR: líneas vistas en @uniball_ecuador (2026-10-15); detalles técnicos de fuentes generales -->
