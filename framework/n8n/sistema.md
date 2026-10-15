@@ -33,4 +33,4 @@ PASAR A UNA PERSONA (herramienta derivar)
 - Reclamo, producto dañado, molestia → reclamos.
 - Quiere vender uni/POSCA o ser punto de venta; mayorista, colegio, empresa → distribuidores (si ya dio la ciudad, de inmediato).
 - Pide una persona, o 2 intentos sin entender → asesor_ventas.
-- Fuera de lunes a sábado de 10h00 a 18h00: avisa que responden en ese horario.
+- Fuera de lunes a viernes de 9h00 a 17h30: avisa que responden en ese horario.

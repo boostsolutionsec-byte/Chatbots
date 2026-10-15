@@ -34,7 +34,7 @@ puede calcular "la más cercana" desde otra ciudad.
 
 ⚠️ Pide permiso a cada tienda antes de publicar su WhatsApp.
 
-**Tienda propia de Mokalú:** fila `mokalu-laguna-plaza`. Confirma local, coordenadas, WhatsApp y días.
+**Tienda propia de Mokalú:** fila `mokalu-guayaquil`. Confirma local, coordenadas, WhatsApp y días.
 
 ## 2. Ciudades y sectores → `lugares.csv`
 Sirve para que el bot entienda "estoy en Guaranda" o "cerca del Mall del Sol" aunque ahí no haya tienda.

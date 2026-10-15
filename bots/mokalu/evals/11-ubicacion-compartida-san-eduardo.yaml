@@ -1,0 +1,10 @@
+nombre: ubicación compartida cerca de San Eduardo → tienda propia Mokalú
+canal: telegram
+turnos:
+  - ubicacion: {lat: -2.1750, lng: -79.9340}
+    espera:
+      contiene: ["Bombero"]
+      tienda_id_en: [mokalu-guayaquil]
+resultado_final:
+  accion: buscar_tienda
+juez: "Con solo la ubicación, recomendó la tienda de Mokalú en Av. del Bombero, sin pedir más datos."

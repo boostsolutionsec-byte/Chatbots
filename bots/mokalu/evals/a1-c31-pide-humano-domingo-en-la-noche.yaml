@@ -8,5 +8,5 @@ turnos:
   espera:
     deriva_a: asesor_ventas
     contiene_alguno:
-    - 10h00
+    - 9h00
     - lunes

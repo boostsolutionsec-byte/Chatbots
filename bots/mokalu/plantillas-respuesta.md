@@ -38,7 +38,7 @@ Claro 🙂 Te paso con una persona del equipo de Mokalú. {aviso_horario}
 
 ## R4 · Dónde queda Mokalú
 ```
-La tienda de Mokalú está en el *C.C. Laguna Plaza*, km 12,5 vía a la costa, Guayaquil 📍 Horario: {horario_mokalu}. Si estás en otra ciudad, dime cuál y te paso el punto de venta más cercano.
+Mokalú está en *Av. del Bombero, La Vista, San Eduardo, Edificio 100*, Guayaquil 📍 También tiene tienda online con envíos a todo el país. Horario: {horario_mokalu}. Si estás en otra ciudad, dime cuál y te paso el punto de venta más cercano.
 ```
 
 ## R5 · Horario
@@ -85,7 +85,7 @@ El precio lo pone cada tienda, así que no te quiero dar un dato equivocado 🙏
 | `{nombre_bot}` | `bot.yaml → variables.nombre_bot` |
 | `{web_tienda}` | `bot.yaml → variables.web_tienda` |
 | `{horario_humano}` | `bot.yaml → variables.horario_humano` |
-| `{horario_mokalu}` | fila `mokalu-laguna-plaza` de `tiendas.csv` |
+| `{horario_mokalu}` | fila `mokalu-guayaquil` de `tiendas.csv` |
 | `{aviso_horario}` | vacío si el equipo está en horario; si no: "Te responden en horario de atención ({horario_humano})." |
 | `{ciudad_cliente}` | lugar que entendió el localizador |
 | `{tienda.*}`, `{distancia_km}` | primera tienda del localizador (`buscar_tienda`) |

@@ -81,6 +81,22 @@
   "lng": -79.945
  },
  {
+  "nombre": "San Eduardo",
+  "alias": [
+   "san eduardo",
+   "av del bombero",
+   "avenida del bombero",
+   "av bombero",
+   "via al bombero",
+   "edificio 100"
+  ],
+  "tipo": "sector",
+  "ciudad": "Guayaquil",
+  "provincia": "Guayas",
+  "lat": -2.1745,
+  "lng": -79.933
+ },
+ {
   "nombre": "Vía a la Costa",
   "alias": [
    "via a la costa",

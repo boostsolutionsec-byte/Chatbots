@@ -110,16 +110,16 @@
   "web": "https://ejemplo.invalid/gye-ceibos"
  },
  {
-  "lat": -2.187,
-  "lng": -80.006,
-  "id": "mokalu-laguna-plaza",
-  "nombre": "Mokalú — C.C. Laguna Plaza",
+  "lat": -2.1745,
+  "lng": -79.933,
+  "id": "mokalu-guayaquil",
+  "nombre": "Mokalú — Av. del Bombero",
   "ciudad": "Guayaquil",
   "provincia": "Guayas",
-  "direccion": "C.C. Laguna Plaza, km 12,5 vía a la costa",
-  "maps_url": "https://www.google.com/maps/search/?api=1&query=C.C.+Laguna+Plaza+Guayaquil",
+  "direccion": "Av. del Bombero, La Vista, San Eduardo, Edificio 100",
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Edificio+100+Av.+del+Bombero+San+Eduardo+Guayaquil",
   "whatsapp": "+593 99 000 0007",
-  "horario": "10h00-18h00",
+  "horario": "lun-vie 09h00-17h30",
   "marcas": [
    "uni-ball",
    "POSCA"

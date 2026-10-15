@@ -8,11 +8,13 @@ memo.chats = memo.chats || {};
 const hoyMs = Date.now();
 for (const k of Object.keys(memo.chats)) if (hoyMs - memo.chats[k].ts > 7 * 864e5) delete memo.chats[k]; // olvida tras 7 días
 const previo = (chatId != null && memo.chats[chatId] && hoyMs - memo.chats[chatId].ts < 2 * 864e5) ? memo.chats[chatId] : null;
-const tiendas = $input.all().map(i => i.json).filter(t => t.nombre && t.lat !== '' && t.lat != null);
+const tiendas = $input.all().map(i => i.json).filter(t => t.nombre && t.lat !== '' && t.lat != null && t.tienda_id !== 'mokalu-laguna-plaza'); // fila vieja: borrarla de la tabla
+const MOK = tiendas.find(x => x.tienda_id === 'mokalu-guayaquil');
+const waMok = MOK && MOK.whatsapp ? ` Escríbenos directo al WhatsApp de Mokalú 📲 ${MOK.whatsapp}` : '';
 
 const CONFIG = {
   nombreBot: 'Sofi',
-  horarioHumano: 'lunes a sábado de 10h00 a 18h00',
+  horarioHumano: 'lunes a viernes de 9h00 a 17h30',
   webTienda: 'https://mokalu.com.ec/tienda/',
   lejosKm: 60,
 };
@@ -25,7 +27,7 @@ const has = list => list.some(k => t.includes(' ' + k + ' ') || (k.includes(' ')
 const km = (a, b, c, d) => { const r = Math.PI / 180, x = Math.sin((c - a) * r / 2) ** 2 + Math.cos(a * r) * Math.cos(c * r) * Math.sin((d - b) * r / 2) ** 2; return 6371 * 2 * Math.asin(Math.sqrt(x)); };
 
 const ahora = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Guayaquil' }));
-const enHorario = ahora.getDay() >= 1 && ahora.getDay() <= 6 && ahora.getHours() >= 10 && ahora.getHours() < 18;
+const enHorario = ahora.getDay() >= 1 && ahora.getDay() <= 5 && ahora.getHours() * 60 + ahora.getMinutes() >= 540 && ahora.getHours() * 60 + ahora.getMinutes() < 1050; // 9h00–17h30
 const aviso = enHorario ? '' : ` Te responden en horario de atención (${CONFIG.horarioHumano}).`;
 
 // 1) ¿Dónde está el cliente? GPS compartido o un lugar escrito.
@@ -64,20 +66,19 @@ let respuesta = null, derivar = null, intencion = 'ia';
 const pideDonde = has(['donde', 'comprar', 'compro', 'consigo', 'venden', 'tienda', 'local', 'conseguir', 'adquirir', 'establecimiento', 'where', 'buy', 'store']);
 if (has(['reclamo', 'defectuoso', 'defectuosos', 'danado', 'danados', 'vino seco', 'vinieron secos', 'llego seco', 'esta seco', 'no sirve', 'no pinta', 'no pintan', 'no funciona', 'no funcionan', 'no sale', 'llego roto', 'llego mal', 'roto', 'rota', 'fallado', 'estafa', 'devolucion', 'devolver', 'garantia', 'queja'])) {
   intencion = 'reclamo'; derivar = 'reclamos';
-  respuesta = `Lamento mucho lo que pasó 🙏 Te paso ahora con el equipo de Mokalú que ve reclamos para resolverlo directamente.${aviso}`;
+  respuesta = `Lamento mucho lo que pasó 🙏 Te paso ahora con el equipo de Mokalú que ve reclamos para resolverlo directamente.${waMok}${aviso}`;
 } else if (has(['ser distribuidor', 'ser distribuidora', 'distribuir', 'punto de venta', 'revender', 'vender posca', 'vender sus productos', 'asesora de ventas', 'asesor de ventas', 'trabajar con ustedes', 'al por mayor', 'por mayor', 'mayorista', 'mayoristas', 'proforma', 'cotizacion', 'para mi colegio', 'para el colegio', 'para la escuela', 'para mi empresa', 'para la empresa', 'para mi negocio'])
   || /\b([5-9]\d|\d{3,})\s*(marcadores|poscas|posca|unidades|cajas|esferos|boligrafos)/.test(t)
   || (t.includes('distribuidor') && has(['tengo', 'mi negocio', 'mi papeleria', 'mi tienda', 'quiero', 'como']))) {
   intencion = 'distribuidor'; derivar = 'distribuidores';
-  respuesta = `¡Qué buena noticia! 🙌 Te conecto con el equipo comercial de Mokalú. Si quieres, déjame el nombre de tu negocio y tu ciudad para pasárselos.${aviso}`;
+  respuesta = `¡Qué buena noticia! 🙌 Te conecto con el equipo comercial de Mokalú. Si quieres, déjame el nombre de tu negocio y tu ciudad para pasárselos.${waMok}${aviso}`;
 } else if (has(['hablar con una persona', 'asesor', 'asesora', 'humano', 'persona real'])) {
   intencion = 'humano'; derivar = 'asesor_ventas';
-  respuesta = `Claro 🙂 Te paso con una persona del equipo de Mokalú.${aviso}`;
+  respuesta = `Claro 🙂 Te paso con una persona del equipo de Mokalú.${waMok}${aviso}`;
 } else if (t.includes(' mokalu ') && has(['donde', 'direccion', 'queda', 'quedan', 'ubicados', 'ubicacion', 'local', 'tienda', 'estan'])) {
   intencion = 'mokalu';
-  const m = tiendas.find(x => x.tienda_id === 'mokalu-laguna-plaza');
-  respuesta = m ? `La tienda de Mokalú está en Guayaquil:\n${ficha(m)}\nSi estás en otra ciudad, dime cuál y te paso el punto de venta más cercano 📍`
-                : `La tienda de Mokalú está en el C.C. Laguna Plaza, vía a la costa, Guayaquil 📍 Si estás en otra ciudad, dime cuál y te paso el punto de venta más cercano.`;
+  respuesta = (MOK ? `Mokalú está en Guayaquil:\n${ficha(MOK)}\n` : 'Mokalú está en Guayaquil, Av. del Bombero, La Vista, San Eduardo, Edificio 100 📍\n')
+    + `También puedes comprar en la tienda online, con envíos a todo el país: ${CONFIG.webTienda}\nSi estás en otra ciudad, dime cuál y te paso el punto de venta más cercano 📍`;
 } else if (has(['precio', 'precios', 'cuanto cuesta', 'cuanto vale', 'valor', 'dolares']) && !cercanas.length) {
   intencion = 'precio';
   respuesta = 'El precio lo pone cada tienda, así que no te quiero dar un dato equivocado 🙏 Dime tu ciudad y te paso el WhatsApp de la tienda más cercana para que te lo confirmen.';

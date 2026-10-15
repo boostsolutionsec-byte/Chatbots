@@ -14,12 +14,12 @@ persona:
 
 canales: [web, telegram]    # luego: whatsapp, instagram
 
-horario_humano:             # FORMULARIO 17 — por defecto 10h00–18h00 (sitio web); días POR CONFIRMAR
+horario_humano:             # Dueño 2026-10-15: 9h00–17h30; días POR CONFIRMAR (se asume lun–vie)
   zona: America/Guayaquil
   dias: [lun, mar, mie, jue, vie, sab]
   desde: "10:00"
   hasta: "18:00"
-  fuera_de_horario: "Te dejo con el equipo y te responden en horario de atención (lun–sáb 10h00–18h00)."
+  fuera_de_horario: "Te dejo con el equipo y te responden en horario de atención (lun–vie 9h00–17h30)."
 
 modelo:
   rapido: claude-haiku
@@ -31,7 +31,7 @@ variables:                  # en prompts/sistema.md se usan como {{variables.nom
   marcas: "uni (POSCA, PIN, uni-ball Signo, Jetstream, Kuru Toga)"
   web_tienda: "https://mokalu.com.ec/tienda/"
   instagram: "@mokalu_ec"
-  horario_humano: "lunes a sábado de 10h00 a 18h00"
+  horario_humano: "lunes a viernes de 9h00 a 17h30"
 
 destinos:
   - id: asesor_ventas
@@ -52,8 +52,8 @@ destinos:
     descripcion: "Tienda online de Mokalú con envíos a todo el país (POR CONFIRMAR que el bot pueda ofrecerla)"
   - id: tienda_mokalu
     tipo: sucursal
-    valor: "mokalu-laguna-plaza"      # id en tiendas.csv
-    descripcion: "Tienda propia de Mokalú en C.C. Laguna Plaza, Guayaquil (POR CONFIRMAR)"
+    valor: "mokalu-guayaquil"      # id en tiendas.csv
+    descripcion: "Mokalú: Av. del Bombero, La Vista, San Eduardo, Edificio 100, Guayaquil"
 
 reglas_derivacion:          # en orden; la primera que coincide gana
   - si: "reclamo, producto defectuoso, garantía o cliente molesto"
