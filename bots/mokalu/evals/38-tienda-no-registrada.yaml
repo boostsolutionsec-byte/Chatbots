@@ -5,7 +5,7 @@ turnos:
     espera:
       tienda_en: [salinas]
       no_inventa_tiendas: true
-      tienda_id_en: [sal-centro]
+      tienda_id_en: [lib-polipapel-paseo-shopping-libertad]
       no_contiene: ["El Faro vende", "sí, el faro"]
 resultado_final:
   accion: buscar_tienda

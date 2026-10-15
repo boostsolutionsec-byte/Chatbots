@@ -11,4 +11,4 @@ turnos:
 - usuario: loja
   espera:
     tienda_id_en:
-    - loj-centro
+    - loj-reforma

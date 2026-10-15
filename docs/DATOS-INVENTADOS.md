@@ -28,6 +28,7 @@ Cada agente añade aquí una fila por cada dato de ejemplo que use. El Agente 4 
 | bots/mokalu/prompts/sistema.md | ejemplos de respuestas | ejemplos con tiendas EJEMPLO | — (se actualizan solos al cambiar tiendas.csv; revisar tono) | ¿Te gusta este tono? ¿tuteo o "usted"? |
 | bots/mokalu/tiendas.csv | columna `marcas` de todas las filas | `uni-ball;POSCA` (todas iguales, por H-12) | Qué marcas/líneas tiene cada punto de venta | ¿Todas las tiendas tienen POSCA o algunas solo bolígrafos uni-ball? |
 | validacion/simulador/fixtures/tiendas-mock.csv | 12 filas `EJEMPLO …` | tiendas de prueba del validador (solo se usan si no existe `bots/mokalu/tiendas.csv`) | ninguno: es un fixture de pruebas, no va al bot | — |
-| `bots/mokalu/tiendas.csv`, n8n Data Table | fila `mokalu-guayaquil`, whatsapp | `+593 99 000 0007` | WhatsApp real de Mokalú (recibe info, consultas y reclamos) | ¿Cuál es el número de WhatsApp de Mokalú? |
+| `bots/mokalu/tiendas.csv`, n8n Data Table | fila `mokalu-guayaquil`, whatsapp | ~~`+593 99 000 0007`~~ RESUELTO 2026-10-15: +593 96 701 1171 | WhatsApp real de Mokalú (recibe info, consultas y reclamos) | ¿Cuál es el número de WhatsApp de Mokalú? |
 | `bots/mokalu/tiendas.csv`, `lugares.csv` | `mokalu-guayaquil` lat/lng y sector San Eduardo | -2.1745, -79.933 (aprox.) | Pin exacto del Edificio 100, Av. del Bombero | ¿Nos pasan el link de Google Maps del local? |
 | `framework/n8n/workflow/nodo.plantilla.js`, `bot.yaml` | días de atención | lunes a viernes 9h00–17h30 | Días reales de atención | ¿Atienden también sábados? |
+| `bots/mokalu/tiendas.csv` | TODAS las tiendas EJEMPLO | RESUELTO 2026-10-15: reemplazadas por 94 puntos de venta reales (destacado de @uniball_ecuador + Google Maps) | — | — |

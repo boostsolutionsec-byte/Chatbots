@@ -11,7 +11,7 @@ turnos:
     tienda_en:
     - riobamba
     tienda_id_en:
-    - rio-centro
+    - amb-polipapel-paseo-shopping-ambato
     no_contiene:
     - $
     max_burbujas: 2

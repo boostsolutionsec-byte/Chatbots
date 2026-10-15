@@ -6,7 +6,7 @@ turnos:
       pide_campo: ubicacion
   - ubicacion: {lat: -0.1790, lng: -78.4830}
     espera:
-      tienda_id_en: [uio-carolina]
+      tienda_id_en: [uio-polipapel-inaquito-cci]
       no_inventa_tiendas: true
 resultado_final:
   accion: buscar_tienda

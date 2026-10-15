@@ -6,7 +6,7 @@ turnos:
 - usuario: en la papeleria de ibarra tienen el posca dorado pc-5m??
   espera:
     tienda_id_en:
-    - iba-centro
+    - iba-sari-popular-ceibos
     no_contiene:
     - sí tienen
     - hay stock

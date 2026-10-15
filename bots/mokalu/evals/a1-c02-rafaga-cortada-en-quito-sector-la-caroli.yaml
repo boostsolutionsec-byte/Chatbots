@@ -20,6 +20,6 @@ turnos:
 - usuario: x la carolina
   espera:
     tienda_id_en:
-    - uio-carolina
+    - uio-polipapel-inaquito-cci
 juez: 'Responde una sola vez a la ráfaga, no saluda varias veces y recomienda la tienda del sector La Carolina. (Nota: ráfaga unida en un solo mensaje (simula debounce)) (Ajuste Agente 3: como la ráfaga
   ya dice ''en quito'', el turno 1 debe dar tiendas de Quito, no pedir la ciudad.)'

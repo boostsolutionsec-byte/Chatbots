@@ -7,7 +7,10 @@ geo = json.load(open(sys.argv[1]))
 L = json.load(open(os.path.join(R, 'lugares.compacto.json')))
 def norm(s): return re.sub(r'\s+', ' ', re.sub(r'[^a-z0-9ñ ]', ' ', ''.join(c for c in unicodedata.normalize('NFD', (s or '').lower()) if unicodedata.category(c) != 'Mn'))).strip()
 CIUDAD = {'Cumbayá (Quito)': 'Quito', 'El Tingo (Valle de los Chillos)': 'Sangolquí'}
-CODE = {'Guayaquil': 'gye', 'Quito': 'uio', 'Cuenca': 'cue', 'Samborondón': 'sam', 'Sangolquí': 'san'}
+CODE = {'Guayaquil': 'gye', 'Quito': 'uio', 'Cuenca': 'cue', 'Samborondón': 'sam', 'Sangolquí': 'sgq', 'Durán': 'dur', 'Daule': 'dau', 'Milagro': 'mil', 'Playas': 'pla',
+        'Machala': 'mch', 'Manta': 'mta', 'Loja': 'loj', 'Zamora': 'zam', 'Cariamanga': 'car', 'Macará': 'mcr', 'Quevedo': 'qvd', 'Babahoyo': 'bab',
+        'Santo Domingo': 'sdo', 'La Libertad': 'lib', 'Ambato': 'amb', 'Ibarra': 'iba'}
+STOP = {'papeleria', 'libreria', 'y', 'de', 'del', 'la', 'el', 'los', 'las', 'c', 'cc'}
 def wa(v):
     v = (v or '').strip()
     if not v: return ''
@@ -42,7 +45,7 @@ for g in geo:
         g = {**g, 'nombre': 'Mokalú Art Shop', 'direccion': 'Av. del Bombero, La Vista, San Eduardo, Edificio 100', 'horario': 'lun-vie 09h00-17h30'}
         lat, lng, prec = -2.1745, -79.933, 'sector'
     else:
-        base = CODE.get(ciudad, norm(ciudad)[:3]) + '-' + '-'.join(norm(g['nombre']).replace('papeleria', '').replace('libreria', '').split()[:4])
+        base = CODE.get(ciudad, norm(ciudad).replace(' ', '')[:3]) + '-' + '-'.join([w for w in norm(g['nombre']).split() if w not in STOP][:4])
         tid = re.sub(r'-+', '-', base).strip('-'); n = 2
         while tid in usados: tid = f'{base}-{n}'; n += 1
     usados.add(tid)

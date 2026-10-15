@@ -6,6 +6,6 @@ turnos:
 - usuario: buenas soy de pelileo
   espera:
     tienda_id_en:
-    - amb-centro
-    - amb-ficoa
+    - amb-polipapel-paseo-shopping-ambato
+    - amb-polipapel-paseo-shopping-ambato
 juez: Recomienda Ambato por cercanía sin preguntar de nuevo.

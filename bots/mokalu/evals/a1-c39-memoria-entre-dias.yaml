@@ -6,7 +6,7 @@ turnos:
 - usuario: donde compro en latacunga
   espera:
     tienda_id_en:
-    - lat-centro
+    - amb-polipapel-paseo-shopping-ambato
 - usuario: oiga y para pintar piedras cual sirve
   espera:
     no_pide_campo: ubicacion

@@ -6,6 +6,6 @@ turnos:
 - usuario: hi! im in montañita, where can i buy posca markers?
   espera:
     tienda_id_en:
-    - sal-centro
+    - lib-polipapel-paseo-shopping-libertad
     no_inventa_tiendas: true
 juez: Responde en inglés y recomienda la tienda más cercana (Salinas) sin inventar una en Montañita.

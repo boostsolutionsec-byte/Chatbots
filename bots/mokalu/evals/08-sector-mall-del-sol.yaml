@@ -3,7 +3,7 @@ canal: telegram
 turnos:
   - usuario: "donde compro posca cerca del Mall del Sol?"
     espera:
-      tienda_id_en: [gye-mall-sol]
+      tienda_id_en: [gye-megamaxi-mall-sol]
       no_inventa_tiendas: true
       tienda_en: [guayaquil]
 resultado_final:

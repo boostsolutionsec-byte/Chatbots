@@ -9,6 +9,6 @@ turnos:
 - usuario: perdon ayer no vi. esmeraldas
   espera:
     tienda_id_en:
-    - esm-centro
+    - sdo-polipapel-bomboli-shopping
     seguimientos_pendientes: 0
-juez: '(Nota: espera de 23h no soportada por el runner: {''seguimientos_enviados'': 1}; espera de 2h no soportada por el runner: {''tienda_id_en'': [''esm-centro''], ''seguimientos_pendientes'': 0})'
+juez: '(Nota: espera de 23h no soportada por el runner: {''seguimientos_enviados'': 1}; espera de 2h no soportada por el runner: {''tienda_id_en'': [''sdo-polipapel-bomboli-shopping''], ''seguimientos_pendientes'': 0})'

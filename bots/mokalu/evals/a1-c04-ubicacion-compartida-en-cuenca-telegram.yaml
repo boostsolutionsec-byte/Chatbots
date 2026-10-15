@@ -8,7 +8,7 @@ turnos:
     pide_campo: ubicacion
 - espera:
     tienda_id_en:
-    - cue-mall-rio
+    - cue-austral-dos
   ubicacion:
     lat: -2.918
     lng: -79.011

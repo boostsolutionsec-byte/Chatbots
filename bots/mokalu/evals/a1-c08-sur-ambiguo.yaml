@@ -9,5 +9,5 @@ turnos:
 - usuario: gye
   espera:
     tienda_id_en:
-    - gye-sur
+    - gye-megamaxi-mall-sur
 juez: Pide aclarar la ciudad una sola vez y luego recomienda la tienda del sur de Guayaquil.

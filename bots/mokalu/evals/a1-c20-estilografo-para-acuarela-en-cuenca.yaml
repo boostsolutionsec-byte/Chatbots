@@ -11,4 +11,4 @@ turnos:
 - usuario: cuenca centro
   espera:
     tienda_id_en:
-    - cue-centro
+    - cue-austral-uno

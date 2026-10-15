@@ -6,7 +6,7 @@ turnos:
 - usuario: hola donde compro posca en santo domingo
   espera:
     tienda_id_en:
-    - sdo-centro
+    - sdo-mundoffice-sucursal-santo-domingo
 - usuario: gracias 👍
   espera:
     max_burbujas: 1

@@ -8,7 +8,8 @@ memo.chats = memo.chats || {};
 const hoyMs = Date.now();
 for (const k of Object.keys(memo.chats)) if (hoyMs - memo.chats[k].ts > 7 * 864e5) delete memo.chats[k]; // olvida tras 7 días
 const previo = (chatId != null && memo.chats[chatId] && hoyMs - memo.chats[chatId].ts < 2 * 864e5) ? memo.chats[chatId] : null;
-const tiendas = $input.all().map(i => i.json).filter(t => t.nombre && t.lat !== '' && t.lat != null && t.tienda_id !== 'mokalu-laguna-plaza'); // fila vieja: borrarla de la tabla
+const tiendas = $input.all().map(i => i.json).filter(t => t.nombre && t.lat !== '' && t.lat != null)
+  .map(t => ({ ...t, maps_url: t.maps_url || 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(`${t.nombre} ${t.direccion || ''} ${t.ciudad || ''}`.trim()) }));
 const MOK = tiendas.find(x => x.tienda_id === 'mokalu-guayaquil');
 const waMok = MOK && MOK.whatsapp ? ` Escríbenos directo al WhatsApp de Mokalú 📲 ${MOK.whatsapp}` : '';
 

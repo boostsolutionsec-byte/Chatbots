@@ -1,727 +1,1505 @@
 [
  {
+  "id": "mta-todo-en",
+  "nombre": "Todo en Papelería",
+  "ciudad": "Manta",
+  "provincia": "Manabí",
+  "direccion": "Cdla. Los Almendros 17, Altagracia, Av. Principal y Calle 7 E3",
+  "lat": -0.9677,
+  "lng": -80.7089,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Todo+en+Papelería+Cdla.+Los+Almendros+17,+Altagracia,+Av.+Principal+y+Calle+7+E3+Manta",
+  "whatsapp": "https://wa.me/message/D35F6QUU7E2FK1",
+  "horario": "",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "loj-reforma",
+  "nombre": "La Reforma",
+  "ciudad": "Loja",
+  "provincia": "Loja",
+  "direccion": "18 de Noviembre y Lourdes 211-37",
+  "lat": -3.993,
+  "lng": -79.204,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=La+Reforma+18+de+Noviembre+y+Lourdes+211-37+Loja",
+  "whatsapp": "(07) 257-3154",
+  "horario": "lun-vie 08:30-13:00 y 14:30-19:00; sáb 08:30-18:00; dom cerrado",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "mch-erikaren-matriz",
+  "nombre": "Papelería Erikaren - Matriz",
+  "ciudad": "Machala",
+  "provincia": "El Oro",
+  "direccion": "Páez 1703 y 25 de Junio esq. (bajos del edificio del Sindicato de Choferes)",
+  "lat": -3.258,
+  "lng": -79.955,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Papelería+Erikaren+-+Matriz+Páez+1703+y+25+de+Junio+esq.+(bajos+del+edificio+del+Sindicato+de+Choferes)+Machala",
+  "whatsapp": "(07) 293-0531",
+  "horario": "lun-sáb 09:00-19:00; dom cerrado",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "mch-erikaren-sucursal",
+  "nombre": "Papelería Erikaren - Sucursal",
+  "ciudad": "Machala",
+  "provincia": "El Oro",
+  "direccion": "Rocafuerte 1108 entre Guayas y Ayacucho (frente a la Corte)",
+  "lat": -3.258,
+  "lng": -79.955,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Papelería+Erikaren+-+Sucursal+Rocafuerte+1108+entre+Guayas+y+Ayacucho+(frente+a+la+Corte)+Machala",
+  "whatsapp": "+593 99 164 4423",
+  "horario": "lun-vie 09:00-18:30; sáb 09:00-18:00; dom cerrado",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "qvd-mundoffice-matriz-quevedo",
+  "nombre": "Mundoffice - Matriz Quevedo",
+  "ciudad": "Quevedo",
+  "provincia": "Los Ríos",
+  "direccion": "Calle Bolívar #705 y 7ma",
+  "lat": -1.0286,
+  "lng": -79.4635,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Mundoffice+-+Matriz+Quevedo+Calle+Bolívar+705+y+7ma+Quevedo",
+  "whatsapp": "+593 98 511 9446",
+  "horario": "lun-vie 07:30-18:45; sáb 08:00-18:45; dom 08:30-14:00",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "qvd-mundoffice-sucursal-quevedo",
+  "nombre": "Mundoffice - Sucursal Quevedo",
+  "ciudad": "Quevedo",
+  "provincia": "Los Ríos",
+  "direccion": "Calle 8va y 7 de Octubre",
+  "lat": -1.0286,
+  "lng": -79.4635,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Mundoffice+-+Sucursal+Quevedo+Calle+8va+y+7+de+Octubre+Quevedo",
+  "whatsapp": "+593 98 511 9446",
+  "horario": "lun-vie 07:30-18:45; sáb 08:00-18:45; dom 08:30-17:00",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "sdo-mundoffice-sucursal-santo-domingo",
+  "nombre": "Mundoffice - Sucursal Santo Domingo",
+  "ciudad": "Santo Domingo",
+  "provincia": "Santo Domingo de los Tsáchilas",
+  "direccion": "Av. 3 de Julio e Ibarra esquina",
+  "lat": -0.253,
+  "lng": -79.175,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Mundoffice+-+Sucursal+Santo+Domingo+Av.+3+de+Julio+e+Ibarra+esquina+Santo+Domingo",
+  "whatsapp": "+593 98 971 1167",
+  "horario": "lun-sáb 07:30-18:45; dom 08:30-17:00",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "gye-polipapel-policentro",
+  "nombre": "Polipapel - Policentro",
+  "ciudad": "Guayaquil",
+  "provincia": "Guayas",
+  "direccion": "Av. San Jorge, C.C. Policentro, Local 56",
+  "lat": -2.1707,
+  "lng": -79.89999,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Polipapel+-+Policentro+Av.+San+Jorge,+C.C.+Policentro,+Local+56+Guayaquil",
+  "whatsapp": "+593 96 284 5845",
+  "horario": "lun-jue 10:00-20:00; vie-sáb 10:00-21:00; dom y feriados 11:00-20:00",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "gye-polipapel-alban-borja",
+  "nombre": "Polipapel - Albán Borja",
+  "ciudad": "Guayaquil",
+  "provincia": "Guayas",
+  "direccion": "C.C. Albán Borja, Ilanes Local 3",
+  "lat": -2.16869,
+  "lng": -79.91665,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Polipapel+-+Albán+Borja+C.C.+Albán+Borja,+Ilanes+Local+3+Guayaquil",
+  "whatsapp": "+593 96 284 5845",
+  "horario": "lun-sáb 09:00-19:00; dom 11:00-18:00",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "gye-polipapel-mall-sur",
+  "nombre": "Polipapel - Mall del Sur",
+  "ciudad": "Guayaquil",
+  "provincia": "Guayas",
+  "direccion": "C.C. Mall del Sur, Av. 25 de Julio, Planta Baja, Local 138",
+  "lat": -2.22949,
+  "lng": -79.89841,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Polipapel+-+Mall+del+Sur+C.C.+Mall+del+Sur,+Av.+25+de+Julio,+Planta+Baja,+Local+138+Guayaquil",
+  "whatsapp": "+593 96 284 5845",
+  "horario": "lun-sáb 10:00-21:00; dom 10:00-20:00",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "gye-polipapel-world-trade-center",
+  "nombre": "Polipapel - World Trade Center",
+  "ciudad": "Guayaquil",
+  "provincia": "Guayas",
+  "direccion": "Av. Francisco de Orellana, Edif. World Trade Center, Planta Baja Local 49",
+  "lat": -2.1635,
+  "lng": -79.89799,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Polipapel+-+World+Trade+Center+Av.+Francisco+de+Orellana,+Edif.+World+Trade+Center,+Planta+Baja+Local+49+Guayaquil",
+  "whatsapp": "+593 96 284 5845",
+  "horario": "lun-vie 09:00-18:00",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "gye-polipapel-riocentro-norte",
+  "nombre": "Polipapel - Riocentro Norte",
+  "ciudad": "Guayaquil",
+  "provincia": "Guayas",
+  "direccion": "Riocentro Norte, Planta Baja, Local 43, Av. Francisco de Orellana",
+  "lat": -2.12764,
+  "lng": -79.90695,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Polipapel+-+Riocentro+Norte+Riocentro+Norte,+Planta+Baja,+Local+43,+Av.+Francisco+de+Orellana+Guayaquil",
+  "whatsapp": "+593 96 284 5845",
+  "horario": "lun-jue 10:00-21:00; vie-sáb 10:00-22:00; dom y feriados 10:30-21:00",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "gye-polipapel-riocentro-ceibos",
+  "nombre": "Polipapel - Riocentro Ceibos",
+  "ciudad": "Guayaquil",
+  "provincia": "Guayas",
+  "direccion": "Riocentro Ceibos, Planta Alta Local 76, Av. del Bombero",
+  "lat": -2.1781,
+  "lng": -79.94231,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Polipapel+-+Riocentro+Ceibos+Riocentro+Ceibos,+Planta+Alta+Local+76,+Av.+del+Bombero+Guayaquil",
+  "whatsapp": "+593 96 284 5845",
+  "horario": "lun-jue 10:00-21:00; vie-sáb 10:00-22:00; dom y feriados 10:30-21:00",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "gye-polipapel-boyaca",
+  "nombre": "Polipapel - Boyacá",
+  "ciudad": "Guayaquil",
+  "provincia": "Guayas",
+  "direccion": "Boyacá entre 9 de Octubre y Vélez",
   "lat": -2.1894,
   "lng": -79.885,
-  "id": "gye-centro",
-  "nombre": "EJEMPLO Papelería Malecón",
-  "ciudad": "Guayaquil",
-  "provincia": "Guayas",
-  "direccion": "EJEMPLO Av. 9 de Octubre y Chile, Centro",
-  "maps_url": "https://ejemplo.invalid/maps/gye-centro",
-  "whatsapp": "+593 99 000 0001",
-  "telefono": "+593 99 000 0001",
-  "horario": "lun-sáb 09h00-19h00",
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Polipapel+-+Boyacá+Boyacá+entre+9+de+Octubre+y+Vélez+Guayaquil",
+  "whatsapp": "+593 96 284 5845",
+  "horario": "lun-sáb 09:30-20:00; dom 10:00-19:00",
   "marcas": [
-   "uni-ball",
-   "POSCA"
+   "uni-ball"
   ],
   "vende_online": false
  },
  {
-  "lat": -2.1544,
-  "lng": -79.893,
-  "id": "gye-mall-sol",
-  "nombre": "EJEMPLO Arte & Color Mall del Sol",
+  "id": "gye-polipapel-rotonda",
+  "nombre": "Polipapel - C.C. La Rotonda",
   "ciudad": "Guayaquil",
   "provincia": "Guayas",
-  "direccion": "EJEMPLO C.C. Mall del Sol, planta baja (sector Mall del Sol)",
-  "maps_url": "https://ejemplo.invalid/maps/gye-mall-sol",
-  "whatsapp": "+593 99 000 0002",
-  "telefono": "+593 99 000 0002",
-  "horario": "lun-sáb 09h00-19h00",
-  "marcas": [
-   "uni-ball",
-   "POSCA"
-  ],
-  "vende_online": true,
-  "web": "https://ejemplo.invalid/gye-mall-sol"
- },
- {
-  "lat": -2.165,
-  "lng": -79.905,
-  "id": "gye-urdesa",
-  "nombre": "EJEMPLO Librería Urdesa",
-  "ciudad": "Guayaquil",
-  "provincia": "Guayas",
-  "direccion": "EJEMPLO Av. Víctor Emilio Estrada, Urdesa Central",
-  "maps_url": "https://ejemplo.invalid/maps/gye-urdesa",
-  "whatsapp": "+593 99 000 0003",
-  "telefono": "+593 99 000 0003",
-  "horario": "lun-sáb 09h00-19h00",
-  "marcas": [
-   "uni-ball",
-   "POSCA"
-  ],
-  "vende_online": false
- },
- {
+  "direccion": "La Piazza, Cdla. Alborada 10ma Etapa, C.C. La Rotonda, Local 1 Planta Baja",
   "lat": -2.135,
   "lng": -79.9,
-  "id": "gye-alborada",
-  "nombre": "EJEMPLO Papelería Alborada",
-  "ciudad": "Guayaquil",
-  "provincia": "Guayas",
-  "direccion": "EJEMPLO Av. Rodolfo Baquerizo, Alborada 9na etapa",
-  "maps_url": "https://ejemplo.invalid/maps/gye-alborada",
-  "whatsapp": "+593 99 000 0004",
-  "telefono": "+593 99 000 0004",
-  "horario": "lun-sáb 09h00-19h00",
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Polipapel+-+C.C.+La+Rotonda+La+Piazza,+Cdla.+Alborada+10ma+Etapa,+C.C.+La+Rotonda,+Local+1+Planta+Baja+Guayaquil",
+  "whatsapp": "+593 96 284 5845",
+  "horario": "lun-dom 10:00-20:00",
   "marcas": [
-   "uni-ball",
-   "POSCA"
+   "uni-ball"
   ],
   "vende_online": false
  },
  {
+  "id": "gye-polipapel-gigante",
+  "nombre": "Polipapel - Gigante",
+  "ciudad": "Guayaquil",
+  "provincia": "Guayas",
+  "direccion": "Juan Montalvo 701 y Escobedo, a dos cuadras del Hospital Luis Vernaza",
+  "lat": -2.1894,
+  "lng": -79.8891,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Polipapel+-+Gigante+Juan+Montalvo+701+y+Escobedo,+a+dos+cuadras+del+Hospital+Luis+Vernaza+Guayaquil",
+  "whatsapp": "+593 96 284 5845",
+  "horario": "lun-dom 09:30-19:00",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "gye-polipapel-bosques-costa",
+  "nombre": "Polipapel - Bosques de la Costa",
+  "ciudad": "Guayaquil",
+  "provincia": "Guayas",
+  "direccion": "Vía a la Costa, junto a Urb. Bosques de la Costa",
+  "lat": -2.187,
+  "lng": -80.006,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Polipapel+-+Bosques+de+la+Costa+Vía+a+la+Costa,+junto+a+Urb.+Bosques+de+la+Costa+Guayaquil",
+  "whatsapp": "+593 96 284 5845",
+  "horario": "lun-sáb 09:00-20:00; dom 10:00-19:00",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "gye-polipapel-mall-sol",
+  "nombre": "Polipapel - Mall del Sol",
+  "ciudad": "Guayaquil",
+  "provincia": "Guayas",
+  "direccion": "Av. Juan Tanca Marengo, C.C. Mall del Sol, Local B-044, Planta Baja (zona Megamaxi)",
+  "lat": -2.15523,
+  "lng": -79.89276,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Polipapel+-+Mall+del+Sol+Av.+Juan+Tanca+Marengo,+C.C.+Mall+del+Sol,+Local+B-044,+Planta+Baja+(zona+Megamaxi)+Guayaquil",
+  "whatsapp": "+593 96 284 5845",
+  "horario": "lun-dom 10:00-21:00",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "gye-polipapel-via-a-costa",
+  "nombre": "Polipapel - Vía a la Costa Km 20.5",
+  "ciudad": "Guayaquil",
+  "provincia": "Guayas",
+  "direccion": "Km 20.5 Vía a la Costa, Planta Baja C.C. Hipermarket",
+  "lat": -2.187,
+  "lng": -80.006,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Polipapel+-+Vía+a+la+Costa+Km+20.5+Km+20.5+Vía+a+la+Costa,+Planta+Baja+C.C.+Hipermarket+Guayaquil",
+  "whatsapp": "+593 96 284 5845",
+  "horario": "dom-jue 10:00-21:00; vie-sáb 10:00-22:00",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "gye-polipapel-plaza-tia-joya",
+  "nombre": "Polipapel - Plaza Tía La Joya",
+  "ciudad": "Guayaquil",
+  "provincia": "Guayas",
+  "direccion": "Urb. La Joya, C.C. Plaza Tía La Joya, diagonal a etapa Quarzo, Locales 25A, 26A y 27A",
+  "lat": -2.1894,
+  "lng": -79.8891,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Polipapel+-+Plaza+Tía+La+Joya+Urb.+La+Joya,+C.C.+Plaza+Tía+La+Joya,+diagonal+a+etapa+Quarzo,+Locales+25A,+26A+y+27A+Guayaquil",
+  "whatsapp": "+593 96 284 5845",
+  "horario": "lun-sáb 10:00-21:00; dom 10:00-20:00",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "dur-polipapel-paseo-shopping-duran",
+  "nombre": "Polipapel - Paseo Shopping Durán",
+  "ciudad": "Durán",
+  "provincia": "Guayas",
+  "direccion": "C.C. Paseo Shopping Durán, Local 44, Autopista Durán-Boliche Km 3.5",
+  "lat": -2.17,
+  "lng": -79.838,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Polipapel+-+Paseo+Shopping+Durán+C.C.+Paseo+Shopping+Durán,+Local+44,+Autopista+Durán-Boliche+Km+3.5+Durán",
+  "whatsapp": "+593 96 284 5845",
+  "horario": "lun-jue 10:00-21:00; vie-sáb 10:00-22:00; dom y feriados 10:30-21:00",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "dur-polipapel-duran-plaza-tia",
+  "nombre": "Polipapel - Durán Plaza Tía",
+  "ciudad": "Durán",
+  "provincia": "Guayas",
+  "direccion": "Cdla. El Recreo 4, Vía Durán-Yaguachi Km 8",
+  "lat": -2.17,
+  "lng": -79.838,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Polipapel+-+Durán+Plaza+Tía+Cdla.+El+Recreo+4,+Vía+Durán-Yaguachi+Km+8+Durán",
+  "whatsapp": "+593 96 284 5845",
+  "horario": "lun-jue 10:00-19:30; vie-dom 10:00-20:00",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "sam-polipapel-ciudad-celeste",
+  "nombre": "Polipapel - Ciudad Celeste",
+  "ciudad": "Samborondón",
+  "provincia": "Guayas",
+  "direccion": "C.C. La Piazza Ciudad Celeste, Av. León Febres Cordero",
+  "lat": -2.09,
+  "lng": -79.858,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Polipapel+-+Ciudad+Celeste+C.C.+La+Piazza+Ciudad+Celeste,+Av.+León+Febres+Cordero+Samborondón",
+  "whatsapp": "+593 96 284 5845",
+  "horario": "lun-sáb 10:00-21:00; dom 10:00-19:00",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "sam-polipapel-riocentro-entre-rios",
+  "nombre": "Polipapel - Riocentro Entre Ríos",
+  "ciudad": "Samborondón",
+  "provincia": "Guayas",
+  "direccion": "C.C. Entre Ríos, Planta Alta Locales 106-107, Av. Principal Km 1.5 vía Samborondón",
+  "lat": -2.14,
+  "lng": -79.865,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Polipapel+-+Riocentro+Entre+Ríos+C.C.+Entre+Ríos,+Planta+Alta+Locales+106-107,+Av.+Principal+Km+1.5+vía+Samborondón+Samborondón",
+  "whatsapp": "+593 96 284 5845",
+  "horario": "lun-jue 10:00-21:00; vie-sáb 10:00-22:00; dom y feriados 10:30-21:00",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "sam-polipapel-piazza-samborondon",
+  "nombre": "Polipapel - La Piazza Samborondón",
+  "ciudad": "Samborondón",
+  "provincia": "Guayas",
+  "direccion": "Av. Samborondón, C.C. La Piazza, Local 6 (junto a Carnes de Chavela)",
+  "lat": -2.14,
+  "lng": -79.865,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Polipapel+-+La+Piazza+Samborondón+Av.+Samborondón,+C.C.+La+Piazza,+Local+6+(junto+a+Carnes+de+Chavela)+Samborondón",
+  "whatsapp": "+593 96 284 5845",
+  "horario": "lun-dom 09:30-20:00",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "dau-polipapel-riocentro-dorado",
+  "nombre": "Polipapel - Riocentro El Dorado",
+  "ciudad": "Daule",
+  "provincia": "Guayas",
+  "direccion": "Av. Febres Cordero, vía La Aurora, C.C. Riocentro El Dorado, 1er piso Local 205",
+  "lat": -2.0505,
+  "lng": -79.9035,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Polipapel+-+Riocentro+El+Dorado+Av.+Febres+Cordero,+vía+La+Aurora,+C.C.+Riocentro+El+Dorado,+1er+piso+Local+205+Daule",
+  "whatsapp": "+593 96 284 5845",
+  "horario": "lun-dom 10:00-21:00",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "dau-polipapel-villa-club",
+  "nombre": "Polipapel - Villa Club",
+  "ciudad": "Daule",
+  "provincia": "Guayas",
+  "direccion": "Av. León Febres Cordero y Av. Principal Villa Club, Plaza Comercial La Piazza, Local 11",
+  "lat": -2.0505,
+  "lng": -79.9035,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Polipapel+-+Villa+Club+Av.+León+Febres+Cordero+y+Av.+Principal+Villa+Club,+Plaza+Comercial+La+Piazza,+Local+11+Daule",
+  "whatsapp": "+593 96 284 5845",
+  "horario": "lun-dom 09:00-20:00",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "mch-polipapel-paseo-shopping-machala",
+  "nombre": "Polipapel - Paseo Shopping Machala",
+  "ciudad": "Machala",
+  "provincia": "El Oro",
+  "direccion": "C.C. Paseo Shopping Machala, Local 57",
+  "lat": -3.258,
+  "lng": -79.955,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Polipapel+-+Paseo+Shopping+Machala+C.C.+Paseo+Shopping+Machala,+Local+57+Machala",
+  "whatsapp": "+593 96 284 5845",
+  "horario": "lun-dom 10:00-21:00",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "uio-polipapel-inaquito-cci",
+  "nombre": "Polipapel - C.C. Iñaquito (CCI)",
+  "ciudad": "Quito",
+  "provincia": "Pichincha",
+  "direccion": "C.C. Iñaquito, Av. Naciones Unidas, Planta Baja Local A-126",
+  "lat": -0.17766,
+  "lng": -78.48474,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Polipapel+-+C.C.+Iñaquito+(CCI)+C.C.+Iñaquito,+Av.+Naciones+Unidas,+Planta+Baja+Local+A-126+Quito",
+  "whatsapp": "+593 96 284 5845",
+  "horario": "lun-sáb 09:30-19:30; dom 09:30-19:00",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "uio-polipapel-paseo-san-francisco",
+  "nombre": "Polipapel - Paseo San Francisco",
+  "ciudad": "Quito",
+  "provincia": "Pichincha",
+  "direccion": "Paseo San Francisco, Av. Interoceánica y Francisco de Orellana, Planta Baja Locales 181-183",
+  "lat": -0.2,
+  "lng": -78.433,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Polipapel+-+Paseo+San+Francisco+Paseo+San+Francisco,+Av.+Interoceánica+y+Francisco+de+Orellana,+Planta+Baja+Locales+181-183+Quito",
+  "whatsapp": "+593 96 284 5845",
+  "horario": "lun-mié 10:00-20:00; jue-sáb 10:00-21:00; dom y feriados 10:00-20:00",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "uio-polipapel-granados-plaza",
+  "nombre": "Polipapel - Granados Plaza",
+  "ciudad": "Quito",
+  "provincia": "Pichincha",
+  "direccion": "Av. de los Granados y De las Hiedras, C.C. Granados Plaza, piso 2 (junto a Veris)",
+  "lat": -0.1655,
+  "lng": -78.4655,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Polipapel+-+Granados+Plaza+Av.+de+los+Granados+y+De+las+Hiedras,+C.C.+Granados+Plaza,+piso+2+(junto+a+Veris)+Quito",
+  "whatsapp": "+593 96 284 5845",
+  "horario": "lun-sáb 09:30-20:00; dom 09:30-19:00",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "sgq-polipapel-plaza-puruha-shopping",
+  "nombre": "Polipapel - Plaza Puruhá Shopping",
+  "ciudad": "Sangolquí",
+  "provincia": "Pichincha",
+  "direccion": "Av. Ilaló y Av. Los Cisnes, C.C. Plaza Puruhá Shopping, Local 6 (frente a Ecuaquímica)",
+  "lat": -0.329,
+  "lng": -78.445,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Polipapel+-+Plaza+Puruhá+Shopping+Av.+Ilaló+y+Av.+Los+Cisnes,+C.C.+Plaza+Puruhá+Shopping,+Local+6+(frente+a+Ecuaquímica)+Sangolquí",
+  "whatsapp": "+593 96 284 5845",
+  "horario": "lun-dom 09:30-20:00",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "uio-polipapel-portal",
+  "nombre": "Polipapel - El Portal",
+  "ciudad": "Quito",
+  "provincia": "Pichincha",
+  "direccion": "Av. Simón Bolívar y Panamericana Norte, C.C. El Portal, local 5 piso 3",
+  "lat": -0.1005,
+  "lng": -78.4555,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Polipapel+-+El+Portal+Av.+Simón+Bolívar+y+Panamericana+Norte,+C.C.+El+Portal,+local+5+piso+3+Quito",
+  "whatsapp": "+593 96 284 5845",
+  "horario": "dom-jue 10:00-20:00; vie-sáb 10:00-21:00",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "sdo-polipapel-bomboli-shopping",
+  "nombre": "Polipapel - Bombolí Shopping",
+  "ciudad": "Santo Domingo",
+  "provincia": "Santo Domingo de los Tsáchilas",
+  "direccion": "C.C. Bombolí Shopping, Av. Chone Km 2.5",
+  "lat": -0.25384,
+  "lng": -79.19228,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Polipapel+-+Bombolí+Shopping+C.C.+Bombolí+Shopping,+Av.+Chone+Km+2.5+Santo+Domingo",
+  "whatsapp": "+593 96 284 5845",
+  "horario": "",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "lib-polipapel-paseo-shopping-libertad",
+  "nombre": "Polipapel - Paseo Shopping La Libertad",
+  "ciudad": "La Libertad",
+  "provincia": "Santa Elena",
+  "direccion": "C.C. Paseo Shopping, Local 85, Av. 9 entre Av. 10 y Av. 12, Manzana 38",
+  "lat": -2.22655,
+  "lng": -80.92099,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Polipapel+-+Paseo+Shopping+La+Libertad+C.C.+Paseo+Shopping,+Local+85,+Av.+9+entre+Av.+10+y+Av.+12,+Manzana+38+La+Libertad",
+  "whatsapp": "+593 96 284 5845",
+  "horario": "",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "mta-polipapel-paseo-shopping-manta",
+  "nombre": "Polipapel - Paseo Shopping Manta",
+  "ciudad": "Manta",
+  "provincia": "Manabí",
+  "direccion": "C.C. Paseo Shopping Manta, Av. 4 de Noviembre y Calle 13",
+  "lat": -0.96638,
+  "lng": -80.70541,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Polipapel+-+Paseo+Shopping+Manta+C.C.+Paseo+Shopping+Manta,+Av.+4+de+Noviembre+y+Calle+13+Manta",
+  "whatsapp": "+593 96 284 5845",
+  "horario": "",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "mta-polipapel-quadra-manta",
+  "nombre": "Polipapel - C.C. La Quadra Manta",
+  "ciudad": "Manta",
+  "provincia": "Manabí",
+  "direccion": "C.C. La Quadra, prolongación de la Av. Manabí y 5 de Junio",
+  "lat": -0.94545,
+  "lng": -80.75242,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Polipapel+-+C.C.+La+Quadra+Manta+C.C.+La+Quadra,+prolongación+de+la+Av.+Manabí+y+5+de+Junio+Manta",
+  "whatsapp": "+593 96 284 5845",
+  "horario": "lun-dom 09:00-19:30",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "mil-polipapel-milagro-plaza-tia",
+  "nombre": "Polipapel - Milagro Plaza Tía",
+  "ciudad": "Milagro",
+  "provincia": "Guayas",
+  "direccion": "Av. Mariscal y Calle Laureles",
+  "lat": -2.1347,
+  "lng": -79.5872,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Polipapel+-+Milagro+Plaza+Tía+Av.+Mariscal+y+Calle+Laureles+Milagro",
+  "whatsapp": "+593 96 284 5845",
+  "horario": "lun-sáb 09:00-19:00; dom 09:00-18:00",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "pla-polipapel-paseo-shopping-playas",
+  "nombre": "Polipapel - Paseo Shopping Playas",
+  "ciudad": "Playas",
+  "provincia": "Guayas",
+  "direccion": "C.C. Paseo Shopping Playas",
+  "lat": -2.64326,
+  "lng": -80.38543,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Polipapel+-+Paseo+Shopping+Playas+C.C.+Paseo+Shopping+Playas+Playas",
+  "whatsapp": "+593 96 284 5845",
+  "horario": "dom-jue 10:00-21:00; vie-sáb 10:00-22:00",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "amb-polipapel-paseo-shopping-ambato",
+  "nombre": "Polipapel - Paseo Shopping Ambato",
+  "ciudad": "Ambato",
+  "provincia": "Tungurahua",
+  "direccion": "Pío Baroja y Manuela Sáenz, C.C. El Paseo Shopping Ambato, Locales 6-7, piso 1",
+  "lat": -1.2491,
+  "lng": -78.6168,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Polipapel+-+Paseo+Shopping+Ambato+Pío+Baroja+y+Manuela+Sáenz,+C.C.+El+Paseo+Shopping+Ambato,+Locales+6-7,+piso+1+Ambato",
+  "whatsapp": "+593 96 284 5845",
+  "horario": "lun-dom 10:00-21:00",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "amb-polipapel-multiplaza-ambato",
+  "nombre": "Polipapel - Multiplaza Ambato",
+  "ciudad": "Ambato",
+  "provincia": "Tungurahua",
+  "direccion": "C.C. Multiplaza Tungurahua, Av. De las Américas y González Suárez, Planta Baja No. 11 (frente a KFC)",
+  "lat": -1.2491,
+  "lng": -78.6168,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Polipapel+-+Multiplaza+Ambato+C.C.+Multiplaza+Tungurahua,+Av.+De+las+Américas+y+González+Suárez,+Planta+Baja+No.+11+(frente+a+KFC)+Ambato",
+  "whatsapp": "+593 96 284 5845",
+  "horario": "lun-sáb 09:00-20:00; dom y feriados 09:00-19:00",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "loj-polipapel-plaza-valle",
+  "nombre": "Polipapel - C.C. Plaza del Valle",
+  "ciudad": "Loja",
+  "provincia": "Loja",
+  "direccion": "Orillas del Zamora entre Guayaquil y Azogues #341",
+  "lat": -3.993,
+  "lng": -79.204,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Polipapel+-+C.C.+Plaza+del+Valle+Orillas+del+Zamora+entre+Guayaquil+y+Azogues+341+Loja",
+  "whatsapp": "+593 96 284 5845",
+  "horario": "lun-dom 10:00-19:00",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "bab-polipapel-paseo-shopping-babahoyo",
+  "nombre": "Polipapel - Paseo Shopping Babahoyo",
+  "ciudad": "Babahoyo",
+  "provincia": "Los Ríos",
+  "direccion": "Av. Enrique Ponce Luque, vía Babahoyo-Guayaquil, C.C. Paseo Shopping Babahoyo, Local 56 (junto a Etafashion)",
+  "lat": -1.81302,
+  "lng": -79.54531,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Polipapel+-+Paseo+Shopping+Babahoyo+Av.+Enrique+Ponce+Luque,+vía+Babahoyo-Guayaquil,+C.C.+Paseo+Shopping+Babahoyo,+Local+56+(junto+a+Etafashion)+Babahoyo",
+  "whatsapp": "+593 96 284 5845",
+  "horario": "dom-jue 10:00-21:00; vie-sáb 10:00-20:00",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "qvd-polipapel-plaza-quadra-quevedo",
+  "nombre": "Polipapel - Plaza La Quadra Quevedo",
+  "ciudad": "Quevedo",
+  "provincia": "Los Ríos",
+  "direccion": "Av. Manabí, Plaza Comercial La Quadra Quevedo, Local L-28 (frente a D-Mujeres)",
+  "lat": -1.0286,
+  "lng": -79.4635,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Polipapel+-+Plaza+La+Quadra+Quevedo+Av.+Manabí,+Plaza+Comercial+La+Quadra+Quevedo,+Local+L-28+(frente+a+D-Mujeres)+Quevedo",
+  "whatsapp": "+593 96 284 5845",
+  "horario": "lun-dom 10:00-20:00",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "uio-megamaxi-6-diciembre",
+  "nombre": "Megamaxi 6 de Diciembre",
+  "ciudad": "Quito",
+  "provincia": "Pichincha",
+  "direccion": "Av. 6 de Diciembre y Germán Alemán",
+  "lat": -0.1807,
+  "lng": -78.4678,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Megamaxi+6+de+Diciembre+Av.+6+de+Diciembre+y+Germán+Alemán+Quito",
+  "whatsapp": "+593 99 551 7000",
+  "horario": "lun-dom y feriados 10:00-21:00",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "sdo-megamaxi-bomboli-shopping",
+  "nombre": "Megamaxi Bombolí Shopping",
+  "ciudad": "Santo Domingo",
+  "provincia": "Santo Domingo de los Tsáchilas",
+  "direccion": "Av. Chone, C.C. Bombolí Shopping",
+  "lat": -0.25384,
+  "lng": -79.19228,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Megamaxi+Bombolí+Shopping+Av.+Chone,+C.C.+Bombolí+Shopping+Santo+Domingo",
+  "whatsapp": "+593 99 551 7000",
+  "horario": "lun-dom 10:00-21:00",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "gye-megamaxi-city-mall",
+  "nombre": "Megamaxi City Mall",
+  "ciudad": "Guayaquil",
+  "provincia": "Guayas",
+  "direccion": "Av. Felipe Pezo y Av. Benjamín Carrión",
+  "lat": -2.1395,
+  "lng": -79.8955,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Megamaxi+City+Mall+Av.+Felipe+Pezo+y+Av.+Benjamín+Carrión+Guayaquil",
+  "whatsapp": "+593 99 551 7000",
+  "horario": "lun-sáb 10:00-21:00; dom y feriados 10:00-20:30",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "uio-megamaxi-condado",
+  "nombre": "Megamaxi El Condado",
+  "ciudad": "Quito",
+  "provincia": "Pichincha",
+  "direccion": "Av. De la Prensa y Av. Mariscal Sucre",
+  "lat": -0.105,
+  "lng": -78.49,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Megamaxi+El+Condado+Av.+De+la+Prensa+y+Av.+Mariscal+Sucre+Quito",
+  "whatsapp": "+593 99 551 7000",
+  "horario": "lun-jue 10:00-20:30; vie-sáb 10:00-21:00; dom y feriados 10:00-20:00",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "uio-megamaxi-recreo",
+  "nombre": "Megamaxi El Recreo",
+  "ciudad": "Quito",
+  "provincia": "Pichincha",
+  "direccion": "Av. Pedro Vicente Maldonado y Antonio Barrionuevo",
+  "lat": -0.295,
+  "lng": -78.55,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Megamaxi+El+Recreo+Av.+Pedro+Vicente+Maldonado+y+Antonio+Barrionuevo+Quito",
+  "whatsapp": "+593 99 551 7000",
+  "horario": "lun-dom y feriados 10:00-20:30",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "mch-megamaxi-machala",
+  "nombre": "Megamaxi Machala",
+  "ciudad": "Machala",
+  "provincia": "El Oro",
+  "direccion": "Av. 25 de Junio, MZ U20, C.C. Gran Piazza Machala",
+  "lat": -3.258,
+  "lng": -79.955,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Megamaxi+Machala+Av.+25+de+Junio,+MZ+U20,+C.C.+Gran+Piazza+Machala+Machala",
+  "whatsapp": "+593 99 551 7000",
+  "horario": "lun-dom y feriados 10:00-21:00",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "amb-megamaxi-mall-andes",
+  "nombre": "Megamaxi Mall de los Andes",
+  "ciudad": "Ambato",
+  "provincia": "Tungurahua",
+  "direccion": "Av. Víctor Hugo y Atahualpa",
+  "lat": -1.2491,
+  "lng": -78.6168,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Megamaxi+Mall+de+los+Andes+Av.+Víctor+Hugo+y+Atahualpa+Ambato",
+  "whatsapp": "+593 99 551 7000",
+  "horario": "lun-sáb 10:00-21:00; dom y feriados 10:00-20:30",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "gye-megamaxi-mall-norte",
+  "nombre": "Megamaxi Mall del Norte",
+  "ciudad": "Guayaquil",
+  "provincia": "Guayas",
+  "direccion": "Av. Francisco de Orellana, C.C. Mall del Norte, Primera planta alta, local 101",
+  "lat": -2.15336,
+  "lng": -79.8901,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Megamaxi+Mall+del+Norte+Av.+Francisco+de+Orellana,+C.C.+Mall+del+Norte,+Primera+planta+alta,+local+101+Guayaquil",
+  "whatsapp": "+593 99 551 7000",
+  "horario": "lun-dom y feriados 10:00-21:00",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "mta-megamaxi-mall-pacifico",
+  "nombre": "Megamaxi Mall del Pacífico",
+  "ciudad": "Manta",
+  "provincia": "Manabí",
+  "direccion": "Av. Malecón, Av. 23 y Calle 20",
+  "lat": -0.9677,
+  "lng": -80.7089,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Megamaxi+Mall+del+Pacífico+Av.+Malecón,+Av.+23+y+Calle+20+Manta",
+  "whatsapp": "+593 99 551 7000",
+  "horario": "lun-sáb 10:00-21:00; dom y feriados 10:00-20:30",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "gye-megamaxi-mall-sol",
+  "nombre": "Megamaxi Mall del Sol",
+  "ciudad": "Guayaquil",
+  "provincia": "Guayas",
+  "direccion": "Av. Joaquín Orrantia y Juan Tanca Marengo",
+  "lat": -2.1544,
+  "lng": -79.893,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Megamaxi+Mall+del+Sol+Av.+Joaquín+Orrantia+y+Juan+Tanca+Marengo+Guayaquil",
+  "whatsapp": "+593 99 551 7000",
+  "horario": "lun-dom y feriados 10:00-21:00",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "gye-megamaxi-mall-sur",
+  "nombre": "Megamaxi Mall del Sur",
+  "ciudad": "Guayaquil",
+  "provincia": "Guayas",
+  "direccion": "Av. 25 de Julio y Ernesto Albán",
   "lat": -2.229,
   "lng": -79.896,
-  "id": "gye-sur",
-  "nombre": "EJEMPLO Útiles del Sur",
-  "ciudad": "Guayaquil",
-  "provincia": "Guayas",
-  "direccion": "EJEMPLO Av. 25 de Julio, cerca de C.C. Mall del Sur",
-  "maps_url": "https://ejemplo.invalid/maps/gye-sur",
-  "whatsapp": "+593 99 000 0005",
-  "telefono": "+593 99 000 0005",
-  "horario": "lun-sáb 09h00-19h00",
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Megamaxi+Mall+del+Sur+Av.+25+de+Julio+y+Ernesto+Albán+Guayaquil",
+  "whatsapp": "+593 99 551 7000",
+  "horario": "lun-sáb 10:00-21:00; dom y feriados 10:00-20:30",
   "marcas": [
-   "uni-ball",
-   "POSCA"
+   "uni-ball"
   ],
   "vende_online": false
  },
  {
-  "lat": -2.172,
-  "lng": -79.945,
-  "id": "gye-ceibos",
-  "nombre": "EJEMPLO Taller de Arte Los Ceibos",
+  "id": "gye-megamaxi-mall-ceibos",
+  "nombre": "Megamaxi Mall Los Ceibos",
   "ciudad": "Guayaquil",
   "provincia": "Guayas",
-  "direccion": "EJEMPLO Av. del Bombero, Los Ceibos (sector Riocentro Ceibos)",
-  "maps_url": "https://ejemplo.invalid/maps/gye-ceibos",
-  "whatsapp": "+593 99 000 0006",
-  "telefono": "+593 99 000 0006",
-  "horario": "lun-sáb 09h00-19h00",
+  "direccion": "Av. del Bombero Km 6.5 y Av. Leopoldo Carrera",
+  "lat": -2.172,
+  "lng": -79.945,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Megamaxi+Mall+Los+Ceibos+Av.+del+Bombero+Km+6.5+y+Av.+Leopoldo+Carrera+Guayaquil",
+  "whatsapp": "+593 99 551 7000",
+  "horario": "lun-sáb 09:30-21:00; dom y feriados 10:00-20:30",
   "marcas": [
-   "uni-ball",
-   "POSCA"
+   "uni-ball"
   ],
-  "vende_online": true,
-  "web": "https://ejemplo.invalid/gye-ceibos"
+  "vende_online": false
  },
  {
-  "lat": -2.1745,
-  "lng": -79.933,
+  "id": "uio-megamaxi-portal",
+  "nombre": "Megamaxi Portal",
+  "ciudad": "Quito",
+  "provincia": "Pichincha",
+  "direccion": "Av. Simón Bolívar y Panamericana Norte",
+  "lat": -0.1005,
+  "lng": -78.4555,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Megamaxi+Portal+Av.+Simón+Bolívar+y+Panamericana+Norte+Quito",
+  "whatsapp": "+593 99 551 7000",
+  "horario": "lun-jue 10:00-20:30; vie-sáb 10:00-21:00; dom y feriados 10:00-20:00",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "uio-megamaxi-quicentro-sur",
+  "nombre": "Megamaxi Quicentro Sur",
+  "ciudad": "Quito",
+  "provincia": "Pichincha",
+  "direccion": "Av. Morán Valverde y Quito",
+  "lat": -0.28426,
+  "lng": -78.54296,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Megamaxi+Quicentro+Sur+Av.+Morán+Valverde+y+Quito+Quito",
+  "whatsapp": "+593 99 551 7000",
+  "horario": "lun-sáb 10:00-20:30; dom y feriados 10:00-20:00",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "sgq-megamaxi-san-luis",
+  "nombre": "Megamaxi San Luis",
+  "ciudad": "Sangolquí",
+  "provincia": "Pichincha",
+  "direccion": "Av. General Rumiñahui e Isla Santa Clara",
+  "lat": -0.329,
+  "lng": -78.445,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Megamaxi+San+Luis+Av.+General+Rumiñahui+e+Isla+Santa+Clara+Sangolquí",
+  "whatsapp": "+593 99 551 7000",
+  "horario": "lun-sáb 10:00-21:00; dom y feriados 10:00-20:30",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "loj-mega-santiago",
+  "nombre": "Mega Santiago",
+  "ciudad": "Loja",
+  "provincia": "Loja",
+  "direccion": "18 de Noviembre entre Miguel Riofrío y Azuay",
+  "lat": -3.993,
+  "lng": -79.204,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Mega+Santiago+18+de+Noviembre+entre+Miguel+Riofrío+y+Azuay+Loja",
+  "whatsapp": "+593 98 766 7459",
+  "horario": "lun-vie 09:00-20:00; sáb 09:00-19:00; dom 10:00-14:00",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "loj-santiago",
+  "nombre": "Santiago Papelería",
+  "ciudad": "Loja",
+  "provincia": "Loja",
+  "direccion": "Azuay entre 18 de Noviembre y Av. Universitaria",
+  "lat": -3.993,
+  "lng": -79.204,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Santiago+Papelería+Azuay+entre+18+de+Noviembre+y+Av.+Universitaria+Loja",
+  "whatsapp": "+593 98 766 7459",
+  "horario": "lun-vie 08:30-19:15; sáb 09:00-18:00; dom cerrado",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
   "id": "mokalu-guayaquil",
-  "nombre": "Mokalú — Av. del Bombero",
+  "nombre": "Mokalú Art Shop",
   "ciudad": "Guayaquil",
   "provincia": "Guayas",
   "direccion": "Av. del Bombero, La Vista, San Eduardo, Edificio 100",
-  "maps_url": "https://www.google.com/maps/search/?api=1&query=Edificio+100+Av.+del+Bombero+San+Eduardo+Guayaquil",
-  "whatsapp": "+593 99 000 0007",
+  "lat": -2.1745,
+  "lng": -79.933,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Mokalú+Art+Shop+Av.+del+Bombero,+La+Vista,+San+Eduardo,+Edificio+100+Guayaquil",
+  "whatsapp": "+593 96 701 1171",
   "horario": "lun-vie 09h00-17h30",
   "marcas": [
-   "uni-ball",
-   "POSCA"
+   "uni-ball"
   ],
-  "vende_online": true,
-  "web": "https://mokalu.com.ec/tienda/"
+  "vende_online": true
  },
  {
-  "lat": -2.14,
-  "lng": -79.865,
-  "id": "sam-entreplaza",
-  "nombre": "EJEMPLO Papelería Samborondón",
-  "ciudad": "Samborondón",
-  "provincia": "Guayas",
-  "direccion": "EJEMPLO Km 2,5 vía a Samborondón, plaza comercial",
-  "maps_url": "https://ejemplo.invalid/maps/sam-entreplaza",
-  "whatsapp": "+593 99 000 0008",
-  "telefono": "+593 99 000 0008",
-  "horario": "lun-sáb 09h00-19h00",
-  "marcas": [
-   "uni-ball",
-   "POSCA"
-  ],
-  "vende_online": false
- },
- {
-  "lat": -2.17,
-  "lng": -79.838,
-  "id": "duran-centro",
-  "nombre": "EJEMPLO Papelería Durán",
-  "ciudad": "Durán",
-  "provincia": "Guayas",
-  "direccion": "EJEMPLO Av. Nicolás Lapentti, Durán",
-  "maps_url": "https://ejemplo.invalid/maps/duran-centro",
-  "whatsapp": "+593 99 000 0009",
-  "telefono": "+593 99 000 0009",
-  "horario": "lun-sáb 09h00-19h00",
-  "marcas": [
-   "uni-ball",
-   "POSCA"
-  ],
-  "vende_online": false
- },
- {
-  "lat": -2.1347,
-  "lng": -79.5872,
-  "id": "milagro-centro",
-  "nombre": "EJEMPLO Bazar Milagro",
-  "ciudad": "Milagro",
-  "provincia": "Guayas",
-  "direccion": "EJEMPLO Calle García Moreno, centro de Milagro",
-  "maps_url": "https://ejemplo.invalid/maps/milagro-centro",
-  "whatsapp": "+593 99 000 0010",
-  "telefono": "+593 99 000 0010",
-  "horario": "lun-sáb 09h00-19h00",
-  "marcas": [
-   "uni-ball",
-   "POSCA"
-  ],
-  "vende_online": false
- },
- {
-  "lat": -0.22,
-  "lng": -78.512,
-  "id": "uio-centro",
-  "nombre": "EJEMPLO Papelería Centro Histórico",
-  "ciudad": "Quito",
-  "provincia": "Pichincha",
-  "direccion": "EJEMPLO Calle Guayaquil y Chile, Centro Histórico",
-  "maps_url": "https://ejemplo.invalid/maps/uio-centro",
-  "whatsapp": "+593 99 000 0011",
-  "telefono": "+593 99 000 0011",
-  "horario": "lun-sáb 09h00-19h00",
-  "marcas": [
-   "uni-ball",
-   "POSCA"
-  ],
-  "vende_online": false
- },
- {
-  "lat": -0.176,
-  "lng": -78.48,
-  "id": "uio-carolina",
-  "nombre": "EJEMPLO Arte Quicentro",
-  "ciudad": "Quito",
-  "provincia": "Pichincha",
-  "direccion": "EJEMPLO Av. Naciones Unidas, sector La Carolina / Quicentro",
-  "maps_url": "https://ejemplo.invalid/maps/uio-carolina",
-  "whatsapp": "+593 99 000 0012",
-  "telefono": "+593 99 000 0012",
-  "horario": "lun-sáb 09h00-19h00",
-  "marcas": [
-   "uni-ball",
-   "POSCA"
-  ],
-  "vende_online": true,
-  "web": "https://ejemplo.invalid/uio-carolina"
- },
- {
-  "lat": -0.105,
-  "lng": -78.49,
-  "id": "uio-condado",
-  "nombre": "EJEMPLO Librería El Condado",
-  "ciudad": "Quito",
-  "provincia": "Pichincha",
-  "direccion": "EJEMPLO Av. La Prensa, sector El Condado (norte)",
-  "maps_url": "https://ejemplo.invalid/maps/uio-condado",
-  "whatsapp": "+593 99 000 0013",
-  "telefono": "+593 99 000 0013",
-  "horario": "lun-sáb 09h00-19h00",
-  "marcas": [
-   "uni-ball",
-   "POSCA"
-  ],
-  "vende_online": false
- },
- {
-  "lat": -0.2,
-  "lng": -78.433,
-  "id": "uio-cumbaya",
-  "nombre": "EJEMPLO Estudio de Arte Cumbayá",
-  "ciudad": "Quito",
-  "provincia": "Pichincha",
-  "direccion": "EJEMPLO Av. Interoceánica, Cumbayá",
-  "maps_url": "https://ejemplo.invalid/maps/uio-cumbaya",
-  "whatsapp": "+593 99 000 0014",
-  "telefono": "+593 99 000 0014",
-  "horario": "lun-sáb 09h00-19h00",
-  "marcas": [
-   "uni-ball",
-   "POSCA"
-  ],
-  "vende_online": true,
-  "web": "https://ejemplo.invalid/uio-cumbaya"
- },
- {
-  "lat": -0.295,
-  "lng": -78.55,
-  "id": "uio-quitumbe",
-  "nombre": "EJEMPLO Papelería Quitumbe",
-  "ciudad": "Quito",
-  "provincia": "Pichincha",
-  "direccion": "EJEMPLO Av. Quitumbe Ñan, sur de Quito",
-  "maps_url": "https://ejemplo.invalid/maps/uio-quitumbe",
-  "whatsapp": "+593 99 000 0015",
-  "telefono": "+593 99 000 0015",
-  "horario": "lun-sáb 09h00-19h00",
-  "marcas": [
-   "uni-ball",
-   "POSCA"
-  ],
-  "vende_online": false
- },
- {
-  "lat": -0.329,
-  "lng": -78.445,
-  "id": "sangolqui-centro",
-  "nombre": "EJEMPLO Papelería Los Chillos",
-  "ciudad": "Sangolquí",
-  "provincia": "Pichincha",
-  "direccion": "EJEMPLO Av. General Enríquez, Valle de los Chillos",
-  "maps_url": "https://ejemplo.invalid/maps/sangolqui-centro",
-  "whatsapp": "+593 99 000 0016",
-  "telefono": "+593 99 000 0016",
-  "horario": "lun-sáb 09h00-19h00",
-  "marcas": [
-   "uni-ball",
-   "POSCA"
-  ],
-  "vende_online": false
- },
- {
-  "lat": -2.8975,
-  "lng": -79.0045,
-  "id": "cue-centro",
-  "nombre": "EJEMPLO Papelería Calderón Cuenca",
+  "id": "cue-austral-uno",
+  "nombre": "Librería y Papelería Austral Uno",
   "ciudad": "Cuenca",
   "provincia": "Azuay",
-  "direccion": "EJEMPLO Calle Bolívar, junto al Parque Calderón, Centro",
-  "maps_url": "https://ejemplo.invalid/maps/cue-centro",
-  "whatsapp": "+593 99 000 0017",
-  "telefono": "+593 99 000 0017",
-  "horario": "lun-sáb 09h00-19h00",
+  "direccion": "Juan Jaramillo 9-91",
+  "lat": -2.89961,
+  "lng": -79.00619,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Librería+y+Papelería+Austral+Uno+Juan+Jaramillo+9-91+Cuenca",
+  "whatsapp": "(07) 284-4328",
+  "horario": "lun-vie 08:00-19:00; sáb 08:00-13:00; dom cerrado",
   "marcas": [
-   "uni-ball",
-   "POSCA"
+   "uni-ball"
   ],
   "vende_online": false
  },
  {
-  "lat": -2.92,
-  "lng": -79.014,
-  "id": "cue-mall-rio",
-  "nombre": "EJEMPLO Arte Mall del Río",
+  "id": "cue-austral-dos",
+  "nombre": "Librería y Papelería Austral Dos",
   "ciudad": "Cuenca",
   "provincia": "Azuay",
-  "direccion": "EJEMPLO C.C. Mall del Río, Av. Felipe II",
-  "maps_url": "https://ejemplo.invalid/maps/cue-mall-rio",
-  "whatsapp": "+593 99 000 0018",
-  "telefono": "+593 99 000 0018",
-  "horario": "lun-sáb 09h00-19h00",
+  "direccion": "Calle Larga 10-30",
+  "lat": -2.89982,
+  "lng": -79.00756,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Librería+y+Papelería+Austral+Dos+Calle+Larga+10-30+Cuenca",
+  "whatsapp": "+593 98 295 6132",
+  "horario": "lun-vie 08:00-19:00; sáb 08:00-17:00; dom cerrado",
   "marcas": [
-   "uni-ball",
-   "POSCA"
+   "uni-ball"
   ],
-  "vende_online": true,
-  "web": "https://ejemplo.invalid/cue-mall-rio"
+  "vende_online": false
  },
  {
-  "lat": -2.89,
-  "lng": -78.98,
-  "id": "cue-totoracocha",
-  "nombre": "EJEMPLO Útiles Totoracocha",
+  "id": "cue-austral-4",
+  "nombre": "Librería y Papelería Austral 4",
   "ciudad": "Cuenca",
   "provincia": "Azuay",
-  "direccion": "EJEMPLO Av. Hurtado de Mendoza, Totoracocha",
-  "maps_url": "https://ejemplo.invalid/maps/cue-totoracocha",
-  "whatsapp": "+593 99 000 0019",
-  "telefono": "+593 99 000 0019",
-  "horario": "lun-sáb 09h00-19h00",
+  "direccion": "Feria Libre El Arenal, Calle Carlos Veintimilla 2-91",
+  "lat": -2.9001,
+  "lng": -79.0059,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Librería+y+Papelería+Austral+4+Feria+Libre+El+Arenal,+Calle+Carlos+Veintimilla+2-91+Cuenca",
+  "whatsapp": "(07) 285-4569",
+  "horario": "lun-vie 08:00-19:00; sáb 08:00-16:00; dom 09:00-13:00",
   "marcas": [
-   "uni-ball",
-   "POSCA"
+   "uni-ball"
   ],
   "vende_online": false
  },
  {
-  "lat": -1.2491,
-  "lng": -78.6168,
-  "id": "amb-centro",
-  "nombre": "EJEMPLO Papelería Ambato Centro",
-  "ciudad": "Ambato",
-  "provincia": "Tungurahua",
-  "direccion": "EJEMPLO Calle Sucre, centro de Ambato",
-  "maps_url": "https://ejemplo.invalid/maps/amb-centro",
-  "whatsapp": "+593 99 000 0020",
-  "telefono": "+593 99 000 0020",
-  "horario": "lun-sáb 09h00-19h00",
+  "id": "cue-distribuidora-austral",
+  "nombre": "Distribuidora Austral",
+  "ciudad": "Cuenca",
+  "provincia": "Azuay",
+  "direccion": "Calle Pío Bravo",
+  "lat": -2.9001,
+  "lng": -79.0059,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Distribuidora+Austral+Calle+Pío+Bravo+Cuenca",
+  "whatsapp": "(07) 411-4647",
+  "horario": "lun-vie 08:00-19:00; sáb 08:00-14:00; dom cerrado",
   "marcas": [
-   "uni-ball",
-   "POSCA"
+   "uni-ball"
   ],
   "vende_online": false
  },
  {
-  "lat": -1.242,
-  "lng": -78.635,
-  "id": "amb-ficoa",
-  "nombre": "EJEMPLO Arte Ficoa",
-  "ciudad": "Ambato",
-  "provincia": "Tungurahua",
-  "direccion": "EJEMPLO Av. Los Guaytambos, Ficoa",
-  "maps_url": "https://ejemplo.invalid/maps/amb-ficoa",
-  "whatsapp": "+593 99 000 0021",
-  "telefono": "+593 99 000 0021",
-  "horario": "lun-sáb 09h00-19h00",
+  "id": "uio-onerom",
+  "nombre": "Onerom",
+  "ciudad": "Quito",
+  "provincia": "Pichincha",
+  "direccion": "Polonia N31-92 y Vancouver",
+  "lat": -0.1807,
+  "lng": -78.4678,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Onerom+Polonia+N31-92+y+Vancouver+Quito",
+  "whatsapp": "+593 99 982 5966",
+  "horario": "lun-vie 08:00-16:00; sáb y dom cerrado",
   "marcas": [
-   "uni-ball",
-   "POSCA"
+   "uni-ball"
   ],
   "vende_online": false
  },
  {
-  "lat": -1.671,
-  "lng": -78.647,
-  "id": "rio-centro",
-  "nombre": "EJEMPLO Papelería Central Riobamba",
-  "ciudad": "Riobamba",
-  "provincia": "Chimborazo",
-  "direccion": "EJEMPLO Calle 10 de Agosto, centro de Riobamba",
-  "maps_url": "https://ejemplo.invalid/maps/rio-centro",
-  "whatsapp": "+593 99 000 0022",
-  "telefono": "+593 99 000 0022",
-  "horario": "lun-sáb 09h00-19h00",
+  "id": "gye-scam",
+  "nombre": "SCAM",
+  "ciudad": "Guayaquil",
+  "provincia": "Guayas",
+  "direccion": "Ildefonso Coronel y Méndez 1427",
+  "lat": -2.1894,
+  "lng": -79.8891,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=SCAM+Ildefonso+Coronel+y+Méndez+1427+Guayaquil",
+  "whatsapp": "+593 99 782 2185",
+  "horario": "lun-vie 09:00-16:30",
   "marcas": [
-   "uni-ball",
-   "POSCA"
+   "uni-ball"
   ],
   "vende_online": false
  },
  {
-  "lat": -0.935,
-  "lng": -78.615,
-  "id": "lat-centro",
-  "nombre": "EJEMPLO Librería Latacunga",
-  "ciudad": "Latacunga",
-  "provincia": "Cotopaxi",
-  "direccion": "EJEMPLO Calle Quito, centro de Latacunga",
-  "maps_url": "https://ejemplo.invalid/maps/lat-centro",
-  "whatsapp": "+593 99 000 0023",
-  "telefono": "+593 99 000 0023",
-  "horario": "lun-sáb 09h00-19h00",
-  "marcas": [
-   "uni-ball",
-   "POSCA"
-  ],
-  "vende_online": false
- },
- {
-  "lat": 0.351,
-  "lng": -78.122,
-  "id": "iba-centro",
-  "nombre": "EJEMPLO Papelería Ibarra",
-  "ciudad": "Ibarra",
-  "provincia": "Imbabura",
-  "direccion": "EJEMPLO Calle Bolívar, centro de Ibarra",
-  "maps_url": "https://ejemplo.invalid/maps/iba-centro",
-  "whatsapp": "+593 99 000 0024",
-  "telefono": "+593 99 000 0024",
-  "horario": "lun-sáb 09h00-19h00",
-  "marcas": [
-   "uni-ball",
-   "POSCA"
-  ],
-  "vende_online": false
- },
- {
-  "lat": 0.234,
-  "lng": -78.262,
-  "id": "ota-centro",
-  "nombre": "EJEMPLO Bazar Otavalo",
-  "ciudad": "Otavalo",
-  "provincia": "Imbabura",
-  "direccion": "EJEMPLO Calle Sucre, cerca de la Plaza de Ponchos",
-  "maps_url": "https://ejemplo.invalid/maps/ota-centro",
-  "whatsapp": "+593 99 000 0025",
-  "telefono": "+593 99 000 0025",
-  "horario": "lun-sáb 09h00-19h00",
-  "marcas": [
-   "uni-ball",
-   "POSCA"
-  ],
-  "vende_online": false
- },
- {
-  "lat": 0.812,
-  "lng": -77.717,
-  "id": "tul-centro",
-  "nombre": "EJEMPLO Papelería Tulcán",
-  "ciudad": "Tulcán",
-  "provincia": "Carchi",
-  "direccion": "EJEMPLO Calle Sucre, centro de Tulcán",
-  "maps_url": "https://ejemplo.invalid/maps/tul-centro",
-  "whatsapp": "+593 99 000 0026",
-  "telefono": "+593 99 000 0026",
-  "horario": "lun-sáb 09h00-19h00",
-  "marcas": [
-   "uni-ball",
-   "POSCA"
-  ],
-  "vende_online": false
- },
- {
-  "lat": -3.993,
-  "lng": -79.204,
-  "id": "loj-centro",
-  "nombre": "EJEMPLO Papelería Loja",
+  "id": "loj-aguilar-matriz",
+  "nombre": "Aguilar Librería & Papelería - Matriz",
   "ciudad": "Loja",
   "provincia": "Loja",
-  "direccion": "EJEMPLO Calle Bolívar, centro de Loja",
-  "maps_url": "https://ejemplo.invalid/maps/loj-centro",
-  "whatsapp": "+593 99 000 0027",
-  "telefono": "+593 99 000 0027",
-  "horario": "lun-sáb 09h00-19h00",
+  "direccion": "Av. Manuel Agustín Aguirre entre Colón y José Antonio Eguiguren",
+  "lat": -3.993,
+  "lng": -79.204,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Aguilar+Librería+&+Papelería+-+Matriz+Av.+Manuel+Agustín+Aguirre+entre+Colón+y+José+Antonio+Eguiguren+Loja",
+  "whatsapp": "+593 98 745 1644",
+  "horario": "lun-sáb 08:30-19:45; dom 09:00-14:00",
   "marcas": [
-   "uni-ball",
-   "POSCA"
+   "uni-ball"
   ],
   "vende_online": false
  },
  {
-  "lat": -3.258,
-  "lng": -79.955,
-  "id": "mch-centro",
-  "nombre": "EJEMPLO Papelería Machala",
-  "ciudad": "Machala",
-  "provincia": "El Oro",
-  "direccion": "EJEMPLO Av. 25 de Junio, centro de Machala",
-  "maps_url": "https://ejemplo.invalid/maps/mch-centro",
-  "whatsapp": "+593 99 000 0028",
-  "telefono": "+593 99 000 0028",
-  "horario": "lun-sáb 09h00-19h00",
+  "id": "loj-aguilar-sucursal-loja",
+  "nombre": "Aguilar Librería & Papelería - Sucursal Loja",
+  "ciudad": "Loja",
+  "provincia": "Loja",
+  "direccion": "Calle Azuay",
+  "lat": -3.993,
+  "lng": -79.204,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Aguilar+Librería+&+Papelería+-+Sucursal+Loja+Calle+Azuay+Loja",
+  "whatsapp": "+593 98 745 1644",
+  "horario": "lun-sáb 08:30-19:45; dom 09:00-14:00",
   "marcas": [
-   "uni-ball",
-   "POSCA"
+   "uni-ball"
   ],
   "vende_online": false
  },
  {
-  "lat": -3.476,
-  "lng": -80.231,
-  "id": "hua-centro",
-  "nombre": "EJEMPLO Bazar Huaquillas",
-  "ciudad": "Huaquillas",
-  "provincia": "El Oro",
-  "direccion": "EJEMPLO Av. La República, Huaquillas",
-  "maps_url": "https://ejemplo.invalid/maps/hua-centro",
-  "whatsapp": "+593 99 000 0029",
-  "telefono": "+593 99 000 0029",
-  "horario": "lun-sáb 09h00-19h00",
+  "id": "zam-aguilar-zamora",
+  "nombre": "Aguilar Librería & Papelería - Zamora",
+  "ciudad": "Zamora",
+  "provincia": "Zamora Chinchipe",
+  "direccion": "Av. Amazonas y Calle Pío Jaramillo Alvarado",
+  "lat": -4.0692,
+  "lng": -78.9567,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Aguilar+Librería+&+Papelería+-+Zamora+Av.+Amazonas+y+Calle+Pío+Jaramillo+Alvarado+Zamora",
+  "whatsapp": "+593 98 745 1644",
+  "horario": "lun-vie 08:00-21:00; sáb 08:00-20:00; dom 08:00-14:00",
   "marcas": [
-   "uni-ball",
-   "POSCA"
+   "uni-ball"
   ],
   "vende_online": false
  },
  {
-  "lat": -1.0546,
-  "lng": -80.4545,
-  "id": "ptv-centro",
-  "nombre": "EJEMPLO Papelería Portoviejo",
-  "ciudad": "Portoviejo",
-  "provincia": "Manabí",
-  "direccion": "EJEMPLO Calle Chile, centro de Portoviejo",
-  "maps_url": "https://ejemplo.invalid/maps/ptv-centro",
-  "whatsapp": "+593 99 000 0030",
-  "telefono": "+593 99 000 0030",
-  "horario": "lun-sáb 09h00-19h00",
+  "id": "car-aguilar-cariamanga",
+  "nombre": "Aguilar Librería & Papelería - Cariamanga",
+  "ciudad": "Cariamanga",
+  "provincia": "Loja",
+  "direccion": "Vía E69 (Plus Code MCFV+7F7)",
+  "lat": -4.3297,
+  "lng": -79.5555,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Aguilar+Librería+&+Papelería+-+Cariamanga+Vía+E69+(Plus+Code+MCFV+7F7)+Cariamanga",
+  "whatsapp": "+593 98 745 1644",
+  "horario": "lun-sáb 08:00-20:00; dom 08:00-14:00",
   "marcas": [
-   "uni-ball",
-   "POSCA"
+   "uni-ball"
   ],
   "vende_online": false
  },
  {
-  "lat": -0.955,
-  "lng": -80.725,
-  "id": "mta-centro",
-  "nombre": "EJEMPLO Arte Manta",
+  "id": "mcr-aguilar-macara",
+  "nombre": "Aguilar Librería & Papelería - Macará",
+  "ciudad": "Macará",
+  "provincia": "Loja",
+  "direccion": "Calle Carlos Veintimilla (Plus Code J384+WVX)",
+  "lat": -4.3814,
+  "lng": -79.9437,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Aguilar+Librería+&+Papelería+-+Macará+Calle+Carlos+Veintimilla+(Plus+Code+J384+WVX)+Macará",
+  "whatsapp": "+593 98 745 1644",
+  "horario": "lun-sáb 08:00-20:00; dom 08:00-14:00",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "uio-sumecor",
+  "nombre": "Sumecor",
+  "ciudad": "Quito",
+  "provincia": "Pichincha",
+  "direccion": "Isla Genovesa y Av. Tomás de Berlanga N42-118",
+  "lat": -0.1807,
+  "lng": -78.4678,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Sumecor+Isla+Genovesa+y+Av.+Tomás+de+Berlanga+N42-118+Quito",
+  "whatsapp": "+593 98 350 7302",
+  "horario": "lun-vie 08:30-17:30; sáb y dom cerrado",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "uio-vernaza-grafic-matriz-quito",
+  "nombre": "Vernaza Grafic - Matriz Quito",
+  "ciudad": "Quito",
+  "provincia": "Pichincha",
+  "direccion": "Av. Universitaria Oe5-254 (522) y Armero",
+  "lat": -0.1807,
+  "lng": -78.4678,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Vernaza+Grafic+-+Matriz+Quito+Av.+Universitaria+Oe5-254+(522)+y+Armero+Quito",
+  "whatsapp": "+593 96 420 8888",
+  "horario": "lun-vie 08:30-17:00; sáb y dom cerrado",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "uio-vernaza-grafic-carapungo",
+  "nombre": "Vernaza Grafic - Carapungo",
+  "ciudad": "Quito",
+  "provincia": "Pichincha",
+  "direccion": "Panamericana Norte Km 11.5 y Alfonso Moncayo, Plaza AYA (junto a Ferrisariato)",
+  "lat": -0.1005,
+  "lng": -78.4555,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Vernaza+Grafic+-+Carapungo+Panamericana+Norte+Km+11.5+y+Alfonso+Moncayo,+Plaza+AYA+(junto+a+Ferrisariato)+Quito",
+  "whatsapp": "+593 96 420 8888",
+  "horario": "",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "sgq-vernaza-grafic-choclo",
+  "nombre": "Vernaza Grafic - El Choclo",
+  "ciudad": "Sangolquí",
+  "provincia": "Pichincha",
+  "direccion": "Redondel del Choclo",
+  "lat": -0.329,
+  "lng": -78.445,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Vernaza+Grafic+-+El+Choclo+Redondel+del+Choclo+Sangolquí",
+  "whatsapp": "+593 96 420 8888",
+  "horario": "",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "gye-vernaza-grafic-matriz-guayaquil",
+  "nombre": "Vernaza Grafic - Matriz Guayaquil",
+  "ciudad": "Guayaquil",
+  "provincia": "Guayas",
+  "direccion": "Av. del Ejército 205 y Manuel Galecio",
+  "lat": -2.1894,
+  "lng": -79.8891,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Vernaza+Grafic+-+Matriz+Guayaquil+Av.+del+Ejército+205+y+Manuel+Galecio+Guayaquil",
+  "whatsapp": "+593 96 420 8888",
+  "horario": "",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "gye-vernaza-grafic-almacen-ballen",
+  "nombre": "Vernaza Grafic - Almacén Ballén",
+  "ciudad": "Guayaquil",
+  "provincia": "Guayas",
+  "direccion": "Pío Montúfar 202 y Clemente Ballén",
+  "lat": -2.1894,
+  "lng": -79.8891,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Vernaza+Grafic+-+Almacén+Ballén+Pío+Montúfar+202+y+Clemente+Ballén+Guayaquil",
+  "whatsapp": "+593 96 420 8888",
+  "horario": "",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "gye-vernaza-grafic-parque-california",
+  "nombre": "Vernaza Grafic - Parque California 2",
+  "ciudad": "Guayaquil",
+  "provincia": "Guayas",
+  "direccion": "Km 12.5 Vía a Daule, Parque California 2, Local A-9",
+  "lat": -2.1894,
+  "lng": -79.8891,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Vernaza+Grafic+-+Parque+California+2+Km+12.5+Vía+a+Daule,+Parque+California+2,+Local+A-9+Guayaquil",
+  "whatsapp": "+593 96 420 8888",
+  "horario": "",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "iba-sari-popular-matriz",
+  "nombre": "Sari Popular - Matriz",
+  "ciudad": "Ibarra",
+  "provincia": "Imbabura",
+  "direccion": "Av. Mariano Acosta 12-51",
+  "lat": 0.34712,
+  "lng": -78.13182,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Sari+Popular+-+Matriz+Av.+Mariano+Acosta+12-51+Ibarra",
+  "whatsapp": "https://wa.me/message/WPUCSCOZHMN7P1",
+  "horario": "lun-jue 08:00-20:00; vie 08:00-19:00; sáb 10:00-19:00; dom 09:00-14:00 y 16:00-19:00",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "iba-sari-popular-pilanqui-centro",
+  "nombre": "Sari Popular - Pilanquí / Centro de Distribución",
+  "ciudad": "Ibarra",
+  "provincia": "Imbabura",
+  "direccion": "Av. José Tobar y Tobar 11-25",
+  "lat": 0.34522,
+  "lng": -78.12777,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Sari+Popular+-+Pilanquí+/+Centro+de+Distribución+Av.+José+Tobar+y+Tobar+11-25+Ibarra",
+  "whatsapp": "https://wa.me/message/WPUCSCOZHMN7P1",
+  "horario": "lun-vie 08:00-20:00; sáb 09:00-19:00; dom 10:00-14:00 y 16:00-19:00",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "iba-sari-popular-ceibos",
+  "nombre": "Sari Popular - Los Ceibos",
+  "ciudad": "Ibarra",
+  "provincia": "Imbabura",
+  "direccion": "Av. El Retorno y Río Aguarico 1394",
+  "lat": 0.351,
+  "lng": -78.122,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Sari+Popular+-+Los+Ceibos+Av.+El+Retorno+y+Río+Aguarico+1394+Ibarra",
+  "whatsapp": "https://wa.me/message/WPUCSCOZHMN7P1",
+  "horario": "lun 08:00-21:00; mar-vie 06:30-21:00; sáb 10:00-14:00 y 16:00-19:00; dom 10:00-14:00 y 16:00-20:00",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "sgq-tia-tula-tingo",
+  "nombre": "Tía Tula - El Tingo",
+  "ciudad": "Sangolquí",
+  "provincia": "Pichincha",
+  "direccion": "Junto a CNT, El Tingo",
+  "lat": -0.329,
+  "lng": -78.445,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Tía+Tula+-+El+Tingo+Junto+a+CNT,+El+Tingo+Sangolquí",
+  "whatsapp": "+593 95 954 0273",
+  "horario": "lun-jue 08:00-19:30; vie 08:00-19:00; sáb-dom 09:00-18:00",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "sgq-tia-tula-sangolqui-calle",
+  "nombre": "Tía Tula - Sangolquí - Calle Colombia",
+  "ciudad": "Sangolquí",
+  "provincia": "Pichincha",
+  "direccion": "Calle Colombia",
+  "lat": -0.329,
+  "lng": -78.445,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Tía+Tula+-+Sangolquí+-+Calle+Colombia+Calle+Colombia+Sangolquí",
+  "whatsapp": "+593 95 954 0273",
+  "horario": "lun-vie 08:00-19:00; sáb-dom 08:00-18:00",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "sgq-tia-tula-sangolqui-av",
+  "nombre": "Tía Tula - Sangolquí - Av. Abdón Calderón",
+  "ciudad": "Sangolquí",
+  "provincia": "Pichincha",
+  "direccion": "Av. Abdón Calderón (Plus Code MH92+GG5)",
+  "lat": -0.329,
+  "lng": -78.445,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Tía+Tula+-+Sangolquí+-+Av.+Abdón+Calderón+Av.+Abdón+Calderón+(Plus+Code+MH92+GG5)+Sangolquí",
+  "whatsapp": "+593 95 954 0273",
+  "horario": "lun-vie 08:00-19:00; sáb-dom 08:00-18:00",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "sgq-tia-tula-sangolqui-av-2",
+  "nombre": "Tía Tula - Sangolquí - Av. de los Shyris",
+  "ciudad": "Sangolquí",
+  "provincia": "Pichincha",
+  "direccion": "Av. de los Shyris 272",
+  "lat": -0.34204,
+  "lng": -78.45076,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Tía+Tula+-+Sangolquí+-+Av.+de+los+Shyris+Av.+de+los+Shyris+272+Sangolquí",
+  "whatsapp": "+593 95 954 0273",
+  "horario": "lun-vie 08:00-19:00; sáb-dom 08:00-18:00",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "sgq-tia-tula-sangolqui-av-3",
+  "nombre": "Tía Tula - Sangolquí - Av. General Enríquez",
+  "ciudad": "Sangolquí",
+  "provincia": "Pichincha",
+  "direccion": "Av. General Enríquez",
+  "lat": -0.30665,
+  "lng": -78.45468,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Tía+Tula+-+Sangolquí+-+Av.+General+Enríquez+Av.+General+Enríquez+Sangolquí",
+  "whatsapp": "+593 95 954 0273",
+  "horario": "lun-vie 08:30-19:00; sáb 09:15-18:30; dom 09:15-18:00",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "sgq-tia-tula-sangolqui-av-4",
+  "nombre": "Tía Tula - Sangolquí - Av. Luis Cordero",
+  "ciudad": "Sangolquí",
+  "provincia": "Pichincha",
+  "direccion": "Av. Luis Cordero",
+  "lat": -0.32526,
+  "lng": -78.4481,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Tía+Tula+-+Sangolquí+-+Av.+Luis+Cordero+Av.+Luis+Cordero+Sangolquí",
+  "whatsapp": "+593 95 954 0273",
+  "horario": "lun-vie 08:30-18:30; sáb-dom 09:30-18:00",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "uio-tia-tula-quito-rio",
+  "nombre": "Tía Tula - Quito - Río Napo y Huancavilca",
+  "ciudad": "Quito",
+  "provincia": "Pichincha",
+  "direccion": "Río Napo y Huancavilca",
+  "lat": -0.1807,
+  "lng": -78.4678,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Tía+Tula+-+Quito+-+Río+Napo+y+Huancavilca+Río+Napo+y+Huancavilca+Quito",
+  "whatsapp": "+593 95 954 0273",
+  "horario": "lun-jue 08:00-19:30; vie 08:00-19:00; sáb 09:00-19:00; dom 09:30-19:00",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "uio-tia-tula-quito-flores",
+  "nombre": "Tía Tula - Quito - Flores",
+  "ciudad": "Quito",
+  "provincia": "Pichincha",
+  "direccion": "Flores E1-25",
+  "lat": -0.20082,
+  "lng": -78.43742,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Tía+Tula+-+Quito+-+Flores+Flores+E1-25+Quito",
+  "whatsapp": "+593 95 954 0273",
+  "horario": "lun-vie 08:45-19:30; sáb 08:45-19:00; dom 08:45-18:30",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "uio-tia-tula-quito-codigo",
+  "nombre": "Tía Tula - Quito (código postal 170157)",
+  "ciudad": "Quito",
+  "provincia": "Pichincha",
+  "direccion": "Quito (dirección por confirmar)",
+  "lat": -0.1807,
+  "lng": -78.4678,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Tía+Tula+-+Quito+(código+postal+170157)+Quito",
+  "whatsapp": "+593 95 954 0273",
+  "horario": "lun-vie 08:00-19:00; sáb 10:00-18:00; dom 10:00-14:00",
+  "marcas": [
+   "uni-ball"
+  ],
+  "vende_online": false
+ },
+ {
+  "id": "mta-comercial-plinio-garcia",
+  "nombre": "Comercial Plinio García",
   "ciudad": "Manta",
   "provincia": "Manabí",
-  "direccion": "EJEMPLO Av. Flavio Reyes, Manta",
-  "maps_url": "https://ejemplo.invalid/maps/mta-centro",
-  "whatsapp": "+593 99 000 0031",
-  "telefono": "+593 99 000 0031",
-  "horario": "lun-sáb 09h00-19h00",
+  "direccion": "Manta (dirección por confirmar)",
+  "lat": -0.9677,
+  "lng": -80.7089,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Comercial+Plinio+García+Manta",
+  "whatsapp": "+593 98 781 9869",
+  "horario": "lun-sáb 08:00-18:30; dom 08:30-13:00",
   "marcas": [
-   "uni-ball",
-   "POSCA"
-  ],
-  "vende_online": true,
-  "web": "https://ejemplo.invalid/mta-centro"
- },
- {
-  "lat": 0.9682,
-  "lng": -79.6517,
-  "id": "esm-centro",
-  "nombre": "EJEMPLO Papelería Esmeraldas",
-  "ciudad": "Esmeraldas",
-  "provincia": "Esmeraldas",
-  "direccion": "EJEMPLO Calle Bolívar, centro de Esmeraldas",
-  "maps_url": "https://ejemplo.invalid/maps/esm-centro",
-  "whatsapp": "+593 99 000 0032",
-  "telefono": "+593 99 000 0032",
-  "horario": "lun-sáb 09h00-19h00",
-  "marcas": [
-   "uni-ball",
-   "POSCA"
+   "uni-ball"
   ],
   "vende_online": false
  },
  {
-  "lat": -0.253,
-  "lng": -79.175,
-  "id": "sdo-centro",
-  "nombre": "EJEMPLO Papelería Santo Domingo",
-  "ciudad": "Santo Domingo",
-  "provincia": "Santo Domingo de los Tsáchilas",
-  "direccion": "EJEMPLO Av. Quito, centro de Santo Domingo",
-  "maps_url": "https://ejemplo.invalid/maps/sdo-centro",
-  "whatsapp": "+593 99 000 0033",
-  "telefono": "+593 99 000 0033",
-  "horario": "lun-sáb 09h00-19h00",
+  "id": "cue-imporsopapel-papeles-soto-s",
+  "nombre": "Imporsopapel (Papeles Soto S.A.)",
+  "ciudad": "Cuenca",
+  "provincia": "Azuay",
+  "direccion": "Mariscal Lamar 13-60 y Estévez de Toral",
+  "lat": -2.9001,
+  "lng": -79.0059,
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Imporsopapel+(Papeles+Soto+S.A.)+Mariscal+Lamar+13-60+y+Estévez+de+Toral+Cuenca",
+  "whatsapp": "(07) 282-3718",
+  "horario": "lun-vie 08:30-13:00 y 14:30-18:00; sáb 09:00-13:00; dom cerrado",
   "marcas": [
-   "uni-ball",
-   "POSCA"
-  ],
-  "vende_online": false
- },
- {
-  "lat": -1.8022,
-  "lng": -79.5344,
-  "id": "bab-centro",
-  "nombre": "EJEMPLO Bazar Babahoyo",
-  "ciudad": "Babahoyo",
-  "provincia": "Los Ríos",
-  "direccion": "EJEMPLO Calle General Barona, Babahoyo",
-  "maps_url": "https://ejemplo.invalid/maps/bab-centro",
-  "whatsapp": "+593 99 000 0034",
-  "telefono": "+593 99 000 0034",
-  "horario": "lun-sáb 09h00-19h00",
-  "marcas": [
-   "uni-ball",
-   "POSCA"
-  ],
-  "vende_online": false
- },
- {
-  "lat": -1.0286,
-  "lng": -79.4635,
-  "id": "qvd-centro",
-  "nombre": "EJEMPLO Papelería Quevedo",
-  "ciudad": "Quevedo",
-  "provincia": "Los Ríos",
-  "direccion": "EJEMPLO Av. 7 de Octubre, Quevedo",
-  "maps_url": "https://ejemplo.invalid/maps/qvd-centro",
-  "whatsapp": "+593 99 000 0035",
-  "telefono": "+593 99 000 0035",
-  "horario": "lun-sáb 09h00-19h00",
-  "marcas": [
-   "uni-ball",
-   "POSCA"
-  ],
-  "vende_online": false
- },
- {
-  "lat": -2.215,
-  "lng": -80.952,
-  "id": "sal-centro",
-  "nombre": "EJEMPLO Papelería Salinas",
-  "ciudad": "Salinas",
-  "provincia": "Santa Elena",
-  "direccion": "EJEMPLO Malecón de Salinas",
-  "maps_url": "https://ejemplo.invalid/maps/sal-centro",
-  "whatsapp": "+593 99 000 0036",
-  "telefono": "+593 99 000 0036",
-  "horario": "lun-sáb 09h00-19h00",
-  "marcas": [
-   "uni-ball",
-   "POSCA"
-  ],
-  "vende_online": false
- },
- {
-  "lat": -2.739,
-  "lng": -78.846,
-  "id": "azo-centro",
-  "nombre": "EJEMPLO Librería Azogues",
-  "ciudad": "Azogues",
-  "provincia": "Cañar",
-  "direccion": "EJEMPLO Calle Bolívar, centro de Azogues",
-  "maps_url": "https://ejemplo.invalid/maps/azo-centro",
-  "whatsapp": "+593 99 000 0037",
-  "telefono": "+593 99 000 0037",
-  "horario": "lun-sáb 09h00-19h00",
-  "marcas": [
-   "uni-ball",
-   "POSCA"
-  ],
-  "vende_online": false
- },
- {
-  "lat": -0.9938,
-  "lng": -77.8129,
-  "id": "ten-centro",
-  "nombre": "EJEMPLO Papelería Tena",
-  "ciudad": "Tena",
-  "provincia": "Napo",
-  "direccion": "EJEMPLO Av. 15 de Noviembre, Tena",
-  "maps_url": "https://ejemplo.invalid/maps/ten-centro",
-  "whatsapp": "+593 99 000 0038",
-  "telefono": "+593 99 000 0038",
-  "horario": "lun-sáb 09h00-19h00",
-  "marcas": [
-   "uni-ball",
-   "POSCA"
-  ],
-  "vende_online": false
- },
- {
-  "lat": -1.4924,
-  "lng": -78.0024,
-  "id": "puy-centro",
-  "nombre": "EJEMPLO Papelería Puyo",
-  "ciudad": "Puyo",
-  "provincia": "Pastaza",
-  "direccion": "EJEMPLO Calle Atahualpa, centro de Puyo",
-  "maps_url": "https://ejemplo.invalid/maps/puy-centro",
-  "whatsapp": "+593 99 000 0039",
-  "telefono": "+593 99 000 0039",
-  "horario": "lun-sáb 09h00-19h00",
-  "marcas": [
-   "uni-ball",
-   "POSCA"
-  ],
-  "vende_online": false
- },
- {
-  "lat": 0.0847,
-  "lng": -76.8828,
-  "id": "nlo-centro",
-  "nombre": "EJEMPLO Bazar Lago Agrio",
-  "ciudad": "Nueva Loja",
-  "provincia": "Sucumbíos",
-  "direccion": "EJEMPLO Av. Quito, Nueva Loja (Lago Agrio)",
-  "maps_url": "https://ejemplo.invalid/maps/nlo-centro",
-  "whatsapp": "+593 99 000 0040",
-  "telefono": "+593 99 000 0040",
-  "horario": "lun-sáb 09h00-19h00",
-  "marcas": [
-   "uni-ball",
-   "POSCA"
+   "uni-ball"
   ],
   "vende_online": false
  }
