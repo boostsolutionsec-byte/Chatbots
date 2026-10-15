@@ -1,9 +1,9 @@
 const fs=require('fs'),path=require('path');
 const YAML=require('/home/user/Chatbots/framework/node_modules/yaml');
-const src=fs.readFileSync('/home/user/Chatbots/framework/n8n/workflow/nodo.js','utf8');
+const src=fs.readFileSync(__dirname+'/nodo.js','utf8').replace("modo: 'tienda'", `modo: '${process.env.MODO || 'tienda'}'`);
 const T=require('/home/user/Chatbots/framework/n8n/tiendas.json').map(t=>({...t,tienda_id:t.id}));
 const memo={};
-const run=(m,chat)=>new Function('$','$input','$getWorkflowStaticData',src)(()=>({first:()=>({json:{message:{chat:{id:chat},...m}}})}),{all:()=>T.map(j=>({json:j}))},()=>memo)[0].json;
+const run=(m,chat)=>new Function('$','$input','$getWorkflowStaticData',src)(()=>({first:()=>({json:{message:{chat:{id:chat},...m}}})}),{all:()=>T.map(j=>({json:j}))},()=>memo)[0]?.json ?? {intencion:'pausa',respuesta:'',contexto:''};
 const km=(a,b,c,d)=>{const r=Math.PI/180,x=Math.sin((c-a)*r/2)**2+Math.cos(a*r)*Math.cos(c*r)*Math.sin((d-b)*r/2)**2;return 6371*2*Math.asin(Math.sqrt(x));};
 const dir='/home/user/Chatbots/validacion/personas'; const stats={}; const malos=[];
 for(const f of fs.readdirSync(dir).filter(f=>f.endsWith('.yaml'))){

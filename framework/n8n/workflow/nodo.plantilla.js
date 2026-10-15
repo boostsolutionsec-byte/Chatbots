@@ -1,6 +1,18 @@
-// Bot Mokalú — responde sin IA cuando puede (tienda más cercana, reclamos, horario, precio…)
-// y, si no, prepara un contexto corto para DeepSeek. Las tiendas vienen de la Data Table "Mokalú tiendas".
-const msg = $('Telegram Trigger').first().json.message || {};
+// Bot Mokalú — responde sin IA cuando puede (tienda más cercana, pedidos, reclamos, horario, precio…)
+// y, si no, prepara un contexto corto para DeepSeek. Las tiendas vienen de la Data Table "uni-ball puntos de venta".
+const CONFIG = {
+  modo: 'tienda',             // 'tienda' = WhatsApp de Mokalú (vende y envía) · 'marca' = cuenta de uni-ball (manda a la tienda más cercana)
+  canal: 'whatsapp',          // 'whatsapp' | 'telegram' (solo cambia el formato del texto)
+  entrada: 'Normalizar mensaje', // nodo de n8n que entrega { message } con forma estándar
+  nombreBot: 'Sofi',
+  horarioHumano: 'lunes a viernes de 9h00 a 17h30',
+  webTienda: 'https://mokalu.com.ec/tienda/',
+  envio: 'Servientrega (llega en 24–48 h)',
+  lejosKm: 60,
+  pausaHoras: 12,             // tras pasar un caso al equipo, el bot no responde en ese chat por estas horas
+};
+const TIENDA = CONFIG.modo === 'tienda';
+const msg = $(CONFIG.entrada).first().json.message || {};
 const chatId = msg.chat ? msg.chat.id : null;
 // Foto: la describe ChatGPT en el nodo "Ver foto (ChatGPT)" (solo corre si el cliente mandó una foto).
 let fotoDesc = '';
@@ -19,18 +31,9 @@ const memo = $getWorkflowStaticData('global');
 memo.chats = memo.chats || {};
 const hoyMs = Date.now();
 for (const k of Object.keys(memo.chats)) if (hoyMs - memo.chats[k].ts > 7 * 864e5) delete memo.chats[k]; // olvida tras 7 días
+if (TIENDA && chatId != null && memo.chats[chatId] && memo.chats[chatId].pausaHasta > hoyMs) return []; // una persona atiende este chat
 const previo = (chatId != null && memo.chats[chatId] && hoyMs - memo.chats[chatId].ts < 2 * 864e5) ? memo.chats[chatId] : null;
-const tiendas = $input.all().map(i => i.json).filter(t => t.nombre && t.lat !== '' && t.lat != null)
-  .map(t => ({ ...t, maps_url: t.maps_url || 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(`${t.nombre} ${t.direccion || ''} ${t.ciudad || ''}`.trim()) }));
-const MOK = tiendas.find(x => x.tienda_id === 'mokalu-guayaquil');
-const waMok = MOK && MOK.whatsapp ? ` Escríbenos directo al WhatsApp de Mokalú 📲 ${MOK.whatsapp}` : '';
 
-const CONFIG = {
-  nombreBot: 'Sofi',
-  horarioHumano: 'lunes a viernes de 9h00 a 17h30',
-  webTienda: 'https://mokalu.com.ec/tienda/',
-  lejosKm: 60,
-};
 // [nombre, alias|alias, ciudad, provincia, lat, lng] — fuente: framework/n8n/lugares.json
 const LUGARES = __LUGARES__;
 
@@ -38,6 +41,16 @@ const norm = s => (s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u03
 const t = ' ' + norm(texto) + ' ';
 const has = list => list.some(k => t.includes(' ' + k + ' ') || (k.includes(' ') && t.includes(k)));
 const km = (a, b, c, d) => { const r = Math.PI / 180, x = Math.sin((c - a) * r / 2) ** 2 + Math.cos(a * r) * Math.cos(c * r) * Math.sin((d - b) * r / 2) ** 2; return 6371 * 2 * Math.asin(Math.sqrt(x)); };
+// Tiendas: vienen de la Data Table. Para dar de baja una tienda: activo = false (no hace falta borrarla).
+// Si una fila no tiene lat/lng, se ubica en el centro de su ciudad (basta escribir nombre + ciudad).
+const centroCiudad = c => { const n = norm(c); return n ? LUGARES.find(l => norm(l[2]) === n || norm(l[0]) === n || l[1].split('|').includes(n)) : null; };
+const tiendas = $input.all().map(i => i.json)
+  .filter(t => t.nombre && t.activo !== false && !['no', 'false', '0'].includes(norm(String(t.activo == null ? '' : t.activo))))
+  .map(t => { if (t.lat === '' || t.lat == null || t.lng === '' || t.lng == null) { const c = centroCiudad(t.ciudad); return c ? { ...t, lat: c[4], lng: c[5] } : null; } return t; })
+  .filter(Boolean)
+  .map(t => ({ ...t, maps_url: t.maps_url || 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(`${t.nombre} ${t.direccion || ''} ${t.ciudad || ''}`.trim()) }));
+const MOK = tiendas.find(x => x.tienda_id === 'mokalu-guayaquil');
+const waMok = TIENDA ? ' Una persona del equipo te responde por aquí mismo 🙌' : (MOK && MOK.whatsapp ? ` Escríbenos directo al WhatsApp de Mokalú 📲 ${MOK.whatsapp}` : '');
 
 const ahora = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Guayaquil' }));
 const enHorario = ahora.getDay() >= 1 && ahora.getDay() <= 5 && ahora.getHours() * 60 + ahora.getMinutes() >= 540 && ahora.getHours() * 60 + ahora.getMinutes() < 1050; // 9h00–17h30
@@ -67,7 +80,7 @@ if (lat != null && tiendas.length) {
   }
 }
 const ciudad = lugar ? lugar[2] : null;
-const md = v => String(v == null ? '' : v).replace(/([_*`\[])/g, '\\$1'); // escapa Markdown de Telegram
+const md = v => CONFIG.canal === 'telegram' ? String(v == null ? '' : v).replace(/([_*`\[])/g, '\\$1') : String(v == null ? '' : v).replace(/[*_~`]/g, ''); // texto seguro para el canal
 const ficha = s => `📍 *${md(s.nombre)}* — ${md(s.direccion)}\n🗺️ ${s.maps_url} · 📲 ${md(s.whatsapp)} · 🕒 ${md(s.horario)}`;
 
 const FRAG = __FRAG__;
@@ -101,14 +114,22 @@ if (has(['reclamo', 'defectuoso', 'defectuosos', 'danado', 'danados', 'vino seco
     + `También puedes comprar en la tienda online, con envíos a todo el país: ${CONFIG.webTienda}\nSi estás en otra ciudad, dime cuál y te paso el punto de venta más cercano 📍`;
 } else if (has(['precio', 'precios', 'cuanto cuesta', 'cuanto vale', 'cuanto sale', 'a como', 'valor', 'valorcito', 'dolares', 'combo', 'promo', 'promos', 'promocion', 'descuento'])) {
   intencion = 'precio';
-  respuesta = `Los precios y promociones dependen del punto de venta, así que no te quiero dar un dato equivocado 🙏 ${cercanas.length ? `En ${ciudad} te lo confirman en *${md(cercanas[0].nombre)}* 📲 ${md(cercanas[0].whatsapp)}.` : 'Dime tu ciudad y te paso la tienda más cercana.'} Si prefieres comprar con envío a domicilio, pregúntale a Mokalú.${waMok}`;
+  if (TIENDA) {
+    derivar = 'ventas';
+    respuesta = `¡Claro! Precio y stock te los confirma el equipo de Mokalú por aquí mismo 🙌 Si me dices qué producto, color y cantidad, y desde qué ciudad nos escribes, se lo dejo listo.${aviso}`;
+  } else {
+    respuesta = `Los precios y promociones dependen del punto de venta, así que no te quiero dar un dato equivocado 🙏 ${cercanas.length ? `En ${ciudad} te lo confirman en *${md(cercanas[0].nombre)}* 📲 ${md(cercanas[0].whatsapp)}.` : 'Dime tu ciudad y te paso la tienda más cercana.'} Si prefieres comprar con envío a domicilio, pregúntale a Mokalú.${waMok}`;
+  }
 } else if (has(['horario', 'a que hora', 'atienden', 'abren']) && !cercanas.length) {
   intencion = 'horario';
-  respuesta = `Nuestro equipo atiende ${CONFIG.horarioHumano} 🕒 Yo te respondo a cualquier hora: ¿en qué ciudad estás para pasarte la tienda más cercana?`;
+  respuesta = `Nuestro equipo atiende ${CONFIG.horarioHumano} 🕒 Yo te respondo a cualquier hora: ${TIENDA ? '¿qué producto estás buscando?' : '¿en qué ciudad estás para pasarte la tienda más cercana?'}`;
 } else if (cercanas.length && !preguntaProducto && (lugarNuevo ? (texto.split(' ').length <= 12 || msg.location || pideDonde) : pideDonde)) {
   const s = cercanas[0];
   intencion = 'donde_compro';
-  if (s.ciudad === ciudad || s.km <= 5) {
+  if (TIENDA) {
+    respuesta = `¡Claro! Desde Mokalú te lo enviamos a ${ciudad} por ${CONFIG.envio} 📦 ¿Qué producto buscas?`
+      + (s.km <= CONFIG.lejosKm ? `\nSi prefieres comprarlo en persona, ${s.ciudad === ciudad || s.km <= 5 ? 'en ' + ciudad + ' lo tienes en' : `lo más cercano está en ${s.ciudad} (~${s.km} km)`}:\n${ficha(s)}` : '');
+  } else if (s.ciudad === ciudad || s.km <= 5) {
     respuesta = `En ${ciudad} puedes comprar en:\n${ficha(s)}\nTe recomiendo escribirles antes para confirmar colores. ¿Te ayudo a elegir qué POSCA llevar?`;
   } else if (s.km <= CONFIG.lejosKm) {
     respuesta = `En ${ciudad} aún no tenemos punto de venta 😕 La más cercana está en ${s.ciudad}, a ~${s.km} km:\n${ficha(s)}`;
@@ -119,13 +140,13 @@ if (has(['reclamo', 'defectuoso', 'defectuosos', 'danado', 'danados', 'vino seco
   }
 } else if (has(['donde', 'consigo', 'conseguir', 'venden', 'local', 'tienda']) && !cercanas.length && !preguntaProducto) {
   intencion = 'pedir_ciudad';
-  respuesta = '¡Claro! ¿En qué ciudad o sector estás? 📍 (también puedes enviarme tu ubicación) Así te paso la tienda más cercana.';
+  respuesta = TIENDA ? '¡Claro! ¿Desde qué ciudad nos escribes? 📍 Te lo enviamos a domicilio o te digo dónde comprarlo en persona.' : '¡Claro! ¿En qué ciudad o sector estás? 📍 (también puedes enviarme tu ubicación) Así te paso la tienda más cercana.';
 } else if (!msg.location && texto.trim() && !/[a-z0-9]/.test(norm(texto))) {
   intencion = 'reaccion';
   respuesta = texto.includes('?') ? '¿En qué te puedo ayudar? 🙂' : '🙂';
 } else if (!msg.location && (!texto.trim() || norm(texto).split(' ').every(w => ['hola', 'holi', 'holaa', 'ola', 'buenas', 'buenos', 'buen', 'dia', 'dias', 'tardes', 'noches', 'que', 'tal', 'saludos', 'estimados', 'estimado', 'senores', 'hi', 'hello', 'hey'].includes(w)))) {
   intencion = 'saludo';
-  respuesta = previo ? '¡Hola de nuevo! 🙂 ¿En qué te ayudo hoy?' : `¡Hola! Soy ${CONFIG.nombreBot}, asesora de Mokalú 🎨 Te ayudo a encontrar dónde comprar uni/POSCA o a elegir cuál te sirve. ¿En qué ciudad estás? (también puedes enviarme tu ubicación 📍)`;
+  respuesta = previo ? '¡Hola de nuevo! 🙂 ¿En qué te ayudo hoy?' : (TIENDA ? `¡Hola! Soy ${CONFIG.nombreBot}, asistente virtual de Mokalú Art Shop 🎨 Te ayudo a elegir tu material y a hacer tu pedido con envío a todo el país. ¿Qué estás buscando y desde qué ciudad nos escribes?` : `¡Hola! Soy ${CONFIG.nombreBot}, asesora de Mokalú 🎨 Te ayudo a encontrar dónde comprar uni/POSCA o a elegir cuál te sirve. ¿En qué ciudad estás? (también puedes enviarme tu ubicación 📍)`);
 }
 
 // 3) Si va a la IA: solo 2 fragmentos de producto y, si hay, 1–2 tiendas cercanas.
@@ -134,6 +155,7 @@ if (!respuesta) {
   const elegidos = fragsUtiles.slice(0, 2).map(x => x.f[1]);
   if (elegidos.length) contexto += 'PRODUCTO:\n' + elegidos.join('\n') + '\n';
   if (cercanas.length) contexto += `TIENDAS (cliente en ${ciudad}):\n` + cercanas.slice(0, 2).map(s => `${s.nombre} (${s.ciudad}, ~${s.km} km) — ${s.direccion} · ${s.maps_url} · WhatsApp ${s.whatsapp} · ${s.horario}`).join('\n') + '\n';
+  if (TIENDA) contexto += `VENTA: Mokalú vende y envía a todo el país por ${CONFIG.envio}; precio, stock y pedido los confirma una persona del equipo por este mismo chat.\n`;
   if (!cercanas.length) contexto += 'TIENDAS: aún no sabes la ciudad del cliente; si quiere comprar, pregúntala.\n';
   if (!enHorario) contexto += `Ahora el equipo humano no atiende (horario: ${CONFIG.horarioHumano}).\n`;
   if (fotoDesc) contexto += `FOTO DEL CLIENTE (descrita por visión, puede tener errores): ${fotoDesc}\n`;
@@ -144,6 +166,7 @@ if (chatId != null) {
   if (lugarNuevo && lat != null) Object.assign(c, { ciudad, lat, lng });
   c.ultimo = respuesta ? respuesta.replace(/\s+/g, ' ').slice(0, 220) : c.ultimo;
   c.ts = hoyMs;
+  if (TIENDA && derivar) c.pausaHasta = hoyMs + CONFIG.pausaHoras * 36e5;
   memo.chats[chatId] = c;
 }
 

@@ -1,11 +1,11 @@
 // Prueba el nodo "Responder sin IA" sin n8n: node framework/n8n/workflow/probar.cjs
 const fs = require('fs');
-const src = fs.readFileSync(__dirname + '/nodo.js', 'utf8');
+const src = fs.readFileSync(__dirname + '/nodo.js', 'utf8').replace("modo: 'tienda'", `modo: '${process.env.MODO || 'tienda'}'`);
 const T = require(__dirname + '/../tiendas.json').map(t => ({ ...t, tienda_id: t.id }));
 const memo = {};
 const run = (m, chat = 7) => new Function('$', '$input', '$getWorkflowStaticData', src)(
   () => ({ first: () => ({ json: { message: { chat: { id: chat }, ...m } } }) }),
-  { all: () => T.map(j => ({ json: j })) }, () => memo)[0].json;
+  { all: () => T.map(j => ({ json: j })) }, () => memo)[0]?.json ?? { intencion: 'pausa', respuesta: '', contexto: '' };
 const casos = [
   ['hola', 'saludo'], ['Buen día 😊', 'saludo'], ['buenas tardes', 'saludo'],
   ['donde compro posca en riobamba', 'donde_compro'], ['soy de quito', 'donde_compro'], ['hola soy de rio bamba', 'donde_compro'],

@@ -51,3 +51,8 @@ Formato: `- [ ] [quién] Qué hacer — por qué / dónde — (agente que lo pid
 - [ ] [dueño] Confirmar dirección de 2 tiendas sin dirección: Tía Tula Quito (código postal 170157) y Comercial Plinio García (Manta) — (integrador, 2026-10-15)
 - [ ] [dueño] Fotos: el nodo "Ver foto (ChatGPT)" usa la credencial **"OpenAi account"** de n8n; confirmar que esa cuenta de OpenAI tenga saldo (gasto esperado: centavos al mes). Si se prefiere, cambiarla por "n8n free OpenAI API credits" — (integrador, 2026-10-15)
 - [ ] [dueño] El nodo "Descargar foto" también usa la credencial de Telegram: cambiarla junto con los otros 4 nodos cuando se cree el bot nuevo en @BotFather — (integrador, 2026-10-15)
+
+## [2026-10-15] Mantener los puntos de venta (cuando cambien)
+- **Quién:** Mokalú / dueño. **Dónde:** n8n → Overview → Data tables → `uni-ball puntos de venta`.
+- **Qué:** añadir fila (basta `nombre` + `ciudad`), desmarcar `activo` para dar de baja, editar celdas para cambios. Efecto inmediato.
+- **Guía:** `docs/como-editar-tiendas.md`.
