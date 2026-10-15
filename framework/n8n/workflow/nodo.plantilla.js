@@ -65,7 +65,7 @@ const preguntaProducto = fragsUtiles.length > 0 && !has(['donde', 'comprar', 'co
 // 2) Respuestas fijas, en orden de prioridad (bots/mokalu/plantillas-respuesta.md).
 let respuesta = null, derivar = null, intencion = 'ia';
 const pideDonde = has(['donde', 'comprar', 'compro', 'consigo', 'venden', 'tienda', 'local', 'conseguir', 'adquirir', 'establecimiento', 'where', 'buy', 'store']);
-if (has(['reclamo', 'defectuoso', 'defectuosos', 'danado', 'danados', 'vino seco', 'vinieron secos', 'llego seco', 'esta seco', 'no sirve', 'no pinta', 'no pintan', 'no funciona', 'no funcionan', 'no sale', 'llego roto', 'llego mal', 'roto', 'rota', 'fallado', 'estafa', 'devolucion', 'devolver', 'garantia', 'queja'])) {
+if (has(['reclamo', 'defectuoso', 'defectuosos', 'danado', 'danados', 'vino seco', 'vinieron secos', 'vinieron secas', 'llego seco', 'llegaron secos', 'llegaron secas', 'llegaron danados', 'llegaron mal', 'llegaron rotos', 'esta seco', 'estan secos', 'no sirve', 'no pinta', 'no pintan', 'no funciona', 'no funcionan', 'no sale', 'llego roto', 'llego mal', 'roto', 'rota', 'fallado', 'estafa', 'devolucion', 'devolver', 'garantia', 'queja'])) {
   intencion = 'reclamo'; derivar = 'reclamos';
   respuesta = `Lamento mucho lo que pasó 🙏 Te paso ahora con el equipo de Mokalú que ve reclamos para resolverlo directamente.${waMok}${aviso}`;
 } else if (has(['ser distribuidor', 'ser distribuidora', 'distribuir', 'punto de venta', 'revender', 'vender posca', 'vender sus productos', 'asesora de ventas', 'asesor de ventas', 'trabajar con ustedes', 'al por mayor', 'por mayor', 'mayorista', 'mayoristas', 'proforma', 'cotizacion', 'para mi colegio', 'para el colegio', 'para la escuela', 'para mi empresa', 'para la empresa', 'para mi negocio'])
