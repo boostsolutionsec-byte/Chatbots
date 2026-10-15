@@ -44,7 +44,7 @@ Santo Domingo,santo domingo;santo domingo de los tsachilas;santo domingo de los 
 Babahoyo,babahoyo;los rios;los ríos,ciudad,Babahoyo,Los Ríos,-1.8022,-79.5344
 Quevedo,quevedo,ciudad,Quevedo,Los Ríos,-1.0286,-79.4635
 Salinas,salinas,ciudad,Salinas,Santa Elena,-2.2150,-80.9520
-Santa Elena,santa elena;la libertad,ciudad,Santa Elena,Santa Elena,-2.2260,-80.8580
+Santa Elena,santa elena,ciudad,Santa Elena,Santa Elena,-2.2260,-80.8580
 Montañita,montañita;montanita,ciudad,Montañita,Santa Elena,-1.8270,-80.7530
 Azogues,azogues;cañar;canar,ciudad,Azogues,Cañar,-2.7390,-78.8460
 Tena,tena;napo,ciudad,Tena,Napo,-0.9938,-77.8129
@@ -77,3 +77,11 @@ La Concordia,la concordia,ciudad,La Concordia,Santo Domingo de los Tsáchilas,0.
 Nobol,nobol;narcisa de jesus,ciudad,Nobol,Guayas,-1.914,-80.004
 Machachi,machachi;mejia;mejía,ciudad,Machachi,Pichincha,-0.51,-78.567
 Pelileo,pelileo;san pedro de pelileo,ciudad,Pelileo,Tungurahua,-1.3300,-78.5430
+Norte de Guayaquil,mall del norte;riocentro norte;world trade center;wtc;city mall;av francisco de orellana,sector,Guayaquil,Guayas,-2.1395,-79.8955
+Albán Borja,alban borja;av carlos julio arosemena,sector,Guayaquil,Guayas,-2.1687,-79.9166
+Carapungo / El Portal,carapungo;el portal;panamericana norte,sector,Quito,Pichincha,-0.1005,-78.4555
+Los Granados,granados;los granados;granados plaza,sector,Quito,Pichincha,-0.1655,-78.4655
+Villa Club,villa club;riocentro el dorado;el dorado,sector,Daule,Guayas,-2.0505,-79.9035
+La Libertad,la libertad,ciudad,La Libertad,Santa Elena,-2.2314,-80.9008
+Cariamanga,cariamanga,ciudad,Cariamanga,Loja,-4.3297,-79.5555
+Macará,macara,ciudad,Macará,Loja,-4.3814,-79.9437

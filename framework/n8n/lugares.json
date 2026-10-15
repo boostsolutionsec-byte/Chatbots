@@ -7,7 +7,6 @@
    "guayas",
    "gayakil",
    "guayakil",
-   "guayakil",
    "gquil",
    "guayaco",
    "la perla del pacifico"
@@ -100,7 +99,6 @@
   "nombre": "Vía a la Costa",
   "alias": [
    "via a la costa",
-   "vía a la costa",
    "puerto azul",
    "laguna plaza",
    "chongon"
@@ -130,7 +128,6 @@
   "alias": [
    "centro de guayaquil",
    "malecon 2000",
-   "malecón 2000",
    "9 de octubre",
    "centro guayaquil"
   ],
@@ -144,7 +141,6 @@
   "nombre": "Samborondón",
   "alias": [
    "samborondon",
-   "samborondón",
    "la puntilla",
    "entreplaza"
   ],
@@ -157,8 +153,7 @@
  {
   "nombre": "Durán",
   "alias": [
-   "duran",
-   "durán"
+   "duran"
   ],
   "tipo": "ciudad",
   "ciudad": "Durán",
@@ -223,7 +218,6 @@
   "nombre": "Centro Histórico de Quito",
   "alias": [
    "centro historico",
-   "centro histórico",
    "plaza grande"
   ],
   "tipo": "sector",
@@ -238,7 +232,10 @@
    "la carolina",
    "quicentro",
    "parque la carolina",
-   "naciones unidas"
+   "naciones unidas",
+   "inaquito",
+   "cci",
+   "centro comercial inaquito"
   ],
   "tipo": "sector",
   "ciudad": "Quito",
@@ -251,8 +248,7 @@
   "alias": [
    "condado",
    "el condado",
-   "carcelen",
-   "carcelén"
+   "carcelen"
   ],
   "tipo": "sector",
   "ciudad": "Quito",
@@ -264,7 +260,6 @@
   "nombre": "Cumbayá",
   "alias": [
    "cumbaya",
-   "cumbayá",
    "tumbaco"
   ],
   "tipo": "sector",
@@ -278,7 +273,8 @@
   "alias": [
    "quitumbe",
    "sur de quito",
-   "el recreo"
+   "el recreo",
+   "quicentro sur"
   ],
   "tipo": "sector",
   "ciudad": "Quito",
@@ -292,7 +288,6 @@
    "los chillos",
    "valle de los chillos",
    "sangolqui",
-   "sangolquí",
    "san rafael"
   ],
   "tipo": "ciudad",
@@ -328,8 +323,7 @@
  {
   "nombre": "Mall del Río",
   "alias": [
-   "mall del rio",
-   "mall del río"
+   "mall del rio"
   ],
   "tipo": "sector",
   "ciudad": "Cuenca",
@@ -364,9 +358,8 @@
  {
   "nombre": "Baños",
   "alias": [
-   "baños",
    "banos",
-   "baños de agua santa"
+   "banos de agua santa"
   ],
   "tipo": "ciudad",
   "ciudad": "Baños",
@@ -380,8 +373,7 @@
    "riobamba",
    "chimborazo",
    "rio bamba",
-   "riobanba",
-   "ríobamba"
+   "riobanba"
   ],
   "tipo": "ciudad",
   "ciudad": "Riobamba",
@@ -428,7 +420,6 @@
   "nombre": "Tulcán",
   "alias": [
    "tulcan",
-   "tulcán",
    "carchi"
   ],
   "tipo": "ciudad",
@@ -476,7 +467,6 @@
   "alias": [
    "portoviejo",
    "manabi",
-   "manabí",
    "porto viejo"
   ],
   "tipo": "ciudad",
@@ -535,7 +525,6 @@
   "alias": [
    "santo domingo",
    "santo domingo de los tsachilas",
-   "santo domingo de los tsáchilas",
    "sto domingo",
    "sto. domingo",
    "santo domingo de los colorados"
@@ -550,8 +539,7 @@
   "nombre": "Babahoyo",
   "alias": [
    "babahoyo",
-   "los rios",
-   "los ríos"
+   "los rios"
   ],
   "tipo": "ciudad",
   "ciudad": "Babahoyo",
@@ -584,8 +572,7 @@
  {
   "nombre": "Santa Elena",
   "alias": [
-   "santa elena",
-   "la libertad"
+   "santa elena"
   ],
   "tipo": "ciudad",
   "ciudad": "Santa Elena",
@@ -596,7 +583,6 @@
  {
   "nombre": "Montañita",
   "alias": [
-   "montañita",
    "montanita"
   ],
   "tipo": "ciudad",
@@ -609,7 +595,6 @@
   "nombre": "Azogues",
   "alias": [
    "azogues",
-   "cañar",
    "canar"
   ],
   "tipo": "ciudad",
@@ -648,7 +633,6 @@
    "nueva loja",
    "lago agrio",
    "sucumbios",
-   "sucumbíos",
    "lagoagrio"
   ],
   "tipo": "ciudad",
@@ -661,8 +645,7 @@
   "nombre": "Guaranda",
   "alias": [
    "guaranda",
-   "bolivar",
-   "bolívar"
+   "bolivar"
   ],
   "tipo": "ciudad",
   "ciudad": "Guaranda",
@@ -715,7 +698,6 @@
    "puerto ayora",
    "santa cruz",
    "galapagos",
-   "galápagos",
    "isla santa cruz"
   ],
   "tipo": "ciudad",
@@ -728,7 +710,6 @@
   "nombre": "Puerto Baquerizo Moreno",
   "alias": [
    "san cristobal",
-   "san cristóbal",
    "puerto baquerizo"
   ],
   "tipo": "ciudad",
@@ -756,8 +737,7 @@
   "alias": [
    "la floresta",
    "floresta",
-   "gonzalez suarez",
-   "gonzález suárez"
+   "gonzalez suarez"
   ],
   "tipo": "sector",
   "ciudad": "Quito",
@@ -784,7 +764,7 @@
   "nombre": "Ciudad Celeste",
   "alias": [
    "ciudad celeste",
-   "vía a samborondón km 10",
+   "via a samborondon km 10",
    "via a samborondon"
   ],
   "tipo": "sector",
@@ -807,8 +787,7 @@
  {
   "nombre": "Puerto López",
   "alias": [
-   "puerto lopez",
-   "puerto lópez"
+   "puerto lopez"
   ],
   "tipo": "ciudad",
   "ciudad": "Puerto López",
@@ -874,8 +853,7 @@
  {
   "nombre": "Alausí",
   "alias": [
-   "alausi",
-   "alausí"
+   "alausi"
   ],
   "tipo": "ciudad",
   "ciudad": "Alausí",
@@ -886,7 +864,7 @@
  {
   "nombre": "Cañar",
   "alias": [
-   "ciudad de cañar"
+   "ciudad de canar"
   ],
   "tipo": "ciudad",
   "ciudad": "Cañar",
@@ -908,8 +886,7 @@
  {
   "nombre": "Sucúa",
   "alias": [
-   "sucua",
-   "sucúa"
+   "sucua"
   ],
   "tipo": "ciudad",
   "ciudad": "Sucúa",
@@ -966,8 +943,7 @@
   "nombre": "Machachi",
   "alias": [
    "machachi",
-   "mejia",
-   "mejía"
+   "mejia"
   ],
   "tipo": "ciudad",
   "ciudad": "Machachi",
@@ -986,5 +962,118 @@
   "provincia": "Tungurahua",
   "lat": -1.33,
   "lng": -78.543
+ },
+ {
+  "nombre": "Cuyabeno",
+  "alias": [
+   "cuyabeno",
+   "santa rosa de cuyabeno",
+   "tarapoa"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "Cuyabeno",
+  "provincia": "Sucumbíos",
+  "lat": -0.12,
+  "lng": -76.34
+ },
+ {
+  "nombre": "Norte de Guayaquil",
+  "alias": [
+   "mall del norte",
+   "riocentro norte",
+   "world trade center",
+   "wtc",
+   "city mall",
+   "av francisco de orellana"
+  ],
+  "tipo": "sector",
+  "ciudad": "Guayaquil",
+  "provincia": "Guayas",
+  "lat": -2.1395,
+  "lng": -79.8955
+ },
+ {
+  "nombre": "Albán Borja",
+  "alias": [
+   "alban borja",
+   "av carlos julio arosemena"
+  ],
+  "tipo": "sector",
+  "ciudad": "Guayaquil",
+  "provincia": "Guayas",
+  "lat": -2.1687,
+  "lng": -79.9166
+ },
+ {
+  "nombre": "Carapungo / El Portal",
+  "alias": [
+   "carapungo",
+   "el portal",
+   "panamericana norte"
+  ],
+  "tipo": "sector",
+  "ciudad": "Quito",
+  "provincia": "Pichincha",
+  "lat": -0.1005,
+  "lng": -78.4555
+ },
+ {
+  "nombre": "Los Granados",
+  "alias": [
+   "granados",
+   "los granados",
+   "granados plaza"
+  ],
+  "tipo": "sector",
+  "ciudad": "Quito",
+  "provincia": "Pichincha",
+  "lat": -0.1655,
+  "lng": -78.4655
+ },
+ {
+  "nombre": "Villa Club",
+  "alias": [
+   "villa club",
+   "riocentro el dorado",
+   "el dorado"
+  ],
+  "tipo": "sector",
+  "ciudad": "Daule",
+  "provincia": "Guayas",
+  "lat": -2.0505,
+  "lng": -79.9035
+ },
+ {
+  "nombre": "La Libertad",
+  "alias": [
+   "la libertad"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "La Libertad",
+  "provincia": "Santa Elena",
+  "lat": -2.2314,
+  "lng": -80.9008
+ },
+ {
+  "nombre": "Cariamanga",
+  "alias": [
+   "cariamanga"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "Cariamanga",
+  "provincia": "Loja",
+  "lat": -4.3297,
+  "lng": -79.5555
+ },
+ {
+  "nombre": "Macará",
+  "alias": [
+   "macara"
+  ],
+  "tipo": "ciudad",
+  "ciudad": "Macará",
+  "provincia": "Loja",
+  "lat": -4.3814,
+  "lng": -79.9437
  }
 ]
