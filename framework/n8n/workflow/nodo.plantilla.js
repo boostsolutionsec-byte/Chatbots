@@ -122,7 +122,7 @@ const horarioTienda = s => {
 };
 
 const FRAG = __FRAG__;
-const pal = new Set(norm(texto).split(' ').filter(w => (w.length > 3 || /^(\d+[km]|1mr|pc|pcf)$/.test(w)) && !['color', 'colores', 'punta', 'puntas', 'marca', 'posca', 'poscas', 'marcador', 'marcadores', 'como', 'para', 'esta', 'este', 'estos', 'estas', 'tiene', 'tienen', 'mismo', 'misma', 'verdad', 'favor', 'gracias', 'quiero', 'tengo', 'pero', 'donde', 'cual', 'cuales'].includes(w))); // palabras demasiado comunes
+const pal = new Set(norm(texto).split(' ').flatMap(w => w.length > 4 && w.endsWith('s') ? [w, w.slice(0, -1)] : [w]).filter(w => (w.length > 3 || /^(\d+[km]|\d{3}|1mr|pc|pcf|pin|eye|one|gel|sn|px|pwe|pwb|pna|ek|clp|sxn|umn|ub|um)$/.test(w)) && !['ball', 'uniball', 'color', 'colores', 'punta', 'puntas', 'marca', 'posca', 'poscas', 'marcador', 'marcadores', 'como', 'para', 'esta', 'este', 'estos', 'estas', 'tiene', 'tienen', 'mismo', 'misma', 'verdad', 'favor', 'gracias', 'quiero', 'tengo', 'pero', 'donde', 'cual', 'cuales'].includes(w))); // palabras demasiado comunes
 const fragsUtiles = FRAG.map(f => ({ f, p: f[0].split(' ').filter(w => pal.has(w)).length })).filter(x => x.p > 0).sort((a, b) => b.p - a.p);
 const preguntaProducto = fragsUtiles.length > 0 && !has(['donde', 'comprar', 'compro', 'consigo', 'conseguir', 'venden', 'adquirir', 'where', 'buy']);
 
