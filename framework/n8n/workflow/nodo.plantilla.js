@@ -10,6 +10,8 @@ const CONFIG = {
   envio: 'Servientrega (llega en 24–48 h)',
   lejosKm: 60,
   pausaHoras: 12,             // tras pasar un caso al equipo, el bot no responde en ese chat por estas horas
+  horarioMall: 'de 10h00 a 21h00 todos los días',     // si una tienda de centro comercial no tiene horario (aproximado)
+  horarioLocal: 'de lunes a sábado de 9h00 a 18h00', // si una papelería de calle no tiene horario (aproximado)
 };
 const TIENDA = CONFIG.modo === 'tienda';
 const msg = $(CONFIG.entrada).first().json.message || {};
@@ -81,7 +83,43 @@ if (lat != null && tiendas.length) {
 }
 const ciudad = lugar ? lugar[2] : null;
 const md = v => CONFIG.canal === 'telegram' ? String(v == null ? '' : v).replace(/([_*`\[])/g, '\\$1') : String(v == null ? '' : v).replace(/[*_~`]/g, ''); // texto seguro para el canal
-const ficha = s => `📍 *${md(s.nombre)}* — ${md(s.direccion)}\n🗺️ ${s.maps_url} · 📲 ${md(s.whatsapp)} · 🕒 ${md(s.horario)}`;
+const ficha = s => `📍 *${md(s.nombre)}* — ${md(s.direccion)}\n🗺️ ${s.maps_url}${s.whatsapp ? ' · 📲 ' + md(s.whatsapp) : ''}${s.horario ? ' · 🕒 ' + md(s.horario) : ''}`;
+// La tienda que se le recomendó antes (para "¿a qué hora atienden?", "¿dirección?", "¿otra opción?").
+const tiendaPrevia = !lugarNuevo && previo && previo.tienda ? cercanas.find(x => x.nombre === previo.tienda) || null : null;
+
+// Horario: "lun-jue 10:00-20:00; vie-sáb 10:00-21:00; dom y feriados 11:00-20:00" → tramo de un día (0 = domingo).
+const DIAS = ['dom', 'lun', 'mar', 'mie', 'jue', 'vie', 'sab'];
+const DIAS_LARGO = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
+const horarioDia = (h, dia) => {
+  const txt = String(h || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/(\d)h(\d)/g, '$1:$2');
+  for (const seg of txt.split(/[;\n|]/)) {
+    const m = seg.match(/^\s*([a-z ,y-]+?)\s*:?\s*(cerrado|(\d{1,2}:\d{2})\s*(?:-|a)\s*(\d{1,2}:\d{2}))/);
+    if (!m) continue;
+    const dias = new Set();
+    for (const p of m[1].split(/,| y /)) {
+      const r = p.trim().match(/^([a-z]{3})[a-z]*(?:\s*-\s*([a-z]{3})[a-z]*)?$/);
+      if (!r || DIAS.indexOf(r[1]) < 0) continue;
+      const a = DIAS.indexOf(r[1]), b = r[2] ? DIAS.indexOf(r[2]) : a;
+      if (b < 0) continue;
+      for (let d = a; ; d = (d + 1) % 7) { dias.add(d); if (d === b) break; }
+    }
+    if (dias.has(dia)) return m[2] === 'cerrado' ? { cerrado: true } : { abre: m[3], cierra: m[4] };
+  }
+  return null;
+};
+const minutos = x => { const [h, m] = x.split(':').map(Number); return h * 60 + m; };
+const esMall = s => /\b(c c|cc|centro comercial|mall|shopping|riocentro|quicentro|piazza|multiplaza|plaza)\b/.test(norm(`${s.nombre} ${s.direccion}`));
+const horarioTienda = s => {
+  const nom = `*${md(s.nombre)}*`, wa = s.whatsapp ? ` Si quieres confirmar antes de ir: 📲 ${md(s.whatsapp)}` : '';
+  if (!s.horario) return (esMall(s)
+    ? `${nom} está en un centro comercial; no tengo su horario exacto, pero esos locales suelen atender ${CONFIG.horarioMall} (aprox.).`
+    : `No tengo el horario exacto de ${nom}; las papelerías suelen atender ${CONFIG.horarioLocal} (aprox.).`) + wa;
+  const dia = ahora.getDay(), hoy = horarioDia(s.horario, dia), min = ahora.getHours() * 60 + ahora.getMinutes();
+  if (!hoy) return `${nom} atiende: ${md(s.horario)} 🕒`;
+  if (hoy.cerrado) return `Hoy ${DIAS_LARGO[dia]} ${nom} no abre 😕 Su horario: ${md(s.horario)}.`;
+  const estado = min < minutos(hoy.abre) ? 'todavía no abre' : min < minutos(hoy.cierra) ? 'ahora está abierto ✅' : 'ya cerró por hoy';
+  return `Hoy ${DIAS_LARGO[dia]} ${nom} atiende de ${hoy.abre} a ${hoy.cierra} 🕒 (${estado}).\nHorario completo: ${md(s.horario)}`;
+};
 
 const FRAG = __FRAG__;
 const pal = new Set(norm(texto).split(' ').filter(w => (w.length > 3 || /^(\d+[km]|1mr|pc|pcf)$/.test(w)) && !['color', 'colores', 'punta', 'puntas', 'marca', 'posca', 'poscas', 'marcador', 'marcadores', 'como', 'para', 'esta', 'este', 'estos', 'estas', 'tiene', 'tienen', 'mismo', 'misma', 'verdad', 'favor', 'gracias', 'quiero', 'tengo', 'pero', 'donde', 'cual', 'cuales'].includes(w))); // palabras demasiado comunes
@@ -89,7 +127,7 @@ const fragsUtiles = FRAG.map(f => ({ f, p: f[0].split(' ').filter(w => pal.has(w
 const preguntaProducto = fragsUtiles.length > 0 && !has(['donde', 'comprar', 'compro', 'consigo', 'conseguir', 'venden', 'adquirir', 'where', 'buy']);
 
 // 2) Respuestas fijas, en orden de prioridad (bots/mokalu/plantillas-respuesta.md).
-let respuesta = null, derivar = null, intencion = 'ia';
+let respuesta = null, derivar = null, intencion = 'ia', tiendaSel = null;
 const pideDonde = has(['donde', 'comprar', 'compro', 'consigo', 'venden', 'tienda', 'local', 'conseguir', 'adquirir', 'establecimiento', 'where', 'buy', 'store']);
 if (has(['reclamo', 'defectuoso', 'defectuosos', 'danado', 'danados', 'vino seco', 'vinieron secos', 'vinieron secas', 'llego seco', 'llegaron secos', 'llegaron secas', 'llegaron danados', 'llegaron mal', 'llegaron rotos', 'esta seco', 'estan secos', 'no sirve', 'no pinta', 'no pintan', 'no funciona', 'no funcionan', 'no sale', 'llego roto', 'llego mal', 'roto', 'rota', 'fallado', 'estafa', 'devolucion', 'devolver', 'garantia', 'queja'])) {
   intencion = 'reclamo'; derivar = 'reclamos';
@@ -118,14 +156,31 @@ if (has(['reclamo', 'defectuoso', 'defectuosos', 'danado', 'danados', 'vino seco
     derivar = 'ventas';
     respuesta = `¡Claro! Precio y stock te los confirma el equipo de Mokalú por aquí mismo 🙌 Si me dices qué producto, color y cantidad, y desde qué ciudad nos escribes, se lo dejo listo.${aviso}`;
   } else {
+    if (cercanas.length) tiendaSel = cercanas[0];
     respuesta = `Los precios y promociones dependen del punto de venta, así que no te quiero dar un dato equivocado 🙏 ${cercanas.length ? `En ${ciudad} te lo confirman en *${md(cercanas[0].nombre)}* 📲 ${md(cercanas[0].whatsapp)}.` : 'Dime tu ciudad y te paso la tienda más cercana.'} Si prefieres comprar con envío a domicilio, pregúntale a Mokalú.${waMok}`;
   }
-} else if (has(['horario', 'a que hora', 'atienden', 'abren']) && !cercanas.length) {
+} else if (has(['horario', 'horarios', 'a que hora', 'que hora', 'atienden', 'abren', 'abre', 'cierran', 'cierra', 'abierto', 'abierta']) && (TIENDA || cercanas.length)) {
+  intencion = 'horario';
+  const s = tiendaPrevia || cercanas[0];
+  if (TIENDA) {
+    respuesta = `En Mokalú te atendemos ${CONFIG.horarioHumano} 🕒 y por aquí te respondo a cualquier hora.`
+      + (s && s.km <= CONFIG.lejosKm && s.tienda_id !== 'mokalu-guayaquil' ? `\nSi prefieres ir en persona: ${horarioTienda(s)}` : '\n¿Qué producto estás buscando?');
+  } else { respuesta = (tiendaPrevia ? '' : `La tienda más cercana${ciudad ? ' en ' + ciudad : ''} es esta 👇\n`) + horarioTienda(s); tiendaSel = s; }
+} else if (tiendaPrevia && !t.includes(' mokalu ') && has(['direccion', 'ubicacion', 'como llego', 'como llegar', 'mapa', 'telefono', 'whatsapp', 'numero', 'contacto', 'celular', 'donde queda', 'donde esta', 'donde quedan'])) {
+  intencion = 'datos_tienda';
+  tiendaSel = tiendaPrevia;
+  respuesta = `Aquí tienes los datos:\n${ficha(tiendaSel)}`;
+} else if (tiendaPrevia && cercanas.length > 1 && has(['otra tienda', 'otras tiendas', 'otro local', 'otros locales', 'otro lugar', 'otros lugares', 'otra opcion', 'otras opciones', 'mas opciones', 'mas cerca', 'mas cercana', 'mas cercano', 'alguna otra', 'algun otro', 'otra sucursal', 'otras sucursales'])) {
+  intencion = 'mas_tiendas';
+  const lista = cercanas.filter(x => !tiendaPrevia || x.nombre !== tiendaPrevia.nombre).slice(0, 3);
+  respuesta = `Otras opciones${ciudad ? ' cerca de ' + ciudad : ''}:\n` + lista.map(x => `📍 *${md(x.nombre)}* (~${x.km} km) — ${md(x.direccion)}${x.whatsapp ? ' · 📲 ' + md(x.whatsapp) : ''}`).join('\n') + '\n¿Quieres el horario o la ubicación de alguna?';
+} else if (has(['horario', 'horarios', 'a que hora', 'atienden', 'abren']) && !cercanas.length) {
   intencion = 'horario';
   respuesta = `Nuestro equipo atiende ${CONFIG.horarioHumano} 🕒 Yo te respondo a cualquier hora: ${TIENDA ? '¿qué producto estás buscando?' : '¿en qué ciudad estás para pasarte la tienda más cercana?'}`;
 } else if (cercanas.length && !preguntaProducto && (lugarNuevo ? (texto.split(' ').length <= 12 || msg.location || pideDonde) : pideDonde)) {
   const s = cercanas[0];
   intencion = 'donde_compro';
+  if (!TIENDA || s.km <= CONFIG.lejosKm) tiendaSel = s;
   if (TIENDA) {
     respuesta = `¡Claro! Desde Mokalú te lo enviamos a ${ciudad} por ${CONFIG.envio} 📦 ¿Qué producto buscas?`
       + (s.km <= CONFIG.lejosKm ? `\nSi prefieres comprarlo en persona, ${s.ciudad === ciudad || s.km <= 5 ? 'en ' + ciudad + ' lo tienes en' : `lo más cercano está en ${s.ciudad} (~${s.km} km)`}:\n${ficha(s)}` : '');
@@ -144,6 +199,9 @@ if (has(['reclamo', 'defectuoso', 'defectuosos', 'danado', 'danados', 'vino seco
 } else if (!msg.location && texto.trim() && !/[a-z0-9]/.test(norm(texto))) {
   intencion = 'reaccion';
   respuesta = texto.includes('?') ? '¿En qué te puedo ayudar? 🙂' : '🙂';
+} else if (!msg.location && texto.trim() && norm(texto).split(' ').every(w => ['gracias', 'gracia', 'muchas', 'mil', 'ok', 'okey', 'oki', 'listo', 'perfecto', 'vale', 'dale', 'chevere', 'genial', 'super', 'excelente', 'entendido', 'thanks', 'muy', 'amable'].includes(w))) {
+  intencion = 'cierre';
+  respuesta = '¡Con gusto! 🙌 Si necesitas algo más, aquí estoy.';
 } else if (!msg.location && (!texto.trim() || norm(texto).split(' ').every(w => ['hola', 'holi', 'holaa', 'ola', 'buenas', 'buenos', 'buen', 'dia', 'dias', 'tardes', 'noches', 'que', 'tal', 'saludos', 'estimados', 'estimado', 'senores', 'hi', 'hello', 'hey'].includes(w)))) {
   intencion = 'saludo';
   respuesta = previo ? '¡Hola de nuevo! 🙂 ¿En qué te ayudo hoy?' : (TIENDA ? `¡Hola! Soy ${CONFIG.nombreBot}, asistente virtual de Mokalú Art Shop 🎨 Te ayudo a elegir tu material y a hacer tu pedido con envío a todo el país. ¿Qué estás buscando y desde qué ciudad nos escribes?` : `¡Hola! Soy ${CONFIG.nombreBot}, asesora de Mokalú 🎨 Te ayudo a encontrar dónde comprar uni-ball o a elegir cuál te sirve. ¿En qué ciudad estás? (también puedes enviarme tu ubicación 📍)`);
@@ -165,6 +223,7 @@ if (chatId != null) {
   const c = memo.chats[chatId] || {};
   if (lugarNuevo && lat != null) Object.assign(c, { ciudad, lat, lng });
   c.ultimo = respuesta ? respuesta.replace(/\s+/g, ' ').slice(0, 220) : c.ultimo;
+  if (tiendaSel) c.tienda = tiendaSel.nombre; else if (lugarNuevo) delete c.tienda;
   c.ts = hoyMs;
   if (TIENDA && derivar) c.pausaHasta = hoyMs + CONFIG.pausaHoras * 36e5;
   memo.chats[chatId] = c;

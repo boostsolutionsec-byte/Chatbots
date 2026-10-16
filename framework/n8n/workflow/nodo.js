@@ -10,6 +10,8 @@ const CONFIG = {
   envio: 'Servientrega (llega en 24–48 h)',
   lejosKm: 60,
   pausaHoras: 12,             // tras pasar un caso al equipo, el bot no responde en ese chat por estas horas
+  horarioMall: 'de 10h00 a 21h00 todos los días',     // si una tienda de centro comercial no tiene horario (aproximado)
+  horarioLocal: 'de lunes a sábado de 9h00 a 18h00', // si una papelería de calle no tiene horario (aproximado)
 };
 const TIENDA = CONFIG.modo === 'tienda';
 const msg = $(CONFIG.entrada).first().json.message || {};
@@ -81,7 +83,43 @@ if (lat != null && tiendas.length) {
 }
 const ciudad = lugar ? lugar[2] : null;
 const md = v => CONFIG.canal === 'telegram' ? String(v == null ? '' : v).replace(/([_*`\[])/g, '\\$1') : String(v == null ? '' : v).replace(/[*_~`]/g, ''); // texto seguro para el canal
-const ficha = s => `📍 *${md(s.nombre)}* — ${md(s.direccion)}\n🗺️ ${s.maps_url} · 📲 ${md(s.whatsapp)} · 🕒 ${md(s.horario)}`;
+const ficha = s => `📍 *${md(s.nombre)}* — ${md(s.direccion)}\n🗺️ ${s.maps_url}${s.whatsapp ? ' · 📲 ' + md(s.whatsapp) : ''}${s.horario ? ' · 🕒 ' + md(s.horario) : ''}`;
+// La tienda que se le recomendó antes (para "¿a qué hora atienden?", "¿dirección?", "¿otra opción?").
+const tiendaPrevia = !lugarNuevo && previo && previo.tienda ? cercanas.find(x => x.nombre === previo.tienda) || null : null;
+
+// Horario: "lun-jue 10:00-20:00; vie-sáb 10:00-21:00; dom y feriados 11:00-20:00" → tramo de un día (0 = domingo).
+const DIAS = ['dom', 'lun', 'mar', 'mie', 'jue', 'vie', 'sab'];
+const DIAS_LARGO = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
+const horarioDia = (h, dia) => {
+  const txt = String(h || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/(\d)h(\d)/g, '$1:$2');
+  for (const seg of txt.split(/[;\n|]/)) {
+    const m = seg.match(/^\s*([a-z ,y-]+?)\s*:?\s*(cerrado|(\d{1,2}:\d{2})\s*(?:-|a)\s*(\d{1,2}:\d{2}))/);
+    if (!m) continue;
+    const dias = new Set();
+    for (const p of m[1].split(/,| y /)) {
+      const r = p.trim().match(/^([a-z]{3})[a-z]*(?:\s*-\s*([a-z]{3})[a-z]*)?$/);
+      if (!r || DIAS.indexOf(r[1]) < 0) continue;
+      const a = DIAS.indexOf(r[1]), b = r[2] ? DIAS.indexOf(r[2]) : a;
+      if (b < 0) continue;
+      for (let d = a; ; d = (d + 1) % 7) { dias.add(d); if (d === b) break; }
+    }
+    if (dias.has(dia)) return m[2] === 'cerrado' ? { cerrado: true } : { abre: m[3], cierra: m[4] };
+  }
+  return null;
+};
+const minutos = x => { const [h, m] = x.split(':').map(Number); return h * 60 + m; };
+const esMall = s => /\b(c c|cc|centro comercial|mall|shopping|riocentro|quicentro|piazza|multiplaza|plaza)\b/.test(norm(`${s.nombre} ${s.direccion}`));
+const horarioTienda = s => {
+  const nom = `*${md(s.nombre)}*`, wa = s.whatsapp ? ` Si quieres confirmar antes de ir: 📲 ${md(s.whatsapp)}` : '';
+  if (!s.horario) return (esMall(s)
+    ? `${nom} está en un centro comercial; no tengo su horario exacto, pero esos locales suelen atender ${CONFIG.horarioMall} (aprox.).`
+    : `No tengo el horario exacto de ${nom}; las papelerías suelen atender ${CONFIG.horarioLocal} (aprox.).`) + wa;
+  const dia = ahora.getDay(), hoy = horarioDia(s.horario, dia), min = ahora.getHours() * 60 + ahora.getMinutes();
+  if (!hoy) return `${nom} atiende: ${md(s.horario)} 🕒`;
+  if (hoy.cerrado) return `Hoy ${DIAS_LARGO[dia]} ${nom} no abre 😕 Su horario: ${md(s.horario)}.`;
+  const estado = min < minutos(hoy.abre) ? 'todavía no abre' : min < minutos(hoy.cierra) ? 'ahora está abierto ✅' : 'ya cerró por hoy';
+  return `Hoy ${DIAS_LARGO[dia]} ${nom} atiende de ${hoy.abre} a ${hoy.cierra} 🕒 (${estado}).\nHorario completo: ${md(s.horario)}`;
+};
 
 const FRAG = [["posca que es marcador pintura acrilica agua opaca superficies permanente","POSCA = marcador de pintura acrílica al agua, opaca, mate y sin olor. Pinta papel, cartón, madera, tela, vidrio, metal, plástico, cerámica, piedra, lienzo y cuero. Seca rápido y se pinta capa sobre capa. Permanente en superficies porosas; en vidrio, metal o plástico se puede quitar si no se sella."],["posca puntas modelos grosor mm pc 1mr pc 1m pc 3m pc 5m pc 7m pc 8k pc 17k pcf 350","PC-1MR 0,7 mm calibrada (detalles mínimos) · PC-1M 0,7 mm (contornos) · PC-3M 0,9–1,3 mm (dibujo general) · PC-5M 1,8–2,5 mm (todo terreno, más colores) · PC-7M 4,5–5,5 mm (rellenos) · PC-8K 8 mm biselada (áreas grandes) · PC-17K 15–17 mm (murales) · PCF-350 pincel. Kit de inicio: PC-1M + PC-3M + PC-5M."],["posca como usar agitar cebar no sale pintura seca","Agitar con la tapa puesta ~10 s hasta oír la bolita; presionar la punta en un papel hasta que baje la pintura (sin exagerar). Capas finas, dejar secar entre capas. Guardar tapada y horizontal. Si llegó seca o con la punta dañada → reclamo."],["zapatillas tenis sneakers custom cuero lona posca sellar barniz no se borre","Zapatillas: PC-1M o PC-3M para contornos y PC-5M para rellenar. Cuero: limpiar/desengrasar antes. Al final barniz acrílico al agua en capas finas; probar antes en una zona escondida (algunos selladores disuelven la pintura)."],["taza ceramica porcelana lavavajillas hornear decorativa alimentos","Taza: PC-1M o PC-3M por fuera, lejos del borde donde va la boca. Hornear según el folleto POSCA (porcelana ~160 °C, 45 min) y barnizar. Queda decorativa: lavar a mano, no lavavajillas, no apta para alimentos."],["ropa tela camiseta tote bag lavar planchar","Tela: PC-3M o PC-5M con un cartón dentro de la prenda. Planchar por el reverso sin vapor. Lavar al revés en ciclo suave; el color baja tras muchos lavados y se puede retocar."],["vidrio ventana espejo metal plastico vitrina mampara mamparas borrar quitar","Vidrio, metal o plástico: PC-5M o PC-8K. Sin sellar se puede limpiar; para que dure, barniz en spray transparente a ~30 cm en capas finas."],["mural pared grande cartel letrero vitrina mampara mamparas grueso gruesa gruesos gruesas punta mas gruesa","Áreas grandes: PC-8K (8 mm) y PC-17K (15–17 mm); PC-5M para detalles. Si es exterior, barnizar."],["rocas piedras lienzo cuadro madera tablas surf","Rocas: PC-3M/PC-5M, PC-1M para puntillismo. Lienzo o madera: PC-8K para fondos, PC-5M y PC-1M para detalles. Si va a la intemperie, barniz al final."],["lettering caligrafia bullet journal letras","Lettering: PC-1MR o PC-1M para letras finas, PC-3M para trazos marcados, PCF-350 pincel para caligrafía. Tinta negra en papel: uni-ball PIN."],["posca vs alcohol copic marcadores alcohol diferencia","POSCA cubre (opaca), pinta sobre cualquier superficie y no traspasa el papel. Los marcadores de alcohol son tinta transparente para degradados suaves en papel. Cubrir/cualquier superficie → POSCA; degradados en papel → alcohol."],["otras marcas no distribuimos copic molotow sharpie faber castell pilot acuarelas alternativa","No las manejamos. Alternativas uni-ball: marcador de pintura (Molotow, Sharpie Paint) → POSCA · marcador de alcohol (Copic) → POSCA PC-3M/PC-5M o uni-ball PIN · acuarelas → uni-ball PIN para entintar antes · bolígrafo de gel → Signo. Nunca hablar mal de otra marca."],["uni pin unipin estilografo fineliner tinta acuarela dibujo tecnico","uni-ball PIN: tinta pigmentada resistente al agua al secar, para entintar antes de acuarela y dibujo técnico. Tamaños 005 a 08 y brush."],["signo gel boligrafo esfero blanco brillos","uni-ball Signo: gel pigmentado, resistente al agua y a la decoloración (0,28–0,7 mm). La Signo blanca sirve para brillos sobre ilustraciones."],["jetstream zurdo esfero no se corre secado rapido","Jetstream (SX/SXN-101): tinta híbrida de secado rápido que no se corre; buena opción para zurdos. 0,5 / 0,7 / 1,0 mm."],["kuru toga portaminas lapiz mina arquitectura","Kuru Toga: portaminas que gira la mina al escribir para mantener la punta fina. Mina 0,3 o 0,5 mm."],["ninos seguridad toxico","POSCA es a base de agua y sin olor. Niños: con supervisión de un adulto, sin llevarlos a la boca. No afirmar \"no tóxico\" ni certificaciones (por confirmar con la ficha local)."],["unipaint marcador pintura aceite permanente metal superficies rugosas exterior","Unipaint (uni-ball PAINT, PX-20/PX-21): marcador de pintura a base de aceite, permanente; marca metal, vidrio, plástico, madera y superficies rugosas, y resiste agua y exterior. Diferencia con POSCA: POSCA es al agua, sin olor y se puede repintar; Unipaint es más resistente pero tiene olor (usar en lugar ventilado)."],["emott rotulador color punta fina bullet journal colorear apuntes","uni-ball emott: rotulador de color con punta fina (0,4 mm), tinta al agua y muchos colores; ideal para bullet journal, apuntes y colorear con detalle."],["eye roller boligrafo tinta liquida escritura suave","uni-ball Eye: bolígrafo roller de tinta líquida, trazo suave y continuo (0,5 / 0,7 mm); para escribir y firmar con línea nítida."],["zento boligrafo esfero escritura suave rapida","uni-ball Zento: bolígrafo de escritura muy suave y secado rápido, pensado para escribir mucho sin cansarse."],["shalaku portaminas economico estudiantes mina","uni-ball Shalaku: portaminas sencillo y económico para estudiantes (mina 0,5 mm). Para dibujo técnico o boceto con punta siempre fina, Kuru Toga."],["uni chalk tiza liquida marcador pizarra vitrina mampara borrable","uni-ball Chalk: marcador de tiza líquida para vidrio, vitrinas, mamparas y pizarras; se borra con un paño húmedo. POSCA es pintura acrílica: cubre más y dura más, pero en vidrio también se puede quitar si no se sella. Para letras grandes en mamparas: punta 8K o 17K."]];
 const pal = new Set(norm(texto).split(' ').filter(w => (w.length > 3 || /^(\d+[km]|1mr|pc|pcf)$/.test(w)) && !['color', 'colores', 'punta', 'puntas', 'marca', 'posca', 'poscas', 'marcador', 'marcadores', 'como', 'para', 'esta', 'este', 'estos', 'estas', 'tiene', 'tienen', 'mismo', 'misma', 'verdad', 'favor', 'gracias', 'quiero', 'tengo', 'pero', 'donde', 'cual', 'cuales'].includes(w))); // palabras demasiado comunes
@@ -89,7 +127,7 @@ const fragsUtiles = FRAG.map(f => ({ f, p: f[0].split(' ').filter(w => pal.has(w
 const preguntaProducto = fragsUtiles.length > 0 && !has(['donde', 'comprar', 'compro', 'consigo', 'conseguir', 'venden', 'adquirir', 'where', 'buy']);
 
 // 2) Respuestas fijas, en orden de prioridad (bots/mokalu/plantillas-respuesta.md).
-let respuesta = null, derivar = null, intencion = 'ia';
+let respuesta = null, derivar = null, intencion = 'ia', tiendaSel = null;
 const pideDonde = has(['donde', 'comprar', 'compro', 'consigo', 'venden', 'tienda', 'local', 'conseguir', 'adquirir', 'establecimiento', 'where', 'buy', 'store']);
 if (has(['reclamo', 'defectuoso', 'defectuosos', 'danado', 'danados', 'vino seco', 'vinieron secos', 'vinieron secas', 'llego seco', 'llegaron secos', 'llegaron secas', 'llegaron danados', 'llegaron mal', 'llegaron rotos', 'esta seco', 'estan secos', 'no sirve', 'no pinta', 'no pintan', 'no funciona', 'no funcionan', 'no sale', 'llego roto', 'llego mal', 'roto', 'rota', 'fallado', 'estafa', 'devolucion', 'devolver', 'garantia', 'queja'])) {
   intencion = 'reclamo'; derivar = 'reclamos';
@@ -118,14 +156,31 @@ if (has(['reclamo', 'defectuoso', 'defectuosos', 'danado', 'danados', 'vino seco
     derivar = 'ventas';
     respuesta = `¡Claro! Precio y stock te los confirma el equipo de Mokalú por aquí mismo 🙌 Si me dices qué producto, color y cantidad, y desde qué ciudad nos escribes, se lo dejo listo.${aviso}`;
   } else {
+    if (cercanas.length) tiendaSel = cercanas[0];
     respuesta = `Los precios y promociones dependen del punto de venta, así que no te quiero dar un dato equivocado 🙏 ${cercanas.length ? `En ${ciudad} te lo confirman en *${md(cercanas[0].nombre)}* 📲 ${md(cercanas[0].whatsapp)}.` : 'Dime tu ciudad y te paso la tienda más cercana.'} Si prefieres comprar con envío a domicilio, pregúntale a Mokalú.${waMok}`;
   }
-} else if (has(['horario', 'a que hora', 'atienden', 'abren']) && !cercanas.length) {
+} else if (has(['horario', 'horarios', 'a que hora', 'que hora', 'atienden', 'abren', 'abre', 'cierran', 'cierra', 'abierto', 'abierta']) && (TIENDA || cercanas.length)) {
+  intencion = 'horario';
+  const s = tiendaPrevia || cercanas[0];
+  if (TIENDA) {
+    respuesta = `En Mokalú te atendemos ${CONFIG.horarioHumano} 🕒 y por aquí te respondo a cualquier hora.`
+      + (s && s.km <= CONFIG.lejosKm && s.tienda_id !== 'mokalu-guayaquil' ? `\nSi prefieres ir en persona: ${horarioTienda(s)}` : '\n¿Qué producto estás buscando?');
+  } else { respuesta = (tiendaPrevia ? '' : `La tienda más cercana${ciudad ? ' en ' + ciudad : ''} es esta 👇\n`) + horarioTienda(s); tiendaSel = s; }
+} else if (tiendaPrevia && !t.includes(' mokalu ') && has(['direccion', 'ubicacion', 'como llego', 'como llegar', 'mapa', 'telefono', 'whatsapp', 'numero', 'contacto', 'celular', 'donde queda', 'donde esta', 'donde quedan'])) {
+  intencion = 'datos_tienda';
+  tiendaSel = tiendaPrevia;
+  respuesta = `Aquí tienes los datos:\n${ficha(tiendaSel)}`;
+} else if (tiendaPrevia && cercanas.length > 1 && has(['otra tienda', 'otras tiendas', 'otro local', 'otros locales', 'otro lugar', 'otros lugares', 'otra opcion', 'otras opciones', 'mas opciones', 'mas cerca', 'mas cercana', 'mas cercano', 'alguna otra', 'algun otro', 'otra sucursal', 'otras sucursales'])) {
+  intencion = 'mas_tiendas';
+  const lista = cercanas.filter(x => !tiendaPrevia || x.nombre !== tiendaPrevia.nombre).slice(0, 3);
+  respuesta = `Otras opciones${ciudad ? ' cerca de ' + ciudad : ''}:\n` + lista.map(x => `📍 *${md(x.nombre)}* (~${x.km} km) — ${md(x.direccion)}${x.whatsapp ? ' · 📲 ' + md(x.whatsapp) : ''}`).join('\n') + '\n¿Quieres el horario o la ubicación de alguna?';
+} else if (has(['horario', 'horarios', 'a que hora', 'atienden', 'abren']) && !cercanas.length) {
   intencion = 'horario';
   respuesta = `Nuestro equipo atiende ${CONFIG.horarioHumano} 🕒 Yo te respondo a cualquier hora: ${TIENDA ? '¿qué producto estás buscando?' : '¿en qué ciudad estás para pasarte la tienda más cercana?'}`;
 } else if (cercanas.length && !preguntaProducto && (lugarNuevo ? (texto.split(' ').length <= 12 || msg.location || pideDonde) : pideDonde)) {
   const s = cercanas[0];
   intencion = 'donde_compro';
+  if (!TIENDA || s.km <= CONFIG.lejosKm) tiendaSel = s;
   if (TIENDA) {
     respuesta = `¡Claro! Desde Mokalú te lo enviamos a ${ciudad} por ${CONFIG.envio} 📦 ¿Qué producto buscas?`
       + (s.km <= CONFIG.lejosKm ? `\nSi prefieres comprarlo en persona, ${s.ciudad === ciudad || s.km <= 5 ? 'en ' + ciudad + ' lo tienes en' : `lo más cercano está en ${s.ciudad} (~${s.km} km)`}:\n${ficha(s)}` : '');
@@ -144,6 +199,9 @@ if (has(['reclamo', 'defectuoso', 'defectuosos', 'danado', 'danados', 'vino seco
 } else if (!msg.location && texto.trim() && !/[a-z0-9]/.test(norm(texto))) {
   intencion = 'reaccion';
   respuesta = texto.includes('?') ? '¿En qué te puedo ayudar? 🙂' : '🙂';
+} else if (!msg.location && texto.trim() && norm(texto).split(' ').every(w => ['gracias', 'gracia', 'muchas', 'mil', 'ok', 'okey', 'oki', 'listo', 'perfecto', 'vale', 'dale', 'chevere', 'genial', 'super', 'excelente', 'entendido', 'thanks', 'muy', 'amable'].includes(w))) {
+  intencion = 'cierre';
+  respuesta = '¡Con gusto! 🙌 Si necesitas algo más, aquí estoy.';
 } else if (!msg.location && (!texto.trim() || norm(texto).split(' ').every(w => ['hola', 'holi', 'holaa', 'ola', 'buenas', 'buenos', 'buen', 'dia', 'dias', 'tardes', 'noches', 'que', 'tal', 'saludos', 'estimados', 'estimado', 'senores', 'hi', 'hello', 'hey'].includes(w)))) {
   intencion = 'saludo';
   respuesta = previo ? '¡Hola de nuevo! 🙂 ¿En qué te ayudo hoy?' : (TIENDA ? `¡Hola! Soy ${CONFIG.nombreBot}, asistente virtual de Mokalú Art Shop 🎨 Te ayudo a elegir tu material y a hacer tu pedido con envío a todo el país. ¿Qué estás buscando y desde qué ciudad nos escribes?` : `¡Hola! Soy ${CONFIG.nombreBot}, asesora de Mokalú 🎨 Te ayudo a encontrar dónde comprar uni-ball o a elegir cuál te sirve. ¿En qué ciudad estás? (también puedes enviarme tu ubicación 📍)`);
@@ -165,6 +223,7 @@ if (chatId != null) {
   const c = memo.chats[chatId] || {};
   if (lugarNuevo && lat != null) Object.assign(c, { ciudad, lat, lng });
   c.ultimo = respuesta ? respuesta.replace(/\s+/g, ' ').slice(0, 220) : c.ultimo;
+  if (tiendaSel) c.tienda = tiendaSel.nombre; else if (lugarNuevo) delete c.tienda;
   c.ts = hoyMs;
   if (TIENDA && derivar) c.pausaHasta = hoyMs + CONFIG.pausaHoras * 36e5;
   memo.chats[chatId] = c;

@@ -167,7 +167,7 @@ function asesoria(r){
   const prod = (r.contexto.match(/PRODUCTO:\n([^\n]+)/) || [])[1];
   const tienda = (r.contexto.match(/TIENDAS \(cliente en [^)]+\):\n([^\n]+)/) || [])[1];
   if (prod) return prod + (tienda ? `\n\nLo encuentras en *${tienda.split(' (')[0]}*. ¿Quieres la dirección?` : '\n\n¿En qué ciudad estás? Te paso la tienda más cercana 📍');
-  if (tienda) return `Te recomiendo *${tienda.split(' (')[0]}*. ¿Te ayudo a elegir qué producto llevar?`;
+  if (tienda) return `Sobre *${tienda.split(' (')[0]}* te puedo pasar el horario de hoy, la ubicación u otras tiendas cercanas. También te ayudo a elegir el producto ideal para lo que quieres hacer 🎨 ¿Qué necesitas?`;
   return 'Puedo ayudarte a encontrar dónde comprar productos uni-ball (POSCA, Unipin, Signo, Jetstream, Kuru Toga…) o a elegir cuál te sirve. ¿Qué necesitas? Si me dices tu ciudad, te paso la tienda más cercana 📍';
 }
 const S = { msg:0, tienda:0, equipo:0, ases:0, ciudad:{}, tiendas:{}, sin:{} };
