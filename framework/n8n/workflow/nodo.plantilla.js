@@ -146,7 +146,7 @@ if (has(['reclamo', 'defectuoso', 'defectuosos', 'danado', 'danados', 'vino seco
   respuesta = texto.includes('?') ? '¿En qué te puedo ayudar? 🙂' : '🙂';
 } else if (!msg.location && (!texto.trim() || norm(texto).split(' ').every(w => ['hola', 'holi', 'holaa', 'ola', 'buenas', 'buenos', 'buen', 'dia', 'dias', 'tardes', 'noches', 'que', 'tal', 'saludos', 'estimados', 'estimado', 'senores', 'hi', 'hello', 'hey'].includes(w)))) {
   intencion = 'saludo';
-  respuesta = previo ? '¡Hola de nuevo! 🙂 ¿En qué te ayudo hoy?' : (TIENDA ? `¡Hola! Soy ${CONFIG.nombreBot}, asistente virtual de Mokalú Art Shop 🎨 Te ayudo a elegir tu material y a hacer tu pedido con envío a todo el país. ¿Qué estás buscando y desde qué ciudad nos escribes?` : `¡Hola! Soy ${CONFIG.nombreBot}, asesora de Mokalú 🎨 Te ayudo a encontrar dónde comprar uni/POSCA o a elegir cuál te sirve. ¿En qué ciudad estás? (también puedes enviarme tu ubicación 📍)`);
+  respuesta = previo ? '¡Hola de nuevo! 🙂 ¿En qué te ayudo hoy?' : (TIENDA ? `¡Hola! Soy ${CONFIG.nombreBot}, asistente virtual de Mokalú Art Shop 🎨 Te ayudo a elegir tu material y a hacer tu pedido con envío a todo el país. ¿Qué estás buscando y desde qué ciudad nos escribes?` : `¡Hola! Soy ${CONFIG.nombreBot}, asesora de Mokalú 🎨 Te ayudo a encontrar dónde comprar uni-ball o a elegir cuál te sirve. ¿En qué ciudad estás? (también puedes enviarme tu ubicación 📍)`);
 }
 
 // 3) Si va a la IA: solo 2 fragmentos de producto y, si hay, 1–2 tiendas cercanas.

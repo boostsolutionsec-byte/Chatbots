@@ -1,4 +1,4 @@
-# Productos uni / POSCA (fragmentos)
+# Productos uni-ball / POSCA (fragmentos)
 <!-- Cada "##" es un fragmento independiente: el motor recupera solo los relevantes por las palabras del título (etiquetas).
      Mantener cada fragmento corto (< 500 caracteres). Fuentes [F#] en docs/marcas.md. Sin precios ni stock. -->
 
@@ -30,16 +30,16 @@ Vidrio, metal o plástico: PC-5M o PC-8K. Sin sellar se puede limpiar; para que 
 Rocas: PC-3M/PC-5M, PC-1M para puntillismo. Lienzo o madera: PC-8K para fondos, PC-5M y PC-1M para detalles. Si va a la intemperie, barniz al final.
 
 ## lettering caligrafía bullet journal letras
-Lettering: PC-1MR o PC-1M para letras finas, PC-3M para trazos marcados, PCF-350 pincel para caligrafía. Tinta negra en papel: uni PIN.
+Lettering: PC-1MR o PC-1M para letras finas, PC-3M para trazos marcados, PCF-350 pincel para caligrafía. Tinta negra en papel: uni-ball PIN.
 
 ## POSCA vs alcohol Copic marcadores alcohol diferencia
 POSCA cubre (opaca), pinta sobre cualquier superficie y no traspasa el papel. Los marcadores de alcohol son tinta transparente para degradados suaves en papel. Cubrir/cualquier superficie → POSCA; degradados en papel → alcohol. [F6]
 
 ## otras marcas no distribuimos Copic Molotow Sharpie Faber-Castell Pilot acuarelas alternativa
-No las manejamos. Alternativas uni: marcador de pintura (Molotow, Sharpie Paint) → POSCA · marcador de alcohol (Copic) → POSCA PC-3M/PC-5M o uni PIN · acuarelas → uni PIN para entintar antes · bolígrafo de gel → Signo. Nunca hablar mal de otra marca.
+No las manejamos. Alternativas uni-ball: marcador de pintura (Molotow, Sharpie Paint) → POSCA · marcador de alcohol (Copic) → POSCA PC-3M/PC-5M o uni-ball PIN · acuarelas → uni-ball PIN para entintar antes · bolígrafo de gel → Signo. Nunca hablar mal de otra marca.
 
-## uni PIN Unipin estilógrafo fineliner tinta acuarela dibujo técnico
-uni PIN: tinta pigmentada resistente al agua al secar, para entintar antes de acuarela y dibujo técnico. Tamaños 005 a 08 y brush. [F15]
+## uni-ball PIN Unipin estilógrafo fineliner tinta acuarela dibujo técnico
+uni-ball PIN: tinta pigmentada resistente al agua al secar, para entintar antes de acuarela y dibujo técnico. Tamaños 005 a 08 y brush. [F15]
 
 ## Signo gel bolígrafo esfero blanco brillos
 uni-ball Signo: gel pigmentado, resistente al agua y a la decoloración (0,28–0,7 mm). La Signo blanca sirve para brillos sobre ilustraciones. [F16]
@@ -54,10 +54,10 @@ Kuru Toga: portaminas que gira la mina al escribir para mantener la punta fina. 
 POSCA es a base de agua y sin olor. Niños: con supervisión de un adulto, sin llevarlos a la boca. No afirmar "no tóxico" ni certificaciones (por confirmar con la ficha local).
 
 ## Unipaint marcador pintura aceite permanente metal superficies rugosas exterior
-Unipaint (uni PAINT, PX-20/PX-21): marcador de pintura a base de aceite, permanente; marca metal, vidrio, plástico, madera y superficies rugosas, y resiste agua y exterior. Diferencia con POSCA: POSCA es al agua, sin olor y se puede repintar; Unipaint es más resistente pero tiene olor (usar en lugar ventilado). <!-- POR CONFIRMAR: líneas vistas en @uniball_ecuador (2026-10-15); detalles técnicos de fuentes generales -->
+Unipaint (uni-ball PAINT, PX-20/PX-21): marcador de pintura a base de aceite, permanente; marca metal, vidrio, plástico, madera y superficies rugosas, y resiste agua y exterior. Diferencia con POSCA: POSCA es al agua, sin olor y se puede repintar; Unipaint es más resistente pero tiene olor (usar en lugar ventilado). <!-- POR CONFIRMAR: líneas vistas en @uniball_ecuador (2026-10-15); detalles técnicos de fuentes generales -->
 
 ## Emott rotulador color punta fina bullet journal colorear apuntes
-uni emott: rotulador de color con punta fina (0,4 mm), tinta al agua y muchos colores; ideal para bullet journal, apuntes y colorear con detalle. <!-- POR CONFIRMAR: líneas vistas en @uniball_ecuador (2026-10-15); detalles técnicos de fuentes generales -->
+uni-ball emott: rotulador de color con punta fina (0,4 mm), tinta al agua y muchos colores; ideal para bullet journal, apuntes y colorear con detalle. <!-- POR CONFIRMAR: líneas vistas en @uniball_ecuador (2026-10-15); detalles técnicos de fuentes generales -->
 
 ## Eye roller boligrafo tinta liquida escritura suave
 uni-ball Eye: bolígrafo roller de tinta líquida, trazo suave y continuo (0,5 / 0,7 mm); para escribir y firmar con línea nítida. <!-- POR CONFIRMAR: líneas vistas en @uniball_ecuador (2026-10-15); detalles técnicos de fuentes generales -->
@@ -66,7 +66,7 @@ uni-ball Eye: bolígrafo roller de tinta líquida, trazo suave y continuo (0,5 /
 uni-ball Zento: bolígrafo de escritura muy suave y secado rápido, pensado para escribir mucho sin cansarse. <!-- POR CONFIRMAR: líneas vistas en @uniball_ecuador (2026-10-15); detalles técnicos de fuentes generales -->
 
 ## Shalaku portaminas economico estudiantes mina
-uni Shalaku: portaminas sencillo y económico para estudiantes (mina 0,5 mm). Para dibujo técnico o boceto con punta siempre fina, Kuru Toga. <!-- POR CONFIRMAR: líneas vistas en @uniball_ecuador (2026-10-15); detalles técnicos de fuentes generales -->
+uni-ball Shalaku: portaminas sencillo y económico para estudiantes (mina 0,5 mm). Para dibujo técnico o boceto con punta siempre fina, Kuru Toga. <!-- POR CONFIRMAR: líneas vistas en @uniball_ecuador (2026-10-15); detalles técnicos de fuentes generales -->
 
-## uni Chalk tiza líquida marcador pizarra vitrina mampara borrable
-uni Chalk: marcador de tiza líquida para vidrio, vitrinas, mamparas y pizarras; se borra con un paño húmedo. POSCA es pintura acrílica: cubre más y dura más, pero en vidrio también se puede quitar si no se sella. Para letras grandes en mamparas: punta 8K o 17K. <!-- visto en chats reales de Mokalú (2026) -->
+## uni-ball Chalk tiza líquida marcador pizarra vitrina mampara borrable
+uni-ball Chalk: marcador de tiza líquida para vidrio, vitrinas, mamparas y pizarras; se borra con un paño húmedo. POSCA es pintura acrílica: cubre más y dura más, pero en vidrio también se puede quitar si no se sella. Para letras grandes en mamparas: punta 8K o 17K. <!-- visto en chats reales de Mokalú (2026) -->

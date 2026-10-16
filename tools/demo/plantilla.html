@@ -104,7 +104,7 @@ form.compose input:focus-visible{outline:2px solid var(--accent);outline-offset:
   </div>
   <div class="grid">
     <section class="phone" aria-label="Chat de demostración">
-      <div class="bar"><div class="avatar">uni</div><div><strong>uni-ball Ecuador</strong><small>Asistente virtual · responde al instante</small></div><button type="button" class="reiniciar" id="reiniciar" title="Borra la conversación y empieza de cero">↻ Reiniciar chat</button></div>
+      <div class="bar"><div class="avatar" aria-hidden="true">🖊️</div><div><strong>uni-ball Ecuador</strong><small>Asistente virtual · responde al instante</small></div><button type="button" class="reiniciar" id="reiniciar" title="Borra la conversación y empieza de cero">↻ Reiniciar chat</button></div>
       <div class="chat" id="chat" aria-live="polite"></div>
       <div class="locs" id="locs" hidden>
         <span>Enviar ubicación (elige un punto de ejemplo):</span>
@@ -168,7 +168,7 @@ function asesoria(r){
   const tienda = (r.contexto.match(/TIENDAS \(cliente en [^)]+\):\n([^\n]+)/) || [])[1];
   if (prod) return prod + (tienda ? `\n\nLo encuentras en *${tienda.split(' (')[0]}*. ¿Quieres la dirección?` : '\n\n¿En qué ciudad estás? Te paso la tienda más cercana 📍');
   if (tienda) return `Te recomiendo *${tienda.split(' (')[0]}*. ¿Te ayudo a elegir qué producto llevar?`;
-  return 'Puedo ayudarte a encontrar dónde comprar productos uni (POSCA, Unipin, Signo, Jetstream, Kuru Toga…) o a elegir cuál te sirve. ¿Qué necesitas? Si me dices tu ciudad, te paso la tienda más cercana 📍';
+  return 'Puedo ayudarte a encontrar dónde comprar productos uni-ball (POSCA, Unipin, Signo, Jetstream, Kuru Toga…) o a elegir cuál te sirve. ¿Qué necesitas? Si me dices tu ciudad, te paso la tienda más cercana 📍';
 }
 const S = { msg:0, tienda:0, equipo:0, ases:0, ciudad:{}, tiendas:{}, sin:{} };
 function rank(id, obj){

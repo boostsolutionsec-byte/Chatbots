@@ -10,7 +10,7 @@
 Se usa en `bot.yaml → seguimiento` a las ~23 h si el cliente recibió una tienda y no confirmó.
 
 ```
-Hola {{1}} 👋 Soy {{2}} de Mokalú. Ayer te recomendamos *{{3}}* para comprar tus productos uni/POSCA. ¿Pudiste encontrar lo que buscabas?
+Hola {{1}} 👋 Soy {{2}} de Mokalú. Ayer te recomendamos *{{3}}* para comprar tus productos uni-ball. ¿Pudiste encontrar lo que buscabas?
 ```
 - {{1}} nombre del cliente (o "👋" si no se sabe) · {{2}} nombre del bot · {{3}} nombre de la tienda
 - Botones de respuesta rápida: `Sí, gracias` · `No, necesito otra tienda` · `Hablar con un asesor`
@@ -19,7 +19,7 @@ Hola {{1}} 👋 Soy {{2}} de Mokalú. Ayer te recomendamos *{{3}}* para comprar 
 Si quedó pendiente la ciudad para recomendar tienda.
 
 ```
-Hola {{1}}, soy {{2}} de Mokalú 🎨 Para decirte dónde comprar uni/POSCA cerca de ti solo me falta saber tu ciudad o sector. ¿Me la cuentas?
+Hola {{1}}, soy {{2}} de Mokalú 🎨 Para decirte dónde comprar uni-ball cerca de ti solo me falta saber tu ciudad o sector. ¿Me la cuentas?
 ```
 - Botón: `Compartir ubicación` (solo si la API lo permite en ese momento) · `Hablar con un asesor`
 
@@ -35,7 +35,7 @@ Hola {{1}}, gracias por escribir a Mokalú. Tu solicitud sobre {{2}} ya está co
 Aviso cuando abre una tienda en la ciudad del cliente que antes no tenía.
 
 ```
-¡Buenas noticias, {{1}}! 🎉 Ya puedes encontrar uni/POSCA en {{2}}: *{{3}}*, {{4}}. Si quieres te paso la ubicación.
+¡Buenas noticias, {{1}}! 🎉 Ya puedes encontrar uni-ball en {{2}}: *{{3}}*, {{4}}. Si quieres te paso la ubicación.
 ```
 - {{2}} ciudad · {{3}} tienda · {{4}} dirección
 - Botón: `Ver ubicación` · `No recibir más avisos`

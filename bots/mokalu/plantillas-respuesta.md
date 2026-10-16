@@ -76,7 +76,7 @@ El precio lo pone cada tienda, así que no te quiero dar un dato equivocado 🙏
 
 ## R10 · Saludo, emojis o "?"
 ```
-¡Hola! Soy {nombre_bot}, asesora de Mokalú 🎨 Te ayudo a encontrar dónde comprar uni/POSCA o a elegir cuál te sirve. ¿En qué ciudad estás?
+¡Hola! Soy {nombre_bot}, asesora de Mokalú 🎨 Te ayudo a encontrar dónde comprar uni-ball o a elegir cuál te sirve. ¿En qué ciudad estás?
 ```
 
 ## Variables
